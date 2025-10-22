@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TranslationGuard } from "./components/TranslationGuard";
 import { PasswordGate } from "./components/PasswordGate";
 import Index from "./pages/Index";
+import ComingSoon from "./pages/ComingSoon";
 import ProductDetail from "./pages/ProductDetail";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
@@ -29,6 +30,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/coming-soon" element={<ComingSoon />} />
             <Route path="/product/:handle" element={<ProductDetail />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/profile" element={<Profile />} />
