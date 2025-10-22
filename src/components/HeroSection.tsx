@@ -35,7 +35,7 @@ export const HeroSection = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
               </span>
-              <span className="text-sm font-semibold text-white">Certificeret og Autoriseret</span>
+              <span className="text-sm font-semibold text-white whitespace-nowrap">Certificeret og Autoriseret</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 text-white leading-tight">
               El-service der <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-300">virker</span>.<br />Hver gang
@@ -58,30 +58,30 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Badges */}
-            <div className="mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-6 text-white max-w-2xl">
-              <div className="flex flex-col items-center gap-3 text-center">
-                <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-secondary/30 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <svg className="h-7 w-7 md:h-8 md:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+            <div className="mt-6 md:mt-8 grid grid-cols-3 gap-6 md:gap-8 text-white max-w-xl">
+              <div className="flex flex-col items-center gap-3 md:gap-4 text-center">
+                <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-secondary/40 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-xl border border-white/20">
+                  <svg className="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-sm md:text-base leading-tight font-bold drop-shadow-lg">2 års<br/>garanti</span>
+                <span className="text-xs md:text-sm leading-snug font-bold drop-shadow-xl text-white/95">2 års<br/>garanti</span>
               </div>
-              <div className="flex flex-col items-center gap-3 text-center">
-                <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-secondary/30 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <svg className="h-7 w-7 md:h-8 md:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+              <div className="flex flex-col items-center gap-3 md:gap-4 text-center">
+                <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-secondary/40 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-xl border border-white/20">
+                  <svg className="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-sm md:text-base leading-tight font-bold drop-shadow-lg">Hurtig<br/>respons</span>
+                <span className="text-xs md:text-sm leading-snug font-bold drop-shadow-xl text-white/95">Hurtig<br/>respons</span>
               </div>
-              <div className="flex flex-col items-center gap-3 text-center">
-                <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-secondary/30 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-lg">
-                  <svg className="h-7 w-7 md:h-8 md:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+              <div className="flex flex-col items-center gap-3 md:gap-4 text-center">
+                <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-secondary/40 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-xl border border-white/20">
+                  <svg className="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-sm md:text-base leading-tight font-bold drop-shadow-lg">Fri<br/>parkering</span>
+                <span className="text-xs md:text-sm leading-snug font-bold drop-shadow-xl text-white/95">Fri<br/>parkering</span>
               </div>
             </div>
           </div>
