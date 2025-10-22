@@ -32,7 +32,7 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative py-[100px] bg-gradient-to-b from-[#F8FAFC] via-[#EFF6FF] to-white overflow-hidden">
+    <section className="relative py-16 md:py-20 bg-gradient-to-b from-background via-[#EFF6FF]/40 to-background overflow-hidden">
       {/* Decorative electrical circuit pattern */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -50,11 +50,8 @@ export const ValuesSection = () => {
         </svg>
       </div>
       
-      {/* Smooth transition to next section */}
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
-      
       <div className="container relative z-10">
-        <div className="text-center mb-16 animate-fade-in px-4">
+        <div className="text-center mb-12 md:mb-14 animate-fade-in px-4">
           {/* Premium Badge with gentle bounce */}
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DBEAFE] to-[#BFDBFE] text-primary text-sm font-semibold mb-6 shadow-[0_4px_12px_rgba(0,102,255,0.15)] animate-[gentleBounce_2s_ease-in-out_infinite]">
             <div className="w-2 h-2 rounded-full bg-primary"></div>
@@ -144,7 +141,7 @@ export const ValuesSection = () => {
         `}</style>
         
         {/* Optional CTA */}
-        <div className="text-center mt-10 md:mt-12 lg:mt-14 animate-fade-in px-4">
+        <div className="text-center mt-12 md:mt-14 animate-fade-in px-4">
           <p className="text-muted-foreground mb-6 text-sm md:text-base">
             Klar til at opleve forskellen?
           </p>
