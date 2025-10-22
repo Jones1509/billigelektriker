@@ -42,7 +42,7 @@ export const ServiceColumns = () => {
   ];
   
   return (
-    <section className="py-12 md:py-16 bg-background relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-background relative overflow-hidden">
       {/* Premium background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,rgba(34,197,94,0.05),transparent_50%)]"></div>
