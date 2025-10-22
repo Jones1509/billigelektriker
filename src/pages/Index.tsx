@@ -58,19 +58,19 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-gradient-to-b from-background to-blue-50/20 py-16 relative overflow-hidden">
+      <footer className="border-t bg-gradient-to-b from-background to-blue-50/20 py-12 md:py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.05),transparent_50%)]"></div>
         
         <div className="container relative z-10">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
+          <div className="grid md:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12 px-4 md:px-0">
             <div className="md:col-span-2">
-              <div className="flex items-center gap-3 font-bold text-2xl mb-6">
-                <div className="p-3 bg-gradient-to-br from-primary to-blue-600 rounded-xl shadow-lg">
-                  <Zap className="h-6 w-6 text-white" />
+              <div className="flex items-center gap-3 font-bold text-xl md:text-2xl mb-4 md:mb-6">
+                <div className="p-2 md:p-3 bg-gradient-to-br from-primary to-blue-600 rounded-xl shadow-lg">
+                  <Zap className="h-5 w-5 md:h-6 md:w-6 text-white" />
                 </div>
                 <span>Billig Elektriker</span>
               </div>
-              <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
+              <p className="text-muted-foreground mb-4 md:mb-6 leading-relaxed max-w-md text-sm md:text-base">
                 Professionel el-service til fair priser. Certificerede elektrikere med passion for kvalitet og kundetilfredshed.
               </p>
               <div className="flex gap-4">
@@ -82,11 +82,11 @@ const Index = () => {
             </div>
             
             <div>
-              <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+              <h4 className="font-semibold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
                 <div className="h-1 w-8 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
                 Services
               </h4>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-muted-foreground">
                 <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">El-arbejde</li>
                 <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Smart Home</li>
                 <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Erhverv</li>
@@ -95,11 +95,11 @@ const Index = () => {
             </div>
             
             <div>
-              <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+              <h4 className="font-semibold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
                 <div className="h-1 w-8 bg-gradient-to-r from-secondary to-green-600 rounded-full"></div>
                 Produkter
               </h4>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-muted-foreground">
                 <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Indendørs belysning</li>
                 <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Udendørs belysning</li>
                 <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Smart Home</li>
@@ -108,8 +108,8 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="border-t pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+          <div className="border-t pt-6 md:pt-8 px-4 md:px-0">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm text-muted-foreground">
               <p>© 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes.</p>
               <div className="flex gap-6">
                 <a href="#" className="hover:text-primary transition-colors">Privatlivspolitik</a>

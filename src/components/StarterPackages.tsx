@@ -45,7 +45,7 @@ const packages = [
 export const StarterPackages = () => {
   return (
     <section 
-      className="py-24 relative overflow-hidden" 
+      className="py-12 md:py-24 relative overflow-hidden" 
       style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 100%)' }}
     >
       {/* Premium background */}
@@ -53,19 +53,19 @@ export const StarterPackages = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
           <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-primary/10 text-purple-600 dark:text-purple-400 text-sm font-semibold mb-4 border border-purple-500/20">
             ✨ Smarte Pakkeløsninger
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             Kom i gang med smart lys – <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-primary">nemt og hurtigt</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Vælg den pakke der passer til dit behov – alt er inkluderet
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
           {packages.map((pkg, idx) => (
             <Card 
               key={idx} 

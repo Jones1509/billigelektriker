@@ -14,7 +14,7 @@ export const GradientDivider = () => {
         padding: 0,
         zIndex: 1
       }}
-      className="my-20"
+      className="my-10 md:my-20"
     />
   );
 };

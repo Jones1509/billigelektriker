@@ -39,30 +39,30 @@ const businessServices = [
 
 export const ServiceColumns = () => {
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-background relative overflow-hidden">
       {/* Premium background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,rgba(34,197,94,0.05),transparent_50%)]"></div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+        <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             El-service til alle
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Uanset om du er privat eller erhverv – vi har løsningen
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 px-4 md:px-0">
           {/* Private */}
-          <div className="space-y-6 animate-fade-in">
+          <div className="space-y-4 md:space-y-6 animate-fade-in">
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
                 <Home className="h-4 w-4" />
                 Private
               </div>
-              <h3 className="text-3xl font-bold mb-3">El-service til private</h3>
+              <h3 className="text-2xl md:text-3xl font-bold mb-3">El-service til private</h3>
               <p className="text-muted-foreground">
                 Fra fejlfinding til smarte løsninger i dit hjem.
               </p>
@@ -87,13 +87,13 @@ export const ServiceColumns = () => {
           </div>
 
           {/* Business */}
-          <div className="space-y-6 animate-fade-in">
+          <div className="space-y-4 md:space-y-6 animate-fade-in">
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-semibold mb-4 border border-secondary/20">
                 <Building className="h-4 w-4" />
                 Erhverv
               </div>
-              <h3 className="text-3xl font-bold mb-3">El-service til erhverv</h3>
+              <h3 className="text-2xl md:text-3xl font-bold mb-3">El-service til erhverv</h3>
               <p className="text-muted-foreground">
                 Stabile installationer til butik, kontor og produktion.
               </p>
