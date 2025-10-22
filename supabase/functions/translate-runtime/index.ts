@@ -14,19 +14,31 @@ serve(async (req) => {
   }
   
   try {
-    const { text, targetLang } = await req.json();
+    const body = await req.json();
+    const { text, texts, targetLang, sourceLang = 'da' } = body;
     
-    if (!text || !targetLang) {
+    // Support both single text and batch texts
+    const textsToTranslate = texts || (text ? [text] : []);
+    
+    if (textsToTranslate.length === 0 || !targetLang) {
       return new Response(
-        JSON.stringify({ error: 'Missing text or targetLang' }),
+        JSON.stringify({ error: 'Missing text/texts or targetLang' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
     
-    const translation = await translateText(text, targetLang);
+    console.log(`Translating ${textsToTranslate.length} texts from ${sourceLang} to ${targetLang}`);
+    
+    // Translate all texts
+    const translations = await Promise.all(
+      textsToTranslate.map((txt: string) => translateText(txt, targetLang))
+    );
+    
+    // Return single translation or array based on input
+    const result = texts ? { translations } : { translation: translations[0] };
     
     return new Response(
-      JSON.stringify({ translation }),
+      JSON.stringify(result),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
