@@ -67,8 +67,8 @@ export const ValuesSection = () => {
         </div>
 
         {/* Values Grid - Premium Design */}
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 auto-rows-fr">
             {values.map((value, idx) => {
               // Define gradient colors for each icon wrapper
               const iconGradients = [
@@ -81,7 +81,7 @@ export const ValuesSection = () => {
               return (
                 <div 
                   key={idx} 
-                  className="group relative flex flex-col items-center p-8 rounded-3xl bg-white border border-primary/[0.08] shadow-[0_4px_6px_rgba(0,0,0,0.03),0_10px_30px_rgba(0,102,255,0.05)] hover:shadow-[0_20px_40px_rgba(0,102,255,0.12),0_4px_8px_rgba(0,0,0,0.04)] hover:border-primary/15 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-4 h-full min-h-[340px] overflow-hidden"
+                  className="group relative flex flex-col items-center p-6 sm:p-8 rounded-3xl bg-white border border-primary/[0.08] shadow-[0_4px_6px_rgba(0,0,0,0.03),0_10px_30px_rgba(0,102,255,0.05)] hover:shadow-[0_20px_40px_rgba(0,102,255,0.12),0_4px_8px_rgba(0,0,0,0.04)] hover:border-primary/15 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-4 h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[340px] overflow-hidden"
                   style={{ 
                     animationDelay: `${(idx + 1) * 100}ms`,
                     opacity: 0,
@@ -92,24 +92,24 @@ export const ValuesSection = () => {
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Icon with circular gradient background and outer ring */}
-                  <div className={`relative flex items-center justify-center w-[80px] h-[80px] rounded-full ${iconGradients[idx]} flex-shrink-0 mb-6 transition-all duration-[400ms] group-hover:scale-110 group-hover:-rotate-[5deg]`}>
+                  <div className={`relative flex items-center justify-center w-[60px] h-[60px] sm:w-[70px] sm:h-[70px] lg:w-[80px] lg:h-[80px] rounded-full ${iconGradients[idx]} flex-shrink-0 mb-4 sm:mb-5 lg:mb-6 transition-all duration-[400ms] group-hover:scale-110 group-hover:-rotate-[5deg]`}>
                     {/* Outer ring effect */}
                     <div className="absolute inset-[-8px] rounded-full border-2 border-primary/10 opacity-0 group-hover:opacity-100 group-hover:inset-[-12px] transition-all duration-300"></div>
                     
                     <img 
                       src={value.icon} 
                       alt={value.title}
-                      className="w-10 h-10 object-contain relative z-10"
+                      className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 object-contain relative z-10"
                     />
                   </div>
                   
                   {/* Title */}
-                  <h3 className="font-bold text-[20px] text-center text-[#0F172A] tracking-tight leading-tight min-h-[52px] flex items-center justify-center mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="font-bold text-[17px] sm:text-[19px] lg:text-[20px] text-center text-[#0F172A] tracking-tight leading-tight min-h-[44px] sm:min-h-[48px] lg:min-h-[52px] flex items-center justify-center mb-2 sm:mb-3 group-hover:text-primary transition-colors duration-300 px-2">
                     {value.title}
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-[15px] text-center text-[#64748B] leading-[1.6] flex-grow mb-auto">
+                  <p className="text-[13px] sm:text-[14px] lg:text-[15px] text-center text-[#64748B] leading-[1.5] sm:leading-[1.55] lg:leading-[1.6] flex-grow mb-auto px-1 sm:px-2">
                     {value.description}
                   </p>
                   

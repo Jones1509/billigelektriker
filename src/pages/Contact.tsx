@@ -38,14 +38,14 @@ const Contact = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="py-20 md:py-32 bg-gradient-to-br from-primary via-blue-600 to-primary text-white relative overflow-hidden">
+        <section className="py-16 sm:py-20 md:py-28 lg:py-32 bg-gradient-to-br from-primary via-blue-600 to-primary text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)]"></div>
           <div className="container relative z-10 px-4">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-5 md:space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Kontakt <span className="text-secondary">os</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/95">
+              <p className="text-lg sm:text-xl md:text-2xl text-white/95">
                 Vi er klar til at hjælpe dig – kontakt os i dag for en uforpligtende snak
               </p>
             </div>
@@ -53,11 +53,11 @@ const Contact = () => {
         </section>
 
         {/* Contact Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24">
           <div className="container px-4">
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
               {/* Contact Form */}
-              <div className="bg-white dark:bg-gray-900 p-8 md:p-12 rounded-2xl shadow-xl">
+              <div className="bg-white dark:bg-gray-900 p-6 sm:p-8 md:p-10 lg:p-12 rounded-2xl shadow-xl">
                 <h2 className="text-3xl font-bold mb-6">Send os en besked</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>

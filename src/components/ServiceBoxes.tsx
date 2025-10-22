@@ -35,7 +35,7 @@ export const ServiceBoxes = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8 md:gap-10 px-4 md:px-0 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 px-4 md:px-0 max-w-6xl mx-auto">
           {/* El-arbejde Card */}
           <Card className="group relative overflow-hidden border-2 border-primary/10 shadow-2xl hover:shadow-primary/20 transition-all duration-700 hover:-translate-y-3 bg-gradient-to-br from-white via-white to-blue-50/80 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950/40 hover:border-primary/30">
             {/* Animated shine effect */}
@@ -45,7 +45,7 @@ export const ServiceBoxes = () => {
             <div className="absolute top-10 right-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
             <div className="absolute bottom-10 left-10 w-24 h-24 bg-blue-400/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" style={{ transitionDelay: '100ms' }}></div>
             
-            <CardContent className="relative p-8 md:p-12 lg:p-14 flex flex-col items-start h-full">
+            <CardContent className="relative p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 flex flex-col items-start h-full">
               {/* Icon with glow */}
               <div className="relative mb-8">
                 <div className="absolute inset-0 bg-primary/30 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
@@ -101,7 +101,7 @@ export const ServiceBoxes = () => {
             <div className="absolute top-10 right-10 w-32 h-32 bg-secondary/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
             <div className="absolute bottom-10 left-10 w-24 h-24 bg-green-400/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" style={{ transitionDelay: '100ms' }}></div>
             
-            <CardContent className="relative p-8 md:p-12 lg:p-14 flex flex-col items-start h-full">
+            <CardContent className="relative p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 flex flex-col items-start h-full">
               {/* Icon with glow */}
               <div className="relative mb-8">
                 <div className="absolute inset-0 bg-secondary/30 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>

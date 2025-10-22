@@ -66,7 +66,7 @@ export const ProductSlider = () => {
               {data.map((product, index) => (
                 <CarouselItem 
                   key={product.node.id} 
-                  className="pl-2 md:pl-4 basis-4/5 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  className="pl-2 md:pl-4 basis-[85%] xs:basis-[75%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="h-full animate-fade-in">

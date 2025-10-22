@@ -58,30 +58,30 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Badges */}
-            <div className="mt-6 md:mt-8 grid grid-cols-3 gap-6 md:gap-8 text-white max-w-xl">
-              <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in">
-                <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
-                  <svg className="h-7 w-7 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="mt-6 md:mt-8 grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-white max-w-xl">
+              <div className="flex flex-col items-center gap-2 sm:gap-3 md:gap-4 text-center animate-fade-in">
+                <div className="h-11 w-11 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-2 sm:ring-3 md:ring-4 ring-secondary/20">
+                  <svg className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.warranty')}</span>
+                <span className="text-[10px] sm:text-xs md:text-sm leading-tight font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.warranty')}</span>
               </div>
-              <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in [animation-delay:150ms]">
-                <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
-                  <svg className="h-7 w-7 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex flex-col items-center gap-2 sm:gap-3 md:gap-4 text-center animate-fade-in [animation-delay:150ms]">
+                <div className="h-11 w-11 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-2 sm:ring-3 md:ring-4 ring-secondary/20">
+                  <svg className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.quickResponse')}</span>
+                <span className="text-[10px] sm:text-xs md:text-sm leading-tight font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.quickResponse')}</span>
               </div>
-              <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in [animation-delay:300ms]">
-                <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
-                  <svg className="h-7 w-7 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex flex-col items-center gap-2 sm:gap-3 md:gap-4 text-center animate-fade-in [animation-delay:300ms]">
+                <div className="h-11 w-11 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-2 sm:ring-3 md:ring-4 ring-secondary/20">
+                  <svg className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.freeParking')}</span>
+                <span className="text-[10px] sm:text-xs md:text-sm leading-tight font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.freeParking')}</span>
               </div>
             </div>
           </div>

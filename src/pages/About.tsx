@@ -10,14 +10,14 @@ const About = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="py-20 md:py-32 bg-gradient-to-br from-primary via-blue-600 to-primary text-white relative overflow-hidden">
+        <section className="py-16 sm:py-20 md:py-28 lg:py-32 bg-gradient-to-br from-primary via-blue-600 to-primary text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)]"></div>
           <div className="container relative z-10 px-4">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-5 md:space-y-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Om <span className="text-secondary">Billig Elektriker</span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/95">
+              <p className="text-lg sm:text-xl md:text-2xl text-white/95">
                 Professionel el-service til fair priser – siden starten har vi sat kvalitet og kundetilfredshed i højsædet.
               </p>
             </div>
@@ -25,9 +25,9 @@ const About = () => {
         </section>
 
         {/* Story Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24">
           <div className="container px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
               <div className="space-y-6">
                 <h2 className="text-3xl md:text-4xl font-bold">Vores historie</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
@@ -57,16 +57,16 @@ const About = () => {
         </section>
 
         {/* Values Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-background to-blue-50/20">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background to-blue-50/20">
           <div className="container px-4">
-            <div className="text-center mb-16">
+            <div className="text-center mb-10 sm:mb-12 md:mb-14 lg:mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Vores værdier</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Det der driver os hver dag
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
               <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
                 <div className="inline-flex p-4 bg-primary/10 rounded-xl mb-4">
                   <Shield className="h-8 w-8 text-primary" />
@@ -131,9 +131,9 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24">
           <div className="container px-4">
-            <div className="max-w-3xl mx-auto bg-gradient-to-br from-primary to-blue-600 rounded-3xl p-8 md:p-12 text-white text-center shadow-2xl">
+            <div className="max-w-3xl mx-auto bg-gradient-to-br from-primary to-blue-600 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 text-white text-center shadow-2xl">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Klar til at arbejde sammen?
               </h2>
