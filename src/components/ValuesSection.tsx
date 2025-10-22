@@ -32,7 +32,7 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative pt-16 md:pt-20 pb-4 md:pb-6 bg-gradient-to-b from-background via-[#EFF6FF]/40 to-background overflow-hidden">
+    <section className="relative pt-16 md:pt-20 pb-0 bg-gradient-to-b from-background via-[#EFF6FF]/40 to-background overflow-hidden">
       {/* Decorative electrical circuit pattern */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -141,7 +141,7 @@ export const ValuesSection = () => {
         `}</style>
         
         {/* Optional CTA */}
-        <div className="text-center mt-8 md:mt-10 animate-fade-in px-4">
+        <div className="text-center mt-6 md:mt-8 animate-fade-in px-4">
           <p className="text-muted-foreground mb-6 text-sm md:text-base">
             Klar til at opleve forskellen?
           </p>
