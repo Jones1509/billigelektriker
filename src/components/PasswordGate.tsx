@@ -38,54 +38,25 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
       <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse" />
       <div className="absolute bottom-20 right-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse delay-1000" />
       
-      <div className="w-full max-w-2xl space-y-10 relative z-10">
-        <div className="text-center space-y-8">
-          <div className="space-y-6">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <img 
-                src="/src/assets/logo-elektriker.png" 
-                alt="Billig Elektriker Logo" 
-                className="w-16 h-16 md:w-20 md:h-20 drop-shadow-2xl animate-pulse"
-              />
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-2xl tracking-tight whitespace-nowrap">
-                Billig Elektriker
-              </h1>
-            </div>
+      <div className="w-full max-w-xl space-y-12 relative z-10">
+        <div className="text-center space-y-6">
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-2xl tracking-tight">
+              Billig Elektriker
+            </h1>
             
-            <div className="space-y-4">
-              <p className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg animate-fade-in">
-                🚀 Snart lancerer vi!
-              </p>
-              <p className="text-xl md:text-2xl text-white/95 drop-shadow-lg font-semibold max-w-xl mx-auto">
-                Danmarks mest moderne elektrikerplatform er på vej
-              </p>
-            </div>
-          </div>
-
-          {/* Benefits preview */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            <div className="bg-white/15 backdrop-blur-md border border-white/30 rounded-2xl p-4 transform hover:scale-105 transition-all">
-              <div className="text-3xl mb-2">⚡</div>
-              <p className="text-white font-bold text-sm">Lynhurtig booking</p>
-            </div>
-            <div className="bg-white/15 backdrop-blur-md border border-white/30 rounded-2xl p-4 transform hover:scale-105 transition-all">
-              <div className="text-3xl mb-2">💰</div>
-              <p className="text-white font-bold text-sm">Konkurrencedygtige priser</p>
-            </div>
-            <div className="bg-white/15 backdrop-blur-md border border-white/30 rounded-2xl p-4 transform hover:scale-105 transition-all">
-              <div className="text-3xl mb-2">🛒</div>
-              <p className="text-white font-bold text-sm">Smart produkt-shop</p>
-            </div>
+            <div className="h-px w-24 mx-auto bg-white/40" />
+            
+            <p className="text-xl md:text-2xl text-white/90 drop-shadow font-light tracking-wide">
+              Snart lancerer vi Danmarks mest moderne elektrikerplatform
+            </p>
           </div>
         </div>
 
-        <div className="bg-white/20 backdrop-blur-xl border-2 border-white/40 rounded-3xl p-8 shadow-2xl transform hover:scale-[1.02] transition-all">
-          <div className="text-center mb-6">
-            <p className="text-white/90 text-lg font-semibold drop-shadow">
-              🔐 Eksklusiv forhåndsadgang
-            </p>
-            <p className="text-white/75 text-sm mt-2">
-              Er du klar til at opleve fremtidens elektrikerservice?
+        <div className="bg-white/15 backdrop-blur-xl border border-white/30 rounded-2xl p-10 shadow-2xl">
+          <div className="text-center mb-8">
+            <p className="text-white text-sm font-medium tracking-wider uppercase mb-2 opacity-90">
+              Eksklusiv adgang
             </p>
           </div>
           
@@ -93,16 +64,16 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
             <div>
               <Input
                 type="password"
-                placeholder="Indtast adgangskode"
+                placeholder="Adgangskode"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                   setError('');
                 }}
-                className="bg-white/95 border-2 border-white/50 rounded-xl px-6 py-7 text-lg font-medium placeholder:text-gray-400"
+                className="bg-white/95 border border-white/40 rounded-lg px-6 py-6 text-base font-light placeholder:text-gray-500 focus:border-white/60 transition-colors"
               />
               {error && (
-                <p className="text-white text-base mt-3 font-bold drop-shadow-lg animate-fade-in">
+                <p className="text-white/95 text-sm mt-3 font-light drop-shadow animate-fade-in">
                   {error}
                 </p>
               )}
@@ -110,23 +81,20 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
             
             <Button 
               type="submit"
-              className="w-full bg-white hover:bg-white/95 text-blue-600 font-bold text-xl py-7 rounded-xl transition-all hover:scale-105 hover:shadow-2xl"
+              className="w-full bg-white hover:bg-white/90 text-gray-900 font-medium text-base py-6 rounded-lg transition-all"
             >
-              Få adgang nu ⚡
+              Fortsæt
             </Button>
             
-            <p className="text-white/90 text-base text-center mt-6 font-medium drop-shadow">
-              Har du brug for adgang? 
-              <br />
-              <span className="text-white font-bold">Kontakt os i dag</span>
+            <p className="text-white/80 text-sm text-center mt-6 font-light">
+              Har du brug for adgang? Kontakt os venligst
             </p>
           </form>
         </div>
 
-        {/* Coming soon teaser */}
         <div className="text-center">
-          <p className="text-white/80 text-sm font-medium drop-shadow animate-pulse">
-            ✨ Lanceringsdato annonceres snart ✨
+          <p className="text-white/70 text-xs font-light tracking-wider uppercase">
+            Lanceringsdato annonceres snart
           </p>
         </div>
       </div>
