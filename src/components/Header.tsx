@@ -214,8 +214,12 @@ export const Header = () => {
           </NavigationMenuList>
         </NavigationMenu>
         
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm" className="hidden md:flex items-center gap-2 text-white hover:text-white/90 hover:bg-white/10">
+        <div className="flex items-center gap-3">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="hidden md:flex items-center gap-2 text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10"
+          >
             <Phone className="h-4 w-4" />
             <span>Ring til os</span>
           </Button>
@@ -223,7 +227,11 @@ export const Header = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full text-white hover:text-white hover:bg-white/20">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
+                >
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
@@ -242,7 +250,12 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="ghost" size="icon" onClick={() => navigate("/auth")} className="text-white hover:text-white hover:bg-white/20">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => navigate("/auth")} 
+              className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
+            >
               <User className="h-5 w-5" />
             </Button>
           )}

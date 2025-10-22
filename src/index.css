@@ -26,8 +26,13 @@ All colors MUST be HSL.
     --muted: 215 20% 97%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 4 90% 58%;
+    --accent: 217 100% 50%;
     --accent-foreground: 0 0% 100%;
+
+    /* Glass effects */
+    --glass-bg: 255 255 255 / 0.1;
+    --glass-border: 255 255 255 / 0.2;
+    --glass-hover: 255 255 255 / 0.15;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -73,8 +78,13 @@ All colors MUST be HSL.
     --muted: 217 33% 18%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 4 90% 58%;
+    --accent: 217 100% 50%;
     --accent-foreground: 0 0% 100%;
+
+    /* Glass effects */
+    --glass-bg: 255 255 255 / 0.1;
+    --glass-border: 255 255 255 / 0.2;
+    --glass-hover: 255 255 255 / 0.15;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
