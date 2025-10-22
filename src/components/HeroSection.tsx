@@ -12,6 +12,11 @@ export const HeroSection = () => {
         muted
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
+        style={{ 
+          imageRendering: "crisp-edges",
+          WebkitBackfaceVisibility: "hidden",
+          backfaceVisibility: "hidden"
+        }}
       >
         <source src="/video-background.mp4" type="video/mp4" />
       </video>
@@ -54,6 +59,11 @@ export const HeroSection = () => {
               src={switchesImage} 
               alt="Forskellige farverige stikkontakter og afbrydere" 
               className="w-full h-auto"
+              style={{ 
+                imageRendering: "-webkit-optimize-contrast",
+                WebkitFontSmoothing: "antialiased"
+              }}
+              loading="eager"
             />
           </div>
         </div>

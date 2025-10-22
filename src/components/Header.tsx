@@ -133,8 +133,12 @@ export const Header = () => {
           <img 
             src={logo} 
             alt="Billig Elektriker" 
-            className="h-14 w-auto object-contain"
-            style={{ filter: "brightness(1.1)" }}
+            className="h-14 w-auto"
+            style={{ 
+              imageRendering: "-webkit-optimize-contrast",
+              WebkitFontSmoothing: "antialiased"
+            }}
+            loading="eager"
           />
         </Link>
         
