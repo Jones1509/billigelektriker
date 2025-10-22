@@ -36,15 +36,6 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
       
       <div className="w-full max-w-md space-y-8 relative z-10">
         <div className="text-center space-y-8">
-          {/* Large logo with pulse animation */}
-          <div className="flex justify-center mb-8">
-            <img 
-              src="/src/assets/logo-elektriker.png" 
-              alt="Billig Elektriker Logo" 
-              className="w-64 h-64 md:w-80 md:h-80 object-contain animate-pulse drop-shadow-2xl"
-            />
-          </div>
-          
           <div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl tracking-tight">
               Billig Elektriker
