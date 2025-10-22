@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      orders: {
+        Row: {
+          created_at: string
+          currency_code: string
+          id: string
+          items: Json
+          order_number: string
+          shipping_address: Json | null
+          shopify_order_id: string | null
+          shopify_order_number: string | null
+          status: string
+          total_amount: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          currency_code?: string
+          id?: string
+          items?: Json
+          order_number: string
+          shipping_address?: Json | null
+          shopify_order_id?: string | null
+          shopify_order_number?: string | null
+          status?: string
+          total_amount: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          currency_code?: string
+          id?: string
+          items?: Json
+          order_number?: string
+          shipping_address?: Json | null
+          shopify_order_id?: string | null
+          shopify_order_number?: string | null
+          status?: string
+          total_amount?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
