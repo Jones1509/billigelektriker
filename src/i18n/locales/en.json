@@ -257,6 +257,12 @@
     },
     "cta": "See products"
   },
+  "productCard": {
+    "notAvailable": "Product not available",
+    "addedToCart": "Added to cart",
+    "noImage": "No image",
+    "addToCart": "Add to cart"
+  },
   "footer": {
     "description": "Professional electrical service at fair prices. Certified electricians with passion for quality and customer satisfaction.",
     "callUs": "Call us",

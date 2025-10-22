@@ -257,6 +257,12 @@
     },
     "cta": "Se produkter"
   },
+  "productCard": {
+    "notAvailable": "Produktet er ikke tilgængeligt",
+    "addedToCart": "Tilføjet til kurv",
+    "noImage": "Intet billede",
+    "addToCart": "Læg i kurv"
+  },
   "footer": {
     "description": "Professionel el-service til fair priser. Certificerede elektrikere med passion for kvalitet og kundetilfredshed.",
     "callUs": "Ring til os",

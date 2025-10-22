@@ -257,6 +257,12 @@
     },
     "cta": "Produkte ansehen"
   },
+  "productCard": {
+    "notAvailable": "Produkt nicht verfügbar",
+    "addedToCart": "Zum Warenkorb hinzugefügt",
+    "noImage": "Kein Bild",
+    "addToCart": "In den Warenkorb"
+  },
   "footer": {
     "description": "Professioneller Elektroservice zu fairen Preisen. Zertifizierte Elektriker mit Leidenschaft für Qualität und Kundenzufriedenheit.",
     "callUs": "Rufen Sie uns an",

@@ -5,12 +5,14 @@ import { ShoppingCart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface ProductCardProps {
   product: ShopifyProduct;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const { t } = useTranslation();
   const addItem = useCartStore(state => state.addItem);
   const { node } = product;
 
@@ -18,7 +20,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     const defaultVariant = node.variants.edges[0]?.node;
     
     if (!defaultVariant) {
-      toast.error("Produktet er ikke tilgængeligt");
+      toast.error(t('productCard.notAvailable'));
       return;
     }
 
@@ -32,7 +34,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     };
     
     addItem(cartItem);
-    toast.success("Tilføjet til kurv", {
+    toast.success(t('productCard.addedToCart'), {
       description: node.title,
       position: "top-center"
     });
@@ -54,7 +56,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-              Intet billede
+              {t('productCard.noImage')}
             </div>
           )}
         </div>
@@ -83,7 +85,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           size="lg"
         >
           <ShoppingCart className="w-4 h-4 mr-2" />
-          Læg i kurv
+          {t('productCard.addToCart')}
         </Button>
       </CardFooter>
     </Card>

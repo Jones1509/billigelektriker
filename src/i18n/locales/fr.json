@@ -257,6 +257,12 @@
     },
     "cta": "Voir les produits"
   },
+  "productCard": {
+    "notAvailable": "Produit non disponible",
+    "addedToCart": "Ajouté au panier",
+    "noImage": "Pas d'image",
+    "addToCart": "Ajouter au panier"
+  },
   "footer": {
     "description": "Service électrique professionnel à des prix équitables. Électriciens certifiés avec passion pour la qualité et la satisfaction client.",
     "callUs": "Appelez-nous",
