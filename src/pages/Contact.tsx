@@ -5,8 +5,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -60,7 +62,7 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Navn *
+                      {t('contact.name')} *
                     </label>
                     <Input
                       id="name"
@@ -69,14 +71,14 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Dit fulde navn"
+                      placeholder={t('contact.namePlaceholder')}
                       className="h-12"
                     />
                   </div>
                   
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email *
+                      {t('contact.email')} *
                     </label>
                     <Input
                       id="email"
@@ -85,14 +87,14 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="din@email.dk"
+                      placeholder={t('contact.emailPlaceholder')}
                       className="h-12"
                     />
                   </div>
                   
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                      Telefon
+                      {t('contact.phone')}
                     </label>
                     <Input
                       id="phone"
@@ -100,14 +102,14 @@ const Contact = () => {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+45 12 34 56 78"
+                      placeholder={t('contact.phonePlaceholder')}
                       className="h-12"
                     />
                   </div>
                   
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Besked *
+                      {t('contact.message')} *
                     </label>
                     <Textarea
                       id="message"
@@ -115,13 +117,13 @@ const Contact = () => {
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Beskriv dit projekt eller hvad du har brug for hjælp til..."
+                      placeholder={t('contact.messagePlaceholder')}
                       className="min-h-[150px]"
                     />
                   </div>
                   
                   <Button type="submit" size="lg" className="w-full shadow-lg hover:shadow-xl">
-                    Send besked
+                    {t('contact.sendMessage')}
                   </Button>
                 </form>
               </div>

@@ -308,5 +308,27 @@
     "experiencedCraftsmen": "Erfarne håndværkere med passion for dit projekt",
     "readyForTask": "Klar til opgaven",
     "allSizes": "Vi tager opgaver af alle størrelser - hurtigt og effektivt"
+  },
+  "auth": {
+    "emailAddress": "Email adresse",
+    "emailPlaceholder": "din@email.dk",
+    "password": "Adgangskode",
+    "passwordPlaceholder": "••••••••",
+    "firstName": "Fornavn",
+    "firstNamePlaceholder": "Anders",
+    "lastName": "Efternavn",
+    "lastNamePlaceholder": "Jensen",
+    "minPasswordLength": "Mindst 6 tegn"
+  },
+  "contact": {
+    "name": "Navn",
+    "namePlaceholder": "Dit fulde navn",
+    "email": "Email",
+    "emailPlaceholder": "din@email.dk",
+    "phone": "Telefon",
+    "phonePlaceholder": "+45 12 34 56 78",
+    "message": "Besked",
+    "messagePlaceholder": "Beskriv dit projekt eller hvad du har brug for hjælp til...",
+    "sendMessage": "Send besked"
   }
 }

@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Zap, Loader2, ArrowLeft, Shield, CheckCircle2, Mail, Lock } from "lucide-react";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 import logo from "@/assets/logo.avif";
 
 const signUpSchema = z.object({
@@ -24,6 +25,7 @@ const signInSchema = z.object({
 });
 
 export default function Auth() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [signUpData, setSignUpData] = useState({
@@ -213,14 +215,14 @@ export default function Auth() {
                   <form onSubmit={handleSignIn} className="space-y-5">
                     <div className="space-y-2">
                       <Label htmlFor="signin-email" className="text-sm font-medium">
-                        Email adresse
+                        {t('auth.emailAddress')}
                       </Label>
                       <div className="relative group">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
                         <Input
                           id="signin-email"
                           type="email"
-                          placeholder="din@email.dk"
+                          placeholder={t('auth.emailPlaceholder')}
                           value={signInData.email}
                           onChange={(e) => setSignInData({ ...signInData, email: e.target.value })}
                           required
@@ -231,14 +233,14 @@ export default function Auth() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="signin-password" className="text-sm font-medium">
-                        Adgangskode
+                        {t('auth.password')}
                       </Label>
                       <div className="relative group">
                         <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
                         <Input
                           id="signin-password"
                           type="password"
-                          placeholder="••••••••"
+                          placeholder={t('auth.passwordPlaceholder')}
                           value={signInData.password}
                           onChange={(e) => setSignInData({ ...signInData, password: e.target.value })}
                           required
@@ -272,12 +274,12 @@ export default function Auth() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="firstname" className="text-sm font-medium">
-                          Fornavn
+                          {t('auth.firstName')}
                         </Label>
                         <Input
                           id="firstname"
                           type="text"
-                          placeholder="Anders"
+                          placeholder={t('auth.firstNamePlaceholder')}
                           value={signUpData.firstName}
                           onChange={(e) => setSignUpData({ ...signUpData, firstName: e.target.value })}
                           required
@@ -287,12 +289,12 @@ export default function Auth() {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="lastname" className="text-sm font-medium">
-                          Efternavn
+                          {t('auth.lastName')}
                         </Label>
                         <Input
                           id="lastname"
                           type="text"
-                          placeholder="Jensen"
+                          placeholder={t('auth.lastNamePlaceholder')}
                           value={signUpData.lastName}
                           onChange={(e) => setSignUpData({ ...signUpData, lastName: e.target.value })}
                           required
@@ -303,14 +305,14 @@ export default function Auth() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="signup-email" className="text-sm font-medium">
-                        Email adresse
+                        {t('auth.emailAddress')}
                       </Label>
                       <div className="relative group">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-secondary transition-colors" />
                         <Input
                           id="signup-email"
                           type="email"
-                          placeholder="din@email.dk"
+                          placeholder={t('auth.emailPlaceholder')}
                           value={signUpData.email}
                           onChange={(e) => setSignUpData({ ...signUpData, email: e.target.value })}
                           required
@@ -321,14 +323,14 @@ export default function Auth() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="signup-password" className="text-sm font-medium">
-                        Adgangskode
+                        {t('auth.password')}
                       </Label>
                       <div className="relative group">
                         <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-secondary transition-colors" />
                         <Input
                           id="signup-password"
                           type="password"
-                          placeholder="Mindst 6 tegn"
+                          placeholder={t('auth.minPasswordLength')}
                           value={signUpData.password}
                           onChange={(e) => setSignUpData({ ...signUpData, password: e.target.value })}
                           required
