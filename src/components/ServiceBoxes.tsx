@@ -66,15 +66,15 @@ export const ServiceBoxes = () => {
               <div className="flex flex-wrap gap-3 mb-8">
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/5 border border-primary/10">
                   <Shield className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-xs font-medium text-primary">Certificeret</span>
+                  <span className="text-xs font-medium text-primary">{t('badges.certified')}</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/5 border border-secondary/10">
                   <Clock className="h-3.5 w-3.5 text-secondary" />
-                  <span className="text-xs font-medium text-secondary">Hurtig respons</span>
+                  <span className="text-xs font-medium text-secondary">{t('badges.quickResponse')}</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/5 border border-green-500/10">
                   <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
-                  <span className="text-xs font-medium text-green-600">2 års garanti</span>
+                  <span className="text-xs font-medium text-green-600">{t('badges.twoYearWarranty')}</span>
                 </div>
               </div>
               
@@ -122,15 +122,15 @@ export const ServiceBoxes = () => {
               <div className="flex flex-wrap gap-3 mb-8">
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/5 border border-secondary/10">
                   <Zap className="h-3.5 w-3.5 text-secondary" />
-                  <span className="text-xs font-medium text-secondary">Gratis fragt over 750kr</span>
+                  <span className="text-xs font-medium text-secondary">{t('badges.freeShipping')}</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/5 border border-primary/10">
                   <Clock className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-xs font-medium text-primary">Hurtig levering</span>
+                  <span className="text-xs font-medium text-primary">{t('badges.fastDelivery')}</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/5 border border-green-500/10">
                   <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
-                  <span className="text-xs font-medium text-green-600">Kvalitetsprodukter</span>
+                  <span className="text-xs font-medium text-green-600">{t('badges.qualityProducts')}</span>
                 </div>
               </div>
               

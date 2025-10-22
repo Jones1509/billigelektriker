@@ -47,8 +47,8 @@ export const TeamSection = () => {
                     <Sparkles className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-2">Professionel kvalitet</h4>
-                    <p className="text-sm text-muted-foreground">Erfarne håndværkere med passion for dit projekt</p>
+                    <h4 className="font-semibold text-lg mb-2">{t('team.professionalQuality')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('team.experiencedCraftsmen')}</p>
                   </div>
                 </div>
               </CardContent>
@@ -61,8 +61,8 @@ export const TeamSection = () => {
                     <Zap className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-2">Klar til opgaven</h4>
-                    <p className="text-sm text-muted-foreground">Vi tager opgaver af alle størrelser - hurtigt og effektivt</p>
+                    <h4 className="font-semibold text-lg mb-2">{t('team.readyForTask')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('team.allSizes')}</p>
                   </div>
                 </div>
               </CardContent>

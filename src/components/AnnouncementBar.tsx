@@ -14,7 +14,7 @@ export const AnnouncementBar = () => {
             {/* Free shipping */}
             <div className="flex items-center gap-2 xl:gap-2.5 text-white group whitespace-nowrap">
               <Zap className="h-4 xl:h-4.5 w-4 xl:w-4.5 text-secondary group-hover:scale-110 transition-transform duration-300 flex-shrink-0" />
-              <span className="font-medium text-xs xl:text-sm">Gratis fragt over 750 kr.</span>
+              <span className="font-medium text-xs xl:text-sm">{t('announcements.freeShipping')}</span>
             </div>
             
             <div className="h-4 w-px bg-white/20 hidden xl:block"></div>
@@ -22,7 +22,7 @@ export const AnnouncementBar = () => {
             {/* Response time - skjul på mindre skærme */}
             <div className="hidden xl:flex items-center gap-2.5 text-white/90 group whitespace-nowrap">
               <Clock className="h-4.5 w-4.5 text-secondary/80 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" />
-              <span className="text-xs">Hurtig respons 24/7</span>
+              <span className="text-xs">{t('announcements.quickResponse')}</span>
             </div>
             
             <div className="h-4 w-px bg-white/20 hidden xl:block"></div>
@@ -30,7 +30,7 @@ export const AnnouncementBar = () => {
             {/* Location - skjul på mindre skærme */}
             <div className="hidden xl:flex items-center gap-2.5 text-white/90 group whitespace-nowrap">
               <MapPin className="h-4.5 w-4.5 text-secondary/80 group-hover:scale-110 transition-transform duration-300 flex-shrink-0" />
-              <span className="text-xs">København</span>
+              <span className="text-xs">{t('announcements.location')}</span>
             </div>
           </div>
           
@@ -68,14 +68,14 @@ export const AnnouncementBar = () => {
                 to="/om-os" 
                 className="text-xs text-white/80 hover:text-[#60A5FA] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] font-medium group flex items-center gap-1 whitespace-nowrap"
               >
-                <span className="group-hover:translate-x-0.5 transition-transform duration-300">Om os</span>
+                <span className="group-hover:translate-x-0.5 transition-transform duration-300">{t('announcements.aboutUs')}</span>
                 <ArrowRight className="h-3 w-3 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
               <Link 
                 to="/kontakt" 
                 className="text-xs text-white/80 hover:text-[#60A5FA] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] font-medium group flex items-center gap-1 whitespace-nowrap"
               >
-                <span className="group-hover:translate-x-0.5 transition-transform duration-300">Kontakt</span>
+                <span className="group-hover:translate-x-0.5 transition-transform duration-300">{t('announcements.contact')}</span>
                 <ArrowRight className="h-3 w-3 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
               </Link>
             </div>

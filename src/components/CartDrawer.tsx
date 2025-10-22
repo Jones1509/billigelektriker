@@ -12,8 +12,10 @@ import {
 import { ShoppingCart, Minus, Plus, Trash2, ExternalLink, Loader2 } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export const CartDrawer = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const { 
     items, 
@@ -61,9 +63,9 @@ export const CartDrawer = () => {
       
       <SheetContent className="w-full sm:max-w-lg flex flex-col h-full">
         <SheetHeader className="flex-shrink-0">
-          <SheetTitle>Indkøbskurv</SheetTitle>
+          <SheetTitle>{t('cart.title')}</SheetTitle>
           <SheetDescription>
-            {totalItems === 0 ? "Din kurv er tom" : `${totalItems} vare${totalItems !== 1 ? 'r' : ''} i din kurv`}
+            {totalItems === 0 ? t('cart.emptyCart') : t('cart.itemsInCart', { count: totalItems })}
           </SheetDescription>
         </SheetHeader>
         
@@ -72,7 +74,7 @@ export const CartDrawer = () => {
             <div className="flex-1 flex items-center justify-center">
               <div className="text-center">
                 <ShoppingCart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                <p className="text-muted-foreground">Din kurv er tom</p>
+                <p className="text-muted-foreground">{t('cart.emptyCart')}</p>
               </div>
             </div>
           ) : (
@@ -138,7 +140,7 @@ export const CartDrawer = () => {
               
               <div className="flex-shrink-0 space-y-4 pt-4 border-t bg-background">
                 <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold">Total</span>
+                  <span className="text-lg font-semibold">{t('cart.total')}</span>
                   <span className="text-xl font-bold">
                     {items[0]?.price.currencyCode || 'USD'} {totalPrice.toFixed(2)}
                   </span>
@@ -153,12 +155,12 @@ export const CartDrawer = () => {
                   {isLoading ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Opretter checkout...
+                      {t('cart.creatingCheckout')}
                     </>
                   ) : (
                     <>
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Gå til kassen
+                      {t('cart.goToCheckout')}
                     </>
                   )}
                 </Button>

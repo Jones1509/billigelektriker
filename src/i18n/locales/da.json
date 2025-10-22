@@ -270,5 +270,43 @@
     "privacy": "Privatlivspolitik",
     "terms": "Handelsbetingelser",
     "contact": "Kontakt"
+  },
+  "announcements": {
+    "freeShipping": "Gratis fragt over 750 kr.",
+    "quickResponse": "Hurtig respons 24/7",
+    "location": "København",
+    "aboutUs": "Om os",
+    "contact": "Kontakt"
+  },
+  "cart": {
+    "title": "Indkøbskurv",
+    "emptyCart": "Din kurv er tom",
+    "itemsInCart": "{{count}} vare i din kurv",
+    "itemsInCart_plural": "{{count}} varer i din kurv",
+    "total": "Total",
+    "creatingCheckout": "Opretter checkout...",
+    "goToCheckout": "Gå til kassen"
+  },
+  "badges": {
+    "certified": "Certificeret",
+    "quickResponse": "Hurtig respons",
+    "twoYearWarranty": "2 års garanti",
+    "freeShipping": "Gratis fragt over 750kr",
+    "fastDelivery": "Hurtig levering",
+    "qualityProducts": "Kvalitetsprodukter"
+  },
+  "team": {
+    "badge": "Mød teamet",
+    "title": "Holdet bag Billig Elektriker",
+    "description": "Billig Elektriker startede med en simpel idé: At levere professionel el-service til ærlige priser – uden at gå på kompromis med kvaliteten. Vi er et ungt, dynamisk team med certificeringer i orden, og vi elsker at løse vores kunders problemer – fra den mindste fejlfinding til store installationsprojekter.",
+    "certified": "Certificeret",
+    "certifiedDescription": "Autoriserede elektrikere",
+    "fastResponse": "Hurtig respons",
+    "fastResponseDescription": "Kontakt os i dag",
+    "cta": "Ring til os i dag",
+    "professionalQuality": "Professionel kvalitet",
+    "experiencedCraftsmen": "Erfarne håndværkere med passion for dit projekt",
+    "readyForTask": "Klar til opgaven",
+    "allSizes": "Vi tager opgaver af alle størrelser - hurtigt og effektivt"
   }
 }
