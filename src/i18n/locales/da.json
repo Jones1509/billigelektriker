@@ -204,7 +204,9 @@
     "warranty": {
       "title": "Garanti sort på hvidt",
       "description": "12 måneders garanti på arbejdet, 2 års reklamationsret"
-    }
+    },
+    "ctaQuestion": "Klar til at opleve forskellen?",
+    "ctaButton": "Få et uforpligtende tilbud"
   },
   "smartLight": {
     "badge": "Smart Home Teknologi",

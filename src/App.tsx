@@ -10,6 +10,8 @@ import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import TranslationAdmin from "./pages/TranslationAdmin";
+import TranslationCheck from "./pages/TranslationCheck";
 import NotFound from "./pages/NotFound";
 import "./i18n/config";
 
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/om-os" element={<About />} />
           <Route path="/kontakt" element={<Contact />} />
+          <Route path="/admin/translations" element={<TranslationAdmin />} />
+          <Route path="/admin/translation-check" element={<TranslationCheck />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

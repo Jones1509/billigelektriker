@@ -143,11 +143,11 @@ export const ValuesSection = () => {
         {/* Optional CTA */}
         <div className="text-center mt-6 md:mt-8 animate-fade-in px-4">
           <p className="text-muted-foreground mb-6 text-sm md:text-base">
-            Klar til at opleve forskellen?
+            {t('values.ctaQuestion')}
           </p>
           <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
             <Phone className="w-4 h-4" />
-            Få et uforpligtende tilbud
+            {t('values.ctaButton')}
           </button>
         </div>
       </div>
