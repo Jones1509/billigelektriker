@@ -32,7 +32,7 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="py-20 md:py-24 lg:py-32 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
       {/* Extremely subtle electrical circuit background pattern */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -50,7 +50,7 @@ export const ValuesSection = () => {
       </div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-16 md:mb-20 animate-fade-in px-4">
+        <div className="text-center mb-10 md:mb-12 lg:mb-14 animate-fade-in px-4">
           {/* Professional Badge */}
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-sm font-semibold mb-6 shadow-sm">
             <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
@@ -110,7 +110,7 @@ export const ValuesSection = () => {
         </div>
         
         {/* Optional CTA */}
-        <div className="text-center mt-16 md:mt-20 animate-fade-in px-4">
+        <div className="text-center mt-10 md:mt-12 lg:mt-14 animate-fade-in px-4">
           <p className="text-muted-foreground mb-6 text-sm md:text-base">
             Klar til at opleve forskellen?
           </p>
