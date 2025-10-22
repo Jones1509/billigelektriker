@@ -22,6 +22,7 @@ import {
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import logo from "@/assets/logo.avif";
 
 const services = [
   {
@@ -129,8 +130,7 @@ export const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3 font-bold text-2xl">
-          <Zap className="h-8 w-8 text-primary" />
-          <span className="text-foreground">Billig Elektriker</span>
+          <img src={logo} alt="Billig Elektriker" className="h-12 w-auto" />
         </Link>
         
         <NavigationMenu className="hidden lg:flex">

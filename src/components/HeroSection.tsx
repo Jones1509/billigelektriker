@@ -4,7 +4,21 @@ import switchesImage from "@/assets/switches-background.webp";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[600px] flex items-center overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="relative min-h-[600px] flex items-center overflow-hidden">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/video-background.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Gradient Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+
       {/* Content */}
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -13,13 +27,13 @@ export const HeroSection = () => {
             <div className="mb-6">
               <span className="text-2xl font-bold text-green-500">Billig Elektriker</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
               El-service der virker.<br />Hver gang
             </h1>
-            <p className="text-xl mb-4 text-gray-700">
+            <p className="text-xl mb-4 text-white/90">
               Certificerede elektrikere med fair priser og hurtig respons – fra fejlfinding til komplette installationer.
             </p>
-            <p className="text-lg mb-8 text-gray-600">
+            <p className="text-lg mb-8 text-white/80">
               Få et tilbud i dag – helt gratis og uforpligtende.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -27,7 +41,7 @@ export const HeroSection = () => {
                 Få et tilbud
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-100">
+              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
                 <Play className="mr-2 h-5 w-5" />
                 Se video
               </Button>
@@ -35,7 +49,7 @@ export const HeroSection = () => {
           </div>
           
           {/* Image - Right Side */}
-          <div className="relative">
+          <div className="relative hidden lg:block">
             <img 
               src={switchesImage} 
               alt="Forskellige farverige stikkontakter og afbrydere" 
