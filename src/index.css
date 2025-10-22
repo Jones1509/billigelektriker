@@ -62,9 +62,9 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding: 60px 20px 80px;
+  padding: 40px 20px;
 }
 
 .coming-soon-container {
@@ -84,12 +84,12 @@
   flex-direction: column;
   align-items: center;
   gap: 0;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   animation: fadeInUp 0.6s ease-out;
 }
 
 .logo-wrapper {
-  width: 180px;
+  width: 220px;
   height: auto;
   display: flex;
   align-items: center;
@@ -113,7 +113,7 @@
   font-weight: 800;
   color: white;
   text-align: center;
-  margin: 0 0 24px 0;
+  margin: 0 0 16px 0;
   line-height: 1.1;
   letter-spacing: -0.01em;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
@@ -124,7 +124,7 @@
   font-size: 22px;
   color: white;
   text-align: center;
-  margin: 0 0 50px 0;
+  margin: 0 0 35px 0;
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -135,12 +135,12 @@
 /* Countdown Timer - Clean Design */
 .countdown-timer {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
   max-width: 600px;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   animation: fadeInUp 0.6s ease-out 0.3s backwards;
 }
 
@@ -192,12 +192,12 @@
   background: rgba(255, 255, 255, 0.22);
   border: 2px solid rgba(255, 255, 255, 0.35);
   border-radius: 20px;
-  padding: 40px;
+  padding: 32px;
   max-width: 800px;
   width: 100%;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   animation: fadeInUp 0.6s ease-out 0.4s backwards;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .description-content {
@@ -205,7 +205,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
 .description-content p {
@@ -231,7 +231,7 @@
   max-width: 500px;
   width: 100%;
   animation: fadeInUp 0.6s ease-out 0.5s backwards;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
 }
 
 .password-input {
@@ -301,7 +301,7 @@
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
-  margin: 0 0 30px 0;
+  margin: 0;
   animation: fadeInUp 0.6s ease-out 0.6s backwards;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
@@ -309,7 +309,7 @@
 /* Responsive Design - Tablet */
 @media (max-width: 1024px) {
   .logo-wrapper {
-    width: 150px;
+    width: 180px;
   }
 
   .company-name {
@@ -329,32 +329,32 @@
 /* Responsive Design - Mobile */
 @media (max-width: 768px) {
   .coming-soon-page {
-    padding: 40px 20px 60px;
+    padding: 30px 20px;
   }
 
   .logo-wrapper {
-    width: 130px;
+    width: 150px;
   }
 
   .logo-section {
     gap: 0;
-    margin-bottom: 40px;
+    margin-bottom: 25px;
   }
 
   .company-name {
     font-size: 44px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
   .coming-soon-subtitle {
     font-size: 20px;
     letter-spacing: 2.5px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   .countdown-timer {
     gap: 14px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     max-width: 100%;
   }
 
@@ -374,8 +374,8 @@
   }
 
   .description-section {
-    padding: 32px;
-    margin-bottom: 40px;
+    padding: 28px;
+    margin-bottom: 25px;
   }
 
   .description-content {
@@ -392,7 +392,7 @@
   }
 
   .access-card {
-    margin-bottom: 25px;
+    margin-bottom: 16px;
   }
 
   .password-input,
@@ -403,39 +403,39 @@
 
   .coming-soon-container > p {
     font-size: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 0;
   }
 }
 
 /* Responsive Design - Small Mobile */
 @media (max-width: 480px) {
   .coming-soon-page {
-    padding: 30px 15px 50px;
+    padding: 25px 15px;
   }
 
   .logo-wrapper {
-    width: 110px;
+    width: 130px;
   }
 
   .logo-section {
     gap: 0;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
   }
 
   .company-name {
     font-size: 36px;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
   }
 
   .coming-soon-subtitle {
     font-size: 17px;
     letter-spacing: 2px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
   }
 
   .countdown-timer {
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   .time-unit {
@@ -455,7 +455,7 @@
 
   .description-section {
     padding: 24px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .description-content p {
@@ -474,7 +474,7 @@
 
   .coming-soon-container > p {
     font-size: 13px;
-    margin-bottom: 25px;
+    margin-bottom: 0;
   }
 }
 
