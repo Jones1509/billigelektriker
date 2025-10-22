@@ -32,7 +32,7 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-b from-background via-blue-tint/60 to-background overflow-hidden">
+    <section className="relative py-8 md:py-12 bg-gradient-to-b from-background via-blue-tint/60 to-background overflow-hidden">
       {/* Smooth fade-in at top */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-[5]"></div>
       
@@ -57,7 +57,7 @@ export const ValuesSection = () => {
       </div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-12 md:mb-14 animate-fade-in px-4">
+        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
           {/* Premium Badge with gentle bounce */}
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DBEAFE] to-[#BFDBFE] text-primary text-sm font-semibold mb-6 shadow-[0_4px_12px_rgba(0,102,255,0.15)] animate-[gentleBounce_2s_ease-in-out_infinite]">
             <div className="w-2 h-2 rounded-full bg-primary"></div>

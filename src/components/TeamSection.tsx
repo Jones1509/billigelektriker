@@ -8,7 +8,7 @@ export const TeamSection = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-12 md:py-16 relative overflow-hidden bg-background">
+    <section className="py-8 md:py-12 relative overflow-hidden bg-background">
       {/* Subtle gradient overlay only */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/20 pointer-events-none"></div>
       

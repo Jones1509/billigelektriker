@@ -42,13 +42,13 @@ export const ServiceColumns = () => {
   ];
   
   return (
-    <section className="py-12 md:py-16 relative overflow-hidden bg-background border-t border-border/40">
+    <section className="py-8 md:py-12 relative overflow-hidden bg-background border-t border-border/40">
       {/* Very subtle gradient only */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/10 to-background pointer-events-none"></div>
       
       <div className="container relative z-10">
         {/* Centered header */}
-        <div className="text-center mb-10 md:mb-12 animate-fade-in px-4 max-w-3xl mx-auto">
+        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
             {t('serviceColumns.title')}
           </h2>

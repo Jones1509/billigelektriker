@@ -8,7 +8,7 @@ export const ServiceBoxes = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden">
+    <section className="py-8 md:py-12 relative overflow-hidden">
       {/* Smooth fade-out at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-[5]"></div>
       
@@ -25,7 +25,7 @@ export const ServiceBoxes = () => {
       
       <div className="container relative z-10">
         {/* Enhanced header */}
-        <div className="text-center mb-12 md:mb-20 animate-fade-in px-4">
+        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-primary/15 to-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-6 shadow-lg shadow-primary/5">
             <Sparkles className="h-4 w-4" />
             {t('serviceBoxes.badge')}
@@ -38,7 +38,7 @@ export const ServiceBoxes = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 px-4 md:px-0 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0 max-w-6xl mx-auto">
           {/* El-arbejde Card */}
           <Card className="group relative overflow-hidden border-2 border-primary/10 shadow-2xl hover:shadow-primary/20 transition-all duration-700 hover:-translate-y-3 bg-gradient-to-br from-white via-white to-blue-50/80 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950/40 hover:border-primary/30">
             {/* Animated shine effect */}

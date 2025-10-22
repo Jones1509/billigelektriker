@@ -39,13 +39,13 @@ export const ProductCategories = () => {
 
   return (
     <section 
-      className="py-12 md:py-24 relative overflow-hidden" 
+      className="py-8 md:py-12 relative overflow-hidden"
       style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--background)) 100%)' }}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.08),transparent_70%)]"></div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
+        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
             {t('productCategories.badge')}
           </span>

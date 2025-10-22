@@ -52,7 +52,7 @@ export const SmartLightSection = () => {
   }, [currentIndex]);
   
   return (
-    <section className="relative overflow-hidden py-20 md:py-32">
+    <section className="relative overflow-hidden py-8 md:py-12">
       {/* Smooth gradient background with transitions */}
       <div 
         className="absolute inset-0 z-0"
@@ -86,7 +86,7 @@ export const SmartLightSection = () => {
       />
       
       <div className="container relative z-10 px-4 md:px-6">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-center max-w-7xl mx-auto">
           {/* Image carousel section */}
           <div className="relative order-2 md:order-1 animate-fade-in">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
@@ -152,7 +152,7 @@ export const SmartLightSection = () => {
           </div>
 
           {/* Text content section */}
-          <div className="space-y-6 md:space-y-8 order-1 md:order-2 animate-fade-in">
+          <div className="space-y-4 md:space-y-6 order-1 md:order-2 animate-fade-in">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
               <Lightbulb className="h-5 w-5 text-primary" />
