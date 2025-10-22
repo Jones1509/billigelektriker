@@ -41,7 +41,7 @@ export const AnnouncementBar = () => {
               href="tel:+4512345678"
               className="flex items-center gap-2 xl:gap-2.5 text-white/90 hover:text-white transition-all duration-300 ease-in-out group relative whitespace-nowrap"
             >
-              <Phone className="h-3.5 xl:h-4 w-3.5 xl:w-4 animate-pulse group-hover:scale-105 transition-all duration-300 drop-shadow-[0_0_8px_rgba(96,165,250,0.5)] group-hover:drop-shadow-[0_0_12px_rgba(96,165,250,0.8)] flex-shrink-0" />
+              <Phone className="h-3.5 xl:h-4 w-3.5 xl:w-4 group-hover:scale-105 transition-all duration-300 drop-shadow-[0_0_8px_rgba(96,165,250,0.5)] group-hover:drop-shadow-[0_0_12px_rgba(96,165,250,0.8)] flex-shrink-0" />
               <span className="text-xs font-medium group-hover:scale-105 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">+45 12 34 56 78</span>
             </a>
             
