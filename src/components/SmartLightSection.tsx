@@ -134,7 +134,7 @@ export const SmartLightSection = () => {
               </div>
 
               {/* Indicators */}
-              <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+              <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
                 {smartHomeImages.map((_, index) => (
                   <button
                     key={index}
