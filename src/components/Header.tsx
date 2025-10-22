@@ -127,7 +127,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
       <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center gap-3 font-bold text-2xl">
           <img src={logo} alt="Billig Elektriker" className="h-12 w-auto" />
@@ -136,7 +136,7 @@ export const Header = () => {
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-base">Serviceydelser</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="text-base text-white hover:text-white/90">Serviceydelser</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[600px] gap-3 p-6 md:grid-cols-2">
                   {services.map((service) => (
@@ -170,7 +170,7 @@ export const Header = () => {
             </NavigationMenuItem>
 
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="text-base">Produkter</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="text-base text-white hover:text-white/90">Produkter</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[600px] gap-3 p-6 md:grid-cols-2">
                   {products.map((product) => (
@@ -206,7 +206,7 @@ export const Header = () => {
         </NavigationMenu>
         
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm" className="hidden md:flex items-center gap-2">
+          <Button variant="ghost" size="sm" className="hidden md:flex items-center gap-2 text-white hover:text-white/90 hover:bg-white/10">
             <Phone className="h-4 w-4" />
             <span>Ring til os</span>
           </Button>
@@ -214,7 +214,7 @@ export const Header = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
+                <Button variant="ghost" size="icon" className="rounded-full text-white hover:bg-white/10">
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
@@ -233,7 +233,7 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="ghost" size="icon" onClick={() => navigate("/auth")}>
+            <Button variant="ghost" size="icon" onClick={() => navigate("/auth")} className="text-white hover:bg-white/10">
               <User className="h-5 w-5" />
             </Button>
           )}

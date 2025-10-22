@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Calculator } from "lucide-react";
 import switchesImage from "@/assets/switches-background.webp";
 
 export const HeroSection = () => {
@@ -41,9 +41,9 @@ export const HeroSection = () => {
                 Få et tilbud
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                <Play className="mr-2 h-5 w-5" />
-                Se video
+              <Button size="lg" variant="outline" className="bg-white text-gray-900 border-white hover:bg-gray-100">
+                <Calculator className="mr-2 h-5 w-5" />
+                Prisberegner
               </Button>
             </div>
           </div>
