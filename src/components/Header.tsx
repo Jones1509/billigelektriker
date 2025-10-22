@@ -233,8 +233,8 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="outline" size="sm" onClick={() => navigate("/auth")}>
-              Log ind
+            <Button variant="ghost" size="icon" onClick={() => navigate("/auth")}>
+              <User className="h-5 w-5" />
             </Button>
           )}
           
