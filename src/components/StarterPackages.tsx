@@ -29,7 +29,7 @@ export const StarterPackages = () => {
 
   return (
     <section 
-      className="py-12 md:py-24 relative overflow-hidden" 
+      className="py-8 md:py-12 relative overflow-hidden"
       style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 100%)' }}
     >
       {/* Premium background */}
@@ -37,7 +37,7 @@ export const StarterPackages = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
+        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
           <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-primary/10 text-purple-600 dark:text-purple-400 text-sm font-semibold mb-4 border border-purple-500/20">
             {t('starterPackages.badge')}
           </span>

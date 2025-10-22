@@ -21,14 +21,14 @@ export const NewsletterCTA = () => {
   };
 
   return (
-    <section className="py-12 md:py-24 bg-gradient-to-br from-primary via-blue-600 to-primary text-primary-foreground relative overflow-hidden">
+    <section className="py-8 md:py-12 bg-gradient-to-br from-primary via-blue-600 to-primary text-primary-foreground relative overflow-hidden">
       {/* Premium background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(34,197,94,0.15),transparent_50%)]"></div>
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
       
       <div className="container relative z-10 px-4">
-        <div className="max-w-3xl mx-auto text-center space-y-6 md:space-y-8">
+        <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
           <div className="inline-flex p-4 md:p-6 bg-white/10 backdrop-blur-sm rounded-2xl mb-2 md:mb-4 shadow-xl">
             <Gift className="h-8 w-8 md:h-10 md:w-10" />
           </div>
