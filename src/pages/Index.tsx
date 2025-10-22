@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { ServiceBoxes } from "@/components/ServiceBoxes";
 import { TeamSection } from "@/components/TeamSection";
@@ -17,6 +18,63 @@ import { useTranslation } from "react-i18next";
 
 const Index = () => {
   const { t } = useTranslation();
+  const [password, setPassword] = useState('');
+  const [isUnlocked, setIsUnlocked] = useState(false);
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === 'billigelektriker2025') {
+      setIsUnlocked(true);
+    } else {
+      alert('Forkert adgangskode');
+      setPassword('');
+    }
+  };
+
+  // BLOCK EVERYTHING if not unlocked
+  if (!isUnlocked) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center p-6 relative overflow-hidden bg-gradient-to-br from-[#10B981] via-[#3B82F6] to-[#EF4444]">
+        <div className="w-full max-w-xl space-y-12 relative z-10 bg-white/15 backdrop-blur-xl border border-white/30 rounded-2xl p-10 shadow-2xl">
+          <div className="text-center space-y-6">
+            <h1 className="text-5xl md:text-7xl font-bold text-white drop-shadow-2xl">
+              Billig Elektriker
+            </h1>
+            <div className="h-px w-24 mx-auto bg-white/40" />
+            <p className="text-xl md:text-2xl text-white/90 drop-shadow font-light">
+              Snart lancerer vi Danmarks mest moderne elektrikerplatform
+            </p>
+          </div>
+
+          <form onSubmit={handlePasswordSubmit} className="space-y-6">
+            <div>
+              <input
+                type="password"
+                placeholder="Adgangskode"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-white/95 border border-white/40 rounded-lg px-6 py-6 text-base font-light placeholder:text-gray-500"
+                autoFocus
+              />
+            </div>
+            
+            <button 
+              type="submit"
+              className="w-full bg-white hover:bg-white/90 text-gray-900 font-medium text-base py-6 rounded-lg transition-all"
+            >
+              Fortsæt
+            </button>
+            
+            <p className="text-white/80 text-sm text-center font-light">
+              Adgangskode: billigelektriker2025
+            </p>
+          </form>
+        </div>
+      </div>
+    );
+  }
+  
+  // Show normal page only if unlocked
   
   return (
     <div className="min-h-screen bg-background">
