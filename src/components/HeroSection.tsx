@@ -48,7 +48,7 @@ export const HeroSection = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-300 group">
-                Se vores arbejde
+                {t('hero.seeOurWork')}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button size="lg" variant="outline" className="backdrop-blur-md bg-white/10 text-white border-2 border-white/30 hover:bg-white hover:text-primary font-semibold shadow-xl hover:scale-105 transition-all duration-300">

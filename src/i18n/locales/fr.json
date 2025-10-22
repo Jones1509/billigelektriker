@@ -7,6 +7,8 @@
     "about": "À propos",
     "contact": "Contactez-nous",
     "myProfile": "Mon profil",
+    "myAccount": "Mon compte",
+    "profile": "Profil",
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "logoutSuccess": "Vous êtes maintenant déconnecté",
@@ -19,6 +21,7 @@
     "title3": ".\nÀ chaque fois",
     "subtitle": "Électriciens certifiés avec des prix équitables et une réponse rapide – du dépannage aux installations complètes.",
     "cta": "Contactez-nous",
+    "seeOurWork": "Voir notre travail",
     "warranty": "2 ans de\ngarantie",
     "quickResponse": "Réponse\nrapide",
     "freeParking": "Parking\ngratuit"
@@ -204,7 +207,9 @@
     "warranty": {
       "title": "Garantie par écrit",
       "description": "12 mois de garantie sur le travail, 2 ans de droit de réclamation"
-    }
+    },
+    "ctaQuestion": "Prêt à découvrir la différence?",
+    "ctaButton": "Obtenez un devis gratuit"
   },
   "smartLight": {
     "badge": "Technologie Smart Home",
@@ -268,5 +273,65 @@
     "privacy": "Politique de Confidentialité",
     "terms": "Conditions Générales",
     "contact": "Contact"
+  },
+  "announcements": {
+    "freeShipping": "Livraison gratuite au-dessus de 750 kr.",
+    "quickResponse": "Réponse rapide 24/7",
+    "location": "Copenhague",
+    "aboutUs": "À propos",
+    "contact": "Contact"
+  },
+  "cart": {
+    "title": "Panier",
+    "emptyCart": "Votre panier est vide",
+    "itemsInCart": "{{count}} article dans votre panier",
+    "itemsInCart_plural": "{{count}} articles dans votre panier",
+    "total": "Total",
+    "creatingCheckout": "Création du paiement...",
+    "goToCheckout": "Aller au paiement"
+  },
+  "badges": {
+    "certified": "Certifié",
+    "quickResponse": "Réponse rapide",
+    "twoYearWarranty": "Garantie de 2 ans",
+    "freeShipping": "Livraison gratuite au-dessus de 750kr",
+    "fastDelivery": "Livraison rapide",
+    "qualityProducts": "Produits de qualité"
+  },
+  "team": {
+    "badge": "Rencontrez l'équipe",
+    "title": "L'équipe derrière Électricien Pas Cher",
+    "description": "Électricien Pas Cher a commencé avec une idée simple: Fournir un service électrique professionnel à des prix honnêtes – sans compromis sur la qualité. Nous sommes une équipe jeune et dynamique avec des certifications en ordre, et nous aimons résoudre les problèmes de nos clients – du plus petit dépannage aux grands projets d'installation.",
+    "certified": "Certifié",
+    "certifiedDescription": "Électriciens agréés",
+    "fastResponse": "Réponse rapide",
+    "fastResponseDescription": "Contactez-nous aujourd'hui",
+    "cta": "Appelez-nous aujourd'hui",
+    "professionalQuality": "Qualité professionnelle",
+    "experiencedCraftsmen": "Artisans expérimentés avec passion pour votre projet",
+    "readyForTask": "Prêt pour la tâche",
+    "allSizes": "Nous prenons des travaux de toutes tailles - rapide et efficace"
+  },
+  "auth": {
+    "emailAddress": "Adresse e-mail",
+    "emailPlaceholder": "votre@email.fr",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "firstName": "Prénom",
+    "firstNamePlaceholder": "Pierre",
+    "lastName": "Nom",
+    "lastNamePlaceholder": "Dupont",
+    "minPasswordLength": "Au moins 6 caractères"
+  },
+  "contact": {
+    "name": "Nom",
+    "namePlaceholder": "Votre nom complet",
+    "email": "E-mail",
+    "emailPlaceholder": "votre@email.fr",
+    "phone": "Téléphone",
+    "phonePlaceholder": "+45 12 34 56 78",
+    "message": "Message",
+    "messagePlaceholder": "Décrivez votre projet ou ce dont vous avez besoin...",
+    "sendMessage": "Envoyer le message"
   }
 }

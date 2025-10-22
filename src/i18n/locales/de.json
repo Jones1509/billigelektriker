@@ -7,6 +7,8 @@
     "about": "Über uns",
     "contact": "Kontaktieren Sie uns",
     "myProfile": "Mein Profil",
+    "myAccount": "Mein Konto",
+    "profile": "Profil",
     "login": "Anmelden",
     "logout": "Abmelden",
     "logoutSuccess": "Sie sind jetzt abgemeldet",
@@ -19,6 +21,7 @@
     "title3": ".\nJedes Mal",
     "subtitle": "Zertifizierte Elektriker mit fairen Preisen und schneller Reaktion – von der Fehlersuche bis zur kompletten Installation.",
     "cta": "Kontaktieren Sie uns",
+    "seeOurWork": "Sehen Sie unsere Arbeit",
     "warranty": "2 Jahre\nGarantie",
     "quickResponse": "Schnelle\nReaktion",
     "freeParking": "Kostenloser\nParkplatz"
@@ -204,7 +207,9 @@
     "warranty": {
       "title": "Garantie schriftlich",
       "description": "12 Monate Garantie auf Arbeit, 2 Jahre Reklamationsrecht"
-    }
+    },
+    "ctaQuestion": "Bereit, den Unterschied zu erleben?",
+    "ctaButton": "Holen Sie sich ein kostenloses Angebot"
   },
   "smartLight": {
     "badge": "Smart Home Technologie",
@@ -268,5 +273,65 @@
     "privacy": "Datenschutzerklärung",
     "terms": "Allgemeine Geschäftsbedingungen",
     "contact": "Kontakt"
+  },
+  "announcements": {
+    "freeShipping": "Kostenloser Versand über 750 kr.",
+    "quickResponse": "Schnelle Reaktion 24/7",
+    "location": "Kopenhagen",
+    "aboutUs": "Über uns",
+    "contact": "Kontakt"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "emptyCart": "Ihr Warenkorb ist leer",
+    "itemsInCart": "{{count}} Artikel in Ihrem Warenkorb",
+    "itemsInCart_plural": "{{count}} Artikel in Ihrem Warenkorb",
+    "total": "Gesamt",
+    "creatingCheckout": "Checkout wird erstellt...",
+    "goToCheckout": "Zur Kasse"
+  },
+  "badges": {
+    "certified": "Zertifiziert",
+    "quickResponse": "Schnelle Reaktion",
+    "twoYearWarranty": "2 Jahre Garantie",
+    "freeShipping": "Kostenloser Versand über 750kr",
+    "fastDelivery": "Schnelle Lieferung",
+    "qualityProducts": "Qualitätsprodukte"
+  },
+  "team": {
+    "badge": "Das Team kennenlernen",
+    "title": "Das Team hinter Günstiger Elektriker",
+    "description": "Günstiger Elektriker begann mit einer einfachen Idee: Professionellen Elektroservice zu ehrlichen Preisen zu liefern – ohne Kompromisse bei der Qualität. Wir sind ein junges, dynamisches Team mit Zertifizierungen in Ordnung, und wir lieben es, die Probleme unserer Kunden zu lösen – von der kleinsten Fehlersuche bis zu großen Installationsprojekten.",
+    "certified": "Zertifiziert",
+    "certifiedDescription": "Autorisierte Elektriker",
+    "fastResponse": "Schnelle Reaktion",
+    "fastResponseDescription": "Kontaktieren Sie uns heute",
+    "cta": "Rufen Sie uns heute an",
+    "professionalQuality": "Professionelle Qualität",
+    "experiencedCraftsmen": "Erfahrene Handwerker mit Leidenschaft für Ihr Projekt",
+    "readyForTask": "Bereit für die Aufgabe",
+    "allSizes": "Wir übernehmen Aufträge aller Größen - schnell und effizient"
+  },
+  "auth": {
+    "emailAddress": "E-Mail-Adresse",
+    "emailPlaceholder": "ihre@email.de",
+    "password": "Passwort",
+    "passwordPlaceholder": "••••••••",
+    "firstName": "Vorname",
+    "firstNamePlaceholder": "Max",
+    "lastName": "Nachname",
+    "lastNamePlaceholder": "Müller",
+    "minPasswordLength": "Mindestens 6 Zeichen"
+  },
+  "contact": {
+    "name": "Name",
+    "namePlaceholder": "Ihr vollständiger Name",
+    "email": "E-Mail",
+    "emailPlaceholder": "ihre@email.de",
+    "phone": "Telefon",
+    "phonePlaceholder": "+45 12 34 56 78",
+    "message": "Nachricht",
+    "messagePlaceholder": "Beschreiben Sie Ihr Projekt oder wobei Sie Hilfe benötigen...",
+    "sendMessage": "Nachricht senden"
   }
 }

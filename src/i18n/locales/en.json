@@ -7,6 +7,8 @@
     "about": "About Us",
     "contact": "Contact Us",
     "myProfile": "My Profile",
+    "myAccount": "My Account",
+    "profile": "Profile",
     "login": "Log In",
     "logout": "Log Out",
     "logoutSuccess": "You are now logged out",
@@ -19,6 +21,7 @@
     "title3": ".\nEvery time",
     "subtitle": "Certified electricians with fair prices and quick response – from troubleshooting to complete installations.",
     "cta": "Contact us",
+    "seeOurWork": "See our work",
     "warranty": "2 year\nwarranty",
     "quickResponse": "Quick\nresponse",
     "freeParking": "Free\nparking"
@@ -204,7 +207,9 @@
     "warranty": {
       "title": "Warranty in writing",
       "description": "12 months warranty on work, 2 years right of complaint"
-    }
+    },
+    "ctaQuestion": "Ready to experience the difference?",
+    "ctaButton": "Get a free quote"
   },
   "smartLight": {
     "badge": "Smart Home Technology",
@@ -268,5 +273,65 @@
     "privacy": "Privacy Policy",
     "terms": "Terms and Conditions",
     "contact": "Contact"
+  },
+  "announcements": {
+    "freeShipping": "Free shipping over 750 kr.",
+    "quickResponse": "Quick response 24/7",
+    "location": "Copenhagen",
+    "aboutUs": "About us",
+    "contact": "Contact"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "emptyCart": "Your cart is empty",
+    "itemsInCart": "{{count}} item in your cart",
+    "itemsInCart_plural": "{{count}} items in your cart",
+    "total": "Total",
+    "creatingCheckout": "Creating checkout...",
+    "goToCheckout": "Go to checkout"
+  },
+  "badges": {
+    "certified": "Certified",
+    "quickResponse": "Quick response",
+    "twoYearWarranty": "2 year warranty",
+    "freeShipping": "Free shipping over 750kr",
+    "fastDelivery": "Fast delivery",
+    "qualityProducts": "Quality products"
+  },
+  "team": {
+    "badge": "Meet the team",
+    "title": "The team behind Cheap Electrician",
+    "description": "Cheap Electrician started with a simple idea: To deliver professional electrical service at honest prices – without compromising on quality. We are a young, dynamic team with certifications in order, and we love solving our customers' problems – from the smallest troubleshooting to large installation projects.",
+    "certified": "Certified",
+    "certifiedDescription": "Authorized electricians",
+    "fastResponse": "Fast response",
+    "fastResponseDescription": "Contact us today",
+    "cta": "Call us today",
+    "professionalQuality": "Professional quality",
+    "experiencedCraftsmen": "Experienced craftsmen with passion for your project",
+    "readyForTask": "Ready for the task",
+    "allSizes": "We take jobs of all sizes - fast and efficient"
+  },
+  "auth": {
+    "emailAddress": "Email address",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "firstName": "First name",
+    "firstNamePlaceholder": "John",
+    "lastName": "Last name",
+    "lastNamePlaceholder": "Smith",
+    "minPasswordLength": "At least 6 characters"
+  },
+  "contact": {
+    "name": "Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "phone": "Phone",
+    "phonePlaceholder": "+45 12 34 56 78",
+    "message": "Message",
+    "messagePlaceholder": "Describe your project or what you need help with...",
+    "sendMessage": "Send message"
   }
 }

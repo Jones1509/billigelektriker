@@ -7,6 +7,8 @@
     "about": "Om os",
     "contact": "Kontakt os",
     "myProfile": "Min profil",
+    "myAccount": "Min konto",
+    "profile": "Profil",
     "login": "Log ind",
     "logout": "Log ud",
     "logoutSuccess": "Du er nu logget ud",
@@ -19,6 +21,7 @@
     "title3": ".\nHver gang",
     "subtitle": "Certificerede elektrikere med fair priser og hurtig respons – fra fejlfinding til komplette installationer.",
     "cta": "Kontakt os",
+    "seeOurWork": "Se vores arbejde",
     "warranty": "2 års\ngaranti",
     "quickResponse": "Hurtig\nrespons",
     "freeParking": "Gratis\nparkering"
