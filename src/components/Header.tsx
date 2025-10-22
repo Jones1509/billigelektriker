@@ -55,25 +55,27 @@ const MobileLanguageSwitcher = () => {
   ];
 
   return (
-    <div className="border-t pt-4">
-      <div className="px-2 mb-2 text-sm font-semibold text-muted-foreground">
+    <AccordionItem value="language" className="border-b-0">
+      <AccordionTrigger className="px-2 text-lg font-semibold text-primary hover:no-underline">
         Sprog / Language
-      </div>
-      <div className="grid grid-cols-2 gap-2">
-        {languages.map((language) => (
-          <Button
-            key={language.code}
-            variant={i18n.language === language.code ? "default" : "outline"}
-            size="sm"
-            onClick={() => i18n.changeLanguage(language.code)}
-            className="justify-start gap-2"
-          >
-            <span className="text-lg">{language.flag}</span>
-            <span className="text-xs">{language.name}</span>
-          </Button>
-        ))}
-      </div>
-    </div>
+      </AccordionTrigger>
+      <AccordionContent>
+        <div className="grid grid-cols-2 gap-2 pt-2 px-2">
+          {languages.map((language) => (
+            <Button
+              key={language.code}
+              variant={i18n.language === language.code ? "default" : "outline"}
+              size="sm"
+              onClick={() => i18n.changeLanguage(language.code)}
+              className="justify-start gap-2"
+            >
+              <span className="text-lg">{language.flag}</span>
+              <span className="text-xs">{language.name}</span>
+            </Button>
+          ))}
+        </div>
+      </AccordionContent>
+    </AccordionItem>
   );
 };
 
@@ -308,7 +310,9 @@ export const Header = () => {
         </NavigationMenu>
         
         <div className="flex items-center gap-3">
-          <LanguageSwitcher />
+          <div className="hidden lg:flex">
+            <LanguageSwitcher />
+          </div>
           
           <Button 
             variant="ghost" 
@@ -390,6 +394,9 @@ export const Header = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
+
+                    {/* Language Switcher in Mobile Menu */}
+                    <MobileLanguageSwitcher />
                   </Accordion>
 
                   {/* Additional Links */}
@@ -418,10 +425,9 @@ export const Header = () => {
                     </div>
                   </div>
 
-                  {/* Language Switcher in Mobile Menu */}
-                  <MobileLanguageSwitcher />
 
-                  {/* User Actions */}
+                  {/* Static Links */}
+                  <div className="space-y-2 px-2">
                   <div className="border-t pt-4 space-y-2">
                     {user ? (
                       <>
