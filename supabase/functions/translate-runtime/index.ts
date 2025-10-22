@@ -26,6 +26,47 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
+
+    // Input validation
+    const MAX_TEXT_LENGTH = 10000;
+    const MAX_BATCH_SIZE = 100;
+    const SUPPORTED_LANGS = ['da', 'en', 'de', 'fr', 'sv', 'no'];
+
+    if (textsToTranslate.length > MAX_BATCH_SIZE) {
+      return new Response(
+        JSON.stringify({ error: `Maximum ${MAX_BATCH_SIZE} texts allowed per request` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    for (const txt of textsToTranslate) {
+      if (typeof txt !== 'string') {
+        return new Response(
+          JSON.stringify({ error: 'All texts must be strings' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+      if (txt.length > MAX_TEXT_LENGTH) {
+        return new Response(
+          JSON.stringify({ error: `Text exceeds maximum length of ${MAX_TEXT_LENGTH} characters` }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
+    if (!SUPPORTED_LANGS.includes(targetLang)) {
+      return new Response(
+        JSON.stringify({ error: `Unsupported target language. Supported: ${SUPPORTED_LANGS.join(', ')}` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!SUPPORTED_LANGS.includes(sourceLang)) {
+      return new Response(
+        JSON.stringify({ error: `Unsupported source language. Supported: ${SUPPORTED_LANGS.join(', ')}` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
     
     console.log(`Translating ${textsToTranslate.length} texts from ${sourceLang} to ${targetLang}`);
     

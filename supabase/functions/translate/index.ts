@@ -20,6 +20,38 @@ serve(async (req) => {
       );
     }
 
+    // Input validation
+    const MAX_TEXT_LENGTH = 10000;
+    const SUPPORTED_LANGS = ['da', 'en', 'de', 'fr', 'sv', 'no'];
+
+    if (typeof text !== 'string') {
+      return new Response(
+        JSON.stringify({ error: "Text must be a string" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (text.length > MAX_TEXT_LENGTH) {
+      return new Response(
+        JSON.stringify({ error: `Text exceeds maximum length of ${MAX_TEXT_LENGTH} characters` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (!SUPPORTED_LANGS.includes(targetLang)) {
+      return new Response(
+        JSON.stringify({ error: `Unsupported target language. Supported: ${SUPPORTED_LANGS.join(', ')}` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (!SUPPORTED_LANGS.includes(sourceLang)) {
+      return new Response(
+        JSON.stringify({ error: `Unsupported source language. Supported: ${SUPPORTED_LANGS.join(', ')}` }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");

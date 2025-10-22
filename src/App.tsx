@@ -5,7 +5,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TranslationGuard } from "./components/TranslationGuard";
-import { PasswordGate } from "./components/PasswordGate";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import Auth from "./pages/Auth";
@@ -25,22 +24,20 @@ const App = () => (
       <Toaster />
       <Sonner />
       <TranslationGuard />
-      <PasswordGate>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/product/:handle" element={<ProductDetail />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/om-os" element={<About />} />
-            <Route path="/kontakt" element={<Contact />} />
-            <Route path="/admin/translations" element={<TranslationAdmin />} />
-            <Route path="/admin/translation-check" element={<TranslationCheck />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </PasswordGate>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/product/:handle" element={<ProductDetail />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/om-os" element={<About />} />
+          <Route path="/kontakt" element={<Contact />} />
+          <Route path="/admin/translations" element={<TranslationAdmin />} />
+          <Route path="/admin/translation-check" element={<TranslationCheck />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
