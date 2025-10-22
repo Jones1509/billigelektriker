@@ -37,7 +37,7 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
       <div className="w-full max-w-md space-y-8 relative z-10">
         <div className="text-center space-y-8">
           <div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl tracking-tight whitespace-nowrap">
               Billig Elektriker
             </h1>
             <p className="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-lg">
