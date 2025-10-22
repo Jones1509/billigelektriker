@@ -1,39 +1,42 @@
 import { Card, CardContent } from "./ui/card";
 import { Home, Sun, Lightbulb, Plug } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const categories = [
-  {
-    icon: Home,
-    title: "Indendørs Lys",
-    description: "Skab den perfekte hygge derhjemme",
-    link: "/collections/indendors-lys",
-    gradient: "from-blue-500 to-blue-600"
-  },
-  {
-    icon: Sun,
-    title: "Udendørs Lys",
-    description: "Robust belysning til have og terrasse",
-    link: "/collections/udendors-lys",
-    gradient: "from-orange-500 to-yellow-500"
-  },
-  {
-    icon: Lightbulb,
-    title: "Smart Home",
-    description: "Intelligente løsninger til hele hjemmet",
-    link: "/collections/smart-home",
-    gradient: "from-purple-500 to-pink-600"
-  },
-  {
-    icon: Plug,
-    title: "Stikkontakter & Tilbehør",
-    description: "Alt du behøver til installationen",
-    link: "/collections/tilbehor",
-    gradient: "from-green-500 to-emerald-600"
-  }
-];
+import { useTranslation } from "react-i18next";
 
 export const ProductCategories = () => {
+  const { t } = useTranslation();
+  
+  const categories = [
+    {
+      icon: Home,
+      title: t('productCategories.indoor.title'),
+      description: t('productCategories.indoor.description'),
+      link: "/collections/indendors-lys",
+      gradient: "from-blue-500 to-blue-600"
+    },
+    {
+      icon: Sun,
+      title: t('productCategories.outdoor.title'),
+      description: t('productCategories.outdoor.description'),
+      link: "/collections/udendors-lys",
+      gradient: "from-orange-500 to-yellow-500"
+    },
+    {
+      icon: Lightbulb,
+      title: t('productCategories.smartHome.title'),
+      description: t('productCategories.smartHome.description'),
+      link: "/collections/smart-home",
+      gradient: "from-purple-500 to-pink-600"
+    },
+    {
+      icon: Plug,
+      title: t('productCategories.accessories.title'),
+      description: t('productCategories.accessories.description'),
+      link: "/collections/tilbehor",
+      gradient: "from-green-500 to-emerald-600"
+    }
+  ];
+
   return (
     <section 
       className="py-12 md:py-24 relative overflow-hidden" 
@@ -44,13 +47,13 @@ export const ProductCategories = () => {
       <div className="container relative z-10">
         <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
-            🏠 Produktkategorier
+            {t('productCategories.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Find det rigtige lys til dit projekt
+            {t('productCategories.title')}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Fra indendørs hygge til robust udendørs belysning – vi har det hele.
+            {t('productCategories.subtitle')}
           </p>
         </div>
 
@@ -67,7 +70,7 @@ export const ProductCategories = () => {
                   <h3 className="text-xl md:text-2xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all">{category.title}</h3>
                   <p className="text-sm md:text-base text-muted-foreground group-hover:text-foreground/80 transition-colors">{category.description}</p>
                   <div className="pt-2 flex items-center gap-2 text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                    Se produkter
+                    {t('productCategories.cta')}
                     <svg className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -1,29 +1,32 @@
 import { Shield, DollarSign, Clock, FileCheck } from "lucide-react";
-
-const values = [
-  {
-    icon: Shield,
-    title: "Tryghed via sikkerhed",
-    description: "Autoriserede elektrikere med alle certificeringer i orden"
-  },
-  {
-    icon: DollarSign,
-    title: "Lav pris, høj kvalitet",
-    description: "Fair priser uden skjulte omkostninger"
-  },
-  {
-    icon: Clock,
-    title: "Punktlighed til tiden",
-    description: "Vi møder op som aftalt – hver gang"
-  },
-  {
-    icon: FileCheck,
-    title: "Garanti sort på hvidt",
-    description: "12 måneders garanti på arbejdet, 2 års reklamationsret"
-  }
-];
+import { useTranslation } from "react-i18next";
 
 export const ValuesSection = () => {
+  const { t } = useTranslation();
+  
+  const values = [
+    {
+      icon: Shield,
+      title: t('values.safety.title'),
+      description: t('values.safety.description')
+    },
+    {
+      icon: DollarSign,
+      title: t('values.price.title'),
+      description: t('values.price.description')
+    },
+    {
+      icon: Clock,
+      title: t('values.punctuality.title'),
+      description: t('values.punctuality.description')
+    },
+    {
+      icon: FileCheck,
+      title: t('values.warranty.title'),
+      description: t('values.warranty.description')
+    }
+  ];
+
   return (
     <section className="py-12 md:py-24 pb-0 bg-gradient-to-b from-background to-blue-50/20 relative overflow-hidden">
       {/* Background decoration */}
@@ -33,13 +36,13 @@ export const ValuesSection = () => {
       <div className="container relative z-10">
         <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
           <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
-            💎 Vores Værdier
+            {t('values.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Derfor vælger kunderne os
+            {t('values.title')}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Professionalisme, fair priser og tryghed – hver eneste gang.
+            {t('values.subtitle')}
           </p>
         </div>
 

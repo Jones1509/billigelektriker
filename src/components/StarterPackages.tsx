@@ -1,45 +1,32 @@
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Check, Star } from "lucide-react";
-
-const packages = [
-  {
-    name: "Start-pakke",
-    price: "999",
-    description: "Perfekt til at komme i gang med smart lys",
-    features: [
-      "2x E27 RGB-pærer",
-      "1x trådløs switch",
-      "Gratis app til iOS & Android",
-      "Nem installation"
-    ]
-  },
-  {
-    name: "Udvidelses-pakke",
-    price: "1.799",
-    description: "Udvid din smarte belysning til flere rum",
-    features: [
-      "4x E27 RGB-pærer",
-      "2x trådløse switches",
-      "1x bevægelsessensor",
-      "Timer-funktioner"
-    ]
-  },
-  {
-    name: "Komplet-pakke",
-    price: "2.499",
-    description: "Alt du behøver til indendørs og udendørs",
-    features: [
-      "6x E27 RGB-pærer",
-      "3x trådløse switches",
-      "2x bevægelsessensorer",
-      "4x udendørs spots (IP65)"
-    ]
-  }
-];
+import { Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const StarterPackages = () => {
+  const { t } = useTranslation();
+  
+  const packages = [
+    {
+      name: t('starterPackages.starter.name'),
+      price: t('starterPackages.starter.price'),
+      description: t('starterPackages.starter.description'),
+      features: t('starterPackages.starter.features', { returnObjects: true }) as string[]
+    },
+    {
+      name: t('starterPackages.expansion.name'),
+      price: t('starterPackages.expansion.price'),
+      description: t('starterPackages.expansion.description'),
+      features: t('starterPackages.expansion.features', { returnObjects: true }) as string[]
+    },
+    {
+      name: t('starterPackages.complete.name'),
+      price: t('starterPackages.complete.price'),
+      description: t('starterPackages.complete.description'),
+      features: t('starterPackages.complete.features', { returnObjects: true }) as string[]
+    }
+  ];
+
   return (
     <section 
       className="py-12 md:py-24 relative overflow-hidden" 
@@ -52,13 +39,13 @@ export const StarterPackages = () => {
       <div className="container relative z-10">
         <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
           <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-primary/10 text-purple-600 dark:text-purple-400 text-sm font-semibold mb-4 border border-purple-500/20">
-            ✨ Smarte Pakkeløsninger
+            {t('starterPackages.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Kom i gang med smart lys – <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-primary">nemt og hurtigt</span>
+            {t('starterPackages.title')}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Vælg den pakke der passer til dit behov – alt er inkluderet
+            {t('starterPackages.subtitle')}
           </p>
         </div>
 
@@ -96,7 +83,7 @@ export const StarterPackages = () => {
 
               <CardFooter className="relative pt-4 md:pt-6 px-4 md:px-6">
                 <Button className="w-full text-sm md:text-base group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg" size="lg">
-                  Køb nu
+                  {t('starterPackages.cta')}
                 </Button>
               </CardFooter>
             </Card>

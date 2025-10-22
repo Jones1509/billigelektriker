@@ -1,8 +1,11 @@
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Calendar, Phone } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const BookingCTA = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="py-12 md:py-24 bg-gradient-to-br from-background via-blue-50/30 to-background relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
@@ -18,26 +21,26 @@ export const BookingCTA = () => {
               
               <div className="space-y-3 md:space-y-4">
                 <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-tight">
-                  Brug for hjælp til at vælge <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">det rigtige lys</span>?
+                  {t('bookingCta.title')}
                 </h2>
                 <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Book en gratis 10-minutters samtale – vi hjælper dig med at finde den bedste løsning til dit projekt.
+                  {t('bookingCta.subtitle')}
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
                 <Button size="lg" className="w-full sm:w-auto group shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700">
                   <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                  Book gratis samtale
+                  {t('bookingCta.bookCall')}
                 </Button>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto shadow-md hover:shadow-lg transition-all duration-300">
                   <Phone className="mr-2 h-5 w-5" />
-                  Ring nu
+                  {t('bookingCta.callNow')}
                 </Button>
               </div>
 
               <p className="text-xs md:text-sm text-muted-foreground pt-2 md:pt-4">
-                ✓ Ingen forpligtelser • ✓ Gratis rådgivning • ✓ Få svar med det samme
+                {t('bookingCta.benefits')}
               </p>
             </CardContent>
           </Card>

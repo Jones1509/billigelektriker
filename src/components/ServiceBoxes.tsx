@@ -2,8 +2,11 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { Zap, ShoppingBag, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const ServiceBoxes = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="py-12 md:py-24 bg-gradient-to-b from-background via-blue-50/30 to-background relative overflow-hidden">
       {/* Background decoration */}
@@ -13,13 +16,13 @@ export const ServiceBoxes = () => {
       <div className="container relative z-10">
         <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-            Vores Services
+            {t('serviceBoxes.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Hvad kan vi hjælpe dig med?
+            {t('serviceBoxes.title')}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Fra små reparationer til store projekter – vi er klar til at hjælpe
+            {t('serviceBoxes.subtitle')}
           </p>
         </div>
         
@@ -34,14 +37,14 @@ export const ServiceBoxes = () => {
                 <Zap className="h-8 w-8 md:h-10 md:w-10 text-white" />
               </div>
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 group-hover:text-primary transition-colors">
-                El-arbejde
+                {t('serviceBoxes.electrical.title')}
               </h3>
               <p className="text-muted-foreground text-base md:text-lg mb-6 md:mb-8 flex-grow leading-relaxed">
-                Professionelt el-arbejde – fra stikkontakter til store installationer. Certificeret og trygt.
+                {t('serviceBoxes.electrical.description')}
               </p>
               <Button variant="outline" asChild className="group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-300 shadow-md hover:shadow-lg">
                 <Link to="/services">
-                  Læs mere
+                  {t('serviceBoxes.electrical.cta')}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
@@ -58,14 +61,14 @@ export const ServiceBoxes = () => {
                 <ShoppingBag className="h-8 w-8 md:h-10 md:w-10 text-white" />
               </div>
               <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 group-hover:text-secondary transition-colors">
-                El-produkter
+                {t('serviceBoxes.products.title')}
               </h3>
               <p className="text-muted-foreground text-base md:text-lg mb-6 md:mb-8 flex-grow leading-relaxed">
-                Køb el-dele direkte hos os. Stikkontakter, kabler, belysning og meget mere.
+                {t('serviceBoxes.products.description')}
               </p>
               <Button variant="outline" asChild className="group-hover:bg-secondary group-hover:text-white group-hover:border-secondary transition-all duration-300 shadow-md hover:shadow-lg">
                 <Link to="/#products">
-                  Se produkter
+                  {t('serviceBoxes.products.cta')}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>

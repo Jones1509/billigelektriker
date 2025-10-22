@@ -10,8 +10,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useTranslation } from "react-i18next";
 
 export const ProductSlider = () => {
+  const { t } = useTranslation();
+  
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
     queryFn: async () => {
@@ -32,13 +35,13 @@ export const ProductSlider = () => {
       <div className="container relative z-10 px-4 md:px-0">
         <div className="text-center mb-8 md:mb-16 animate-fade-in">
           <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
-            ⚡ Webshop
+            {t('productSlider.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text">
-            Populære produkter i webshoppen
+            {t('productSlider.title')}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Håndplukket smart lys til inde og ude – hurtig levering direkte til døren
+            {t('productSlider.subtitle')}
           </p>
         </div>
 
@@ -81,7 +84,7 @@ export const ProductSlider = () => {
               <ShoppingBag className="h-8 w-8 text-primary" />
             </div>
             <p className="text-muted-foreground text-lg">
-              Produkter kommer snart!
+              {t('productSlider.comingSoon')}
             </p>
           </div>
         )}

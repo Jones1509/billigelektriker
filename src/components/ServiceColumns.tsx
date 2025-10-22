@@ -1,43 +1,46 @@
 import { Home, Building, Lightbulb, Plug, FileCheck, Users } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-
-const privateServices = [
-  {
-    icon: Lightbulb,
-    title: "Smart Home",
-    description: "Intelligente løsninger til dit hjem"
-  },
-  {
-    icon: Plug,
-    title: "Ladestander",
-    description: "El-bil opladning installeret professionelt"
-  },
-  {
-    icon: Home,
-    title: "Boliginstallationer",
-    description: "Komplette el-installationer"
-  }
-];
-
-const businessServices = [
-  {
-    icon: Building,
-    title: "Tavlearbejde",
-    description: "Professionelle tavleinstallationer"
-  },
-  {
-    icon: FileCheck,
-    title: "Serviceaftaler",
-    description: "Kontinuerlig vedligeholdelse"
-  },
-  {
-    icon: Users,
-    title: "Udlejning",
-    description: "Elektrikere til erhverv"
-  }
-];
+import { Card, CardContent } from "./ui/card";
+import { useTranslation } from "react-i18next";
 
 export const ServiceColumns = () => {
+  const { t } = useTranslation();
+  
+  const privateServices = [
+    {
+      icon: Lightbulb,
+      title: t('serviceColumns.private.smartHome.title'),
+      description: t('serviceColumns.private.smartHome.description')
+    },
+    {
+      icon: Plug,
+      title: t('serviceColumns.private.charging.title'),
+      description: t('serviceColumns.private.charging.description')
+    },
+    {
+      icon: Home,
+      title: t('serviceColumns.private.installation.title'),
+      description: t('serviceColumns.private.installation.description')
+    }
+  ];
+
+  const businessServices = [
+    {
+      icon: Building,
+      title: t('serviceColumns.business.panelWork.title'),
+      description: t('serviceColumns.business.panelWork.description')
+    },
+    {
+      icon: FileCheck,
+      title: t('serviceColumns.business.serviceAgreements.title'),
+      description: t('serviceColumns.business.serviceAgreements.description')
+    },
+    {
+      icon: Users,
+      title: t('serviceColumns.business.rental.title'),
+      description: t('serviceColumns.business.rental.description')
+    }
+  ];
+  
   return (
     <section className="py-12 md:py-24 bg-background relative overflow-hidden">
       {/* Premium background */}
@@ -47,10 +50,10 @@ export const ServiceColumns = () => {
       <div className="container relative z-10">
         <div className="text-center mb-8 md:mb-16 animate-fade-in px-4">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            El-service til alle
+            {t('serviceColumns.title')}
           </h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Uanset om du er privat eller erhverv – vi har løsningen
+            {t('serviceColumns.subtitle')}
           </p>
         </div>
 
@@ -60,11 +63,11 @@ export const ServiceColumns = () => {
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
                 <Home className="h-4 w-4" />
-                Private
+                {t('serviceColumns.private.badge')}
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-3">El-service til private</h3>
+              <h3 className="text-2xl md:text-3xl font-bold mb-3">{t('serviceColumns.private.title')}</h3>
               <p className="text-muted-foreground">
-                Fra fejlfinding til smarte løsninger i dit hjem.
+                {t('serviceColumns.private.subtitle')}
               </p>
             </div>
 
@@ -91,11 +94,11 @@ export const ServiceColumns = () => {
             <div className="text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-semibold mb-4 border border-secondary/20">
                 <Building className="h-4 w-4" />
-                Erhverv
+                {t('serviceColumns.business.badge')}
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-3">El-service til erhverv</h3>
+              <h3 className="text-2xl md:text-3xl font-bold mb-3">{t('serviceColumns.business.title')}</h3>
               <p className="text-muted-foreground">
-                Stabile installationer til butik, kontor og produktion.
+                {t('serviceColumns.business.subtitle')}
               </p>
             </div>
 

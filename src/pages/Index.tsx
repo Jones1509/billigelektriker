@@ -13,8 +13,11 @@ import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Zap, Phone } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -71,12 +74,12 @@ const Index = () => {
                 <span>Billig Elektriker</span>
               </div>
               <p className="text-muted-foreground mb-4 md:mb-6 leading-relaxed max-w-md text-sm md:text-base">
-                Professionel el-service til fair priser. Certificerede elektrikere med passion for kvalitet og kundetilfredshed.
+                {t('footer.description')}
               </p>
               <div className="flex gap-4">
                 <Button variant="outline" size="sm" className="hover:bg-primary hover:text-white hover:border-primary transition-all">
                   <Phone className="h-4 w-4 mr-2" />
-                  Ring til os
+                  {t('footer.callUs')}
                 </Button>
               </div>
             </div>
@@ -84,37 +87,37 @@ const Index = () => {
             <div>
               <h4 className="font-semibold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
                 <div className="h-1 w-8 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-                Services
+                {t('footer.servicesTitle')}
               </h4>
               <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-muted-foreground">
-                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">El-arbejde</li>
-                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Smart Home</li>
-                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Erhverv</li>
-                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Udlejning</li>
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">{t('footer.electricalWork')}</li>
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">{t('footer.smartHome')}</li>
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">{t('footer.business')}</li>
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">{t('footer.rental')}</li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold text-base md:text-lg mb-3 md:mb-4 flex items-center gap-2">
                 <div className="h-1 w-8 bg-gradient-to-r from-secondary to-green-600 rounded-full"></div>
-                Produkter
+                {t('footer.productsTitle')}
               </h4>
               <ul className="space-y-2 md:space-y-3 text-xs md:text-sm text-muted-foreground">
-                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Indendørs belysning</li>
-                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Udendørs belysning</li>
-                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Smart Home</li>
-                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Tilbehør</li>
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">{t('footer.indoorLighting')}</li>
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">{t('footer.outdoorLighting')}</li>
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">{t('footer.smartHome')}</li>
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">{t('footer.accessories')}</li>
               </ul>
             </div>
           </div>
           
           <div className="border-t pt-6 md:pt-8 px-4 md:px-0">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm text-muted-foreground">
-              <p>© 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes.</p>
+              <p>{t('footer.copyright')}</p>
               <div className="flex flex-wrap gap-3 md:gap-6">
-                <a href="#" className="hover:text-primary transition-colors">Privatlivspolitik</a>
-                <a href="#" className="hover:text-primary transition-colors">Handelsbetingelser</a>
-                <a href="#" className="hover:text-primary transition-colors">Kontakt</a>
+                <a href="#" className="hover:text-primary transition-colors">{t('footer.privacy')}</a>
+                <a href="#" className="hover:text-primary transition-colors">{t('footer.terms')}</a>
+                <a href="#" className="hover:text-primary transition-colors">{t('footer.contact')}</a>
               </div>
             </div>
           </div>

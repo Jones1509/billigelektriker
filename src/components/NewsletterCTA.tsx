@@ -3,15 +3,17 @@ import { Input } from "./ui/input";
 import { Gift } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 export const NewsletterCTA = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      toast.success("Tak for tilmeldingen!", {
-        description: "Du modtager snart din rabatkode på email.",
+      toast.success(t('newsletter.successTitle'), {
+        description: t('newsletter.successDescription'),
         position: "top-center"
       });
       setEmail("");
@@ -33,25 +35,25 @@ export const NewsletterCTA = () => {
           
           <div className="space-y-3 md:space-y-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              Få <span className="text-secondary">10% rabat</span> på din første ordre
+              {t('newsletter.title')}
             </h2>
             
             <p className="text-base md:text-xl text-primary-foreground/95 leading-relaxed">
-              Tilmeld dig nyhedsbrevet og få rabatkoden direkte i din indbakke. Plus eksklusive tilbud og tips til dit smarte hjem.
+              {t('newsletter.subtitle')}
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-lg mx-auto">
             <Input 
               type="email" 
-              placeholder="Din e-mail adresse"
+              placeholder={t('newsletter.placeholder')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className="bg-white text-foreground h-12 md:h-14 px-4 md:px-6 text-base md:text-lg shadow-lg"
             />
             <Button type="submit" variant="secondary" size="lg" className="h-12 md:h-14 px-6 md:px-8 whitespace-nowrap shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold">
-              Få rabatkode
+              {t('newsletter.cta')}
             </Button>
           </form>
 
@@ -60,19 +62,19 @@ export const NewsletterCTA = () => {
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Ingen spam</span>
+              <span>{t('newsletter.noSpam')}</span>
             </div>
             <div className="flex items-center gap-2">
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Max 1 mail om måneden</span>
+              <span>{t('newsletter.maxOneMail')}</span>
             </div>
             <div className="flex items-center gap-2">
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Afmeld når som helst</span>
+              <span>{t('newsletter.unsubscribe')}</span>
             </div>
           </div>
         </div>

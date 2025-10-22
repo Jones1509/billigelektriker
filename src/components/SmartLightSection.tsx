@@ -1,8 +1,11 @@
 import { Button } from "./ui/button";
 import { Lightbulb, Shield } from "lucide-react";
 import smartLightImage from "@/assets/smart-light-mobile.jpg";
+import { useTranslation } from "react-i18next";
 
 export const SmartLightSection = () => {
+  const { t } = useTranslation();
+  
   return (
     <section 
       className="py-12 md:py-24 relative overflow-hidden" 
@@ -25,15 +28,15 @@ export const SmartLightSection = () => {
           <div className="space-y-4 md:space-y-6 order-1 md:order-2 animate-fade-in">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500/10 to-primary/10 rounded-full border border-purple-500/20">
               <Lightbulb className="h-5 w-5 text-purple-600 dark:text-purple-400" />
-              <span className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-primary bg-clip-text text-transparent">Smart Home Teknologi</span>
+              <span className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-primary bg-clip-text text-transparent">{t('smartLight.badge')}</span>
             </div>
             
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              Smart lys – <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-primary">styr stemningen</span> fra din mobil
+              {t('smartLight.title')}
             </h2>
             
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-              Vælg farver, dæmp lyset og tænd automatisk – alt sammen fra app'en. Skab den perfekte stemning til enhver lejlighed.
+              {t('smartLight.description')}
             </p>
 
             <div className="flex items-start gap-3 md:gap-4 p-4 md:p-6 bg-gradient-to-br from-white to-purple-50/30 dark:from-gray-900 dark:to-purple-950/20 rounded-2xl border border-purple-500/10 shadow-lg">
@@ -41,15 +44,15 @@ export const SmartLightSection = () => {
                 <Shield className="h-5 w-5 md:h-6 md:w-6 text-white" />
               </div>
               <div>
-                <div className="font-semibold mb-1 text-sm md:text-base">Tryg installation</div>
+                <div className="font-semibold mb-1 text-sm md:text-base">{t('smartLight.safeInstallation')}</div>
                 <p className="text-xs md:text-sm text-muted-foreground">
-                  Autoriseret montering. 2 års reklamationsret på varer og 12 mdr. garanti på arbejdet.
+                  {t('smartLight.safeDescription')}
                 </p>
               </div>
             </div>
 
             <Button size="lg" className="group shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-purple-600 to-primary hover:from-purple-700 hover:to-blue-700">
-              Se lamperne
+              {t('smartLight.cta')}
               <Lightbulb className="ml-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
             </Button>
           </div>
