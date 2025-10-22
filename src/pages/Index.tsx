@@ -3,7 +3,6 @@ import { ServiceBoxes } from "@/components/ServiceBoxes";
 import { TeamSection } from "@/components/TeamSection";
 import { ServiceColumns } from "@/components/ServiceColumns";
 import { ValuesSection } from "@/components/ValuesSection";
-import WhyChooseUs from "@/components/WhyChooseUs";
 import { GradientDivider } from "@/components/GradientDivider";
 import { SmartLightSection } from "@/components/SmartLightSection";
 import { ProductCategories } from "@/components/ProductCategories";
@@ -38,9 +37,6 @@ const Index = () => {
         
         {/* 5. Values */}
         <ValuesSection />
-        
-        {/* 6. Why Choose Us */}
-        <WhyChooseUs />
         
         {/* Gradient Divider */}
         <GradientDivider />
