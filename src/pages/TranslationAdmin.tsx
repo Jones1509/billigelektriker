@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
-import { Languages, Download, Upload, CheckCircle, AlertCircle } from "lucide-react";
+import { Languages, Download, Upload, CheckCircle, AlertCircle, RefreshCw } from "lucide-react";
 import { translateObject, getTranslationCoverage, TranslationProgress } from "@/utils/translationSync";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 import daTranslations from "@/i18n/locales/da.json";
 import enTranslations from "@/i18n/locales/en.json";
 import deTranslations from "@/i18n/locales/de.json";
@@ -24,7 +26,54 @@ export default function TranslationAdmin() {
     current: '',
     status: 'idle',
   });
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError || !session) {
+          toast({
+            title: "Authentication Required",
+            description: "Please sign in to access the admin panel",
+            variant: "destructive",
+          });
+          navigate('/auth');
+          return;
+        }
+
+        const { data: roleData, error: roleError } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', session.user.id)
+          .eq('role', 'admin')
+          .maybeSingle();
+
+        if (roleError || !roleData) {
+          toast({
+            title: "Unauthorized Access",
+            description: "You don't have permission to access this page",
+            variant: "destructive",
+          });
+          navigate('/');
+          return;
+        }
+
+        setIsAuthorized(true);
+      } catch (error) {
+        console.error('Auth check error:', error);
+        navigate('/');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [navigate, toast]);
 
   const getTranslationFile = (langCode: string) => {
     switch (langCode) {
@@ -119,6 +168,21 @@ export default function TranslationAdmin() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" />
+          <p>Checking authorization...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthorized) {
+    return null;
+  }
 
   const stats = getCoverageStats();
   const progressPercentage = progress.total > 0 ? (progress.completed / progress.total) * 100 : 0;
