@@ -1,42 +1,59 @@
 import { Button } from "./ui/button";
-import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/hero-electrician.jpg";
+import { ArrowRight, Play } from "lucide-react";
+import switchesImage from "@/assets/switches-hero.png";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <img 
-          src={heroImage} 
-          alt="Professionel elektriker arbejder"
-          className="w-full h-full object-cover"
-        />
-        <div 
-          className="absolute inset-0" 
-          style={{ background: 'var(--hero-overlay)' }}
-        />
-      </div>
+    <section className="relative min-h-[600px] flex items-center overflow-hidden bg-muted/30">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ filter: "brightness(0.7)" }}
+      >
+        <source src="/video-background.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-transparent"></div>
 
       {/* Content */}
       <div className="container relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="text-white space-y-6">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              El-service der virker. Hver gang.
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="max-w-2xl">
+            <div className="mb-6">
+              <span className="text-2xl font-bold text-green-500">Billig Elektriker</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
+              El-service der virker.<br />Hver gang
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-xl">
+            <p className="text-xl mb-4 text-white/90">
               Certificerede elektrikere med fair priser og hurtig respons – fra fejlfinding til komplette installationer.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" variant="default" className="group">
+            <p className="text-lg mb-8 text-white/80">
+              Få et tilbud i dag – helt gratis og uforpligtende.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg" className="bg-primary text-white hover:bg-primary/90">
                 Få et tilbud
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="secondary">
-                Se produkter
+              <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
+                <Play className="mr-2 h-5 w-5" />
+                Se video
               </Button>
             </div>
+          </div>
+          
+          <div className="hidden lg:block relative">
+            <img 
+              src={switchesImage} 
+              alt="Forskellige farverige stikkontakter og afbrydere" 
+              className="w-full h-auto"
+            />
           </div>
         </div>
       </div>
