@@ -30,7 +30,7 @@ export const TeamSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-8 md:gap-12 lg:gap-20 px-4 md:px-0 max-w-6xl mx-auto items-center">
-          {/* Left - Enhanced Image with Stats Badges */}
+          {/* Left - Clean Image with Subtle Decorative Elements */}
           <div className="relative animate-fade-in">
             {/* Decorative background elements */}
             <div className="absolute -top-6 -right-6 w-48 h-48 bg-gradient-to-br from-primary to-blue-400 rounded-full opacity-15 blur-2xl -z-10"></div>
@@ -44,37 +44,6 @@ export const TeamSection = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent pointer-events-none"></div>
-                
-                {/* Floating Stats Badges */}
-                <div className="absolute top-6 -left-4 md:-left-6 bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl rounded-2xl shadow-xl p-4 flex items-center gap-3 animate-fade-in border border-primary/10">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center shadow-lg">
-                    <Zap className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">500+</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Projekter</div>
-                  </div>
-                </div>
-                
-                <div className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl rounded-2xl shadow-xl p-4 flex items-center gap-3 animate-fade-in border border-primary/10" style={{ animationDelay: '0.2s' }}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-lg">
-                    <Star className="h-6 w-6 text-white fill-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">4.9</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Rating</div>
-                  </div>
-                </div>
-                
-                <div className="absolute bottom-6 left-6 md:left-8 bg-white/98 dark:bg-gray-900/98 backdrop-blur-xl rounded-2xl shadow-xl p-4 flex items-center gap-3 animate-fade-in border border-primary/10" style={{ animationDelay: '0.4s' }}>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-green-500 flex items-center justify-center shadow-lg">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-primary">5+</div>
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">Elektrikere</div>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </div>
