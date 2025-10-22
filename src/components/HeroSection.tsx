@@ -4,7 +4,7 @@ import switchesImage from "@/assets/switches-background.webp";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden pt-32 md:pt-0">
+    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden pt-20 md:pt-0">
       {/* Video Background */}
       <video
         autoPlay
