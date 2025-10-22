@@ -78,25 +78,23 @@
   justify-content: flex-start;
 }
 
-/* Logo Section - Large, No Circle */
+/* Logo Section - Clean & Simple */
 .logo-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
-  margin-bottom: 60px;
+  gap: 40px;
+  margin-bottom: 50px;
   animation: fadeInUp 0.6s ease-out;
-  margin-top: 0;
 }
 
 .logo-wrapper {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
-  animation: fadeInUp 0.6s ease-out;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
   transition: transform 0.3s ease;
 }
 
@@ -106,102 +104,100 @@
 
 .logo-image {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
 }
 
 .company-name {
-  font-size: 72px;
+  font-size: 56px;
   font-weight: 800;
   color: white;
   text-align: center;
-  margin: 0;
+  margin: 0 0 15px 0;
   line-height: 1.1;
-  letter-spacing: -0.02em;
-  text-shadow: 
-    0 2px 30px rgba(0, 0, 0, 0.4),
-    0 4px 60px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
   animation: fadeInUp 0.6s ease-out 0.1s backwards;
 }
 
 .coming-soon-subtitle {
-  font-size: 28px;
+  font-size: 22px;
   color: white;
   text-align: center;
-  margin: 0;
+  margin: 0 0 50px 0;
   font-weight: 600;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
   animation: fadeInUp 0.6s ease-out 0.2s backwards;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
-/* Countdown Timer - Premium Design */
+/* Countdown Timer - Clean Design */
 .countdown-timer {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  max-width: 650px;
-  margin-bottom: 60px;
+  max-width: 600px;
+  margin-bottom: 50px;
   animation: fadeInUp 0.6s ease-out 0.3s backwards;
 }
 
 .time-unit {
-  backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  border-radius: 20px;
-  padding: 24px;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: 20px;
   text-align: center;
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
 }
 
 .time-unit:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-  background: rgba(255, 255, 255, 0.28);
-  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.22);
 }
 
 .time-number {
-  font-size: 54px;
+  font-size: 48px;
   font-weight: 700;
   color: white;
   line-height: 1;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
+  margin-bottom: 8px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   font-variant-numeric: tabular-nums;
 }
 
 .time-label {
-  font-size: 15px;
+  font-size: 14px;
   color: white;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   font-weight: 600;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Description Section - Readable with Glassmorphism */
+/* Description Section - Clean & Readable */
 .description-section {
-  backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.28);
-  border: 2px solid rgba(255, 255, 255, 0.45);
-  border-radius: 24px;
-  padding: 48px;
-  max-width: 850px;
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.22);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 800px;
   width: 100%;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   animation: fadeInUp 0.6s ease-out 0.4s backwards;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .description-content {
@@ -209,74 +205,48 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .description-content p {
-  font-size: 19px;
-  line-height: 1.8;
+  font-size: 17px;
+  line-height: 1.7;
   margin: 0;
   font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .description-content .highlight {
   color: white;
   font-weight: 700;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-  font-size: 20px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  font-size: 18px;
 }
 
-/* Password Section - Clean & Integrated */
+/* Password Section - Clean & Simple */
 .access-card {
-  backdrop-filter: blur(15px);
   background: transparent;
   border: none;
   padding: 0;
-  max-width: 550px;
+  max-width: 500px;
   width: 100%;
   animation: fadeInUp 0.6s ease-out 0.5s backwards;
-  margin-bottom: 30px;
-}
-
-.access-card .flex.justify-center {
-  display: none;
-}
-
-.access-title {
-  font-size: 22px;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-  letter-spacing: -0.01em;
-  display: none;
-}
-
-.access-subtitle {
-  font-size: 14px;
-  color: white;
-  text-align: center;
-  margin-bottom: 12px;
-  font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  display: none;
+  margin-bottom: 25px;
 }
 
 .password-input {
-  background: rgba(255, 255, 255, 0.96);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   color: #1a1a1a;
   text-align: center;
-  font-size: 17px;
-  height: 56px;
-  backdrop-filter: blur(10px);
-  border-radius: 14px;
+  font-size: 16px;
+  height: 52px;
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-weight: 500;
-  padding: 18px 24px;
+  padding: 16px 20px;
 }
 
 .password-input:focus {
@@ -285,56 +255,55 @@
   outline: none;
   box-shadow: 
     0 4px 16px rgba(0, 0, 0, 0.2),
-    0 0 0 4px rgba(0, 102, 255, 0.12);
-  transform: translateY(-2px);
+    0 0 0 3px rgba(0, 102, 255, 0.1);
+  transform: translateY(-1px);
 }
 
 .password-input:hover {
   background: rgba(255, 255, 255, 0.98);
-  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .password-input::placeholder {
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.4);
   font-weight: 400;
 }
 
 .access-button {
   width: 100%;
-  height: 56px;
-  font-size: 19px;
+  height: 52px;
+  font-size: 17px;
   background: #0066FF !important;
   border: none;
   color: white !important;
   font-weight: 700;
-  border-radius: 14px;
+  border-radius: 12px;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.35);
-  letter-spacing: 0.03em;
+  box-shadow: 0 5px 18px rgba(0, 102, 255, 0.3);
+  letter-spacing: 0.02em;
   cursor: pointer;
-  padding: 18px 48px;
-  margin-top: 16px;
+  padding: 16px 40px;
+  margin-top: 12px;
 }
 
 .access-button:hover {
   background: #3385FF !important;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(0, 102, 255, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 24px rgba(0, 102, 255, 0.4);
 }
 
 .access-button:active {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.35);
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 102, 255, 0.3);
 }
 
 /* Contact Admin Text */
 .coming-soon-container > p {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
   text-align: center;
-  margin: 0 0 40px 0;
+  margin: 0 0 30px 0;
   animation: fadeInUp 0.6s ease-out 0.6s backwards;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Responsive Design - Tablet */
