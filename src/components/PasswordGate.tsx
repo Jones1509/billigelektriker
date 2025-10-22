@@ -13,20 +13,28 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 
   const correctPassword = 'billigelektriker2025';
 
+  console.log('PasswordGate rendering, isAuthenticated:', isAuthenticated);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Password submitted:', password, 'Correct:', correctPassword);
     if (password === correctPassword) {
+      console.log('Password correct - authenticating');
       setIsAuthenticated(true);
       setError('');
     } else {
+      console.log('Password incorrect');
       setError('Forkert adgangskode');
       setPassword('');
     }
   };
 
   if (isAuthenticated) {
+    console.log('Rendering children - user authenticated');
     return <>{children}</>;
   }
+
+  console.log('Rendering password gate form');
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-6 relative overflow-hidden">
