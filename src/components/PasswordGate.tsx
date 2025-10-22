@@ -13,13 +13,19 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState('');
 
+  // Debug: Log when component renders
+  console.log('🔒 PasswordGate rendering. isAuthenticated:', isAuthenticated);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('🔑 Password attempt:', password.length, 'chars');
     
     if (password.trim() === CORRECT_PASSWORD) {
+      console.log('✅ Password correct - granting access');
       setIsAuthenticated(true);
       setError('');
     } else {
+      console.log('❌ Password incorrect');
       setError('Forkert adgangskode');
       setPassword('');
     }
@@ -27,6 +33,7 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 
   // Only render children if authenticated
   if (!isAuthenticated) {
+    console.log('🚫 Blocking access - showing password gate');
     return (
       <div className="min-h-screen w-full flex items-center justify-center p-6 relative overflow-hidden">
         {/* Animated electric gradient background */}
@@ -103,5 +110,6 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
   }
 
   // Only show content if authenticated
+  console.log('✅ Access granted - rendering app');
   return <>{children}</>;
 };
