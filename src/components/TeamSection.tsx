@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 import { Phone, Sparkles, Zap } from "lucide-react";
-import teamPhoto from "@/assets/team-photo.jpg";
+import teamPhoto from "@/assets/team-photo-branded.jpg";
 import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "./ui/card";
 
@@ -25,15 +25,15 @@ export const TeamSection = () => {
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0 max-w-5xl mx-auto">
           {/* Left - Image Card */}
-          <Card className="border-0 shadow-lg overflow-hidden animate-fade-in group">
+          <Card className="border-0 shadow-2xl overflow-hidden animate-fade-in group rounded-3xl">
             <CardContent className="p-0">
               <div className="relative">
                 <img 
                   src={teamPhoto} 
-                  alt="Billig Elektriker team"
-                  className="w-full group-hover:scale-105 transition-transform duration-500"
+                  alt="Billig Elektriker certificerede elektrikere"
+                  className="w-full group-hover:scale-102 transition-all duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent pointer-events-none"></div>
               </div>
             </CardContent>
           </Card>
