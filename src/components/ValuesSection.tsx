@@ -25,10 +25,17 @@ const values = [
 
 export const ValuesSection = () => {
   return (
-    <section className="py-20 pb-0 bg-background">
-      <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <section className="py-24 pb-0 bg-gradient-to-b from-background to-blue-50/20 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 left-1/3 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-1/3 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+      
+      <div className="container relative z-10">
+        <div className="text-center mb-16 animate-fade-in">
+          <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
+            💎 Vores Værdier
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Derfor vælger kunderne os
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -38,12 +45,16 @@ export const ValuesSection = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {values.map((value, idx) => (
-            <div key={idx} className="text-center space-y-4">
-              <div className="inline-flex p-4 bg-primary/10 rounded-full">
+            <div 
+              key={idx} 
+              className="group text-center space-y-4 p-6 rounded-2xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border border-transparent hover:border-primary/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in"
+              style={{ animationDelay: `${idx * 100}ms` }}
+            >
+              <div className="inline-flex p-5 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl group-hover:scale-110 transition-transform duration-300">
                 <value.icon className="h-8 w-8 text-primary" />
               </div>
-              <h3 className="font-bold text-lg">{value.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <h3 className="font-bold text-xl group-hover:text-primary transition-colors">{value.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors">
                 {value.description}
               </p>
             </div>

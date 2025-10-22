@@ -11,7 +11,8 @@ import { ProductSlider } from "@/components/ProductSlider";
 import { BookingCTA } from "@/components/BookingCTA";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Header } from "@/components/Header";
-import { Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Zap, Phone } from "lucide-react";
 
 const Index = () => {
   return (
@@ -57,42 +58,65 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t py-12 bg-secondary/30">
-        <div className="container">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 font-bold text-xl mb-4">
-                <Zap className="h-6 w-6 text-primary" />
+      <footer className="border-t bg-gradient-to-b from-background to-blue-50/20 py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.05),transparent_50%)]"></div>
+        
+        <div className="container relative z-10">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-3 font-bold text-2xl mb-6">
+                <div className="p-3 bg-gradient-to-br from-primary to-blue-600 rounded-xl shadow-lg">
+                  <Zap className="h-6 w-6 text-white" />
+                </div>
                 <span>Billig Elektriker</span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Professionel el-service til fair priser
+              <p className="text-muted-foreground mb-6 leading-relaxed max-w-md">
+                Professionel el-service til fair priser. Certificerede elektrikere med passion for kvalitet og kundetilfredshed.
               </p>
+              <div className="flex gap-4">
+                <Button variant="outline" size="sm" className="hover:bg-primary hover:text-white hover:border-primary transition-all">
+                  <Phone className="h-4 w-4 mr-2" />
+                  Ring til os
+                </Button>
+              </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>El-arbejde</li>
-                <li>Smart Home</li>
-                <li>Erhverv</li>
-                <li>Udlejning</li>
+              <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                <div className="h-1 w-8 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                Services
+              </h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">El-arbejde</li>
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Smart Home</li>
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Erhverv</li>
+                <li className="hover:text-primary hover:translate-x-1 transition-all cursor-pointer">Udlejning</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Produkter</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Indendørs belysning</li>
-                <li>Udendørs belysning</li>
-                <li>Smart Home</li>
-                <li>Tilbehør</li>
+              <h4 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                <div className="h-1 w-8 bg-gradient-to-r from-secondary to-green-600 rounded-full"></div>
+                Produkter
+              </h4>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Indendørs belysning</li>
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Udendørs belysning</li>
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Smart Home</li>
+                <li className="hover:text-secondary hover:translate-x-1 transition-all cursor-pointer">Tilbehør</li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>© 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes.</p>
+          <div className="border-t pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+              <p>© 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes.</p>
+              <div className="flex gap-6">
+                <a href="#" className="hover:text-primary transition-colors">Privatlivspolitik</a>
+                <a href="#" className="hover:text-primary transition-colors">Handelsbetingelser</a>
+                <a href="#" className="hover:text-primary transition-colors">Kontakt</a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
