@@ -58,16 +58,13 @@
 /* Coming Soon Page - Clean & Professional Design */
 .coming-soon-page {
   position: relative;
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   padding: 60px 20px 80px;
-  scroll-behavior: smooth;
 }
 
 .coming-soon-container {
