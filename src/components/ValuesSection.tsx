@@ -81,7 +81,7 @@ export const ValuesSection = () => {
               return (
                 <div 
                   key={idx} 
-                  className="group relative flex flex-col items-center p-12 rounded-3xl bg-white border border-primary/[0.08] shadow-[0_4px_6px_rgba(0,0,0,0.03),0_10px_30px_rgba(0,102,255,0.05)] hover:shadow-[0_20px_40px_rgba(0,102,255,0.12),0_4px_8px_rgba(0,0,0,0.04)] hover:border-primary/15 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-4 h-full min-h-[440px] overflow-hidden"
+                  className="group relative flex flex-col items-center p-8 rounded-3xl bg-white border border-primary/[0.08] shadow-[0_4px_6px_rgba(0,0,0,0.03),0_10px_30px_rgba(0,102,255,0.05)] hover:shadow-[0_20px_40px_rgba(0,102,255,0.12),0_4px_8px_rgba(0,0,0,0.04)] hover:border-primary/15 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-4 h-full min-h-[340px] overflow-hidden"
                   style={{ 
                     animationDelay: `${(idx + 1) * 100}ms`,
                     opacity: 0,
@@ -92,31 +92,31 @@ export const ValuesSection = () => {
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
                   {/* Icon with circular gradient background and outer ring */}
-                  <div className={`relative flex items-center justify-center w-[100px] h-[100px] rounded-full ${iconGradients[idx]} flex-shrink-0 mb-8 transition-all duration-[400ms] group-hover:scale-110 group-hover:-rotate-[5deg]`}>
+                  <div className={`relative flex items-center justify-center w-[80px] h-[80px] rounded-full ${iconGradients[idx]} flex-shrink-0 mb-6 transition-all duration-[400ms] group-hover:scale-110 group-hover:-rotate-[5deg]`}>
                     {/* Outer ring effect */}
                     <div className="absolute inset-[-8px] rounded-full border-2 border-primary/10 opacity-0 group-hover:opacity-100 group-hover:inset-[-12px] transition-all duration-300"></div>
                     
                     <img 
                       src={value.icon} 
                       alt={value.title}
-                      className="w-12 h-12 object-contain relative z-10"
+                      className="w-10 h-10 object-contain relative z-10"
                     />
                   </div>
                   
                   {/* Title */}
-                  <h3 className="font-bold text-[22px] text-center text-[#0F172A] tracking-tight leading-tight min-h-[60px] flex items-center justify-center mb-4 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="font-bold text-[20px] text-center text-[#0F172A] tracking-tight leading-tight min-h-[52px] flex items-center justify-center mb-3 group-hover:text-primary transition-colors duration-300">
                     {value.title}
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-base text-center text-[#64748B] leading-[1.6] flex-grow mb-auto">
+                  <p className="text-[15px] text-center text-[#64748B] leading-[1.6] flex-grow mb-auto">
                     {value.description}
                   </p>
                   
                   {/* Arrow Button - Premium Interactive */}
-                  <div className="flex items-center justify-center mt-8 flex-shrink-0">
-                    <button className="w-14 h-14 rounded-full bg-primary shadow-[0_4px_16px_rgba(0,102,255,0.25)] flex items-center justify-center transition-all duration-300 hover:bg-[#0052CC] hover:translate-x-1 hover:scale-105 hover:shadow-[0_6px_24px_rgba(0,102,255,0.4)] cursor-pointer">
-                      <ArrowRight className="w-6 h-6 text-white transition-transform duration-300 hover:translate-x-0.5" />
+                  <div className="flex items-center justify-center mt-6 flex-shrink-0">
+                    <button className="w-12 h-12 rounded-full bg-primary shadow-[0_4px_16px_rgba(0,102,255,0.25)] flex items-center justify-center transition-all duration-300 hover:bg-[#0052CC] hover:translate-x-1 hover:scale-105 hover:shadow-[0_6px_24px_rgba(0,102,255,0.4)] cursor-pointer">
+                      <ArrowRight className="w-5 h-5 text-white transition-transform duration-300 hover:translate-x-0.5" />
                     </button>
                   </div>
                 </div>
