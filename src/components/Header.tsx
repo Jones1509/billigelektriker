@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { 
   Phone, User, LogOut, Zap, Search, Smartphone, Car, 
   Server, Briefcase, Power, Lamp, Wifi, Moon, 
-  Boxes, Cable, Shield
+  Boxes, Cable, Shield, Menu, Info, Mail
 } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,6 +23,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
+import { ScrollArea } from "./ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -121,6 +129,7 @@ const products = [
 export const Header = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<any>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Get initial session
@@ -141,6 +150,8 @@ export const Header = () => {
     toast.success("Du er nu logget ud");
     navigate("/");
   };
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
@@ -256,18 +267,152 @@ export const Header = () => {
             <span>Ring til os</span>
           </Button>
           
+          {/* Mobile Menu */}
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="lg:hidden text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-full sm:w-[400px] bg-background">
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+              </SheetHeader>
+              <ScrollArea className="h-[calc(100vh-80px)] mt-6">
+                <div className="space-y-6 pb-10">
+                  {/* Services */}
+                  <div>
+                    <h3 className="font-semibold text-lg mb-4 px-2 text-primary">Serviceydelser</h3>
+                    <div className="space-y-2">
+                      {services.map((service) => (
+                        <Link
+                          key={service.title}
+                          to={service.href}
+                          onClick={closeMobileMenu}
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                        >
+                          <div className={`rounded-lg bg-gradient-to-br ${service.color} p-2 shadow-md flex-shrink-0`}>
+                            <service.icon className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <div className="font-medium text-sm">{service.title}</div>
+                            <p className="text-xs text-muted-foreground line-clamp-2">{service.description}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Products */}
+                  <div>
+                    <h3 className="font-semibold text-lg mb-4 px-2 text-secondary">Produkter</h3>
+                    <div className="space-y-2">
+                      {products.map((product) => (
+                        <Link
+                          key={product.title}
+                          to={product.href}
+                          onClick={closeMobileMenu}
+                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                        >
+                          <div className={`rounded-lg bg-gradient-to-br ${product.color} p-2 shadow-md flex-shrink-0`}>
+                            <product.icon className="h-4 w-4 text-white" />
+                          </div>
+                          <div>
+                            <div className="font-medium text-sm">{product.title}</div>
+                            <p className="text-xs text-muted-foreground line-clamp-2">{product.description}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Additional Links */}
+                  <div className="border-t pt-4">
+                    <div className="space-y-2">
+                      <Link
+                        to="/om-os"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                      >
+                        <div className="rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 p-2 shadow-md">
+                          <Info className="h-4 w-4 text-white" />
+                        </div>
+                        <span className="font-medium">Om os</span>
+                      </Link>
+                      <Link
+                        to="/kontakt"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                      >
+                        <div className="rounded-lg bg-gradient-to-br from-green-500 to-green-600 p-2 shadow-md">
+                          <Mail className="h-4 w-4 text-white" />
+                        </div>
+                        <span className="font-medium">Kontakt os</span>
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* User Actions */}
+                  {user ? (
+                    <div className="border-t pt-4 space-y-2">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start"
+                        onClick={() => {
+                          closeMobileMenu();
+                          navigate("/profile");
+                        }}
+                      >
+                        <User className="mr-2 h-4 w-4" />
+                        Min profil
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start"
+                        onClick={() => {
+                          closeMobileMenu();
+                          handleSignOut();
+                        }}
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Log ud
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="border-t pt-4">
+                      <Button
+                        className="w-full"
+                        onClick={() => {
+                          closeMobileMenu();
+                          navigate("/auth");
+                        }}
+                      >
+                        <User className="mr-2 h-4 w-4" />
+                        Log ind
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </ScrollArea>
+            </SheetContent>
+          </Sheet>
+          
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
+                  className="hidden lg:flex relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
                 >
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-white">
+              <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-gray-900">
                 <DropdownMenuLabel>Min konto</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => navigate("/profile")}>
@@ -286,7 +431,7 @@ export const Header = () => {
               variant="ghost" 
               size="icon" 
               onClick={() => navigate("/auth")} 
-              className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
+              className="hidden lg:flex relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
             >
               <User className="h-5 w-5" />
             </Button>
