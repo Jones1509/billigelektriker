@@ -339,5 +339,81 @@
     "message": "Besked",
     "messagePlaceholder": "Beskriv dit projekt eller hvad du har brug for hjælp til...",
     "sendMessage": "Send besked"
+  },
+  "profile": {
+    "title": "Min Profil",
+    "subtitle": "Administrer dine kontooplysninger og indstillinger",
+    "tabs": {
+      "profile": "Profil",
+      "orders": "Mine Ordrer"
+    },
+    "personalInfo": {
+      "title": "Personlige oplysninger",
+      "description": "Opdater dine personlige oplysninger her",
+      "email": "Email",
+      "emailCannotChange": "Email kan ikke ændres",
+      "firstName": "Fornavn",
+      "lastName": "Efternavn",
+      "phone": "Telefon (valgfrit)",
+      "phonePlaceholder": "+45 12 34 56 78",
+      "saving": "Gemmer...",
+      "saveChanges": "Gem ændringer"
+    },
+    "password": {
+      "title": "Skift adgangskode",
+      "description": "Opdater din adgangskode for at holde din konto sikker",
+      "current": "Nuværende adgangskode",
+      "new": "Ny adgangskode",
+      "newPlaceholder": "Mindst 6 tegn",
+      "confirm": "Bekræft ny adgangskode",
+      "changing": "Ændrer...",
+      "changeButton": "Skift adgangskode"
+    },
+    "account": {
+      "title": "Konto handlinger",
+      "description": "Log ud eller administrer din konto",
+      "logout": "Log ud"
+    },
+    "orders": {
+      "noOrders": "Ingen ordrer endnu",
+      "noOrdersDesc": "Når du placerer en ordre, vil den blive vist her.",
+      "startShopping": "Start med at handle",
+      "orderNumber": "Ordre #{{number}}",
+      "status": {
+        "completed": "Gennemført",
+        "pending": "Afventer"
+      },
+      "products": "Produkter:",
+      "product": "Produkt"
+    },
+    "validation": {
+      "firstNameRequired": "Fornavn er påkrævet",
+      "firstNameMax": "Fornavn må max være 50 tegn",
+      "lastNameRequired": "Efternavn er påkrævet",
+      "lastNameMax": "Efternavn må max være 50 tegn",
+      "phoneMax": "Telefonnummer må max være 20 tegn",
+      "currentPasswordRequired": "Nuværende adgangskode er påkrævet",
+      "newPasswordMin": "Ny adgangskode skal være mindst 6 tegn",
+      "newPasswordMax": "Adgangskode må max være 72 tegn",
+      "confirmPasswordRequired": "Bekræft din nye adgangskode",
+      "passwordsNotMatch": "Adgangskoderne matcher ikke"
+    },
+    "errors": {
+      "fetchProfile": "Kunne ikke hente profil",
+      "fetchOrders": "Kunne ikke hente ordrer",
+      "noUserId": "Ingen bruger ID",
+      "invalidData": "Ugyldige oplysninger",
+      "updateProfile": "Kunne ikke opdatere profil",
+      "wrongPassword": "Forkert nuværende adgangskode",
+      "wrongPasswordDesc": "Tjek din adgangskode og prøv igen.",
+      "changePassword": "Kunne ikke ændre adgangskode"
+    },
+    "success": {
+      "profileUpdated": "Profil opdateret!",
+      "profileUpdatedDesc": "Dine oplysninger er blevet gemt.",
+      "passwordChanged": "Adgangskode ændret!",
+      "passwordChangedDesc": "Din nye adgangskode er nu aktiv.",
+      "loggedOut": "Du er nu logget ud"
+    }
   }
 }

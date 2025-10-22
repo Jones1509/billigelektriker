@@ -339,5 +339,81 @@
     "message": "Nachricht",
     "messagePlaceholder": "Beschreiben Sie Ihr Projekt oder wobei Sie Hilfe benötigen...",
     "sendMessage": "Nachricht senden"
+  },
+  "profile": {
+    "title": "Mein Profil",
+    "subtitle": "Verwalten Sie Ihre Kontoinformationen und Einstellungen",
+    "tabs": {
+      "profile": "Profil",
+      "orders": "Meine Bestellungen"
+    },
+    "personalInfo": {
+      "title": "Persönliche Informationen",
+      "description": "Aktualisieren Sie hier Ihre persönlichen Informationen",
+      "email": "E-Mail",
+      "emailCannotChange": "E-Mail kann nicht geändert werden",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "phone": "Telefon (optional)",
+      "phonePlaceholder": "+45 12 34 56 78",
+      "saving": "Speichern...",
+      "saveChanges": "Änderungen speichern"
+    },
+    "password": {
+      "title": "Passwort ändern",
+      "description": "Aktualisieren Sie Ihr Passwort, um Ihr Konto zu sichern",
+      "current": "Aktuelles Passwort",
+      "new": "Neues Passwort",
+      "newPlaceholder": "Mindestens 6 Zeichen",
+      "confirm": "Neues Passwort bestätigen",
+      "changing": "Ändern...",
+      "changeButton": "Passwort ändern"
+    },
+    "account": {
+      "title": "Kontoaktionen",
+      "description": "Melden Sie sich ab oder verwalten Sie Ihr Konto",
+      "logout": "Abmelden"
+    },
+    "orders": {
+      "noOrders": "Noch keine Bestellungen",
+      "noOrdersDesc": "Wenn Sie eine Bestellung aufgeben, wird sie hier angezeigt.",
+      "startShopping": "Mit dem Einkaufen beginnen",
+      "orderNumber": "Bestellung #{{number}}",
+      "status": {
+        "completed": "Abgeschlossen",
+        "pending": "Ausstehend"
+      },
+      "products": "Produkte:",
+      "product": "Produkt"
+    },
+    "validation": {
+      "firstNameRequired": "Vorname ist erforderlich",
+      "firstNameMax": "Vorname darf maximal 50 Zeichen lang sein",
+      "lastNameRequired": "Nachname ist erforderlich",
+      "lastNameMax": "Nachname darf maximal 50 Zeichen lang sein",
+      "phoneMax": "Telefonnummer darf maximal 20 Zeichen lang sein",
+      "currentPasswordRequired": "Aktuelles Passwort ist erforderlich",
+      "newPasswordMin": "Neues Passwort muss mindestens 6 Zeichen lang sein",
+      "newPasswordMax": "Passwort darf maximal 72 Zeichen lang sein",
+      "confirmPasswordRequired": "Bestätigen Sie Ihr neues Passwort",
+      "passwordsNotMatch": "Passwörter stimmen nicht überein"
+    },
+    "errors": {
+      "fetchProfile": "Profil konnte nicht abgerufen werden",
+      "fetchOrders": "Bestellungen konnten nicht abgerufen werden",
+      "noUserId": "Keine Benutzer-ID",
+      "invalidData": "Ungültige Informationen",
+      "updateProfile": "Profil konnte nicht aktualisiert werden",
+      "wrongPassword": "Falsches aktuelles Passwort",
+      "wrongPasswordDesc": "Überprüfen Sie Ihr Passwort und versuchen Sie es erneut.",
+      "changePassword": "Passwort konnte nicht geändert werden"
+    },
+    "success": {
+      "profileUpdated": "Profil aktualisiert!",
+      "profileUpdatedDesc": "Ihre Informationen wurden gespeichert.",
+      "passwordChanged": "Passwort geändert!",
+      "passwordChangedDesc": "Ihr neues Passwort ist jetzt aktiv.",
+      "loggedOut": "Sie sind jetzt abgemeldet"
+    }
   }
 }

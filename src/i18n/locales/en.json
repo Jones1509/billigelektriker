@@ -339,5 +339,81 @@
     "message": "Message",
     "messagePlaceholder": "Describe your project or what you need help with...",
     "sendMessage": "Send message"
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your account information and settings",
+    "tabs": {
+      "profile": "Profile",
+      "orders": "My Orders"
+    },
+    "personalInfo": {
+      "title": "Personal information",
+      "description": "Update your personal information here",
+      "email": "Email",
+      "emailCannotChange": "Email cannot be changed",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone (optional)",
+      "phonePlaceholder": "+45 12 34 56 78",
+      "saving": "Saving...",
+      "saveChanges": "Save changes"
+    },
+    "password": {
+      "title": "Change password",
+      "description": "Update your password to keep your account secure",
+      "current": "Current password",
+      "new": "New password",
+      "newPlaceholder": "At least 6 characters",
+      "confirm": "Confirm new password",
+      "changing": "Changing...",
+      "changeButton": "Change password"
+    },
+    "account": {
+      "title": "Account actions",
+      "description": "Log out or manage your account",
+      "logout": "Log out"
+    },
+    "orders": {
+      "noOrders": "No orders yet",
+      "noOrdersDesc": "When you place an order, it will be displayed here.",
+      "startShopping": "Start shopping",
+      "orderNumber": "Order #{{number}}",
+      "status": {
+        "completed": "Completed",
+        "pending": "Pending"
+      },
+      "products": "Products:",
+      "product": "Product"
+    },
+    "validation": {
+      "firstNameRequired": "First name is required",
+      "firstNameMax": "First name must be max 50 characters",
+      "lastNameRequired": "Last name is required",
+      "lastNameMax": "Last name must be max 50 characters",
+      "phoneMax": "Phone number must be max 20 characters",
+      "currentPasswordRequired": "Current password is required",
+      "newPasswordMin": "New password must be at least 6 characters",
+      "newPasswordMax": "Password must be max 72 characters",
+      "confirmPasswordRequired": "Confirm your new password",
+      "passwordsNotMatch": "Passwords do not match"
+    },
+    "errors": {
+      "fetchProfile": "Could not fetch profile",
+      "fetchOrders": "Could not fetch orders",
+      "noUserId": "No user ID",
+      "invalidData": "Invalid information",
+      "updateProfile": "Could not update profile",
+      "wrongPassword": "Incorrect current password",
+      "wrongPasswordDesc": "Check your password and try again.",
+      "changePassword": "Could not change password"
+    },
+    "success": {
+      "profileUpdated": "Profile updated!",
+      "profileUpdatedDesc": "Your information has been saved.",
+      "passwordChanged": "Password changed!",
+      "passwordChangedDesc": "Your new password is now active.",
+      "loggedOut": "You are now logged out"
+    }
   }
 }

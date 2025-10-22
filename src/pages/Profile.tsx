@@ -12,25 +12,27 @@ import { Header } from "@/components/Header";
 import { Loader2, User, Lock, ShoppingBag, Package, Calendar, CreditCard } from "lucide-react";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
+import { useTranslation } from "react-i18next";
 
 type Order = Database['public']['Tables']['orders']['Row'];
 
-const profileSchema = z.object({
-  firstName: z.string().trim().min(1, "Fornavn er påkrævet").max(50, "Fornavn må max være 50 tegn"),
-  lastName: z.string().trim().min(1, "Efternavn er påkrævet").max(50, "Efternavn må max være 50 tegn"),
-  phone: z.string().trim().max(20, "Telefonnummer må max være 20 tegn").optional(),
+const getProfileSchema = (t: any) => z.object({
+  firstName: z.string().trim().min(1, t('profile.validation.firstNameRequired')).max(50, t('profile.validation.firstNameMax')),
+  lastName: z.string().trim().min(1, t('profile.validation.lastNameRequired')).max(50, t('profile.validation.lastNameMax')),
+  phone: z.string().trim().max(20, t('profile.validation.phoneMax')).optional(),
 });
 
-const passwordSchema = z.object({
-  currentPassword: z.string().min(1, "Nuværende adgangskode er påkrævet"),
-  newPassword: z.string().min(6, "Ny adgangskode skal være mindst 6 tegn").max(72, "Adgangskode må max være 72 tegn"),
-  confirmPassword: z.string().min(1, "Bekræft din nye adgangskode"),
+const getPasswordSchema = (t: any) => z.object({
+  currentPassword: z.string().min(1, t('profile.validation.currentPasswordRequired')),
+  newPassword: z.string().min(6, t('profile.validation.newPasswordMin')).max(72, t('profile.validation.newPasswordMax')),
+  confirmPassword: z.string().min(1, t('profile.validation.confirmPasswordRequired')),
 }).refine((data) => data.newPassword === data.confirmPassword, {
-  message: "Adgangskoderne matcher ikke",
+  message: t('profile.validation.passwordsNotMatch'),
   path: ["confirmPassword"],
 });
 
 export default function Profile() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
@@ -78,7 +80,7 @@ export default function Profile() {
           });
         }
       } catch (error: any) {
-        toast.error("Kunne ikke hente profil", {
+        toast.error(t('profile.errors.fetchProfile'), {
           description: error.message,
         });
       } finally {
@@ -112,7 +114,7 @@ export default function Profile() {
 
       setOrders(data || []);
     } catch (error: any) {
-      toast.error("Kunne ikke hente ordrer", {
+      toast.error(t('profile.errors.fetchOrders'), {
         description: error.message,
       });
     } finally {
@@ -131,9 +133,9 @@ export default function Profile() {
     setUpdating(true);
 
     try {
-      const validatedData = profileSchema.parse(profileData);
+      const validatedData = getProfileSchema(t).parse(profileData);
 
-      if (!userId) throw new Error("Ingen bruger ID");
+      if (!userId) throw new Error(t('profile.errors.noUserId'));
 
       const { error } = await supabase
         .from("profiles")
@@ -146,16 +148,16 @@ export default function Profile() {
 
       if (error) throw error;
 
-      toast.success("Profil opdateret!", {
-        description: "Dine oplysninger er blevet gemt.",
+      toast.success(t('profile.success.profileUpdated'), {
+        description: t('profile.success.profileUpdatedDesc'),
       });
     } catch (error: any) {
       if (error instanceof z.ZodError) {
-        toast.error("Ugyldige oplysninger", {
+        toast.error(t('profile.errors.invalidData'), {
           description: error.errors[0].message,
         });
       } else {
-        toast.error("Kunne ikke opdatere profil", {
+        toast.error(t('profile.errors.updateProfile'), {
           description: error.message,
         });
       }
@@ -169,7 +171,7 @@ export default function Profile() {
     setUpdating(true);
 
     try {
-      const validatedData = passwordSchema.parse(passwordData);
+      const validatedData = getPasswordSchema(t).parse(passwordData);
 
       // Verify current password by attempting to sign in
       const { error: signInError } = await supabase.auth.signInWithPassword({
@@ -178,8 +180,8 @@ export default function Profile() {
       });
 
       if (signInError) {
-        toast.error("Forkert nuværende adgangskode", {
-          description: "Tjek din adgangskode og prøv igen.",
+        toast.error(t('profile.errors.wrongPassword'), {
+          description: t('profile.errors.wrongPasswordDesc'),
         });
         setUpdating(false);
         return;
@@ -192,8 +194,8 @@ export default function Profile() {
 
       if (error) throw error;
 
-      toast.success("Adgangskode ændret!", {
-        description: "Din nye adgangskode er nu aktiv.",
+      toast.success(t('profile.success.passwordChanged'), {
+        description: t('profile.success.passwordChangedDesc'),
       });
       
       setPasswordData({
@@ -203,11 +205,11 @@ export default function Profile() {
       });
     } catch (error: any) {
       if (error instanceof z.ZodError) {
-        toast.error("Ugyldige oplysninger", {
+        toast.error(t('profile.errors.invalidData'), {
           description: error.errors[0].message,
         });
       } else {
-        toast.error("Kunne ikke ændre adgangskode", {
+        toast.error(t('profile.errors.changePassword'), {
           description: error.message,
         });
       }
@@ -219,7 +221,7 @@ export default function Profile() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate("/");
-    toast.success("Du er nu logget ud");
+    toast.success(t('profile.success.loggedOut'));
   };
 
   if (loading) {
@@ -236,19 +238,19 @@ export default function Profile() {
       <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 py-12">
         <div className="container max-w-4xl">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Min Profil</h1>
-            <p className="text-muted-foreground">Administrer dine kontooplysninger og indstillinger</p>
+            <h1 className="text-3xl font-bold mb-2">{t('profile.title')}</h1>
+            <p className="text-muted-foreground">{t('profile.subtitle')}</p>
           </div>
 
           <Tabs defaultValue="profile" className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="profile" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Profil
+                {t('profile.tabs.profile')}
               </TabsTrigger>
               <TabsTrigger value="orders" className="flex items-center gap-2">
                 <ShoppingBag className="h-4 w-4" />
-                Mine Ordrer
+                {t('profile.tabs.orders')}
               </TabsTrigger>
             </TabsList>
 
@@ -257,16 +259,16 @@ export default function Profile() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <User className="h-5 w-5 text-primary" />
-                  <CardTitle>Personlige oplysninger</CardTitle>
+                  <CardTitle>{t('profile.personalInfo.title')}</CardTitle>
                 </div>
                 <CardDescription>
-                  Opdater dine personlige oplysninger her
+                  {t('profile.personalInfo.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleUpdateProfile} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t('profile.personalInfo.email')}</Label>
                     <Input
                       id="email"
                       type="email"
@@ -274,11 +276,11 @@ export default function Profile() {
                       disabled
                       className="bg-muted"
                     />
-                    <p className="text-xs text-muted-foreground">Email kan ikke ændres</p>
+                    <p className="text-xs text-muted-foreground">{t('profile.personalInfo.emailCannotChange')}</p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="firstname">Fornavn</Label>
+                      <Label htmlFor="firstname">{t('profile.personalInfo.firstName')}</Label>
                       <Input
                         id="firstname"
                         type="text"
@@ -289,7 +291,7 @@ export default function Profile() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lastname">Efternavn</Label>
+                      <Label htmlFor="lastname">{t('profile.personalInfo.lastName')}</Label>
                       <Input
                         id="lastname"
                         type="text"
@@ -301,11 +303,11 @@ export default function Profile() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Telefon (valgfrit)</Label>
+                    <Label htmlFor="phone">{t('profile.personalInfo.phone')}</Label>
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+45 12 34 56 78"
+                      placeholder={t('profile.personalInfo.phonePlaceholder')}
                       value={profileData.phone}
                       onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
                       disabled={updating}
@@ -315,10 +317,10 @@ export default function Profile() {
                     {updating ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Gemmer...
+                        {t('profile.personalInfo.saving')}
                       </>
                     ) : (
-                      "Gem ændringer"
+                      t('profile.personalInfo.saveChanges')
                     )}
                   </Button>
                 </form>
@@ -329,16 +331,16 @@ export default function Profile() {
               <CardHeader>
                 <div className="flex items-center gap-2">
                   <Lock className="h-5 w-5 text-primary" />
-                  <CardTitle>Skift adgangskode</CardTitle>
+                  <CardTitle>{t('profile.password.title')}</CardTitle>
                 </div>
                 <CardDescription>
-                  Opdater din adgangskode for at holde din konto sikker
+                  {t('profile.password.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleUpdatePassword} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="current-password">Nuværende adgangskode</Label>
+                    <Label htmlFor="current-password">{t('profile.password.current')}</Label>
                     <Input
                       id="current-password"
                       type="password"
@@ -349,11 +351,11 @@ export default function Profile() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="new-password">Ny adgangskode</Label>
+                    <Label htmlFor="new-password">{t('profile.password.new')}</Label>
                     <Input
                       id="new-password"
                       type="password"
-                      placeholder="Mindst 6 tegn"
+                      placeholder={t('profile.password.newPlaceholder')}
                       value={passwordData.newPassword}
                       onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
                       required
@@ -361,7 +363,7 @@ export default function Profile() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="confirm-password">Bekræft ny adgangskode</Label>
+                    <Label htmlFor="confirm-password">{t('profile.password.confirm')}</Label>
                     <Input
                       id="confirm-password"
                       type="password"
@@ -375,10 +377,10 @@ export default function Profile() {
                     {updating ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Ændrer...
+                        {t('profile.password.changing')}
                       </>
                     ) : (
-                      "Skift adgangskode"
+                      t('profile.password.changeButton')
                     )}
                   </Button>
                 </form>
@@ -387,14 +389,14 @@ export default function Profile() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Konto handlinger</CardTitle>
+                <CardTitle>{t('profile.account.title')}</CardTitle>
                 <CardDescription>
-                  Log ud eller administrer din konto
+                  {t('profile.account.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Button variant="outline" onClick={handleSignOut}>
-                  Log ud
+                  {t('profile.account.logout')}
                 </Button>
               </CardContent>
               </Card>
@@ -417,13 +419,13 @@ export default function Profile() {
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold mb-2">Ingen ordrer endnu</h3>
+                        <h3 className="text-lg font-semibold mb-2">{t('profile.orders.noOrders')}</h3>
                         <p className="text-muted-foreground">
-                          Når du placerer en ordre, vil den blive vist her.
+                          {t('profile.orders.noOrdersDesc')}
                         </p>
                       </div>
                       <Button onClick={() => navigate("/")} variant="outline">
-                        Start med at handle
+                        {t('profile.orders.startShopping')}
                       </Button>
                     </div>
                   </CardContent>
@@ -438,7 +440,7 @@ export default function Profile() {
                             <Package className="h-5 w-5 text-primary" />
                             <div>
                               <CardTitle className="text-base">
-                                Ordre #{order.order_number}
+                                {t('profile.orders.orderNumber', { number: order.order_number })}
                               </CardTitle>
                               <CardDescription className="text-xs mt-1">
                                 {order.shopify_order_number && (
@@ -453,8 +455,8 @@ export default function Profile() {
                               order.status === 'pending' ? 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400' :
                               'bg-gray-500/10 text-gray-700 dark:text-gray-400'
                             }`}>
-                              {order.status === 'completed' ? 'Gennemført' :
-                               order.status === 'pending' ? 'Afventer' :
+                              {order.status === 'completed' ? t('profile.orders.status.completed') :
+                               order.status === 'pending' ? t('profile.orders.status.pending') :
                                order.status}
                             </span>
                           </div>
@@ -483,10 +485,10 @@ export default function Profile() {
                             <div>
                               <Separator className="my-3" />
                               <div className="space-y-2">
-                                <h4 className="text-sm font-medium text-muted-foreground mb-2">Produkter:</h4>
+                                <h4 className="text-sm font-medium text-muted-foreground mb-2">{t('profile.orders.products')}</h4>
                                 {order.items.map((item: any, idx: number) => (
                                   <div key={idx} className="flex justify-between text-sm py-1">
-                                    <span>{item.title || item.name || 'Produkt'} {item.quantity > 1 && `(${item.quantity}x)`}</span>
+                                    <span>{item.title || item.name || t('profile.orders.product')} {item.quantity > 1 && `(${item.quantity}x)`}</span>
                                     <span className="text-muted-foreground">
                                       {item.price ? `${parseFloat(item.price).toFixed(2)} ${order.currency_code}` : ''}
                                     </span>

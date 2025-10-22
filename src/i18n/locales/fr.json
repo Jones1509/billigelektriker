@@ -339,5 +339,81 @@
     "message": "Message",
     "messagePlaceholder": "Décrivez votre projet ou ce dont vous avez besoin...",
     "sendMessage": "Envoyer le message"
+  },
+  "profile": {
+    "title": "Mon Profil",
+    "subtitle": "Gérez vos informations de compte et paramètres",
+    "tabs": {
+      "profile": "Profil",
+      "orders": "Mes Commandes"
+    },
+    "personalInfo": {
+      "title": "Informations personnelles",
+      "description": "Mettez à jour vos informations personnelles ici",
+      "email": "E-mail",
+      "emailCannotChange": "L'e-mail ne peut pas être modifié",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "phone": "Téléphone (facultatif)",
+      "phonePlaceholder": "+45 12 34 56 78",
+      "saving": "Enregistrement...",
+      "saveChanges": "Enregistrer les modifications"
+    },
+    "password": {
+      "title": "Changer le mot de passe",
+      "description": "Mettez à jour votre mot de passe pour sécuriser votre compte",
+      "current": "Mot de passe actuel",
+      "new": "Nouveau mot de passe",
+      "newPlaceholder": "Au moins 6 caractères",
+      "confirm": "Confirmer le nouveau mot de passe",
+      "changing": "Modification...",
+      "changeButton": "Changer le mot de passe"
+    },
+    "account": {
+      "title": "Actions du compte",
+      "description": "Déconnectez-vous ou gérez votre compte",
+      "logout": "Se déconnecter"
+    },
+    "orders": {
+      "noOrders": "Pas encore de commandes",
+      "noOrdersDesc": "Lorsque vous passerez une commande, elle sera affichée ici.",
+      "startShopping": "Commencer à acheter",
+      "orderNumber": "Commande #{{number}}",
+      "status": {
+        "completed": "Terminé",
+        "pending": "En attente"
+      },
+      "products": "Produits:",
+      "product": "Produit"
+    },
+    "validation": {
+      "firstNameRequired": "Le prénom est requis",
+      "firstNameMax": "Le prénom doit contenir au maximum 50 caractères",
+      "lastNameRequired": "Le nom de famille est requis",
+      "lastNameMax": "Le nom de famille doit contenir au maximum 50 caractères",
+      "phoneMax": "Le numéro de téléphone doit contenir au maximum 20 caractères",
+      "currentPasswordRequired": "Le mot de passe actuel est requis",
+      "newPasswordMin": "Le nouveau mot de passe doit contenir au moins 6 caractères",
+      "newPasswordMax": "Le mot de passe doit contenir au maximum 72 caractères",
+      "confirmPasswordRequired": "Confirmez votre nouveau mot de passe",
+      "passwordsNotMatch": "Les mots de passe ne correspondent pas"
+    },
+    "errors": {
+      "fetchProfile": "Impossible de récupérer le profil",
+      "fetchOrders": "Impossible de récupérer les commandes",
+      "noUserId": "Aucun ID utilisateur",
+      "invalidData": "Informations invalides",
+      "updateProfile": "Impossible de mettre à jour le profil",
+      "wrongPassword": "Mot de passe actuel incorrect",
+      "wrongPasswordDesc": "Vérifiez votre mot de passe et réessayez.",
+      "changePassword": "Impossible de changer le mot de passe"
+    },
+    "success": {
+      "profileUpdated": "Profil mis à jour!",
+      "profileUpdatedDesc": "Vos informations ont été enregistrées.",
+      "passwordChanged": "Mot de passe modifié!",
+      "passwordChangedDesc": "Votre nouveau mot de passe est maintenant actif.",
+      "loggedOut": "Vous êtes maintenant déconnecté"
+    }
   }
 }
