@@ -215,9 +215,25 @@
     "badge": "Technologie Smart Home",
     "title": "Éclairage intelligent – contrôlez l'ambiance depuis votre mobile",
     "description": "Choisissez les couleurs, tamisez la lumière et allumez automatiquement – le tout depuis l'application. Créez l'ambiance parfaite pour toute occasion.",
-    "safeInstallation": "Installation sûre",
-    "safeDescription": "Installation autorisée. 2 ans de droit de réclamation sur les marchandises et 12 mois de garantie sur le travail.",
-    "cta": "Voir les lampes"
+    "installation": {
+      "title": "Installation sûre",
+      "description": "Installation autorisée. 2 ans de garantie sur les marchandises et 12 mois de garantie sur le travail."
+    },
+    "cta": "Voir les lampes",
+    "images": {
+      "indoor": {
+        "title": "Éclairage Intérieur Intelligent",
+        "description": "Contrôlez les couleurs, tamisez et allumez automatiquement"
+      },
+      "outdoor": {
+        "title": "Éclairage Extérieur Intelligent",
+        "description": "Éclairage extérieur automatique avec minuterie et capteur"
+      },
+      "bedroom": {
+        "title": "Chambre Intelligente",
+        "description": "Éclairage de réveil et contrôle d'ambiance depuis le lit"
+      }
+    }
   },
   "productSlider": {
     "badge": "⚡ Boutique en ligne",

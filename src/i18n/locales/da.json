@@ -215,9 +215,25 @@
     "badge": "Smart Home Teknologi",
     "title": "Smart lys – styr stemningen fra din mobil",
     "description": "Vælg farver, dæmp lyset og tænd automatisk – alt sammen fra app'en. Skab den perfekte stemning til enhver lejlighed.",
-    "safeInstallation": "Tryg installation",
-    "safeDescription": "Autoriseret montering. 2 års reklamationsret på varer og 12 mdr. garanti på arbejdet.",
-    "cta": "Se lamperne"
+    "installation": {
+      "title": "Tryg installation",
+      "description": "Autoriseret montering. 2 års reklamationsret på varer og 12 mdr. garanti på arbejdet."
+    },
+    "cta": "Se lamperne",
+    "images": {
+      "indoor": {
+        "title": "Smart Indendørs Belysning",
+        "description": "Styr farver, dæmp lyset og tænd automatisk"
+      },
+      "outdoor": {
+        "title": "Smart Udendørs Belysning",
+        "description": "Automatisk udendørsbelysning med tids- og sensorstyring"
+      },
+      "bedroom": {
+        "title": "Smart Soveværelse",
+        "description": "Wake-up lys og stemningsstyring fra sengen"
+      }
+    }
   },
   "productSlider": {
     "badge": "⚡ Webshop",

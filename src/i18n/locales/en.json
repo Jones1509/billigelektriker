@@ -215,9 +215,25 @@
     "badge": "Smart Home Technology",
     "title": "Smart lighting – control the mood from your mobile",
     "description": "Choose colors, dim the light and turn on automatically – all from the app. Create the perfect atmosphere for any occasion.",
-    "safeInstallation": "Safe installation",
-    "safeDescription": "Authorized installation. 2 years right of complaint on goods and 12 months warranty on work.",
-    "cta": "See the lamps"
+    "installation": {
+      "title": "Safe installation",
+      "description": "Authorized installation. 2 years warranty on goods and 12 months warranty on work."
+    },
+    "cta": "See the lamps",
+    "images": {
+      "indoor": {
+        "title": "Smart Indoor Lighting",
+        "description": "Control colors, dim lights and turn on automatically"
+      },
+      "outdoor": {
+        "title": "Smart Outdoor Lighting",
+        "description": "Automatic outdoor lighting with timer and sensor control"
+      },
+      "bedroom": {
+        "title": "Smart Bedroom",
+        "description": "Wake-up lighting and mood control from bed"
+      }
+    }
   },
   "productSlider": {
     "badge": "⚡ Webshop",

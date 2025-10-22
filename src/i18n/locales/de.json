@@ -215,9 +215,25 @@
     "badge": "Smart Home Technologie",
     "title": "Intelligente Beleuchtung – steuern Sie die Stimmung von Ihrem Handy aus",
     "description": "Wählen Sie Farben, dimmen Sie das Licht und schalten Sie automatisch ein – alles über die App. Schaffen Sie die perfekte Atmosphäre für jeden Anlass.",
-    "safeInstallation": "Sichere Installation",
-    "safeDescription": "Autorisierte Montage. 2 Jahre Reklamationsrecht auf Waren und 12 Monate Garantie auf Arbeit.",
-    "cta": "Lampen ansehen"
+    "installation": {
+      "title": "Sichere Installation",
+      "description": "Autorisierte Montage. 2 Jahre Garantie auf Waren und 12 Monate Garantie auf Arbeit."
+    },
+    "cta": "Lampen ansehen",
+    "images": {
+      "indoor": {
+        "title": "Intelligente Innenbeleuchtung",
+        "description": "Steuern Sie Farben, dimmen Sie und schalten Sie automatisch ein"
+      },
+      "outdoor": {
+        "title": "Intelligente Außenbeleuchtung",
+        "description": "Automatische Außenbeleuchtung mit Timer- und Sensorsteuerung"
+      },
+      "bedroom": {
+        "title": "Intelligentes Schlafzimmer",
+        "description": "Wake-up-Licht und Stimmungssteuerung vom Bett aus"
+      }
+    }
   },
   "productSlider": {
     "badge": "⚡ Webshop",
