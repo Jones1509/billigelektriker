@@ -485,15 +485,15 @@ export const Header = () => {
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-gray-900">
+              <DropdownMenuContent align="end" className="w-56 bg-background border border-border shadow-xl">
                 <DropdownMenuLabel>{t('header.myAccount')}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate("/profile")}>
+                <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer">
                   <User className="mr-2 h-4 w-4" />
                   <span>{t('header.profile')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleSignOut}>
+                <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>{t('header.logout')}</span>
                 </DropdownMenuItem>
