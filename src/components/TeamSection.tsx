@@ -78,7 +78,7 @@ export const TeamSection = () => {
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500/10 to-orange-600/10 border border-orange-500/20">
                 <Sparkles className="h-4 w-4 text-orange-600" />
-                <span className="text-sm font-semibold text-orange-700 dark:text-orange-400">100+ projekter</span>
+                <span className="text-sm font-semibold text-orange-700 dark:text-orange-400">Erfarne elektrikere</span>
               </div>
             </div>
             
@@ -119,14 +119,14 @@ export const TeamSection = () => {
             </div>
             
             {/* Floating badge */}
-            <div className="absolute -bottom-6 -left-6 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-4 border-2 border-primary/20 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500">
+            <div className="absolute -bottom-6 -left-6 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-4 border-2 border-secondary/20 group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500">
               <div className="flex items-center gap-3">
                 <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-secondary to-green-600 flex items-center justify-center">
-                  <Users className="h-6 w-6 text-white" />
+                  <Shield className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-foreground">100+</div>
-                  <div className="text-xs text-muted-foreground">Tilfredse kunder</div>
+                  <div className="text-lg font-bold text-foreground">Kvalitet</div>
+                  <div className="text-xs text-muted-foreground">Garanteret</div>
                 </div>
               </div>
             </div>
