@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Zap, Lock, Key, Settings } from "lucide-react";
 import { toast } from "sonner";
+import logo from "@/assets/logo.avif";
 
 const DEFAULT_PASSWORD = "Zack2410";
 const LAUNCHED_KEY = "site_launched";
@@ -155,43 +156,40 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
   if (!hasAccess) {
     return (
       <>
-        <div className="min-h-screen electric-gradient flex items-center justify-center p-4 md:p-6 relative overflow-hidden">
+        <div className="coming-soon-page electric-gradient">
           {/* Electric grid overlay */}
           <div className="electric-grid"></div>
           
           {/* Animated radial glows */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-green-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
+            <div className="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-64 h-64 md:w-96 md:h-96 bg-green-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-red-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
           </div>
 
-          <div className="relative z-10 w-full max-w-4xl animate-fade-in flex flex-col items-center justify-center" style={{ maxHeight: "95vh" }}>
+          <div className="coming-soon-container">
             {/* Logo Section */}
-            <div className="flex flex-col items-center mb-6">
-              <div className="p-4 md:p-5 bg-gradient-to-br from-primary to-blue-600 rounded-2xl shadow-2xl mb-4 animate-pulse">
-                <Zap className="h-12 w-12 md:h-14 md:w-14 text-white" />
+            <div className="logo-section">
+              <div className="logo-wrapper">
+                <img src={logo} alt="Billig Elektriker Logo" className="logo-image" />
               </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-1">Billig Elektriker</h1>
-              <p className="text-blue-100 text-base md:text-lg">Coming Soon</p>
+              <h1 className="company-name">Billig Elektriker</h1>
+              <p className="coming-soon-subtitle">Coming Soon</p>
             </div>
 
             {/* Countdown Timer */}
-            <div className="grid grid-cols-4 gap-2 md:gap-3 mb-6 w-full max-w-2xl px-2">
+            <div className="countdown-timer">
               {[
                 { value: timeLeft.days, label: "Dage" },
                 { value: timeLeft.hours, label: "Timer" },
                 { value: timeLeft.minutes, label: "Min" },
                 { value: timeLeft.seconds, label: "Sek" },
               ].map((item, index) => (
-                <div
-                  key={index}
-                  className="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl md:rounded-2xl p-3 md:p-4 text-center"
-                >
-                  <div className="text-2xl md:text-4xl font-bold text-white mb-1">
+                <div key={index} className="time-unit">
+                  <div className="time-number">
                     {String(item.value).padStart(2, "0")}
                   </div>
-                  <div className="text-blue-100 text-xs md:text-sm uppercase tracking-wider">
+                  <div className="time-label">
                     {item.label}
                   </div>
                 </div>
@@ -199,9 +197,9 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             {/* Description */}
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 mb-6 max-w-3xl">
-              <div className="text-white/95 text-center space-y-3 text-sm md:text-base leading-relaxed">
-                <p className="font-semibold text-base md:text-lg">
+            <div className="description-section">
+              <div className="description-content">
+                <p className="font-semibold">
                   Vi er Billig Elektriker – dit nye valg for professionel el-service i København og omegn.
                 </p>
                 <p>
@@ -210,24 +208,24 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
                 <p>
                   Fra den mindste fejlfinding til store installationsprojekter – vi løser dine problemer hurtigt, professionelt og til en pris der giver mening.
                 </p>
-                <p className="font-semibold text-blue-100">
+                <p className="font-semibold highlight">
                   Snart kan du opleve forskellen selv. Vi glæder os til at servicere dig!
                 </p>
               </div>
             </div>
 
             {/* Password Box */}
-            <div className={`backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 max-w-md w-full ${shake ? "animate-shake" : ""}`}>
+            <div className={`access-card ${shake ? "animate-shake" : ""}`}>
               <div className="flex justify-center mb-4">
                 <div className="p-2 md:p-3 bg-white/10 rounded-xl">
                   <Lock className="h-6 w-6 md:h-7 md:w-7 text-white" />
                 </div>
               </div>
               
-              <h3 className="text-xl md:text-2xl font-bold text-white text-center mb-2">
+              <h3 className="access-title">
                 Har du adgangskode?
               </h3>
-              <p className="text-blue-100 text-center mb-4 text-sm md:text-base">
+              <p className="access-subtitle">
                 Indtast din kode for at få adgang
               </p>
 
@@ -237,13 +235,13 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
                   placeholder="Indtast adgangskode"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50 text-center text-base md:text-lg h-12 md:h-14 backdrop-blur-sm"
+                  className="password-input"
                   autoFocus
                 />
                 
                 <Button 
                   type="submit" 
-                  className="w-full h-12 md:h-14 text-base md:text-lg bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white border-0"
+                  className="access-button"
                   size="lg"
                 >
                   Få adgang
