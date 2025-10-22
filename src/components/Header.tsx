@@ -426,9 +426,8 @@ export const Header = () => {
                   </div>
 
 
-                  {/* Static Links */}
-                  <div className="space-y-2 px-2">
-                  <div className="border-t pt-4 space-y-2">
+                  {/* User Actions */}
+                  <div className="border-t pt-4 space-y-2 px-2">
                     {user ? (
                       <>
                         <Button
