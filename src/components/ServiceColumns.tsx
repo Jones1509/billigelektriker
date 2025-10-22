@@ -42,7 +42,13 @@ export const ServiceColumns = () => {
   ];
   
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background">
+    <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-blue-tint via-muted/30 to-background">
+      {/* Smooth fade-in at top - matches TeamSection fade-out */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-blue-tint to-transparent pointer-events-none z-[5]"></div>
+      
+      {/* Smooth fade-out at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-[5]"></div>
+      
       {/* Decorative background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(34,197,94,0.08),transparent_50%)]"></div>

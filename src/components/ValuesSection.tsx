@@ -32,7 +32,13 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative pt-16 md:pt-20 pb-0 bg-gradient-to-b from-background via-[#EFF6FF]/40 to-background overflow-hidden">
+    <section className="relative py-20 md:py-32 bg-gradient-to-b from-background via-blue-tint/60 to-background overflow-hidden">
+      {/* Smooth fade-in at top */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent pointer-events-none z-[5]"></div>
+      
+      {/* Smooth fade-out at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-[5]"></div>
+      
       {/* Decorative electrical circuit pattern */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
