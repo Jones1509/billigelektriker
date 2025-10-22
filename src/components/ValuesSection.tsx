@@ -32,89 +32,95 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative py-24 md:py-28 lg:py-32 bg-gradient-to-b from-background via-blue-50/30 to-background overflow-hidden">
-      {/* Extremely subtle electrical circuit background pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+    <section className="relative py-[100px] bg-gradient-to-b from-[#F8FAFC] via-[#EFF6FF] to-white overflow-hidden">
+      {/* Decorative electrical circuit pattern */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="circuit-values" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
               <path d="M10 10h25v25h25v25h-25v25h-25v-25h-25v-25h25z" stroke="currentColor" strokeWidth="0.5" fill="none" />
-              <circle cx="35" cy="35" r="1.5" fill="currentColor" />
-              <circle cx="85" cy="85" r="2" fill="currentColor" />
+              <circle cx="35" cy="35" r="2" fill="currentColor" />
+              <circle cx="85" cy="85" r="2.5" fill="currentColor" />
               <line x1="35" y1="10" x2="35" y2="35" stroke="currentColor" strokeWidth="0.5" />
               <line x1="85" y1="60" x2="85" y2="85" stroke="currentColor" strokeWidth="0.5" />
+              <line x1="10" y1="35" x2="35" y2="35" stroke="currentColor" strokeWidth="0.5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#circuit-values)" />
         </svg>
       </div>
       
-      {/* Soft shadow underneath */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-muted/20 to-transparent pointer-events-none"></div>
+      {/* Smooth transition to next section */}
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-white pointer-events-none"></div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-14 md:mb-16 lg:mb-20 animate-fade-in px-4">
-          {/* Professional Badge with subtle animation */}
-          <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-cyan-50 to-blue-50 border border-primary/20 text-primary text-sm font-semibold mb-6 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+        <div className="text-center mb-16 animate-fade-in px-4">
+          {/* Premium Badge with gentle bounce */}
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DBEAFE] to-[#BFDBFE] text-primary text-sm font-semibold mb-6 shadow-[0_4px_12px_rgba(0,102,255,0.15)] animate-[gentleBounce_2s_ease-in-out_infinite]">
+            <div className="w-2 h-2 rounded-full bg-primary"></div>
             <span className="tracking-wide">{t('values.badge')}</span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-foreground leading-tight drop-shadow-sm">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-[#0F172A] leading-tight tracking-tight">
             {t('values.title')}
           </h2>
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-[#64748B] max-w-3xl mx-auto leading-relaxed">
             {t('values.subtitle')}
           </p>
         </div>
 
-        {/* Values Grid - Perfect Alignment with Premium Design */}
+        {/* Values Grid - Premium Design */}
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
             {values.map((value, idx) => {
-              // Define accent colors for each card
-              const accentColors = [
-                { bg: "bg-blue-100", border: "border-blue-200", hover: "group-hover:bg-blue-50" }, // Security - Blue
-                { bg: "bg-green-100", border: "border-green-200", hover: "group-hover:bg-green-50" }, // Quality - Green
-                { bg: "bg-purple-100", border: "border-purple-200", hover: "group-hover:bg-purple-50" }, // Punctuality - Purple
-                { bg: "bg-blue-100", border: "border-blue-200", hover: "group-hover:bg-blue-50" }, // Guarantee - Blue
+              // Define gradient colors for each icon wrapper
+              const iconGradients = [
+                "bg-gradient-to-br from-[#DBEAFE] to-[#BFDBFE]", // Security - Blue
+                "bg-gradient-to-br from-[#D1FAE5] to-[#A7F3D0]", // Quality - Green
+                "bg-gradient-to-br from-[#E0E7FF] to-[#C7D2FE]", // Punctuality - Purple
+                "bg-gradient-to-br from-[#DBEAFE] to-[#BFDBFE]", // Guarantee - Blue
               ];
               
               return (
                 <div 
                   key={idx} 
-                  className="group flex flex-col items-center p-10 rounded-[20px] bg-card border border-primary/10 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_40px_rgba(0,102,255,0.15)] hover:border-primary/30 hover:bg-gradient-to-b hover:from-card hover:to-blue-50/20 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-3 h-full min-h-[440px]"
+                  className="group relative flex flex-col items-center p-12 rounded-3xl bg-white border border-primary/[0.08] shadow-[0_4px_6px_rgba(0,0,0,0.03),0_10px_30px_rgba(0,102,255,0.05)] hover:shadow-[0_20px_40px_rgba(0,102,255,0.12),0_4px_8px_rgba(0,0,0,0.04)] hover:border-primary/15 transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-4 h-full min-h-[440px] overflow-hidden"
                   style={{ 
-                    animationDelay: `${idx * 100}ms`,
-                    animation: 'fadeInUp 0.6s ease-out both'
+                    animationDelay: `${(idx + 1) * 100}ms`,
+                    opacity: 0,
+                    animation: 'fadeInUp 0.6s ease-out forwards'
                   }}
                 >
-                  {/* Icon with Circular Background */}
-                  <div className={`relative flex items-center justify-center w-[120px] h-[120px] rounded-full ${accentColors[idx].bg} ${accentColors[idx].border} border-2 ${accentColors[idx].hover} flex-shrink-0 mb-6 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[5deg] shadow-lg group-hover:shadow-[0_8px_25px_rgba(0,102,255,0.2)]`}>
+                  {/* Top shine effect */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Icon with circular gradient background and outer ring */}
+                  <div className={`relative flex items-center justify-center w-[100px] h-[100px] rounded-full ${iconGradients[idx]} flex-shrink-0 mb-8 transition-all duration-[400ms] group-hover:scale-110 group-hover:-rotate-[5deg]`}>
+                    {/* Outer ring effect */}
+                    <div className="absolute inset-[-8px] rounded-full border-2 border-primary/10 opacity-0 group-hover:opacity-100 group-hover:inset-[-12px] transition-all duration-300"></div>
+                    
                     <img 
                       src={value.icon} 
                       alt={value.title}
-                      className="w-16 h-16 object-contain transition-all duration-300"
+                      className="w-12 h-12 object-contain relative z-10"
                     />
-                    {/* Pulse effect on icon background */}
-                    <div className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/5 animate-pulse transition-all duration-300"></div>
                   </div>
                   
-                  {/* Title - Fixed min-height for consistent alignment */}
-                  <h3 className="font-bold text-xl text-center text-foreground group-hover:text-primary transition-colors duration-300 leading-tight min-h-[60px] flex items-center justify-center mb-4">
+                  {/* Title */}
+                  <h3 className="font-bold text-[22px] text-center text-[#0F172A] tracking-tight leading-tight min-h-[60px] flex items-center justify-center mb-4 group-hover:text-primary transition-colors duration-300">
                     {value.title}
                   </h3>
                   
-                  {/* Description - Grows to fill space, pushes button down */}
-                  <p className="text-base text-center text-muted-foreground leading-relaxed group-hover:text-foreground/70 transition-colors duration-300 flex-grow mb-auto">
+                  {/* Description */}
+                  <p className="text-base text-center text-[#64748B] leading-[1.6] flex-grow mb-auto">
                     {value.description}
                   </p>
                   
-                  {/* Arrow Button - Premium version */}
+                  {/* Arrow Button - Premium Interactive */}
                   <div className="flex items-center justify-center mt-8 flex-shrink-0">
-                    <div className="w-14 h-14 rounded-full bg-primary shadow-[0_4px_12px_rgba(0,102,255,0.3)] flex items-center justify-center transition-all duration-300 group-hover:shadow-[0_6px_20px_rgba(0,102,255,0.4)] group-hover:scale-110 group-hover:bg-[#0052CC]">
-                      <ArrowRight className="w-5 h-5 text-primary-foreground transition-all duration-300 group-hover:translate-x-1" />
-                    </div>
+                    <button className="w-14 h-14 rounded-full bg-primary shadow-[0_4px_16px_rgba(0,102,255,0.25)] flex items-center justify-center transition-all duration-300 hover:bg-[#0052CC] hover:translate-x-1 hover:scale-105 hover:shadow-[0_6px_24px_rgba(0,102,255,0.4)] cursor-pointer">
+                      <ArrowRight className="w-6 h-6 text-white transition-transform duration-300 hover:translate-x-0.5" />
+                    </button>
                   </div>
                 </div>
               );
@@ -122,17 +128,18 @@ export const ValuesSection = () => {
           </div>
         </div>
         
-        {/* Add keyframe animation */}
+        {/* Add keyframe animations */}
         <style>{`
           @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
             to {
               opacity: 1;
               transform: translateY(0);
             }
+          }
+          
+          @keyframes gentleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
           }
         `}</style>
         
