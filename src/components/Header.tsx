@@ -129,8 +129,8 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
       <div className="container flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 font-bold text-2xl">
-          <img src={logo} alt="Billig Elektriker" className="h-12 w-auto" />
+        <Link to="/" className="flex items-center gap-3">
+          <img src={logo} alt="Billig Elektriker" className="h-16 md:h-20 w-auto" />
         </Link>
         
         <NavigationMenu className="hidden lg:flex">
@@ -214,11 +214,11 @@ export const Header = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" className="rounded-full text-white hover:text-white hover:bg-white/20">
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuContent align="end" className="w-56 bg-white">
                 <DropdownMenuLabel>Min konto</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => navigate("/profile")}>
@@ -233,7 +233,7 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="ghost" size="icon" onClick={() => navigate("/auth")} className="text-white hover:bg-white/10">
+            <Button variant="ghost" size="icon" onClick={() => navigate("/auth")} className="text-white hover:text-white hover:bg-white/20">
               <User className="h-5 w-5" />
             </Button>
           )}

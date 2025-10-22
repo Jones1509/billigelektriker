@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { ArrowRight, Calculator } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import switchesImage from "@/assets/switches-background.webp";
 
 export const HeroSection = () => {
@@ -34,16 +34,16 @@ export const HeroSection = () => {
               Certificerede elektrikere med fair priser og hurtig respons – fra fejlfinding til komplette installationer.
             </p>
             <p className="text-lg mb-8 text-white/80">
-              Få et tilbud i dag – helt gratis og uforpligtende.
+              Certificerede elektrikere i København. Vi hjælper dig med alt fra små reparationer til store projekter.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" className="bg-primary text-white hover:bg-primary/90">
-                Få et tilbud
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold">
+                Se vores arbejde
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" className="bg-white text-gray-900 border-white hover:bg-gray-100">
-                <Calculator className="mr-2 h-5 w-5" />
-                Prisberegner
+              <Button size="lg" variant="outline" className="bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary font-semibold">
+                <Phone className="mr-2 h-5 w-5" />
+                Kontakt os
               </Button>
             </div>
           </div>
