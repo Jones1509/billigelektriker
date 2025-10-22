@@ -110,6 +110,7 @@
   flex-direction: column;
   align-items: center;
   gap: clamp(8px, 1.5vh, 16px);
+  margin-bottom: clamp(16px, 2vh, 28px);
   animation: fadeInUp 0.8s ease-out;
   flex-shrink: 0;
 }
@@ -128,6 +129,7 @@
   animation: pulse 3s ease-in-out infinite;
   flex-shrink: 0;
   backdrop-filter: blur(10px);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
 }
 
 @keyframes pulse {
@@ -187,6 +189,7 @@
   justify-content: center;
   width: 100%;
   max-width: 550px;
+  margin-bottom: clamp(12px, 2vh, 20px);
   animation: fadeInUp 0.8s ease-out 0.3s backwards;
   flex-shrink: 0;
 }
@@ -205,7 +208,7 @@
   flex: 1;
   min-width: 0;
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   animation: pulse-subtle 3s ease-in-out infinite;
   transition: all 0.3s ease;
@@ -219,7 +222,7 @@
 .time-unit:hover {
   transform: translateY(-4px);
   box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.15),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   background: linear-gradient(
     135deg,
@@ -246,70 +249,66 @@
   font-weight: 600;
 }
 
-/* Description Section - Glassmorphism */
+/* Description Section - HIGH CONTRAST & READABLE */
 .description-section {
-  backdrop-filter: blur(30px) saturate(150%);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.06) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: clamp(20px, 3vw, 32px);
-  padding: clamp(16px, 2.5vh, 24px) clamp(16px, 2.5vw, 24px);
-  max-width: 650px;
+  backdrop-filter: blur(20px) saturate(150%);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: clamp(24px, 3vh, 32px) clamp(20px, 2.8vw, 32px);
+  max-width: 700px;
   width: 100%;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   animation: fadeInUp 0.8s ease-out 0.4s backwards;
   flex-shrink: 1;
   min-height: 0;
+  margin-bottom: clamp(20px, 3vh, 32px);
 }
 
 .description-content {
-  color: rgba(255, 255, 255, 0.95);
+  color: #FFFFFF;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 1.2vh, 12px);
+  gap: clamp(10px, 1.5vh, 14px);
 }
 
 .description-content p {
-  font-size: clamp(12px, 1.5vw, 15px);
-  line-height: 1.5;
+  font-size: clamp(13px, 1.6vw, 16px);
+  line-height: 1.6;
   margin: 0;
   font-weight: 400;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .description-content .highlight {
-  color: rgba(200, 230, 255, 1);
+  color: rgba(220, 240, 255, 1);
   font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* Access Card - Premium Glass Design */
+/* Password Section - Clean & Integrated */
 .access-card {
-  backdrop-filter: blur(30px) saturate(150%);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: clamp(20px, 3vw, 32px);
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
   padding: clamp(20px, 3vh, 28px) clamp(18px, 2.8vw, 28px);
-  max-width: 420px;
+  max-width: 500px;
   width: 100%;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.8s ease-out 0.5s backwards;
   flex-shrink: 0;
 }
 
+.access-card .flex.justify-center {
+  display: none;
+}
+
 .access-title {
-  font-size: clamp(18px, 2.8vw, 24px);
+  font-size: clamp(17px, 2.5vw, 22px);
   font-weight: 700;
   color: white;
   text-align: center;
@@ -319,82 +318,81 @@
 }
 
 .access-subtitle {
-  font-size: clamp(12px, 1.6vw, 14px);
-  color: rgba(200, 230, 255, 1);
+  font-size: clamp(12px, 1.5vw, 14px);
+  color: rgba(220, 240, 255, 1);
   text-align: center;
   margin-bottom: clamp(14px, 2vh, 18px);
   font-weight: 500;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .password-input {
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: white;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #1a1a1a;
   text-align: center;
   font-size: clamp(13px, 1.6vw, 15px);
   height: clamp(44px, 5.5vh, 50px);
   backdrop-filter: blur(10px);
-  border-radius: clamp(12px, 2vw, 16px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
 }
 
 .password-input:focus {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 1);
+  border-color: #0066FF;
   outline: none;
   box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.1),
-    0 0 0 3px rgba(255, 255, 255, 0.1);
+    0 2px 12px rgba(0, 0, 0, 0.15),
+    0 0 0 3px rgba(0, 102, 255, 0.1);
   transform: translateY(-1px);
 }
 
 .password-input:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .password-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 400;
 }
 
 .access-button {
   width: 100%;
   height: clamp(44px, 5.5vh, 50px);
   font-size: clamp(13px, 1.6vw, 16px);
-  background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%);
+  background: #0066FF;
   border: none;
   color: white;
   font-weight: 600;
-  border-radius: clamp(12px, 2vw, 16px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
   box-shadow: 
-    0 4px 20px rgba(0, 102, 255, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 4px 16px rgba(0, 102, 255, 0.3);
   letter-spacing: 0.02em;
   cursor: pointer;
 }
 
 .access-button:hover {
-  background: linear-gradient(135deg, #0052CC 0%, #003D99 100%);
+  background: #0052CC;
   transform: translateY(-2px);
   box-shadow: 
-    0 6px 28px rgba(0, 102, 255, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    0 6px 24px rgba(0, 102, 255, 0.4);
 }
 
 .access-button:active {
   transform: translateY(0);
   box-shadow: 
-    0 2px 12px rgba(0, 102, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 2px 8px rgba(0, 102, 255, 0.3);
 }
 
 /* Responsive Breakpoints - Optimized for all screens */
 @media (max-width: 768px) {
   .coming-soon-container {
-    gap: clamp(10px, 1.8vh, 18px);
+    gap: clamp(10px, 1.8vh, 16px);
   }
   
   .logo-wrapper {
@@ -404,6 +402,7 @@
   
   .countdown-timer {
     gap: clamp(6px, 1.2vw, 12px);
+    margin-bottom: clamp(10px, 1.8vh, 16px);
   }
   
   .time-unit {
@@ -411,17 +410,22 @@
   }
   
   .description-section {
-    padding: clamp(14px, 2.2vh, 20px) clamp(14px, 2.2vw, 20px);
+    padding: clamp(18px, 2.5vh, 24px) clamp(16px, 2.2vw, 20px);
+    margin-bottom: clamp(16px, 2.5vh, 24px);
+  }
+  
+  .description-content p {
+    font-size: clamp(12px, 1.5vw, 14px);
   }
   
   .access-card {
-    padding: clamp(16px, 2.5vh, 24px) clamp(16px, 2.5vw, 24px);
+    padding: clamp(18px, 2.5vh, 24px) clamp(16px, 2.5vw, 24px);
   }
 }
 
 @media (max-width: 480px) {
   .coming-soon-container {
-    gap: clamp(8px, 1.5vh, 14px);
+    gap: clamp(8px, 1.5vh, 12px);
   }
   
   .logo-wrapper {
@@ -431,6 +435,7 @@
   
   .countdown-timer {
     gap: 6px;
+    margin-bottom: 10px;
   }
   
   .time-unit {
@@ -442,12 +447,17 @@
     gap: 8px;
   }
   
+  .description-content p {
+    font-size: 12px;
+  }
+  
   .description-section {
-    padding: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
   }
   
   .access-card {
-    padding: 18px 16px;
+    padding: 16px;
   }
 }
 

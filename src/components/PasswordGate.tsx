@@ -216,12 +216,6 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
 
             {/* Password Box */}
             <div className={`access-card ${shake ? "animate-shake" : ""}`}>
-              <div className="flex justify-center mb-4">
-                <div className="p-2 md:p-3 bg-white/10 rounded-xl">
-                  <Lock className="h-6 w-6 md:h-7 md:w-7 text-white" />
-                </div>
-              </div>
-              
               <h3 className="access-title">
                 Har du adgangskode?
               </h3>
@@ -249,7 +243,7 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
               </form>
             </div>
 
-            <p className="text-center text-white/70 text-xs md:text-sm mt-4">
+            <p className="text-center text-white/80 text-xs md:text-sm" style={{ marginTop: 'clamp(8px, 1.5vh, 12px)' }}>
               Kontakt administratoren for at få adgang
             </p>
           </div>
