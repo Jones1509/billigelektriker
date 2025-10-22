@@ -1,11 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, AlertTriangle, RefreshCw } from "lucide-react";
+import { CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { getTranslationCoverage, flattenTranslationKeys } from "@/utils/translationSync";
-import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react";
 import daTranslations from "@/i18n/locales/da.json";
 import enTranslations from "@/i18n/locales/en.json";
 import deTranslations from "@/i18n/locales/de.json";
@@ -18,70 +14,6 @@ const LANGUAGES = [
 ];
 
 export default function TranslationCheck() {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
-  const { toast } = useToast();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        
-        if (sessionError || !session) {
-          toast({
-            title: "Authentication Required",
-            description: "Please sign in to access the admin panel",
-            variant: "destructive",
-          });
-          navigate('/auth');
-          return;
-        }
-
-        const { data: roleData, error: roleError } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
-          .eq('role', 'admin')
-          .maybeSingle();
-
-        if (roleError || !roleData) {
-          toast({
-            title: "Unauthorized Access",
-            description: "You don't have permission to access this page",
-            variant: "destructive",
-          });
-          navigate('/');
-          return;
-        }
-
-        setIsAuthorized(true);
-      } catch (error) {
-        console.error('Auth check error:', error);
-        navigate('/');
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, [navigate, toast]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <RefreshCw className="h-8 w-8 animate-spin mx-auto mb-4" />
-          <p>Checking authorization...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthorized) {
-    return null;
-  }
-
   const sourceKeys = flattenTranslationKeys(daTranslations);
   const totalKeys = Object.keys(sourceKeys).length;
 

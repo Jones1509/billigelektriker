@@ -7,14 +7,14 @@ export const BookingCTA = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-8 md:py-12 bg-gradient-to-br from-background via-blue-50/30 to-background relative overflow-hidden">
+    <section className="py-12 md:py-24 bg-gradient-to-br from-background via-blue-50/30 to-background relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
       
       <div className="container relative z-10 px-4">
         <div className="max-w-4xl mx-auto">
           <Card className="border-0 shadow-2xl bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-900 dark:to-blue-950/30 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
-            <CardContent className="relative p-6 md:p-8 text-center space-y-4 md:space-y-6">
+            <CardContent className="relative p-6 md:p-12 text-center space-y-6 md:space-y-8">
               <div className="inline-flex p-4 md:p-6 bg-gradient-to-br from-primary to-blue-600 rounded-2xl shadow-xl">
                 <Calendar className="h-8 w-8 md:h-12 md:w-12 text-white" />
               </div>

@@ -61,7 +61,7 @@ const Index = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-gradient-to-b from-background to-blue-50/20 py-8 sm:py-10 md:py-12 relative overflow-hidden">
+      <footer className="border-t bg-gradient-to-b from-background to-blue-50/20 py-10 sm:py-12 md:py-14 lg:py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.05),transparent_50%)]"></div>
         
         <div className="container relative z-10">
