@@ -48,7 +48,7 @@ export const LanguageSwitcher = () => {
                 transition-all duration-150 cursor-pointer
                 ${isActive 
                   ? 'bg-primary text-primary-foreground font-medium cursor-default shadow-sm' 
-                  : 'hover:bg-accent text-foreground font-normal'
+                  : 'hover:bg-primary/10 text-foreground font-normal hover:text-primary'
                 }
               `}
             >
