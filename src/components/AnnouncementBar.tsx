@@ -6,9 +6,9 @@ export const AnnouncementBar = () => {
   const { t } = useTranslation();
   
   return (
-    <div className="hidden lg:block bg-gradient-to-r from-[#0A1628] via-[#0d1d35] to-[#0A1628] border-b border-white/10 shadow-lg">
+    <div className="hidden lg:block bg-gradient-to-r from-[#0A1628] via-[#0d1d35] to-[#0A1628] border-b border-white/10 shadow-lg overflow-hidden">
       <div className="container">
-        <div className="flex items-center justify-between h-14 text-sm overflow-x-auto">
+        <div className="flex items-center justify-between h-14 text-sm">
           {/* Left side - Multiple info items */}
           <div className="flex items-center gap-4 xl:gap-8">
             {/* Free shipping */}
@@ -88,31 +88,31 @@ export const AnnouncementBar = () => {
                 href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-all duration-500 ease-in-out group relative"
+                className="text-white/70 hover:text-white transition-all duration-300 group relative overflow-hidden p-1"
                 aria-label="Facebook"
               >
-                <div className="absolute inset-0 bg-[#60A5FA] rounded-full scale-0 opacity-0 group-hover:scale-150 group-hover:opacity-20 transition-all duration-300 ease-out"></div>
-                <Facebook className="h-4 xl:h-4.5 w-4 xl:w-4.5 relative group-hover:rotate-[360deg] group-hover:scale-115 transition-all duration-500 ease-in-out" />
+                <div className="absolute inset-0 bg-[#60A5FA] rounded-full scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-10 transition-all duration-300"></div>
+                <Facebook className="h-4 xl:h-4.5 w-4 xl:w-4.5 relative group-hover:scale-110 transition-transform duration-300" />
               </a>
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-all duration-500 ease-in-out group relative"
+                className="text-white/70 hover:text-white transition-all duration-300 group relative overflow-hidden p-1"
                 aria-label="Instagram"
               >
-                <div className="absolute inset-0 bg-[#60A5FA] rounded-full scale-0 opacity-0 group-hover:scale-150 group-hover:opacity-20 transition-all duration-300 ease-out"></div>
-                <Instagram className="h-4 xl:h-4.5 w-4 xl:w-4.5 relative group-hover:rotate-[360deg] group-hover:scale-115 transition-all duration-500 ease-in-out" />
+                <div className="absolute inset-0 bg-[#60A5FA] rounded-full scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-10 transition-all duration-300"></div>
+                <Instagram className="h-4 xl:h-4.5 w-4 xl:w-4.5 relative group-hover:scale-110 transition-transform duration-300" />
               </a>
               <a 
                 href="https://youtube.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-all duration-500 ease-in-out group relative"
+                className="text-white/70 hover:text-white transition-all duration-300 group relative overflow-hidden p-1"
                 aria-label="YouTube"
               >
-                <div className="absolute inset-0 bg-[#60A5FA] rounded-full scale-0 opacity-0 group-hover:scale-150 group-hover:opacity-20 transition-all duration-300 ease-out"></div>
-                <Youtube className="h-4 xl:h-4.5 w-4 xl:w-4.5 relative group-hover:rotate-[360deg] group-hover:scale-115 transition-all duration-500 ease-in-out" />
+                <div className="absolute inset-0 bg-[#60A5FA] rounded-full scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-10 transition-all duration-300"></div>
+                <Youtube className="h-4 xl:h-4.5 w-4 xl:w-4.5 relative group-hover:scale-110 transition-transform duration-300" />
               </a>
             </div>
           </div>
