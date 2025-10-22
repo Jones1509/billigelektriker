@@ -104,7 +104,7 @@ export const SmartLightSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
                 {/* Image title overlay */}
-                <div className="absolute bottom-24 left-6 right-6 text-white z-10">
+                <div className="absolute bottom-36 left-6 right-6 text-white z-10">
                   <h3 className="text-xl md:text-2xl font-bold mb-2">
                     {t(smartHomeImages[currentIndex].titleKey)}
                   </h3>
@@ -134,7 +134,7 @@ export const SmartLightSection = () => {
               </div>
 
               {/* Indicators */}
-              <div className="absolute bottom-28 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+              <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
                 {smartHomeImages.map((_, index) => (
                   <button
                     key={index}
