@@ -30,6 +30,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
 import { ScrollArea } from "./ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
@@ -284,51 +290,61 @@ export const Header = () => {
               </SheetHeader>
               <ScrollArea className="h-[calc(100vh-80px)] mt-6">
                 <div className="space-y-6 pb-10">
-                  {/* Services */}
-                  <div>
-                    <h3 className="font-semibold text-lg mb-4 px-2 text-primary">Serviceydelser</h3>
-                    <div className="space-y-2">
-                      {services.map((service) => (
-                        <Link
-                          key={service.title}
-                          to={service.href}
-                          onClick={closeMobileMenu}
-                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
-                        >
-                          <div className={`rounded-lg bg-gradient-to-br ${service.color} p-2 shadow-md flex-shrink-0`}>
-                            <service.icon className="h-4 w-4 text-white" />
-                          </div>
-                          <div>
-                            <div className="font-medium text-sm">{service.title}</div>
-                            <p className="text-xs text-muted-foreground line-clamp-2">{service.description}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                  <Accordion type="single" collapsible className="w-full">
+                    {/* Services */}
+                    <AccordionItem value="services" className="border-b-0">
+                      <AccordionTrigger className="px-2 text-lg font-semibold text-primary hover:no-underline">
+                        Serviceydelser
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-2 pt-2">
+                          {services.map((service) => (
+                            <Link
+                              key={service.title}
+                              to={service.href}
+                              onClick={closeMobileMenu}
+                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                            >
+                              <div className={`rounded-lg bg-gradient-to-br ${service.color} p-2 shadow-md flex-shrink-0`}>
+                                <service.icon className="h-4 w-4 text-white" />
+                              </div>
+                              <div>
+                                <div className="font-medium text-sm">{service.title}</div>
+                                <p className="text-xs text-muted-foreground line-clamp-2">{service.description}</p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
 
-                  {/* Products */}
-                  <div>
-                    <h3 className="font-semibold text-lg mb-4 px-2 text-secondary">Produkter</h3>
-                    <div className="space-y-2">
-                      {products.map((product) => (
-                        <Link
-                          key={product.title}
-                          to={product.href}
-                          onClick={closeMobileMenu}
-                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
-                        >
-                          <div className={`rounded-lg bg-gradient-to-br ${product.color} p-2 shadow-md flex-shrink-0`}>
-                            <product.icon className="h-4 w-4 text-white" />
-                          </div>
-                          <div>
-                            <div className="font-medium text-sm">{product.title}</div>
-                            <p className="text-xs text-muted-foreground line-clamp-2">{product.description}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                    {/* Products */}
+                    <AccordionItem value="products" className="border-b-0">
+                      <AccordionTrigger className="px-2 text-lg font-semibold text-secondary hover:no-underline">
+                        Produkter
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-2 pt-2">
+                          {products.map((product) => (
+                            <Link
+                              key={product.title}
+                              to={product.href}
+                              onClick={closeMobileMenu}
+                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                            >
+                              <div className={`rounded-lg bg-gradient-to-br ${product.color} p-2 shadow-md flex-shrink-0`}>
+                                <product.icon className="h-4 w-4 text-white" />
+                              </div>
+                              <div>
+                                <div className="font-medium text-sm">{product.title}</div>
+                                <p className="text-xs text-muted-foreground line-clamp-2">{product.description}</p>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
 
                   {/* Additional Links */}
                   <div className="border-t pt-4">
@@ -357,33 +373,33 @@ export const Header = () => {
                   </div>
 
                   {/* User Actions */}
-                  {user ? (
-                    <div className="border-t pt-4 space-y-2">
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start"
-                        onClick={() => {
-                          closeMobileMenu();
-                          navigate("/profile");
-                        }}
-                      >
-                        <User className="mr-2 h-4 w-4" />
-                        Min profil
-                      </Button>
-                      <Button
-                        variant="outline"
-                        className="w-full justify-start"
-                        onClick={() => {
-                          closeMobileMenu();
-                          handleSignOut();
-                        }}
-                      >
-                        <LogOut className="mr-2 h-4 w-4" />
-                        Log ud
-                      </Button>
-                    </div>
-                  ) : (
-                    <div className="border-t pt-4">
+                  <div className="border-t pt-4 space-y-2">
+                    {user ? (
+                      <>
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start"
+                          onClick={() => {
+                            closeMobileMenu();
+                            navigate("/profile");
+                          }}
+                        >
+                          <User className="mr-2 h-4 w-4" />
+                          Min profil
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full justify-start"
+                          onClick={() => {
+                            closeMobileMenu();
+                            handleSignOut();
+                          }}
+                        >
+                          <LogOut className="mr-2 h-4 w-4" />
+                          Log ud
+                        </Button>
+                      </>
+                    ) : (
                       <Button
                         className="w-full"
                         onClick={() => {
@@ -394,8 +410,8 @@ export const Header = () => {
                         <User className="mr-2 h-4 w-4" />
                         Log ind
                       </Button>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </ScrollArea>
             </SheetContent>
