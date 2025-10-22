@@ -141,7 +141,7 @@ export const ValuesSection = () => {
         `}</style>
         
         {/* Optional CTA */}
-        <div className="text-center mt-12 md:mt-14 animate-fade-in px-4">
+        <div className="text-center mt-8 md:mt-10 animate-fade-in px-4">
           <p className="text-muted-foreground mb-6 text-sm md:text-base">
             Klar til at opleve forskellen?
           </p>
