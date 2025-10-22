@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -10,36 +10,19 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
 
   const correctPassword = 'billigelektriker2025';
-  const AUTH_KEY = 'billig_elektriker_auth';
-
-  // Check authentication status on mount
-  useEffect(() => {
-    const authStatus = sessionStorage.getItem(AUTH_KEY);
-    if (authStatus === 'true') {
-      setIsAuthenticated(true);
-    }
-    setIsLoading(false);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === correctPassword) {
       setIsAuthenticated(true);
-      sessionStorage.setItem(AUTH_KEY, 'true');
       setError('');
     } else {
       setError('Forkert adgangskode');
       setPassword('');
     }
   };
-
-  // Show loading state briefly to prevent flash
-  if (isLoading) {
-    return null;
-  }
 
   if (isAuthenticated) {
     return <>{children}</>;
