@@ -40,8 +40,11 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl tracking-tight">
               Billig Elektriker
             </h1>
-            <p className="text-3xl md:text-4xl font-bold text-white tracking-[6px] uppercase drop-shadow-lg animate-pulse">
-              COMING SOON
+            <p className="text-2xl md:text-3xl font-bold text-white mb-4 drop-shadow-lg">
+              Vi er snart klar til dig!
+            </p>
+            <p className="text-lg md:text-xl text-white/90 drop-shadow">
+              Vores nye hjemmeside er under opbygning
             </p>
           </div>
         </div>
@@ -74,7 +77,7 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
             </Button>
             
             <p className="text-white/90 text-base text-center mt-6 font-medium drop-shadow">
-              Kontakt administratoren for at få adgang
+              Har du brug for adgang? Kontakt os venligst
             </p>
           </form>
         </div>
