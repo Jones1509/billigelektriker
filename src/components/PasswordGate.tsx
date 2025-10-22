@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import logoElektriker from '@/assets/logo-elektriker.png';
 
 interface PasswordGateProps {
   children: React.ReactNode;
@@ -29,14 +30,14 @@ export const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-6 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]">
-      <div className="w-full max-w-md space-y-8">
+    <div className="min-h-screen w-full flex items-center justify-center p-6 bg-gradient-to-br from-[#10B981] via-[#3B82F6] to-[#EF4444]">
+      <div className="w-full max-w-4xl space-y-8">
         <div className="text-center space-y-6">
           <div className="flex justify-center mb-12">
             <img 
-              src="/src/assets/logo.avif" 
+              src={logoElektriker}
               alt="Billig Elektriker Logo" 
-              className="w-40 h-40 object-contain"
+              className="w-[400px] h-[400px] md:w-[500px] md:h-[500px] object-contain drop-shadow-2xl animate-pulse"
             />
           </div>
           
