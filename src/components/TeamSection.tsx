@@ -21,31 +21,31 @@ export const TeamSection = () => {
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
               Billig Elektriker startede med en simpel idé: At levere professionel el-service til ærlige priser – uden at gå på kompromis med kvaliteten. Vi er et ungt, dynamisk team med certificeringer i orden, og vi elsker at løse vores kunders problemer – fra den mindste fejlfinding til store installationsprojekter.
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4 pt-4">
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-primary/10 backdrop-blur-sm flex items-center justify-center">
-                  <svg className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-primary/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                  <svg className="h-5 w-5 md:h-6 md:w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
                 <div>
-                  <div className="font-semibold">Certificeret</div>
-                  <div className="text-sm text-muted-foreground">Autoriserede elektrikere</div>
+                  <div className="font-semibold text-sm md:text-base">Certificeret</div>
+                  <div className="text-xs md:text-sm text-muted-foreground">Autoriserede elektrikere</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-secondary/10 backdrop-blur-sm flex items-center justify-center">
-                  <svg className="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-secondary/10 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                  <svg className="h-5 w-5 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
-                  <div className="font-semibold">Hurtig respons</div>
-                  <div className="text-sm text-muted-foreground">Kontakt os i dag</div>
+                  <div className="font-semibold text-sm md:text-base">Hurtig respons</div>
+                  <div className="text-xs md:text-sm text-muted-foreground">Kontakt os i dag</div>
                 </div>
               </div>
             </div>
-            <Button size="lg" className="group shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700">
+            <Button size="lg" className="w-full md:w-auto group shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700">
               <Phone className="mr-2 h-5 w-5" />
               Ring til os i dag
             </Button>

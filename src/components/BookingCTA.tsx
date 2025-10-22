@@ -26,17 +26,17 @@ export const BookingCTA = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
-                <Button size="lg" className="group shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700">
+                <Button size="lg" className="w-full sm:w-auto group shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700">
                   <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                   Book gratis samtale
                 </Button>
-                <Button size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-all duration-300">
+                <Button size="lg" variant="outline" className="w-full sm:w-auto shadow-md hover:shadow-lg transition-all duration-300">
                   <Phone className="mr-2 h-5 w-5" />
                   Ring nu
                 </Button>
               </div>
 
-              <p className="text-sm text-muted-foreground pt-4">
+              <p className="text-xs md:text-sm text-muted-foreground pt-2 md:pt-4">
                 ✓ Ingen forpligtelser • ✓ Gratis rådgivning • ✓ Få svar med det samme
               </p>
             </CardContent>

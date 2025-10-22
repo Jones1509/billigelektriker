@@ -43,18 +43,18 @@ export const ValuesSection = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4 md:px-0">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-4 md:px-0">
           {values.map((value, idx) => (
             <div 
               key={idx} 
-              className="group text-center space-y-4 p-6 rounded-2xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border border-transparent hover:border-primary/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in"
+              className="group text-center space-y-3 md:space-y-4 p-4 md:p-6 rounded-2xl bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm border border-transparent hover:border-primary/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
-              <div className="inline-flex p-5 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                <value.icon className="h-8 w-8 text-primary" />
+              <div className="inline-flex p-3 md:p-5 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                <value.icon className="h-6 w-6 md:h-8 md:w-8 text-primary" />
               </div>
-              <h3 className="font-bold text-xl group-hover:text-primary transition-colors">{value.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors">
+              <h3 className="font-bold text-base md:text-xl group-hover:text-primary transition-colors">{value.title}</h3>
+              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors">
                 {value.description}
               </p>
             </div>

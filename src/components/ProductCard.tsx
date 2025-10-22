@@ -60,26 +60,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
       
-      <CardContent className="p-4">
+      <CardContent className="p-3 md:p-4">
         <Link to={`/product/${node.handle}`}>
-          <h3 className="font-semibold text-lg mb-2 line-clamp-1 group-hover:text-accent transition-colors">
+          <h3 className="font-semibold text-base md:text-lg mb-2 line-clamp-1 group-hover:text-accent transition-colors">
             {node.title}
           </h3>
         </Link>
         {node.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+          <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 mb-3">
             {node.description}
           </p>
         )}
-        <p className="text-xl font-bold">
+        <p className="text-lg md:text-xl font-bold">
           {currency} {price.toFixed(2)}
         </p>
       </CardContent>
       
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-3 pt-0 md:p-4 md:pt-0">
         <Button 
           onClick={handleAddToCart}
-          className="w-full"
+          className="w-full text-sm md:text-base"
           size="lg"
         >
           <ShoppingCart className="w-4 h-4 mr-2" />

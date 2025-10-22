@@ -13,8 +13,7 @@ const packages = [
       "1x trådløs switch",
       "Gratis app til iOS & Android",
       "Nem installation"
-    ],
-    badge: null
+    ]
   },
   {
     name: "Udvidelses-pakke",
@@ -25,8 +24,7 @@ const packages = [
       "2x trådløse switches",
       "1x bevægelsessensor",
       "Timer-funktioner"
-    ],
-    badge: "Mest populære"
+    ]
   },
   {
     name: "Komplet-pakke",
@@ -37,8 +35,7 @@ const packages = [
       "3x trådløse switches",
       "2x bevægelsessensorer",
       "4x udendørs spots (IP65)"
-    ],
-    badge: "IP65"
+    ]
   }
 ];
 
@@ -69,48 +66,36 @@ export const StarterPackages = () => {
           {packages.map((pkg, idx) => (
             <Card 
               key={idx} 
-              className={`group flex flex-col relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20 overflow-hidden animate-fade-in ${pkg.badge === "Mest populære" ? "ring-2 ring-primary/50" : ""}`}
+              className="group flex flex-col relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20 overflow-hidden animate-fade-in"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               {/* Animated gradient background */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
-              {pkg.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                  <Badge className={`${pkg.badge === "Mest populære" ? "bg-gradient-to-r from-purple-600 to-primary shadow-lg" : "bg-primary"} text-white px-4 py-1.5 text-sm font-semibold`}>
-                    {pkg.badge === "Mest populære" ? (
-                      <><Star className="h-3 w-3 mr-1 inline fill-white" />{pkg.badge}</>
-                    ) : (
-                      pkg.badge
-                    )}
-                  </Badge>
+              <CardHeader className="relative text-center pb-4 md:pb-6 pt-4 md:pt-6">
+                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{pkg.name}</h3>
+                <div className="mb-3 md:mb-4">
+                  <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">{pkg.price}</span>
+                  <span className="text-muted-foreground text-base md:text-lg"> kr.</span>
                 </div>
-              )}
-              
-              <CardHeader className="relative text-center pb-6 pt-8">
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{pkg.name}</h3>
-                <div className="mb-4">
-                  <span className="text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">{pkg.price}</span>
-                  <span className="text-muted-foreground text-lg"> kr.</span>
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">{pkg.description}</p>
+                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{pkg.description}</p>
               </CardHeader>
 
-              <CardContent className="relative flex-grow">
-                <ul className="space-y-3">
+              <CardContent className="relative flex-grow px-4 md:px-6">
+                <ul className="space-y-2 md:space-y-3">
                   {pkg.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-3">
+                    <li key={fIdx} className="flex items-start gap-2 md:gap-3">
                       <div className="p-1 bg-primary/10 rounded-full flex-shrink-0 mt-0.5">
-                        <Check className="h-4 w-4 text-primary" />
+                        <Check className="h-3 w-3 md:h-4 md:w-4 text-primary" />
                       </div>
-                      <span className="text-sm">{feature}</span>
+                      <span className="text-xs md:text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </CardContent>
 
-              <CardFooter className="relative pt-6">
-                <Button className="w-full group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg" size="lg">
+              <CardFooter className="relative pt-4 md:pt-6 px-4 md:px-6">
+                <Button className="w-full text-sm md:text-base group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg" size="lg">
                   Køb nu
                 </Button>
               </CardFooter>

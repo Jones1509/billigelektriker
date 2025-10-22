@@ -111,7 +111,7 @@ const Index = () => {
           <div className="border-t pt-6 md:pt-8 px-4 md:px-0">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs md:text-sm text-muted-foreground">
               <p>© 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes.</p>
-              <div className="flex gap-6">
+              <div className="flex flex-wrap gap-3 md:gap-6">
                 <a href="#" className="hover:text-primary transition-colors">Privatlivspolitik</a>
                 <a href="#" className="hover:text-primary transition-colors">Handelsbetingelser</a>
                 <a href="#" className="hover:text-primary transition-colors">Kontakt</a>
