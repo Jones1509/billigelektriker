@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Zap, Lock, Key, Settings } from "lucide-react";
 import { toast } from "sonner";
-import logo from "@/assets/logo.avif";
+import logo from "@/assets/logo-symbol.png";
 
 const DEFAULT_PASSWORD = "Zack2410";
 const LAUNCHED_KEY = "site_launched";

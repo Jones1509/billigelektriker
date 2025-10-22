@@ -64,22 +64,21 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding: clamp(30px, 5vh, 60px) clamp(15px, 3vw, 40px) clamp(30px, 5vh, 60px);
+  padding: clamp(20px, 3vh, 40px) clamp(15px, 3vw, 30px);
 }
 
 .coming-soon-container {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 1000px;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(10px, 1.5vh, 20px);
+  gap: clamp(16px, 2.5vh, 32px);
   animation: fade-in 0.6s ease-out;
-  margin: auto 0;
 }
 
 /* Logo Section */
@@ -87,17 +86,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(6px, 1vh, 12px);
+  gap: clamp(10px, 1.5vh, 20px);
+  margin-bottom: clamp(8px, 1vh, 16px);
 }
 
 .logo-wrapper {
-  width: clamp(70px, 10vw, 110px);
-  height: clamp(70px, 10vw, 110px);
+  width: clamp(80px, 12vw, 120px);
+  height: clamp(80px, 12vw, 120px);
   border-radius: 50%;
   overflow: hidden;
   background: white;
-  padding: clamp(10px, 1.5vw, 18px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: clamp(12px, 2vw, 20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(255, 255, 255, 0.1);
   animation: pulse 2s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -109,67 +109,75 @@
 }
 
 .company-name {
-  font-size: clamp(22px, 4.5vw, 42px);
+  font-size: clamp(28px, 5vw, 48px);
   font-weight: 800;
   color: white;
   text-align: center;
   margin: 0;
   line-height: 1.1;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .coming-soon-subtitle {
-  font-size: clamp(13px, 2.2vw, 18px);
-  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(14px, 2.2vw, 20px);
+  color: rgba(255, 255, 255, 0.95);
   text-align: center;
   margin: 0;
+  font-weight: 500;
 }
 
 /* Countdown Timer */
 .countdown-timer {
   display: flex;
-  gap: clamp(6px, 1.5vw, 14px);
+  gap: clamp(10px, 2vw, 20px);
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  max-width: 650px;
+  max-width: 600px;
+  margin: clamp(8px, 1.5vh, 16px) 0;
 }
 
 .time-unit {
   backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: clamp(10px, 1.8vw, 18px);
-  padding: clamp(10px, 1.8vh, 18px) clamp(8px, 1.5vw, 14px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: clamp(12px, 2vw, 20px);
+  padding: clamp(14px, 2.2vh, 24px) clamp(12px, 2vw, 20px);
   text-align: center;
-  min-width: clamp(60px, 9vw, 85px);
+  min-width: clamp(70px, 10vw, 100px);
   flex: 1;
-  max-width: 140px;
+  max-width: 130px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .time-number {
-  font-size: clamp(22px, 4.5vw, 40px);
+  font-size: clamp(28px, 5vw, 48px);
   font-weight: 700;
   color: white;
   line-height: 1;
-  margin-bottom: clamp(3px, 0.6vh, 6px);
+  margin-bottom: clamp(4px, 0.8vh, 8px);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .time-label {
-  font-size: clamp(9px, 1.3vw, 13px);
-  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(10px, 1.4vw, 14px);
+  color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
 /* Description Section */
 .description-section {
   backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: clamp(10px, 1.8vw, 20px);
-  padding: clamp(14px, 2.5vh, 28px) clamp(10px, 1.8vw, 20px);
-  max-width: 750px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: clamp(12px, 2vw, 24px);
+  padding: clamp(20px, 3vh, 32px) clamp(16px, 2.5vw, 28px);
+  max-width: 700px;
   width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin: clamp(8px, 1.5vh, 16px) 0;
 }
 
 .description-content {
@@ -177,71 +185,90 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 1.4vh, 14px);
+  gap: clamp(10px, 1.8vh, 18px);
 }
 
 .description-content p {
-  font-size: clamp(12px, 1.6vw, 16px);
-  line-height: 1.5;
+  font-size: clamp(14px, 1.8vw, 18px);
+  line-height: 1.6;
   margin: 0;
+  font-weight: 400;
 }
 
 .description-content .highlight {
   color: rgba(200, 230, 255, 1);
+  font-weight: 600;
 }
 
 /* Access Card */
 .access-card {
   backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: clamp(10px, 1.8vw, 20px);
-  padding: clamp(18px, 2.8vh, 28px) clamp(14px, 2.5vw, 24px);
-  max-width: 480px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: clamp(12px, 2vw, 24px);
+  padding: clamp(24px, 3.5vh, 36px) clamp(20px, 3vw, 32px);
+  max-width: 450px;
   width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-top: clamp(8px, 1.5vh, 16px);
 }
 
 .access-title {
-  font-size: clamp(16px, 2.8vw, 24px);
+  font-size: clamp(20px, 3vw, 28px);
   font-weight: 700;
   color: white;
   text-align: center;
-  margin-bottom: clamp(6px, 1.2vh, 10px);
+  margin-bottom: clamp(8px, 1.5vh, 12px);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .access-subtitle {
-  font-size: clamp(12px, 1.6vw, 15px);
+  font-size: clamp(13px, 1.8vw, 16px);
   color: rgba(200, 230, 255, 1);
   text-align: center;
-  margin-bottom: clamp(14px, 2.2vh, 20px);
+  margin-bottom: clamp(18px, 2.5vh, 24px);
+  font-weight: 500;
 }
 
 .password-input {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
   text-align: center;
-  font-size: clamp(13px, 1.6vw, 16px);
-  height: clamp(44px, 5.5vh, 52px);
+  font-size: clamp(14px, 1.8vw, 17px);
+  height: clamp(48px, 6vh, 56px);
   backdrop-filter: blur(10px);
+  border-radius: clamp(8px, 1.5vw, 12px);
+  transition: all 0.3s ease;
+}
+
+.password-input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  outline: none;
 }
 
 .password-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .access-button {
   width: 100%;
-  height: clamp(44px, 5.5vh, 52px);
-  font-size: clamp(13px, 1.6vw, 17px);
+  height: clamp(48px, 6vh, 56px);
+  font-size: clamp(14px, 1.8vw, 18px);
   background: linear-gradient(to right, #0066FF, #0052CC);
   border: none;
   color: white;
   font-weight: 600;
+  border-radius: clamp(8px, 1.5vw, 12px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
 }
 
 .access-button:hover {
   background: linear-gradient(to right, #0052CC, #003D99);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 102, 255, 0.4);
 }
 
 /* Responsive Breakpoints */
@@ -298,68 +325,137 @@
 }
 
 /* Extra Small Heights - Ensure no cutoff */
+@media (max-height: 900px) {
+  .coming-soon-container {
+    gap: 20px;
+  }
+  
+  .logo-section {
+    margin-bottom: 0;
+  }
+  
+  .countdown-timer {
+    margin: 8px 0;
+  }
+  
+  .description-section {
+    margin: 8px 0;
+    padding: 18px 16px;
+  }
+  
+  .access-card {
+    margin-top: 8px;
+    padding: 20px 18px;
+  }
+}
+
 @media (max-height: 800px) {
   .coming-soon-page {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    justify-content: flex-start;
+    padding: 20px clamp(15px, 3vw, 30px);
   }
   
   .coming-soon-container {
-    gap: 10px;
+    gap: 16px;
   }
   
   .logo-wrapper {
-    width: 75px;
-    height: 75px;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .company-name {
+    font-size: clamp(24px, 4.5vw, 38px);
+  }
+  
+  .time-unit {
+    padding: 12px 10px;
+  }
+  
+  .time-number {
+    font-size: clamp(24px, 4.5vw, 40px);
   }
   
   .description-section {
     padding: 16px 14px;
   }
   
-  .time-unit {
-    padding: 10px 8px;
+  .description-content p {
+    font-size: clamp(13px, 1.6vw, 16px);
   }
   
-  .description-content p {
-    font-size: 13px;
+  .access-card {
+    padding: 18px 16px;
   }
 }
 
 @media (max-height: 700px) {
   .coming-soon-page {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 15px clamp(15px, 3vw, 30px);
   }
   
   .coming-soon-container {
-    gap: 8px;
+    gap: 12px;
   }
   
   .logo-wrapper {
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
   }
   
   .logo-section {
-    gap: 6px;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+  
+  .company-name {
+    font-size: clamp(22px, 4vw, 32px);
+  }
+  
+  .coming-soon-subtitle {
+    font-size: clamp(12px, 2vw, 16px);
+  }
+  
+  .countdown-timer {
+    margin: 6px 0;
   }
   
   .time-unit {
-    padding: 8px 6px;
+    padding: 10px 8px;
+  }
+  
+  .time-number {
+    font-size: clamp(22px, 4vw, 36px);
+  }
+  
+  .time-label {
+    font-size: clamp(9px, 1.2vw, 12px);
   }
   
   .description-section {
     padding: 14px 12px;
+    margin: 6px 0;
   }
   
   .description-content {
     gap: 8px;
   }
   
+  .description-content p {
+    font-size: clamp(12px, 1.5vw, 15px);
+  }
+  
   .access-card {
-    padding: 16px 12px;
+    padding: 16px 14px;
+    margin-top: 6px;
+  }
+  
+  .access-title {
+    font-size: clamp(18px, 2.5vw, 24px);
+  }
+  
+  .password-input,
+  .access-button {
+    height: clamp(44px, 5vh, 50px);
   }
 }
 
