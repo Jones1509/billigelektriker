@@ -55,7 +55,7 @@
   opacity: 0.4;
 }
 
-/* Coming Soon Page - Professional & Clean */
+/* Coming Soon Page - Clean & Professional Design */
 .coming-soon-page {
   position: relative;
   width: 100%;
@@ -64,7 +64,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 50px 20px;
+  padding: 40px 20px;
 }
 
 .coming-soon-container {
@@ -78,23 +78,24 @@
   justify-content: flex-start;
 }
 
-/* Logo Section */
+/* Logo Section - Clean & Simple */
 .logo-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 35px;
+  gap: 0;
+  margin-bottom: 30px;
+  animation: fadeInUp 0.6s ease-out;
 }
 
 .logo-wrapper {
-  width: 240px;
+  width: 220px;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
   transition: transform 0.3s ease;
-  margin-bottom: 35px;
 }
 
 .logo-wrapper:hover {
@@ -107,16 +108,16 @@
   object-fit: contain;
 }
 
-/* Typography */
 .company-name {
   font-size: 56px;
   font-weight: 800;
   color: white;
   text-align: center;
-  margin: 0 0 25px 0;
+  margin: 0 0 16px 0;
   line-height: 1.1;
   letter-spacing: -0.01em;
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.6s ease-out 0.1s backwards;
 }
 
 .coming-soon-subtitle {
@@ -127,10 +128,11 @@
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
+  animation: fadeInUp 0.6s ease-out 0.2s backwards;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
-/* Countdown Timer */
+/* Countdown Timer - Clean Design */
 .countdown-timer {
   display: flex;
   gap: 16px;
@@ -139,6 +141,7 @@
   width: 100%;
   max-width: 600px;
   margin-bottom: 35px;
+  animation: fadeInUp 0.6s ease-out 0.3s backwards;
 }
 
 .time-unit {
@@ -183,16 +186,17 @@
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Description Section */
+/* Description Section - Clean & Readable */
 .description-section {
   backdrop-filter: blur(16px);
   background: rgba(255, 255, 255, 0.22);
   border: 2px solid rgba(255, 255, 255, 0.35);
   border-radius: 20px;
-  padding: 35px;
+  padding: 32px;
   max-width: 800px;
   width: 100%;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.6s ease-out 0.4s backwards;
   margin-bottom: 30px;
 }
 
@@ -201,7 +205,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
 }
 
 .description-content p {
@@ -219,14 +223,15 @@
   font-size: 18px;
 }
 
-/* Password Section */
+/* Password Section - Clean & Simple */
 .access-card {
   background: transparent;
   border: none;
   padding: 0;
   max-width: 500px;
   width: 100%;
-  margin-bottom: 20px;
+  animation: fadeInUp 0.6s ease-out 0.5s backwards;
+  margin-bottom: 18px;
 }
 
 .password-input {
@@ -291,23 +296,24 @@
   box-shadow: 0 3px 10px rgba(0, 102, 255, 0.3);
 }
 
-/* Contact Text */
+/* Contact Admin Text */
 .coming-soon-container > p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   margin: 0;
+  animation: fadeInUp 0.6s ease-out 0.6s backwards;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Responsive Design - Tablet */
 @media (max-width: 1024px) {
   .logo-wrapper {
-    width: 200px;
+    width: 180px;
   }
 
   .company-name {
-    font-size: 50px;
+    font-size: 52px;
   }
 
   .time-unit {
@@ -323,25 +329,25 @@
 /* Responsive Design - Mobile */
 @media (max-width: 768px) {
   .coming-soon-page {
-    padding: 35px 20px;
+    padding: 30px 20px;
   }
 
   .logo-wrapper {
-    width: 170px;
-    margin-bottom: 30px;
+    width: 150px;
   }
 
   .logo-section {
-    margin-bottom: 30px;
+    gap: 0;
+    margin-bottom: 25px;
   }
 
   .company-name {
-    font-size: 42px;
-    margin-bottom: 22px;
+    font-size: 44px;
+    margin-bottom: 14px;
   }
 
   .coming-soon-subtitle {
-    font-size: 19px;
+    font-size: 20px;
     letter-spacing: 2.5px;
     margin-bottom: 30px;
   }
@@ -353,14 +359,14 @@
   }
 
   .time-unit {
-    width: 100px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
     padding: 16px;
   }
 
   .time-number {
     font-size: 40px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   .time-label {
@@ -373,55 +379,56 @@
   }
 
   .description-content {
-    gap: 14px;
+    gap: 16px;
   }
 
   .description-content p {
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 17px;
+    line-height: 1.7;
   }
 
   .description-content .highlight {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .access-card {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   .password-input,
   .access-button {
-    height: 50px;
-    font-size: 16px;
+    height: 52px;
+    font-size: 17px;
   }
 
   .coming-soon-container > p {
-    font-size: 13px;
+    font-size: 14px;
+    margin-bottom: 0;
   }
 }
 
 /* Responsive Design - Small Mobile */
 @media (max-width: 480px) {
   .coming-soon-page {
-    padding: 28px 15px;
+    padding: 25px 15px;
   }
 
   .logo-wrapper {
-    width: 140px;
-    margin-bottom: 25px;
+    width: 130px;
   }
 
   .logo-section {
-    margin-bottom: 25px;
+    gap: 0;
+    margin-bottom: 20px;
   }
 
   .company-name {
-    font-size: 34px;
-    margin-bottom: 18px;
+    font-size: 36px;
+    margin-bottom: 12px;
   }
 
   .coming-soon-subtitle {
-    font-size: 16px;
+    font-size: 17px;
     letter-spacing: 2px;
     margin-bottom: 25px;
   }
@@ -432,14 +439,14 @@
   }
 
   .time-unit {
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
     padding: 12px;
   }
 
   .time-number {
     font-size: 32px;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
   }
 
   .time-label {
@@ -448,7 +455,7 @@
 
   .description-section {
     padding: 24px;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
   }
 
   .description-content p {
@@ -462,11 +469,12 @@
   .password-input,
   .access-button {
     height: 48px;
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .coming-soon-container > p {
-    font-size: 12px;
+    font-size: 13px;
+    margin-bottom: 0;
   }
 }
 
