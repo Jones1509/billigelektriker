@@ -41,13 +41,14 @@ export const LanguageSwitcher = () => {
           return (
             <DropdownMenuItem
               key={language.code}
-              onClick={() => i18n.changeLanguage(language.code)}
+              onClick={() => !isActive && i18n.changeLanguage(language.code)}
+              disabled={isActive}
               className={`
-                flex items-center gap-3 cursor-pointer rounded-xl px-4 py-3 mb-1 last:mb-0
+                flex items-center gap-3 rounded-xl px-4 py-3 mb-1 last:mb-0
                 transition-all duration-200
                 ${isActive 
-                  ? 'bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 shadow-sm' 
-                  : 'hover:bg-accent/50 border border-transparent'
+                  ? 'bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 shadow-sm cursor-default' 
+                  : 'hover:bg-accent border border-transparent cursor-pointer hover:shadow-md hover:scale-[1.02]'
                 }
               `}
             >
