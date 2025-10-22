@@ -4,7 +4,7 @@ import switchesImage from "@/assets/switches-background.webp";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden pt-24 md:pt-0">
+    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden pt-32 md:pt-0">
       {/* Video Background */}
       <video
         autoPlay
@@ -58,30 +58,30 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Badges */}
-            <div className="mt-8 md:mt-12 grid grid-cols-3 gap-3 md:gap-6 text-xs md:text-sm text-white/90 max-w-2xl">
+            <div className="mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-6 text-xs md:text-sm text-white/90 max-w-2xl">
               <div className="flex flex-col items-center gap-2 text-center">
-                <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                  <svg className="h-5 w-5 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="h-12 w-12 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                  <svg className="h-6 w-6 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="leading-tight">2 års garanti</span>
+                <span className="leading-tight font-medium">2 års garanti</span>
               </div>
               <div className="flex flex-col items-center gap-2 text-center">
-                <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                  <svg className="h-5 w-5 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="h-12 w-12 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                  <svg className="h-6 w-6 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="leading-tight">Hurtig respons</span>
+                <span className="leading-tight font-medium">Hurtig respons</span>
               </div>
               <div className="flex flex-col items-center gap-2 text-center">
-                <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                  <svg className="h-5 w-5 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="h-12 w-12 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                  <svg className="h-6 w-6 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="leading-tight">Fri parkering</span>
+                <span className="leading-tight font-medium">Fri parkering</span>
               </div>
             </div>
           </div>
