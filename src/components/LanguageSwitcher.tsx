@@ -9,10 +9,10 @@ import {
 import { useTranslation } from "react-i18next";
 
 const languages = [
-  { code: 'da', name: 'Dansk', flag: '🇩🇰' },
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'da', name: 'Dansk', flag: '🇩🇰', countryCode: 'DK' },
+  { code: 'en', name: 'English', flag: '🇬🇧', countryCode: 'GB' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷', countryCode: 'FR' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪', countryCode: 'DE' },
 ];
 
 export const LanguageSwitcher = () => {
@@ -26,15 +26,15 @@ export const LanguageSwitcher = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="relative group text-white hover:text-white backdrop-blur-md bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 transition-all duration-300 hover:shadow-xl hover:shadow-white/20 hover:scale-105 rounded-xl"
+          className="relative group text-white hover:text-white backdrop-blur-md bg-white/10 hover:bg-white/15 border border-white/20 hover:border-white/30 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105 rounded-lg"
         >
-          <Languages className="h-5 w-5 transition-transform group-hover:rotate-12 duration-300" />
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+          <Languages className="h-4 w-4 transition-transform group-hover:rotate-12 duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-56 backdrop-blur-xl bg-background/95 border-2 shadow-2xl rounded-2xl overflow-hidden p-2"
+        className="w-48 backdrop-blur-xl bg-background/98 border border-border/50 shadow-xl rounded-xl overflow-hidden p-1.5"
       >
         {languages.map((language) => {
           const isActive = currentLanguage.code === language.code;
@@ -44,22 +44,24 @@ export const LanguageSwitcher = () => {
               onClick={() => !isActive && i18n.changeLanguage(language.code)}
               disabled={isActive}
               className={`
-                flex items-center gap-3 rounded-xl px-4 py-3 mb-1 last:mb-0
-                transition-all duration-200
+                flex items-center gap-3 rounded-lg px-3 py-2 mb-0.5 last:mb-0
+                transition-all duration-200 cursor-pointer
                 ${isActive 
-                  ? 'bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 shadow-sm cursor-default' 
-                  : 'hover:bg-accent border border-transparent cursor-pointer hover:shadow-md hover:scale-[1.02]'
+                  ? 'bg-primary/5 cursor-default' 
+                  : 'hover:bg-accent/50'
                 }
               `}
             >
-              <span className="text-2xl transition-transform duration-200 hover:scale-110">
-                {language.flag}
-              </span>
-              <span className={`font-semibold flex-1 ${isActive ? 'text-primary' : ''}`}>
-                {language.name}
-              </span>
+              <div className="flex items-center gap-2.5 flex-1">
+                <span className="text-xs font-semibold text-muted-foreground/60 w-6">
+                  {language.countryCode}
+                </span>
+                <span className={`text-sm font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                  {language.name}
+                </span>
+              </div>
               {isActive && (
-                <Check className="h-4 w-4 text-primary animate-in zoom-in-50 duration-200" />
+                <Check className="h-3.5 w-3.5 text-primary animate-in fade-in zoom-in-50 duration-200" />
               )}
             </DropdownMenuItem>
           );
