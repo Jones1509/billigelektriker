@@ -100,53 +100,53 @@ export const SmartLightSection = () => {
                   }`}
                 />
                 
-                {/* Image overlay with gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                {/* Gradient overlay for better text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 
-                {/* Image title overlay */}
-                <div className="absolute bottom-36 left-6 right-6 text-white z-10">
-                  <h3 className="text-xl md:text-2xl font-bold mb-2">
+                {/* Image title and description - responsive positioning */}
+                <div className="absolute bottom-32 md:bottom-40 left-4 right-4 md:left-6 md:right-6 text-white z-10">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-1 md:mb-2 drop-shadow-lg">
                     {t(smartHomeImages[currentIndex].titleKey)}
                   </h3>
-                  <p className="text-sm md:text-base text-white/90">
+                  <p className="text-xs md:text-sm lg:text-base text-white/95 drop-shadow-md">
                     {t(smartHomeImages[currentIndex].descriptionKey)}
                   </p>
                 </div>
-              </div>
 
-              {/* Navigation arrows */}
-              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 z-20">
-                <button
-                  onClick={prevSlide}
-                  className="w-14 h-14 rounded-full bg-white/95 backdrop-blur-sm border-none cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg hover:shadow-xl"
-                  aria-label="Forrige billede"
-                >
-                  <ChevronLeft className="w-6 h-6 text-primary" />
-                </button>
-                
-                <button
-                  onClick={nextSlide}
-                  className="w-14 h-14 rounded-full bg-white/95 backdrop-blur-sm border-none cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg hover:shadow-xl"
-                  aria-label="Næste billede"
-                >
-                  <ChevronRight className="w-6 h-6 text-primary" />
-                </button>
-              </div>
+                {/* Indicators - positioned above arrows */}
+                <div className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-3 z-20">
+                  {smartHomeImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentIndex(index)}
+                      className={`h-2 md:h-3 rounded-full cursor-pointer transition-all duration-300 ${
+                        index === currentIndex
+                          ? 'w-6 md:w-8 bg-white shadow-lg'
+                          : 'w-2 md:w-3 bg-white/50 hover:bg-white/75'
+                      }`}
+                      aria-label={`Gå til billede ${index + 1}`}
+                    />
+                  ))}
+                </div>
 
-              {/* Indicators */}
-              <div className="absolute bottom-32 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
-                {smartHomeImages.map((_, index) => (
+                {/* Navigation arrows - bottom center */}
+                <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 md:gap-4 z-20">
                   <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${
-                      index === currentIndex
-                        ? 'w-8 bg-white'
-                        : 'w-3 bg-white/50 hover:bg-white/75'
-                    }`}
-                    aria-label={`Gå til billede ${index + 1}`}
-                  />
-                ))}
+                    onClick={prevSlide}
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/95 backdrop-blur-sm border-none cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg hover:shadow-xl"
+                    aria-label="Forrige billede"
+                  >
+                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                  </button>
+                  
+                  <button
+                    onClick={nextSlide}
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/95 backdrop-blur-sm border-none cursor-pointer flex items-center justify-center transition-all duration-300 hover:bg-white hover:scale-110 shadow-lg hover:shadow-xl"
+                    aria-label="Næste billede"
+                  >
+                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
