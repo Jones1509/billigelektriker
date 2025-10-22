@@ -43,6 +43,7 @@ import { toast } from "sonner";
 import logo from "@/assets/logo.avif";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { AnnouncementBar } from "./AnnouncementBar";
 
 const MobileLanguageSwitcher = () => {
   const { i18n } = useTranslation();
@@ -206,8 +207,10 @@ export const Header = () => {
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
-      <div className="container flex h-20 items-center justify-between">
+    <>
+      <AnnouncementBar />
+      <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
+        <div className="container flex h-20 items-center justify-between">
         <Link to="/" className="flex items-center">
           <img 
             src={logo} 
@@ -510,6 +513,7 @@ export const Header = () => {
           <CartDrawer />
         </div>
       </div>
-    </header>
+      </header>
+    </>
   );
 };
