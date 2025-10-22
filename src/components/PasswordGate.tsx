@@ -168,18 +168,14 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           <div className="coming-soon-container">
-            {/* Logo Section - Large, No Circle */}
+            {/* Logo Section */}
             <div className="logo-section">
               <div className="logo-wrapper">
                 <img src={logo} alt="Billig Elektriker Logo" className="logo-image" />
               </div>
+              <h1 className="company-name">Billig Elektriker</h1>
+              <p className="coming-soon-subtitle">Coming Soon</p>
             </div>
-
-            {/* Company Name */}
-            <h1 className="company-name">Billig Elektriker</h1>
-
-            {/* Coming Soon Subtitle */}
-            <p className="coming-soon-subtitle">Coming Soon</p>
 
             {/* Countdown Timer */}
             <div className="countdown-timer">
@@ -200,7 +196,7 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
               ))}
             </div>
 
-            {/* Mission Statement */}
+            {/* Description */}
             <div className="description-section">
               <div className="description-content">
                 <p className="font-semibold">
@@ -218,9 +214,16 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
               </div>
             </div>
 
-            {/* Password Field - Part of Normal Layout */}
+            {/* Password Box */}
             <div className={`access-card ${shake ? "animate-shake" : ""}`}>
-              <form onSubmit={handlePasswordSubmit}>
+              <h3 className="access-title">
+                Har du adgangskode?
+              </h3>
+              <p className="access-subtitle">
+                Indtast din kode for at få adgang
+              </p>
+
+              <form onSubmit={handlePasswordSubmit} className="space-y-3">
                 <Input
                   type="password"
                   placeholder="Indtast adgangskode"
@@ -233,14 +236,14 @@ export const PasswordGate = ({ children }: { children: React.ReactNode }) => {
                 <Button 
                   type="submit" 
                   className="access-button"
+                  size="lg"
                 >
                   Få adgang
                 </Button>
               </form>
             </div>
 
-            {/* Contact Admin Text */}
-            <p>
+            <p className="text-center text-white/80 text-xs md:text-sm" style={{ marginTop: 'clamp(8px, 1.5vh, 12px)' }}>
               Kontakt administratoren for at få adgang
             </p>
           </div>
