@@ -65,43 +65,44 @@ export const ValuesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 px-4 md:px-0 max-w-7xl mx-auto">
+        {/* Values Grid - Perfect Alignment */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 md:px-0 max-w-[1400px] mx-auto">
           {values.map((value, idx) => (
             <div 
               key={idx} 
-              className="group relative text-center h-full flex flex-col p-8 md:p-9 rounded-2xl bg-card border border-border/40 shadow-sm hover:shadow-[0_8px_30px_rgba(0,102,255,0.12)] hover:border-primary/30 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 animate-fade-in"
+              className="group relative h-full flex flex-col p-10 rounded-2xl bg-card border border-border/40 shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,102,255,0.12)] hover:border-primary/30 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-2 animate-fade-in"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               {/* Subtle gradient overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-b from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/[0.02] group-hover:to-primary/[0.01] rounded-2xl transition-all duration-300 pointer-events-none"></div>
               
-              {/* Icon */}
-              <div className="relative flex justify-center mb-6">
+              {/* Icon - Fixed size and centered */}
+              <div className="relative flex justify-center items-center h-20 mb-6">
                 <div className="relative">
                   <img 
                     src={value.icon} 
                     alt={value.title}
-                    className="w-16 h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 transition-all duration-300 group-hover:scale-105 group-hover:rotate-3"
+                    className="w-20 h-20 object-contain transition-all duration-300 group-hover:scale-105 group-hover:rotate-[5deg]"
                   />
                   {/* Subtle glow effect on hover */}
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 blur-xl rounded-full transition-all duration-300 -z-10"></div>
                 </div>
               </div>
               
-              {/* Content */}
-              <div className="relative flex-grow flex flex-col">
-                <h3 className="font-bold text-lg md:text-xl mb-3 md:mb-4 text-foreground group-hover:text-primary transition-colors duration-300 leading-tight">
-                  {value.title}
-                </h3>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed group-hover:text-foreground/70 transition-colors duration-300 mb-6">
-                  {value.description}
-                </p>
-                
-                {/* Arrow indicator */}
-                <div className="mt-auto flex justify-center">
-                  <div className="w-10 h-10 rounded-full bg-primary/5 group-hover:bg-primary flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:shadow-primary/30">
-                    <ArrowRight className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:translate-x-0.5" />
-                  </div>
+              {/* Title - Fixed min-height for alignment */}
+              <h3 className="font-bold text-xl text-center text-foreground group-hover:text-primary transition-colors duration-300 leading-tight min-h-[3.5rem] mb-4">
+                {value.title}
+              </h3>
+              
+              {/* Description - Grows to fill space */}
+              <p className="text-base text-center text-muted-foreground leading-relaxed group-hover:text-foreground/70 transition-colors duration-300 flex-grow mb-8">
+                {value.description}
+              </p>
+              
+              {/* Arrow Button - Always at bottom */}
+              <div className="flex justify-center mt-auto">
+                <div className="w-12 h-12 rounded-full bg-primary/5 group-hover:bg-primary flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:shadow-primary/30">
+                  <ArrowRight className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:translate-x-0.5" />
                 </div>
               </div>
             </div>
