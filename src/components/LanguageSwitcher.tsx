@@ -34,7 +34,7 @@ export const LanguageSwitcher = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-48 backdrop-blur-xl bg-background/98 border border-border/50 shadow-xl rounded-xl overflow-hidden p-1.5"
+        className="w-48 bg-background border border-border shadow-xl rounded-lg overflow-hidden p-1.5"
       >
         {languages.map((language) => {
           const isActive = currentLanguage.code === language.code;
@@ -44,24 +44,24 @@ export const LanguageSwitcher = () => {
               onClick={() => !isActive && i18n.changeLanguage(language.code)}
               disabled={isActive}
               className={`
-                flex items-center gap-3 rounded-lg px-3 py-2 mb-0.5 last:mb-0
-                transition-all duration-200 cursor-pointer
+                flex items-center gap-3 rounded-md px-3 py-2.5 mb-0.5 last:mb-0
+                transition-all duration-150 cursor-pointer
                 ${isActive 
-                  ? 'bg-primary/5 cursor-default' 
-                  : 'hover:bg-accent/50'
+                  ? 'bg-primary text-primary-foreground font-medium cursor-default shadow-sm' 
+                  : 'hover:bg-accent text-foreground font-normal'
                 }
               `}
             >
               <div className="flex items-center gap-2.5 flex-1">
-                <span className="text-xs font-semibold text-muted-foreground/60 w-6">
+                <span className={`text-xs font-bold w-6 ${isActive ? 'text-primary-foreground/90' : 'text-muted-foreground'}`}>
                   {language.countryCode}
                 </span>
-                <span className={`text-sm font-medium ${isActive ? 'text-primary' : 'text-foreground'}`}>
+                <span className="text-sm">
                   {language.name}
                 </span>
               </div>
               {isActive && (
-                <Check className="h-3.5 w-3.5 text-primary animate-in fade-in zoom-in-50 duration-200" />
+                <Check className="h-4 w-4 animate-in fade-in zoom-in-50 duration-200" />
               )}
             </DropdownMenuItem>
           );
