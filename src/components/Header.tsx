@@ -41,99 +41,143 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import logo from "@/assets/logo.avif";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
-const services = [
-  {
-    title: "El-installation",
-    href: "/services/installation",
-    description: "Professionel installation af stikkontakter, afbrydere og elinstallationer",
-    icon: Zap,
-    color: "from-blue-500 to-blue-600",
-  },
-  {
-    title: "Fejlfinding",
-    href: "/services/fejlfinding",
-    description: "Hurtig og effektiv fejlfinding på alle typer el-problemer",
-    icon: Search,
-    color: "from-green-500 to-green-600",
-  },
-  {
-    title: "Smart Home Installation",
-    href: "/services/smart-home",
-    description: "Installation og opsætning af smart belysning og styringssystemer",
-    icon: Smartphone,
-    color: "from-purple-500 to-purple-600",
-  },
-  {
-    title: "Elbil Ladestandere",
-    href: "/services/elbil",
-    description: "Installation af ladestandere til elbiler i privat og erhverv",
-    icon: Car,
-    color: "from-blue-500 to-cyan-600",
-  },
-  {
-    title: "Tavlearbejde",
-    href: "/services/tavle",
-    description: "Udskiftning og opgradering af eltavler efter gældende regler",
-    icon: Server,
-    color: "from-orange-500 to-red-600",
-  },
-  {
-    title: "Erhvervsservice",
-    href: "/services/erhverv",
-    description: "El-service til butikker, kontorer og produktionsfaciliteter",
-    icon: Briefcase,
-    color: "from-gray-500 to-gray-600",
-  },
-];
+const MobileLanguageSwitcher = () => {
+  const { i18n } = useTranslation();
+  
+  const languages = [
+    { code: 'da', name: 'Dansk', flag: '🇩🇰' },
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  ];
 
-const products = [
-  {
-    title: "Stikkontakter & Kontakter",
-    href: "/products/stikkontakter",
-    description: "Moderne stikkontakter og afbrydere i mange designs",
-    icon: Power,
-    color: "from-blue-500 to-blue-600",
-  },
-  {
-    title: "Lamper & Belysning",
-    href: "/products/lamper",
-    description: "Indendørs lamper, spots og LED-belysning",
-    icon: Lamp,
-    color: "from-yellow-500 to-orange-600",
-  },
-  {
-    title: "Smart Home Produkter",
-    href: "/products/smart-home",
-    description: "Smart belysning, sensorer og styringssystemer",
-    icon: Wifi,
-    color: "from-purple-500 to-pink-600",
-  },
-  {
-    title: "Udendørs Belysning",
-    href: "/products/udendors",
-    description: "Vejrbestandig belysning til haven og facade",
-    icon: Moon,
-    color: "from-indigo-500 to-blue-600",
-  },
-  {
-    title: "Tavler & Komponenter",
-    href: "/products/tavler",
-    description: "Eltavler, automatsikringer og tavlekomponenter",
-    icon: Boxes,
-    color: "from-gray-500 to-gray-600",
-  },
-  {
-    title: "Kabler & Ledninger",
-    href: "/products/kabler",
-    description: "Elkabler, installationsledninger og tilbehør",
-    icon: Cable,
-    color: "from-green-500 to-emerald-600",
-  },
-];
+  return (
+    <div className="border-t pt-4">
+      <div className="px-2 mb-2 text-sm font-semibold text-muted-foreground">
+        Sprog / Language
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        {languages.map((language) => (
+          <Button
+            key={language.code}
+            variant={i18n.language === language.code ? "default" : "outline"}
+            size="sm"
+            onClick={() => i18n.changeLanguage(language.code)}
+            className="justify-start gap-2"
+          >
+            <span className="text-lg">{language.flag}</span>
+            <span className="text-xs">{language.name}</span>
+          </Button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const useServices = () => {
+  const { t } = useTranslation();
+  return [
+    {
+      title: t('services.installation.title'),
+      href: "/services/installation",
+      description: t('services.installation.description'),
+      icon: Zap,
+      color: "from-blue-500 to-blue-600",
+    },
+    {
+      title: t('services.troubleshooting.title'),
+      href: "/services/fejlfinding",
+      description: t('services.troubleshooting.description'),
+      icon: Search,
+      color: "from-green-500 to-green-600",
+    },
+    {
+      title: t('services.smartHome.title'),
+      href: "/services/smart-home",
+      description: t('services.smartHome.description'),
+      icon: Smartphone,
+      color: "from-purple-500 to-purple-600",
+    },
+    {
+      title: t('services.evCharging.title'),
+      href: "/services/elbil",
+      description: t('services.evCharging.description'),
+      icon: Car,
+      color: "from-blue-500 to-cyan-600",
+    },
+    {
+      title: t('services.panelWork.title'),
+      href: "/services/tavle",
+      description: t('services.panelWork.description'),
+      icon: Server,
+      color: "from-orange-500 to-red-600",
+    },
+    {
+      title: t('services.business.title'),
+      href: "/services/erhverv",
+      description: t('services.business.description'),
+      icon: Briefcase,
+      color: "from-gray-500 to-gray-600",
+    },
+  ];
+};
+
+const useProducts = () => {
+  const { t } = useTranslation();
+  return [
+    {
+      title: t('products.outlets.title'),
+      href: "/products/stikkontakter",
+      description: t('products.outlets.description'),
+      icon: Power,
+      color: "from-blue-500 to-blue-600",
+    },
+    {
+      title: t('products.lamps.title'),
+      href: "/products/lamper",
+      description: t('products.lamps.description'),
+      icon: Lamp,
+      color: "from-yellow-500 to-orange-600",
+    },
+    {
+      title: t('products.smartHome.title'),
+      href: "/products/smart-home",
+      description: t('products.smartHome.description'),
+      icon: Wifi,
+      color: "from-purple-500 to-pink-600",
+    },
+    {
+      title: t('products.outdoor.title'),
+      href: "/products/udendors",
+      description: t('products.outdoor.description'),
+      icon: Moon,
+      color: "from-indigo-500 to-blue-600",
+    },
+    {
+      title: t('products.panels.title'),
+      href: "/products/tavler",
+      description: t('products.panels.description'),
+      icon: Boxes,
+      color: "from-gray-500 to-gray-600",
+    },
+    {
+      title: t('products.cables.title'),
+      href: "/products/kabler",
+      description: t('products.cables.description'),
+      icon: Cable,
+      color: "from-green-500 to-emerald-600",
+    },
+  ];
+};
 
 export const Header = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const services = useServices();
+  const products = useProducts();
   const [user, setUser] = useState<any>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -153,7 +197,7 @@ export const Header = () => {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    toast.success("Du er nu logget ud");
+    toast.success(t('header.logoutSuccess'));
     navigate("/");
   };
 
@@ -179,7 +223,7 @@ export const Header = () => {
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
-                Serviceydelser
+                {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="w-[700px] p-6 bg-gradient-to-br from-background via-background to-blue-50/50 dark:to-blue-950/20">
@@ -215,7 +259,7 @@ export const Header = () => {
                   <div className="mt-6 pt-6 border-t flex items-center justify-center">
                     <div className="flex items-center gap-2 text-sm">
                       <Shield className="h-4 w-4 text-primary" />
-                      <span className="text-muted-foreground">Autoriseret elektriker • Fri parkering • 2 års garanti</span>
+                      <span className="text-muted-foreground">{t('header.tagline')}</span>
                     </div>
                   </div>
                 </div>
@@ -224,7 +268,7 @@ export const Header = () => {
 
             <NavigationMenuItem>
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
-                Produkter
+                {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="w-[700px] p-6 bg-gradient-to-br from-background via-background to-green-50/50 dark:to-green-950/20">
@@ -264,13 +308,15 @@ export const Header = () => {
         </NavigationMenu>
         
         <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          
           <Button 
             variant="ghost" 
             size="sm" 
             className="hidden md:flex items-center gap-2 text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10"
           >
             <Phone className="h-4 w-4" />
-            <span>Ring til os</span>
+            <span>{t('header.callUs')}</span>
           </Button>
           
           {/* Mobile Menu */}
@@ -286,7 +332,7 @@ export const Header = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-full sm:w-[400px] bg-background">
               <SheetHeader>
-                <SheetTitle>Menu</SheetTitle>
+                <SheetTitle>{t('header.menu')}</SheetTitle>
               </SheetHeader>
               <ScrollArea className="h-[calc(100vh-80px)] mt-6">
                 <div className="space-y-6 pb-10">
@@ -294,7 +340,7 @@ export const Header = () => {
                     {/* Services */}
                     <AccordionItem value="services" className="border-b-0">
                       <AccordionTrigger className="px-2 text-lg font-semibold text-primary hover:no-underline">
-                        Serviceydelser
+                        {t('header.services')}
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-2 pt-2">
@@ -321,7 +367,7 @@ export const Header = () => {
                     {/* Products */}
                     <AccordionItem value="products" className="border-b-0">
                       <AccordionTrigger className="px-2 text-lg font-semibold text-secondary hover:no-underline">
-                        Produkter
+                        {t('header.products')}
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-2 pt-2">
@@ -357,7 +403,7 @@ export const Header = () => {
                         <div className="rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 p-2 shadow-md">
                           <Info className="h-4 w-4 text-white" />
                         </div>
-                        <span className="font-medium">Om os</span>
+                        <span className="font-medium">{t('header.about')}</span>
                       </Link>
                       <Link
                         to="/kontakt"
@@ -367,10 +413,13 @@ export const Header = () => {
                         <div className="rounded-lg bg-gradient-to-br from-green-500 to-green-600 p-2 shadow-md">
                           <Mail className="h-4 w-4 text-white" />
                         </div>
-                        <span className="font-medium">Kontakt os</span>
+                        <span className="font-medium">{t('header.contact')}</span>
                       </Link>
                     </div>
                   </div>
+
+                  {/* Language Switcher in Mobile Menu */}
+                  <MobileLanguageSwitcher />
 
                   {/* User Actions */}
                   <div className="border-t pt-4 space-y-2">
@@ -385,7 +434,7 @@ export const Header = () => {
                           }}
                         >
                           <User className="mr-2 h-4 w-4" />
-                          Min profil
+                          {t('header.myProfile')}
                         </Button>
                         <Button
                           variant="outline"
@@ -396,7 +445,7 @@ export const Header = () => {
                           }}
                         >
                           <LogOut className="mr-2 h-4 w-4" />
-                          Log ud
+                          {t('header.logout')}
                         </Button>
                       </>
                     ) : (
@@ -408,7 +457,7 @@ export const Header = () => {
                         }}
                       >
                         <User className="mr-2 h-4 w-4" />
-                        Log ind
+                        {t('header.login')}
                       </Button>
                     )}
                   </div>

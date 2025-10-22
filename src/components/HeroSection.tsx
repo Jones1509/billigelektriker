@@ -1,8 +1,11 @@
 import { Button } from "./ui/button";
 import { ArrowRight, Phone } from "lucide-react";
 import switchesImage from "@/assets/switches-background.webp";
+import { useTranslation } from "react-i18next";
 
 export const HeroSection = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="relative min-h-[100dvh] md:min-h-[700px] flex items-center overflow-hidden">
       {/* Video Background */}
@@ -35,16 +38,13 @@ export const HeroSection = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
               </span>
-              <span className="text-sm font-semibold text-white whitespace-nowrap">Certificeret og Autoriseret</span>
+              <span className="text-sm font-semibold text-white whitespace-nowrap">{t('hero.certified')}</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 text-white leading-tight">
-              El-service der <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-300">virker</span>.<br />Hver gang
+              {t('hero.title1')}<span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-300">{t('hero.title2')}</span>{t('hero.title3')}
             </h1>
             <p className="text-base md:text-xl mb-3 md:mb-4 text-white/95 leading-relaxed">
-              Certificerede elektrikere med fair priser og hurtig respons – fra fejlfinding til komplette installationer.
-            </p>
-            <p className="text-sm md:text-lg mb-6 md:mb-8 text-white/85 leading-relaxed">
-              Vi hjælper dig med alt fra små reparationer til store projekter.
+              {t('hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-300 group">
@@ -53,7 +53,7 @@ export const HeroSection = () => {
               </Button>
               <Button size="lg" variant="outline" className="backdrop-blur-md bg-white/10 text-white border-2 border-white/30 hover:bg-white hover:text-primary font-semibold shadow-xl hover:scale-105 transition-all duration-300">
                 <Phone className="mr-2 h-5 w-5" />
-                Kontakt os
+                {t('hero.cta')}
               </Button>
             </div>
             
@@ -65,7 +65,7 @@ export const HeroSection = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">2 års<br/>garanti</span>
+                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.warranty')}</span>
               </div>
               <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in [animation-delay:150ms]">
                 <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
@@ -73,7 +73,7 @@ export const HeroSection = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Hurtig<br/>respons</span>
+                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.quickResponse')}</span>
               </div>
               <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in [animation-delay:300ms]">
                 <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
@@ -81,7 +81,7 @@ export const HeroSection = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Fri<br/>parkering</span>
+                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{t('hero.freeParking')}</span>
               </div>
             </div>
           </div>

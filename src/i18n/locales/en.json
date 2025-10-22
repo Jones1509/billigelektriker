@@ -1,0 +1,78 @@
+{
+  "header": {
+    "services": "Services",
+    "products": "Products",
+    "callUs": "Call Us",
+    "menu": "Menu",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "myProfile": "My Profile",
+    "login": "Log In",
+    "logout": "Log Out",
+    "logoutSuccess": "You are now logged out",
+    "tagline": "Authorized electrician • Free parking • 2 year warranty"
+  },
+  "hero": {
+    "certified": "Certified and Authorized",
+    "title1": "Electrical service that ",
+    "title2": "works",
+    "title3": ".\nEvery time",
+    "subtitle": "Certified electricians with fair prices and quick response – from troubleshooting to complete installations.",
+    "cta": "Contact us",
+    "warranty": "2 year\nwarranty",
+    "quickResponse": "Quick\nresponse",
+    "freeParking": "Free\nparking"
+  },
+  "services": {
+    "installation": {
+      "title": "Electrical Installation",
+      "description": "Professional installation of outlets, switches and electrical installations"
+    },
+    "troubleshooting": {
+      "title": "Troubleshooting",
+      "description": "Fast and efficient troubleshooting for all types of electrical problems"
+    },
+    "smartHome": {
+      "title": "Smart Home Installation",
+      "description": "Installation and setup of smart lighting and control systems"
+    },
+    "evCharging": {
+      "title": "EV Charging Stations",
+      "description": "Installation of charging stations for electric cars for private and business use"
+    },
+    "panelWork": {
+      "title": "Panel Work",
+      "description": "Replacement and upgrade of electrical panels according to current regulations"
+    },
+    "business": {
+      "title": "Business Service",
+      "description": "Electrical service for shops, offices and production facilities"
+    }
+  },
+  "products": {
+    "outlets": {
+      "title": "Outlets & Switches",
+      "description": "Modern outlets and switches in many designs"
+    },
+    "lamps": {
+      "title": "Lamps & Lighting",
+      "description": "Indoor lamps, spots and LED lighting"
+    },
+    "smartHome": {
+      "title": "Smart Home Products",
+      "description": "Smart lighting, sensors and control systems"
+    },
+    "outdoor": {
+      "title": "Outdoor Lighting",
+      "description": "Weather-resistant lighting for garden and facade"
+    },
+    "panels": {
+      "title": "Panels & Components",
+      "description": "Electrical panels, circuit breakers and panel components"
+    },
+    "cables": {
+      "title": "Cables & Wires",
+      "description": "Electrical cables, installation wires and accessories"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "header": {
+    "services": "Services",
+    "products": "Produits",
+    "callUs": "Appelez-nous",
+    "menu": "Menu",
+    "about": "À propos",
+    "contact": "Contact",
+    "myProfile": "Mon profil",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "logoutSuccess": "Vous êtes maintenant déconnecté",
+    "tagline": "Électricien autorisé • Parking gratuit • Garantie 2 ans"
+  },
+  "hero": {
+    "certified": "Certifié et Autorisé",
+    "title1": "Service électrique qui ",
+    "title2": "fonctionne",
+    "title3": ".\nÀ chaque fois",
+    "subtitle": "Électriciens certifiés avec des prix équitables et une réponse rapide – du dépannage aux installations complètes.",
+    "cta": "Contactez-nous",
+    "warranty": "Garantie\n2 ans",
+    "quickResponse": "Réponse\nrapide",
+    "freeParking": "Parking\ngratuit"
+  },
+  "services": {
+    "installation": {
+      "title": "Installation Électrique",
+      "description": "Installation professionnelle de prises, interrupteurs et installations électriques"
+    },
+    "troubleshooting": {
+      "title": "Dépannage",
+      "description": "Dépannage rapide et efficace pour tous types de problèmes électriques"
+    },
+    "smartHome": {
+      "title": "Installation Maison Intelligente",
+      "description": "Installation et configuration de l'éclairage intelligent et des systèmes de contrôle"
+    },
+    "evCharging": {
+      "title": "Bornes de Recharge VE",
+      "description": "Installation de bornes de recharge pour voitures électriques pour usage privé et professionnel"
+    },
+    "panelWork": {
+      "title": "Travaux de Tableau",
+      "description": "Remplacement et mise à niveau des tableaux électriques selon les réglementations en vigueur"
+    },
+    "business": {
+      "title": "Service aux Entreprises",
+      "description": "Service électrique pour magasins, bureaux et installations de production"
+    }
+  },
+  "products": {
+    "outlets": {
+      "title": "Prises & Interrupteurs",
+      "description": "Prises et interrupteurs modernes dans de nombreux designs"
+    },
+    "lamps": {
+      "title": "Lampes & Éclairage",
+      "description": "Lampes intérieures, spots et éclairage LED"
+    },
+    "smartHome": {
+      "title": "Produits Maison Intelligente",
+      "description": "Éclairage intelligent, capteurs et systèmes de contrôle"
+    },
+    "outdoor": {
+      "title": "Éclairage Extérieur",
+      "description": "Éclairage résistant aux intempéries pour jardin et façade"
+    },
+    "panels": {
+      "title": "Tableaux & Composants",
+      "description": "Tableaux électriques, disjoncteurs et composants de tableau"
+    },
+    "cables": {
+      "title": "Câbles & Fils",
+      "description": "Câbles électriques, fils d'installation et accessoires"
+    }
+  }
+}

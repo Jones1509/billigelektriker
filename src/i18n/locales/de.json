@@ -1,0 +1,78 @@
+{
+  "header": {
+    "services": "Dienstleistungen",
+    "products": "Produkte",
+    "callUs": "Rufen Sie uns an",
+    "menu": "Menü",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "myProfile": "Mein Profil",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "logoutSuccess": "Sie sind jetzt abgemeldet",
+    "tagline": "Autorisierter Elektriker • Kostenlose Parkplätze • 2 Jahre Garantie"
+  },
+  "hero": {
+    "certified": "Zertifiziert und Autorisiert",
+    "title1": "Elektrischer Service der ",
+    "title2": "funktioniert",
+    "title3": ".\nJedes Mal",
+    "subtitle": "Zertifizierte Elektriker mit fairen Preisen und schneller Reaktion – von der Fehlersuche bis zur kompletten Installation.",
+    "cta": "Kontaktieren Sie uns",
+    "warranty": "2 Jahre\nGarantie",
+    "quickResponse": "Schnelle\nAntwort",
+    "freeParking": "Kostenlose\nParkplätze"
+  },
+  "services": {
+    "installation": {
+      "title": "Elektroinstallation",
+      "description": "Professionelle Installation von Steckdosen, Schaltern und Elektroinstallationen"
+    },
+    "troubleshooting": {
+      "title": "Fehlerbehebung",
+      "description": "Schnelle und effiziente Fehlerbehebung für alle Arten von elektrischen Problemen"
+    },
+    "smartHome": {
+      "title": "Smart Home Installation",
+      "description": "Installation und Einrichtung von intelligenter Beleuchtung und Steuerungssystemen"
+    },
+    "evCharging": {
+      "title": "E-Auto Ladestationen",
+      "description": "Installation von Ladestationen für Elektroautos für den privaten und gewerblichen Gebrauch"
+    },
+    "panelWork": {
+      "title": "Schaltschrankarbeiten",
+      "description": "Austausch und Modernisierung von Schalttafeln nach geltenden Vorschriften"
+    },
+    "business": {
+      "title": "Geschäftsservice",
+      "description": "Elektrischer Service für Geschäfte, Büros und Produktionsanlagen"
+    }
+  },
+  "products": {
+    "outlets": {
+      "title": "Steckdosen & Schalter",
+      "description": "Moderne Steckdosen und Schalter in vielen Designs"
+    },
+    "lamps": {
+      "title": "Lampen & Beleuchtung",
+      "description": "Innenlampen, Spots und LED-Beleuchtung"
+    },
+    "smartHome": {
+      "title": "Smart Home Produkte",
+      "description": "Intelligente Beleuchtung, Sensoren und Steuerungssysteme"
+    },
+    "outdoor": {
+      "title": "Außenbeleuchtung",
+      "description": "Wetterfeste Beleuchtung für Garten und Fassade"
+    },
+    "panels": {
+      "title": "Schalttafeln & Komponenten",
+      "description": "Schalttafeln, Leistungsschalter und Schalttafelkomponenten"
+    },
+    "cables": {
+      "title": "Kabel & Leitungen",
+      "description": "Elektrokabel, Installationsleitungen und Zubehör"
+    }
+  }
+}

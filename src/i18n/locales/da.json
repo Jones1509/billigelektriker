@@ -1,0 +1,78 @@
+{
+  "header": {
+    "services": "Serviceydelser",
+    "products": "Produkter",
+    "callUs": "Ring til os",
+    "menu": "Menu",
+    "about": "Om os",
+    "contact": "Kontakt os",
+    "myProfile": "Min profil",
+    "login": "Log ind",
+    "logout": "Log ud",
+    "logoutSuccess": "Du er nu logget ud",
+    "tagline": "Autoriseret elektriker • Fri parkering • 2 års garanti"
+  },
+  "hero": {
+    "certified": "Certificeret og Autoriseret",
+    "title1": "El-service der ",
+    "title2": "virker",
+    "title3": ".\nHver gang",
+    "subtitle": "Certificerede elektrikere med fair priser og hurtig respons – fra fejlfinding til komplette installationer.",
+    "cta": "Kontakt os",
+    "warranty": "2 års\ngaranti",
+    "quickResponse": "Hurtig\nrespons",
+    "freeParking": "Fri\nparkering"
+  },
+  "services": {
+    "installation": {
+      "title": "El-installation",
+      "description": "Professionel installation af stikkontakter, afbrydere og elinstallationer"
+    },
+    "troubleshooting": {
+      "title": "Fejlfinding",
+      "description": "Hurtig og effektiv fejlfinding på alle typer el-problemer"
+    },
+    "smartHome": {
+      "title": "Smart Home Installation",
+      "description": "Installation og opsætning af smart belysning og styringssystemer"
+    },
+    "evCharging": {
+      "title": "Elbil Ladestandere",
+      "description": "Installation af ladestandere til elbiler i privat og erhverv"
+    },
+    "panelWork": {
+      "title": "Tavlearbejde",
+      "description": "Udskiftning og opgradering af eltavler efter gældende regler"
+    },
+    "business": {
+      "title": "Erhvervsservice",
+      "description": "El-service til butikker, kontorer og produktionsfaciliteter"
+    }
+  },
+  "products": {
+    "outlets": {
+      "title": "Stikkontakter & Kontakter",
+      "description": "Moderne stikkontakter og afbrydere i mange designs"
+    },
+    "lamps": {
+      "title": "Lamper & Belysning",
+      "description": "Indendørs lamper, spots og LED-belysning"
+    },
+    "smartHome": {
+      "title": "Smart Home Produkter",
+      "description": "Smart belysning, sensorer og styringssystemer"
+    },
+    "outdoor": {
+      "title": "Udendørs Belysning",
+      "description": "Vejrbestandig belysning til haven og facade"
+    },
+    "panels": {
+      "title": "Tavler & Komponenter",
+      "description": "Eltavler, automatsikringer og tavlekomponenter"
+    },
+    "cables": {
+      "title": "Kabler & Ledninger",
+      "description": "Elkabler, installationsledninger og tilbehør"
+    }
+  }
+}
