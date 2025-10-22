@@ -4,7 +4,7 @@ import switchesImage from "@/assets/switches-background.webp";
 
 export const HeroSection = () => {
   return (
-    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden pt-20 md:pt-0">
+    <section className="relative min-h-[100dvh] md:min-h-[700px] flex items-center overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
@@ -59,29 +59,29 @@ export const HeroSection = () => {
             
             {/* Trust Badges */}
             <div className="mt-6 md:mt-8 grid grid-cols-3 gap-6 md:gap-8 text-white max-w-xl">
-              <div className="flex flex-col items-center gap-3 md:gap-4 text-center">
-                <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-secondary/40 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-xl border border-white/20">
-                  <svg className="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in">
+                <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
+                  <svg className="h-7 w-7 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold drop-shadow-xl text-white/95">2 års<br/>garanti</span>
+                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">2 års<br/>garanti</span>
               </div>
-              <div className="flex flex-col items-center gap-3 md:gap-4 text-center">
-                <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-secondary/40 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-xl border border-white/20">
-                  <svg className="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in [animation-delay:150ms]">
+                <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
+                  <svg className="h-7 w-7 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold drop-shadow-xl text-white/95">Hurtig<br/>respons</span>
+                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Hurtig<br/>respons</span>
               </div>
-              <div className="flex flex-col items-center gap-3 md:gap-4 text-center">
-                <div className="h-12 w-12 md:h-14 md:w-14 rounded-full bg-secondary/40 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-xl border border-white/20">
-                  <svg className="h-6 w-6 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="flex flex-col items-center gap-3 md:gap-4 text-center animate-fade-in [animation-delay:300ms]">
+                <div className="h-14 w-14 md:h-14 md:w-14 rounded-full bg-secondary backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-2xl border-2 border-white/30 ring-4 ring-secondary/20">
+                  <svg className="h-7 w-7 md:h-7 md:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-xs md:text-sm leading-snug font-bold drop-shadow-xl text-white/95">Fri<br/>parkering</span>
+                <span className="text-xs md:text-sm leading-snug font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Fri<br/>parkering</span>
               </div>
             </div>
           </div>
