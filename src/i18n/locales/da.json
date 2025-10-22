@@ -10,7 +10,7 @@
     "login": "Log ind",
     "logout": "Log ud",
     "logoutSuccess": "Du er nu logget ud",
-    "tagline": "Autoriseret elektriker • Fri parkering • 2 års garanti"
+    "tagline": "Autoriseret elektriker • Gratis parkering • 2 års garanti"
   },
   "hero": {
     "certified": "Certificeret og Autoriseret",
@@ -21,12 +21,12 @@
     "cta": "Kontakt os",
     "warranty": "2 års\ngaranti",
     "quickResponse": "Hurtig\nrespons",
-    "freeParking": "Fri\nparkering"
+    "freeParking": "Gratis\nparkering"
   },
   "services": {
     "installation": {
       "title": "El-installation",
-      "description": "Professionel installation af stikkontakter, afbrydere og elinstallationer"
+      "description": "Professionel installation af stikkontakter, afbrydere og el-installationer"
     },
     "troubleshooting": {
       "title": "Fejlfinding",
@@ -37,21 +37,21 @@
       "description": "Installation og opsætning af smart belysning og styringssystemer"
     },
     "evCharging": {
-      "title": "Elbil Ladestandere",
-      "description": "Installation af ladestandere til elbiler i privat og erhverv"
+      "title": "Elbil-ladestandere",
+      "description": "Installation af ladestandere til elbiler til privat og erhverv"
     },
     "panelWork": {
       "title": "Tavlearbejde",
-      "description": "Udskiftning og opgradering af eltavler efter gældende regler"
+      "description": "Udskiftning og opgradering af tavler efter gældende regler"
     },
     "business": {
       "title": "Erhvervsservice",
-      "description": "El-service til butikker, kontorer og produktionsfaciliteter"
+      "description": "El-service til butik, kontor og produktionslokaler"
     }
   },
   "products": {
     "outlets": {
-      "title": "Stikkontakter & Kontakter",
+      "title": "Stikkontakter & Afbrydere",
       "description": "Moderne stikkontakter og afbrydere i mange designs"
     },
     "lamps": {
@@ -64,15 +64,209 @@
     },
     "outdoor": {
       "title": "Udendørs Belysning",
-      "description": "Vejrbestandig belysning til haven og facade"
+      "description": "Vejrbestandig belysning til have og facade"
     },
     "panels": {
       "title": "Tavler & Komponenter",
-      "description": "Eltavler, automatsikringer og tavlekomponenter"
+      "description": "Eltavler, afbrydere og tavlekomponenter"
     },
     "cables": {
       "title": "Kabler & Ledninger",
       "description": "Elkabler, installationsledninger og tilbehør"
     }
+  },
+  "serviceBoxes": {
+    "badge": "Vores Services",
+    "title": "Hvad kan vi hjælpe dig med?",
+    "subtitle": "Fra små reparationer til store projekter – vi er klar til at hjælpe",
+    "electrical": {
+      "title": "El-arbejde",
+      "description": "Professionelt el-arbejde – fra stikkontakter til store installationer. Certificeret og trygt.",
+      "cta": "Læs mere"
+    },
+    "products": {
+      "title": "El-produkter",
+      "description": "Køb el-dele direkte hos os. Stikkontakter, kabler, belysning og meget mere.",
+      "cta": "Se produkter"
+    }
+  },
+  "serviceColumns": {
+    "title": "El-service til alle",
+    "subtitle": "Uanset om du er privat eller erhverv – vi har løsningen",
+    "private": {
+      "badge": "Private",
+      "title": "El-service til private",
+      "subtitle": "Fra fejlfinding til smarte løsninger i dit hjem.",
+      "smartHome": {
+        "title": "Smart Home",
+        "description": "Intelligente løsninger til dit hjem"
+      },
+      "charging": {
+        "title": "Ladestander",
+        "description": "El-bil opladning installeret professionelt"
+      },
+      "installation": {
+        "title": "Boliginstallationer",
+        "description": "Komplette el-installationer"
+      }
+    },
+    "business": {
+      "badge": "Erhverv",
+      "title": "El-service til erhverv",
+      "subtitle": "Stabile installationer til butik, kontor og produktion.",
+      "panelWork": {
+        "title": "Tavlearbejde",
+        "description": "Professionelle tavleinstallationer"
+      },
+      "serviceAgreements": {
+        "title": "Serviceaftaler",
+        "description": "Kontinuerlig vedligeholdelse"
+      },
+      "rental": {
+        "title": "Udlejning",
+        "description": "Elektrikere til erhverv"
+      }
+    }
+  },
+  "starterPackages": {
+    "badge": "✨ Smarte Pakkeløsninger",
+    "title": "Kom i gang med smart lys – nemt og hurtigt",
+    "subtitle": "Vælg den pakke der passer til dit behov – alt er inkluderet",
+    "starter": {
+      "name": "Start-pakke",
+      "price": "999",
+      "description": "Perfekt til at komme i gang med smart lys",
+      "features": [
+        "2x E27 RGB-pærer",
+        "1x trådløs switch",
+        "Gratis app til iOS & Android",
+        "Nem installation"
+      ]
+    },
+    "expansion": {
+      "name": "Udvidelses-pakke",
+      "price": "1.799",
+      "description": "Udvid din smarte belysning til flere rum",
+      "features": [
+        "4x E27 RGB-pærer",
+        "2x trådløse switches",
+        "1x bevægelsessensor",
+        "Timer-funktioner"
+      ]
+    },
+    "complete": {
+      "name": "Komplet-pakke",
+      "price": "2.499",
+      "description": "Alt du behøver til indendørs og udendørs",
+      "features": [
+        "6x E27 RGB-pærer",
+        "3x trådløse switches",
+        "2x bevægelsessensorer",
+        "4x udendørs spots (IP65)"
+      ]
+    },
+    "cta": "Køb nu"
+  },
+  "bookingCta": {
+    "title": "Brug for hjælp til at vælge det rigtige lys?",
+    "subtitle": "Book en gratis 10-minutters samtale – vi hjælper dig med at finde den bedste løsning til dit projekt.",
+    "bookCall": "Book gratis samtale",
+    "callNow": "Ring nu",
+    "benefits": "✓ Ingen forpligtelser • ✓ Gratis rådgivning • ✓ Få svar med det samme"
+  },
+  "newsletter": {
+    "title": "Få 10% rabat på din første ordre",
+    "subtitle": "Tilmeld dig nyhedsbrevet og få rabatkoden direkte i din indbakke. Plus eksklusive tilbud og tips til dit smarte hjem.",
+    "placeholder": "Din e-mail adresse",
+    "cta": "Få rabatkode",
+    "noSpam": "Ingen spam",
+    "maxOneMail": "Max 1 mail om måneden",
+    "unsubscribe": "Afmeld når som helst",
+    "successTitle": "Tak for tilmeldingen!",
+    "successDescription": "Du modtager snart din rabatkode på email."
+  },
+  "values": {
+    "badge": "💎 Vores Værdier",
+    "title": "Derfor vælger kunderne os",
+    "subtitle": "Professionalisme, fair priser og tryghed – hver eneste gang.",
+    "safety": {
+      "title": "Tryghed via sikkerhed",
+      "description": "Autoriserede elektrikere med alle certificeringer i orden"
+    },
+    "price": {
+      "title": "Lav pris, høj kvalitet",
+      "description": "Fair priser uden skjulte omkostninger"
+    },
+    "punctuality": {
+      "title": "Punktlighed til tiden",
+      "description": "Vi møder op som aftalt – hver gang"
+    },
+    "warranty": {
+      "title": "Garanti sort på hvidt",
+      "description": "12 måneders garanti på arbejdet, 2 års reklamationsret"
+    }
+  },
+  "smartLight": {
+    "badge": "Smart Home Teknologi",
+    "title": "Smart lys – styr stemningen fra din mobil",
+    "description": "Vælg farver, dæmp lyset og tænd automatisk – alt sammen fra app'en. Skab den perfekte stemning til enhver lejlighed.",
+    "safeInstallation": "Tryg installation",
+    "safeDescription": "Autoriseret montering. 2 års reklamationsret på varer og 12 mdr. garanti på arbejdet.",
+    "cta": "Se lamperne"
+  },
+  "productSlider": {
+    "badge": "⚡ Webshop",
+    "title": "Populære produkter i webshoppen",
+    "subtitle": "Håndplukket smart lys til inde og ude – hurtig levering direkte til døren",
+    "comingSoon": "Produkter kommer snart!"
+  },
+  "team": {
+    "badge": "Mød teamet",
+    "title": "Holdet bag Billig Elektriker",
+    "description": "Billig Elektriker startede med en simpel idé: At levere professionel el-service til ærlige priser – uden at gå på kompromis med kvaliteten. Vi er et ungt, dynamisk team med certificeringer i orden, og vi elsker at løse vores kunders problemer – fra den mindste fejlfinding til store installationsprojekter.",
+    "certified": "Certificeret",
+    "certifiedDescription": "Autoriserede elektrikere",
+    "fastResponse": "Hurtig respons",
+    "fastResponseDescription": "Kontakt os i dag",
+    "cta": "Ring til os i dag"
+  },
+  "productCategories": {
+    "badge": "🏠 Produktkategorier",
+    "title": "Find det rigtige lys til dit projekt",
+    "subtitle": "Fra indendørs hygge til robust udendørs belysning – vi har det hele.",
+    "indoor": {
+      "title": "Indendørs Lys",
+      "description": "Skab den perfekte hygge derhjemme"
+    },
+    "outdoor": {
+      "title": "Udendørs Lys",
+      "description": "Robust belysning til have og terrasse"
+    },
+    "smartHome": {
+      "title": "Smart Home",
+      "description": "Intelligente løsninger til hele hjemmet"
+    },
+    "accessories": {
+      "title": "Stikkontakter & Tilbehør",
+      "description": "Alt du behøver til installationen"
+    },
+    "cta": "Se produkter"
+  },
+  "footer": {
+    "description": "Professionel el-service til fair priser. Certificerede elektrikere med passion for kvalitet og kundetilfredshed.",
+    "callUs": "Ring til os",
+    "servicesTitle": "Services",
+    "electricalWork": "El-arbejde",
+    "smartHome": "Smart Home",
+    "business": "Erhverv",
+    "rental": "Udlejning",
+    "productsTitle": "Produkter",
+    "indoorLighting": "Indendørs belysning",
+    "outdoorLighting": "Udendørs belysning",
+    "accessories": "Tilbehør",
+    "copyright": "© 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes.",
+    "privacy": "Privatlivspolitik",
+    "terms": "Handelsbetingelser",
+    "contact": "Kontakt"
   }
 }

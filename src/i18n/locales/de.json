@@ -5,48 +5,48 @@
     "callUs": "Rufen Sie uns an",
     "menu": "Menü",
     "about": "Über uns",
-    "contact": "Kontakt",
+    "contact": "Kontaktieren Sie uns",
     "myProfile": "Mein Profil",
     "login": "Anmelden",
     "logout": "Abmelden",
     "logoutSuccess": "Sie sind jetzt abgemeldet",
-    "tagline": "Autorisierter Elektriker • Kostenlose Parkplätze • 2 Jahre Garantie"
+    "tagline": "Autorisierter Elektriker • Kostenloser Parkplatz • 2 Jahre Garantie"
   },
   "hero": {
     "certified": "Zertifiziert und Autorisiert",
-    "title1": "Elektrischer Service der ",
+    "title1": "Elektroservice der ",
     "title2": "funktioniert",
     "title3": ".\nJedes Mal",
     "subtitle": "Zertifizierte Elektriker mit fairen Preisen und schneller Reaktion – von der Fehlersuche bis zur kompletten Installation.",
     "cta": "Kontaktieren Sie uns",
     "warranty": "2 Jahre\nGarantie",
-    "quickResponse": "Schnelle\nAntwort",
-    "freeParking": "Kostenlose\nParkplätze"
+    "quickResponse": "Schnelle\nReaktion",
+    "freeParking": "Kostenloser\nParkplatz"
   },
   "services": {
     "installation": {
       "title": "Elektroinstallation",
-      "description": "Professionelle Installation von Steckdosen, Schaltern und Elektroinstallationen"
+      "description": "Professionelle Installation von Steckdosen, Schaltern und elektrischen Installationen"
     },
     "troubleshooting": {
-      "title": "Fehlerbehebung",
-      "description": "Schnelle und effiziente Fehlerbehebung für alle Arten von elektrischen Problemen"
+      "title": "Fehlersuche",
+      "description": "Schnelle und effiziente Fehlersuche für alle Arten von elektrischen Problemen"
     },
     "smartHome": {
       "title": "Smart Home Installation",
-      "description": "Installation und Einrichtung von intelligenter Beleuchtung und Steuerungssystemen"
+      "description": "Installation und Einrichtung von intelligenten Beleuchtungs- und Steuerungssystemen"
     },
     "evCharging": {
-      "title": "E-Auto Ladestationen",
-      "description": "Installation von Ladestationen für Elektroautos für den privaten und gewerblichen Gebrauch"
+      "title": "E-Auto-Ladestationen",
+      "description": "Installation von Ladestationen für Elektroautos für privaten und geschäftlichen Gebrauch"
     },
     "panelWork": {
-      "title": "Schaltschrankarbeiten",
-      "description": "Austausch und Modernisierung von Schalttafeln nach geltenden Vorschriften"
+      "title": "Schaltschrank-Arbeiten",
+      "description": "Austausch und Modernisierung von Schalttafeln nach aktuellen Vorschriften"
     },
     "business": {
       "title": "Geschäftsservice",
-      "description": "Elektrischer Service für Geschäfte, Büros und Produktionsanlagen"
+      "description": "Elektroservice für Geschäfte, Büros und Produktionsanlagen"
     }
   },
   "products": {
@@ -71,8 +71,202 @@
       "description": "Schalttafeln, Leistungsschalter und Schalttafelkomponenten"
     },
     "cables": {
-      "title": "Kabel & Leitungen",
-      "description": "Elektrokabel, Installationsleitungen und Zubehör"
+      "title": "Kabel & Drähte",
+      "description": "Elektrokabel, Installationsdrähte und Zubehör"
     }
+  },
+  "serviceBoxes": {
+    "badge": "Unsere Dienstleistungen",
+    "title": "Wie können wir Ihnen helfen?",
+    "subtitle": "Von kleinen Reparaturen bis zu großen Projekten – wir sind bereit zu helfen",
+    "electrical": {
+      "title": "Elektroarbeiten",
+      "description": "Professionelle Elektroarbeiten – von Steckdosen bis zu großen Installationen. Zertifiziert und sicher.",
+      "cta": "Mehr lesen"
+    },
+    "products": {
+      "title": "Elektroprodukte",
+      "description": "Kaufen Sie Elektroteile direkt bei uns. Steckdosen, Kabel, Beleuchtung und vieles mehr.",
+      "cta": "Produkte ansehen"
+    }
+  },
+  "serviceColumns": {
+    "title": "Elektroservice für alle",
+    "subtitle": "Ob privat oder geschäftlich – wir haben die Lösung",
+    "private": {
+      "badge": "Privat",
+      "title": "Elektroservice für Privatkunden",
+      "subtitle": "Von der Fehlersuche bis zu intelligenten Lösungen in Ihrem Zuhause.",
+      "smartHome": {
+        "title": "Smart Home",
+        "description": "Intelligente Lösungen für Ihr Zuhause"
+      },
+      "charging": {
+        "title": "Ladestation",
+        "description": "E-Auto-Laden professionell installiert"
+      },
+      "installation": {
+        "title": "Wohnungsinstallationen",
+        "description": "Komplette elektrische Installationen"
+      }
+    },
+    "business": {
+      "badge": "Gewerbe",
+      "title": "Elektroservice für Unternehmen",
+      "subtitle": "Stabile Installationen für Geschäfte, Büros und Produktion.",
+      "panelWork": {
+        "title": "Schaltschrank-Arbeiten",
+        "description": "Professionelle Schalttafelinstallationen"
+      },
+      "serviceAgreements": {
+        "title": "Serviceverträge",
+        "description": "Kontinuierliche Wartung"
+      },
+      "rental": {
+        "title": "Vermietung",
+        "description": "Elektriker für Unternehmen"
+      }
+    }
+  },
+  "starterPackages": {
+    "badge": "✨ Intelligente Paketlösungen",
+    "title": "Starten Sie mit intelligenter Beleuchtung – einfach und schnell",
+    "subtitle": "Wählen Sie das Paket, das zu Ihren Bedürfnissen passt – alles inklusive",
+    "starter": {
+      "name": "Starter-Paket",
+      "price": "999",
+      "description": "Perfekt für den Einstieg in die intelligente Beleuchtung",
+      "features": [
+        "2x E27 RGB-Lampen",
+        "1x kabelloser Schalter",
+        "Kostenlose App für iOS & Android",
+        "Einfache Installation"
+      ]
+    },
+    "expansion": {
+      "name": "Erweiterungs-Paket",
+      "price": "1.799",
+      "description": "Erweitern Sie Ihre intelligente Beleuchtung auf mehr Räume",
+      "features": [
+        "4x E27 RGB-Lampen",
+        "2x kabellose Schalter",
+        "1x Bewegungssensor",
+        "Timer-Funktionen"
+      ]
+    },
+    "complete": {
+      "name": "Komplett-Paket",
+      "price": "2.499",
+      "description": "Alles, was Sie für Innen- und Außenbereich benötigen",
+      "features": [
+        "6x E27 RGB-Lampen",
+        "3x kabellose Schalter",
+        "2x Bewegungssensoren",
+        "4x Außen-Spots (IP65)"
+      ]
+    },
+    "cta": "Jetzt kaufen"
+  },
+  "bookingCta": {
+    "title": "Brauchen Sie Hilfe bei der Auswahl der richtigen Beleuchtung?",
+    "subtitle": "Buchen Sie ein kostenloses 10-Minuten-Gespräch – wir helfen Ihnen, die beste Lösung für Ihr Projekt zu finden.",
+    "bookCall": "Kostenloses Gespräch buchen",
+    "callNow": "Jetzt anrufen",
+    "benefits": "✓ Keine Verpflichtungen • ✓ Kostenlose Beratung • ✓ Sofort Antworten erhalten"
+  },
+  "newsletter": {
+    "title": "Erhalten Sie 10% Rabatt auf Ihre erste Bestellung",
+    "subtitle": "Abonnieren Sie den Newsletter und erhalten Sie den Rabattcode direkt in Ihrem Posteingang. Plus exklusive Angebote und Tipps für Ihr Smart Home.",
+    "placeholder": "Ihre E-Mail-Adresse",
+    "cta": "Rabattcode erhalten",
+    "noSpam": "Kein Spam",
+    "maxOneMail": "Max. 1 E-Mail pro Monat",
+    "unsubscribe": "Jederzeit abmelden",
+    "successTitle": "Danke für Ihre Anmeldung!",
+    "successDescription": "Sie erhalten bald Ihren Rabattcode per E-Mail."
+  },
+  "values": {
+    "badge": "💎 Unsere Werte",
+    "title": "Warum Kunden uns wählen",
+    "subtitle": "Professionalität, faire Preise und Sicherheit – jedes Mal.",
+    "safety": {
+      "title": "Sicherheit durch Schutz",
+      "description": "Autorisierte Elektriker mit allen Zertifizierungen in Ordnung"
+    },
+    "price": {
+      "title": "Niedriger Preis, hohe Qualität",
+      "description": "Faire Preise ohne versteckte Kosten"
+    },
+    "punctuality": {
+      "title": "Pünktlichkeit zur Zeit",
+      "description": "Wir erscheinen wie vereinbart – jedes Mal"
+    },
+    "warranty": {
+      "title": "Garantie schriftlich",
+      "description": "12 Monate Garantie auf Arbeit, 2 Jahre Reklamationsrecht"
+    }
+  },
+  "smartLight": {
+    "badge": "Smart Home Technologie",
+    "title": "Intelligente Beleuchtung – steuern Sie die Stimmung von Ihrem Handy aus",
+    "description": "Wählen Sie Farben, dimmen Sie das Licht und schalten Sie automatisch ein – alles über die App. Schaffen Sie die perfekte Atmosphäre für jeden Anlass.",
+    "safeInstallation": "Sichere Installation",
+    "safeDescription": "Autorisierte Montage. 2 Jahre Reklamationsrecht auf Waren und 12 Monate Garantie auf Arbeit.",
+    "cta": "Lampen ansehen"
+  },
+  "productSlider": {
+    "badge": "⚡ Webshop",
+    "title": "Beliebte Produkte im Webshop",
+    "subtitle": "Handverlesene intelligente Beleuchtung für Innen- und Außenbereich – schnelle Lieferung direkt vor Ihre Tür",
+    "comingSoon": "Produkte kommen bald!"
+  },
+  "team": {
+    "badge": "Das Team kennenlernen",
+    "title": "Das Team hinter Günstiger Elektriker",
+    "description": "Günstiger Elektriker begann mit einer einfachen Idee: Professionellen Elektroservice zu ehrlichen Preisen zu liefern – ohne Kompromisse bei der Qualität. Wir sind ein junges, dynamisches Team mit Zertifizierungen in Ordnung, und wir lieben es, die Probleme unserer Kunden zu lösen – von der kleinsten Fehlersuche bis zu großen Installationsprojekten.",
+    "certified": "Zertifiziert",
+    "certifiedDescription": "Autorisierte Elektriker",
+    "fastResponse": "Schnelle Reaktion",
+    "fastResponseDescription": "Kontaktieren Sie uns heute",
+    "cta": "Rufen Sie uns heute an"
+  },
+  "productCategories": {
+    "badge": "🏠 Produktkategorien",
+    "title": "Finden Sie die richtige Beleuchtung für Ihr Projekt",
+    "subtitle": "Von Innengemütlichkeit bis zu robuster Außenbeleuchtung – wir haben alles.",
+    "indoor": {
+      "title": "Innenbeleuchtung",
+      "description": "Schaffen Sie die perfekte Gemütlichkeit zu Hause"
+    },
+    "outdoor": {
+      "title": "Außenbeleuchtung",
+      "description": "Robuste Beleuchtung für Garten und Terrasse"
+    },
+    "smartHome": {
+      "title": "Smart Home",
+      "description": "Intelligente Lösungen für das ganze Zuhause"
+    },
+    "accessories": {
+      "title": "Steckdosen & Zubehör",
+      "description": "Alles, was Sie für die Installation benötigen"
+    },
+    "cta": "Produkte ansehen"
+  },
+  "footer": {
+    "description": "Professioneller Elektroservice zu fairen Preisen. Zertifizierte Elektriker mit Leidenschaft für Qualität und Kundenzufriedenheit.",
+    "callUs": "Rufen Sie uns an",
+    "servicesTitle": "Dienstleistungen",
+    "electricalWork": "Elektroarbeiten",
+    "smartHome": "Smart Home",
+    "business": "Gewerbe",
+    "rental": "Vermietung",
+    "productsTitle": "Produkte",
+    "indoorLighting": "Innenbeleuchtung",
+    "outdoorLighting": "Außenbeleuchtung",
+    "accessories": "Zubehör",
+    "copyright": "© 2025 Günstiger Elektriker (ASA ApS). Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzerklärung",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "contact": "Kontakt"
   }
 }

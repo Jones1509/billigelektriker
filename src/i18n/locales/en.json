@@ -74,5 +74,199 @@
       "title": "Cables & Wires",
       "description": "Electrical cables, installation wires and accessories"
     }
+  },
+  "serviceBoxes": {
+    "badge": "Our Services",
+    "title": "How can we help you?",
+    "subtitle": "From small repairs to large projects – we're ready to help",
+    "electrical": {
+      "title": "Electrical Work",
+      "description": "Professional electrical work – from outlets to large installations. Certified and safe.",
+      "cta": "Read more"
+    },
+    "products": {
+      "title": "Electrical Products",
+      "description": "Buy electrical parts directly from us. Outlets, cables, lighting and much more.",
+      "cta": "See products"
+    }
+  },
+  "serviceColumns": {
+    "title": "Electrical service for everyone",
+    "subtitle": "Whether you're private or business – we have the solution",
+    "private": {
+      "badge": "Private",
+      "title": "Electrical service for private",
+      "subtitle": "From troubleshooting to smart solutions in your home.",
+      "smartHome": {
+        "title": "Smart Home",
+        "description": "Intelligent solutions for your home"
+      },
+      "charging": {
+        "title": "Charging Station",
+        "description": "EV charging installed professionally"
+      },
+      "installation": {
+        "title": "Home Installations",
+        "description": "Complete electrical installations"
+      }
+    },
+    "business": {
+      "badge": "Business",
+      "title": "Electrical service for business",
+      "subtitle": "Stable installations for shops, offices and production.",
+      "panelWork": {
+        "title": "Panel Work",
+        "description": "Professional panel installations"
+      },
+      "serviceAgreements": {
+        "title": "Service Agreements",
+        "description": "Continuous maintenance"
+      },
+      "rental": {
+        "title": "Rental",
+        "description": "Electricians for business"
+      }
+    }
+  },
+  "starterPackages": {
+    "badge": "✨ Smart Package Solutions",
+    "title": "Get started with smart lighting – easy and fast",
+    "subtitle": "Choose the package that fits your needs – everything included",
+    "starter": {
+      "name": "Starter Package",
+      "price": "999",
+      "description": "Perfect for getting started with smart lighting",
+      "features": [
+        "2x E27 RGB bulbs",
+        "1x wireless switch",
+        "Free app for iOS & Android",
+        "Easy installation"
+      ]
+    },
+    "expansion": {
+      "name": "Expansion Package",
+      "price": "1,799",
+      "description": "Expand your smart lighting to more rooms",
+      "features": [
+        "4x E27 RGB bulbs",
+        "2x wireless switches",
+        "1x motion sensor",
+        "Timer functions"
+      ]
+    },
+    "complete": {
+      "name": "Complete Package",
+      "price": "2,499",
+      "description": "Everything you need for indoor and outdoor",
+      "features": [
+        "6x E27 RGB bulbs",
+        "3x wireless switches",
+        "2x motion sensors",
+        "4x outdoor spots (IP65)"
+      ]
+    },
+    "cta": "Buy now"
+  },
+  "bookingCta": {
+    "title": "Need help choosing the right lighting?",
+    "subtitle": "Book a free 10-minute call – we'll help you find the best solution for your project.",
+    "bookCall": "Book free call",
+    "callNow": "Call now",
+    "benefits": "✓ No obligations • ✓ Free advice • ✓ Get answers immediately"
+  },
+  "newsletter": {
+    "title": "Get 10% off your first order",
+    "subtitle": "Subscribe to the newsletter and get the discount code directly in your inbox. Plus exclusive offers and tips for your smart home.",
+    "placeholder": "Your email address",
+    "cta": "Get discount code",
+    "noSpam": "No spam",
+    "maxOneMail": "Max 1 email per month",
+    "unsubscribe": "Unsubscribe anytime",
+    "successTitle": "Thanks for signing up!",
+    "successDescription": "You will soon receive your discount code by email."
+  },
+  "values": {
+    "badge": "💎 Our Values",
+    "title": "Why customers choose us",
+    "subtitle": "Professionalism, fair prices and security – every single time.",
+    "safety": {
+      "title": "Security through safety",
+      "description": "Authorized electricians with all certifications in order"
+    },
+    "price": {
+      "title": "Low price, high quality",
+      "description": "Fair prices without hidden costs"
+    },
+    "punctuality": {
+      "title": "Punctuality on time",
+      "description": "We show up as agreed – every time"
+    },
+    "warranty": {
+      "title": "Warranty in writing",
+      "description": "12 months warranty on work, 2 years right of complaint"
+    }
+  },
+  "smartLight": {
+    "badge": "Smart Home Technology",
+    "title": "Smart lighting – control the mood from your mobile",
+    "description": "Choose colors, dim the light and turn on automatically – all from the app. Create the perfect atmosphere for any occasion.",
+    "safeInstallation": "Safe installation",
+    "safeDescription": "Authorized installation. 2 years right of complaint on goods and 12 months warranty on work.",
+    "cta": "See the lamps"
+  },
+  "productSlider": {
+    "badge": "⚡ Webshop",
+    "title": "Popular products in the webshop",
+    "subtitle": "Hand-picked smart lighting for indoors and outdoors – fast delivery right to your door",
+    "comingSoon": "Products coming soon!"
+  },
+  "team": {
+    "badge": "Meet the team",
+    "title": "The team behind Cheap Electrician",
+    "description": "Cheap Electrician started with a simple idea: To deliver professional electrical service at honest prices – without compromising on quality. We are a young, dynamic team with certifications in order, and we love solving our customers' problems – from the smallest troubleshooting to large installation projects.",
+    "certified": "Certified",
+    "certifiedDescription": "Authorized electricians",
+    "fastResponse": "Fast response",
+    "fastResponseDescription": "Contact us today",
+    "cta": "Call us today"
+  },
+  "productCategories": {
+    "badge": "🏠 Product Categories",
+    "title": "Find the right lighting for your project",
+    "subtitle": "From indoor coziness to robust outdoor lighting – we have it all.",
+    "indoor": {
+      "title": "Indoor Lighting",
+      "description": "Create the perfect coziness at home"
+    },
+    "outdoor": {
+      "title": "Outdoor Lighting",
+      "description": "Robust lighting for garden and terrace"
+    },
+    "smartHome": {
+      "title": "Smart Home",
+      "description": "Intelligent solutions for the whole home"
+    },
+    "accessories": {
+      "title": "Outlets & Accessories",
+      "description": "Everything you need for the installation"
+    },
+    "cta": "See products"
+  },
+  "footer": {
+    "description": "Professional electrical service at fair prices. Certified electricians with passion for quality and customer satisfaction.",
+    "callUs": "Call us",
+    "servicesTitle": "Services",
+    "electricalWork": "Electrical work",
+    "smartHome": "Smart Home",
+    "business": "Business",
+    "rental": "Rental",
+    "productsTitle": "Products",
+    "indoorLighting": "Indoor lighting",
+    "outdoorLighting": "Outdoor lighting",
+    "accessories": "Accessories",
+    "copyright": "© 2025 Cheap Electrician (ASA ApS). All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms and Conditions",
+    "contact": "Contact"
   }
 }

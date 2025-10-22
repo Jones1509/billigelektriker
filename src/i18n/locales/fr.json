@@ -5,12 +5,12 @@
     "callUs": "Appelez-nous",
     "menu": "Menu",
     "about": "À propos",
-    "contact": "Contact",
+    "contact": "Contactez-nous",
     "myProfile": "Mon profil",
-    "login": "Connexion",
-    "logout": "Déconnexion",
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
     "logoutSuccess": "Vous êtes maintenant déconnecté",
-    "tagline": "Électricien autorisé • Parking gratuit • Garantie 2 ans"
+    "tagline": "Électricien agréé • Parking gratuit • Garantie de 2 ans"
   },
   "hero": {
     "certified": "Certifié et Autorisé",
@@ -19,7 +19,7 @@
     "title3": ".\nÀ chaque fois",
     "subtitle": "Électriciens certifiés avec des prix équitables et une réponse rapide – du dépannage aux installations complètes.",
     "cta": "Contactez-nous",
-    "warranty": "Garantie\n2 ans",
+    "warranty": "2 ans de\ngarantie",
     "quickResponse": "Réponse\nrapide",
     "freeParking": "Parking\ngratuit"
   },
@@ -33,8 +33,8 @@
       "description": "Dépannage rapide et efficace pour tous types de problèmes électriques"
     },
     "smartHome": {
-      "title": "Installation Maison Intelligente",
-      "description": "Installation et configuration de l'éclairage intelligent et des systèmes de contrôle"
+      "title": "Installation Smart Home",
+      "description": "Installation et configuration de systèmes d'éclairage et de contrôle intelligents"
     },
     "evCharging": {
       "title": "Bornes de Recharge VE",
@@ -45,7 +45,7 @@
       "description": "Remplacement et mise à niveau des tableaux électriques selon les réglementations en vigueur"
     },
     "business": {
-      "title": "Service aux Entreprises",
+      "title": "Service Entreprise",
       "description": "Service électrique pour magasins, bureaux et installations de production"
     }
   },
@@ -59,7 +59,7 @@
       "description": "Lampes intérieures, spots et éclairage LED"
     },
     "smartHome": {
-      "title": "Produits Maison Intelligente",
+      "title": "Produits Smart Home",
       "description": "Éclairage intelligent, capteurs et systèmes de contrôle"
     },
     "outdoor": {
@@ -74,5 +74,199 @@
       "title": "Câbles & Fils",
       "description": "Câbles électriques, fils d'installation et accessoires"
     }
+  },
+  "serviceBoxes": {
+    "badge": "Nos Services",
+    "title": "Comment pouvons-nous vous aider?",
+    "subtitle": "Des petites réparations aux grands projets – nous sommes prêts à aider",
+    "electrical": {
+      "title": "Travaux Électriques",
+      "description": "Travaux électriques professionnels – des prises aux grandes installations. Certifié et sûr.",
+      "cta": "En savoir plus"
+    },
+    "products": {
+      "title": "Produits Électriques",
+      "description": "Achetez des pièces électriques directement chez nous. Prises, câbles, éclairage et bien plus.",
+      "cta": "Voir les produits"
+    }
+  },
+  "serviceColumns": {
+    "title": "Service électrique pour tous",
+    "subtitle": "Que vous soyez particulier ou professionnel – nous avons la solution",
+    "private": {
+      "badge": "Particuliers",
+      "title": "Service électrique pour particuliers",
+      "subtitle": "Du dépannage aux solutions intelligentes dans votre maison.",
+      "smartHome": {
+        "title": "Smart Home",
+        "description": "Solutions intelligentes pour votre maison"
+      },
+      "charging": {
+        "title": "Borne de Recharge",
+        "description": "Recharge VE installée professionnellement"
+      },
+      "installation": {
+        "title": "Installations Résidentielles",
+        "description": "Installations électriques complètes"
+      }
+    },
+    "business": {
+      "badge": "Entreprises",
+      "title": "Service électrique pour entreprises",
+      "subtitle": "Installations stables pour magasins, bureaux et production.",
+      "panelWork": {
+        "title": "Travaux de Tableau",
+        "description": "Installations de tableaux professionnelles"
+      },
+      "serviceAgreements": {
+        "title": "Contrats de Service",
+        "description": "Maintenance continue"
+      },
+      "rental": {
+        "title": "Location",
+        "description": "Électriciens pour entreprises"
+      }
+    }
+  },
+  "starterPackages": {
+    "badge": "✨ Solutions de Forfaits Intelligents",
+    "title": "Commencez avec l'éclairage intelligent – facile et rapide",
+    "subtitle": "Choisissez le forfait qui correspond à vos besoins – tout est inclus",
+    "starter": {
+      "name": "Forfait Démarrage",
+      "price": "999",
+      "description": "Parfait pour commencer avec l'éclairage intelligent",
+      "features": [
+        "2x ampoules E27 RGB",
+        "1x interrupteur sans fil",
+        "Application gratuite pour iOS & Android",
+        "Installation facile"
+      ]
+    },
+    "expansion": {
+      "name": "Forfait Extension",
+      "price": "1 799",
+      "description": "Étendez votre éclairage intelligent à plus de pièces",
+      "features": [
+        "4x ampoules E27 RGB",
+        "2x interrupteurs sans fil",
+        "1x détecteur de mouvement",
+        "Fonctions de minuterie"
+      ]
+    },
+    "complete": {
+      "name": "Forfait Complet",
+      "price": "2 499",
+      "description": "Tout ce dont vous avez besoin pour l'intérieur et l'extérieur",
+      "features": [
+        "6x ampoules E27 RGB",
+        "3x interrupteurs sans fil",
+        "2x détecteurs de mouvement",
+        "4x spots extérieurs (IP65)"
+      ]
+    },
+    "cta": "Acheter maintenant"
+  },
+  "bookingCta": {
+    "title": "Besoin d'aide pour choisir le bon éclairage?",
+    "subtitle": "Réservez un appel gratuit de 10 minutes – nous vous aiderons à trouver la meilleure solution pour votre projet.",
+    "bookCall": "Réserver un appel gratuit",
+    "callNow": "Appelez maintenant",
+    "benefits": "✓ Aucune obligation • ✓ Conseils gratuits • ✓ Obtenez des réponses immédiatement"
+  },
+  "newsletter": {
+    "title": "Obtenez 10% de réduction sur votre première commande",
+    "subtitle": "Abonnez-vous à la newsletter et recevez le code de réduction directement dans votre boîte de réception. Plus des offres exclusives et des conseils pour votre maison intelligente.",
+    "placeholder": "Votre adresse e-mail",
+    "cta": "Obtenir le code de réduction",
+    "noSpam": "Pas de spam",
+    "maxOneMail": "Maximum 1 e-mail par mois",
+    "unsubscribe": "Se désabonner à tout moment",
+    "successTitle": "Merci pour votre inscription!",
+    "successDescription": "Vous recevrez bientôt votre code de réduction par e-mail."
+  },
+  "values": {
+    "badge": "💎 Nos Valeurs",
+    "title": "Pourquoi les clients nous choisissent",
+    "subtitle": "Professionnalisme, prix équitables et sécurité – à chaque fois.",
+    "safety": {
+      "title": "Sécurité par la sûreté",
+      "description": "Électriciens agréés avec toutes les certifications en ordre"
+    },
+    "price": {
+      "title": "Prix bas, haute qualité",
+      "description": "Prix équitables sans frais cachés"
+    },
+    "punctuality": {
+      "title": "Ponctualité à l'heure",
+      "description": "Nous arrivons comme convenu – à chaque fois"
+    },
+    "warranty": {
+      "title": "Garantie par écrit",
+      "description": "12 mois de garantie sur le travail, 2 ans de droit de réclamation"
+    }
+  },
+  "smartLight": {
+    "badge": "Technologie Smart Home",
+    "title": "Éclairage intelligent – contrôlez l'ambiance depuis votre mobile",
+    "description": "Choisissez les couleurs, tamisez la lumière et allumez automatiquement – le tout depuis l'application. Créez l'ambiance parfaite pour toute occasion.",
+    "safeInstallation": "Installation sûre",
+    "safeDescription": "Installation autorisée. 2 ans de droit de réclamation sur les marchandises et 12 mois de garantie sur le travail.",
+    "cta": "Voir les lampes"
+  },
+  "productSlider": {
+    "badge": "⚡ Boutique en ligne",
+    "title": "Produits populaires dans la boutique en ligne",
+    "subtitle": "Éclairage intelligent sélectionné pour l'intérieur et l'extérieur – livraison rapide directement à votre porte",
+    "comingSoon": "Produits à venir bientôt!"
+  },
+  "team": {
+    "badge": "Rencontrez l'équipe",
+    "title": "L'équipe derrière Électricien Pas Cher",
+    "description": "Électricien Pas Cher a commencé avec une idée simple: Fournir un service électrique professionnel à des prix honnêtes – sans compromis sur la qualité. Nous sommes une équipe jeune et dynamique avec des certifications en ordre, et nous aimons résoudre les problèmes de nos clients – du plus petit dépannage aux grands projets d'installation.",
+    "certified": "Certifié",
+    "certifiedDescription": "Électriciens agréés",
+    "fastResponse": "Réponse rapide",
+    "fastResponseDescription": "Contactez-nous aujourd'hui",
+    "cta": "Appelez-nous aujourd'hui"
+  },
+  "productCategories": {
+    "badge": "🏠 Catégories de Produits",
+    "title": "Trouvez le bon éclairage pour votre projet",
+    "subtitle": "Du confort intérieur à l'éclairage extérieur robuste – nous avons tout.",
+    "indoor": {
+      "title": "Éclairage Intérieur",
+      "description": "Créez le confort parfait à la maison"
+    },
+    "outdoor": {
+      "title": "Éclairage Extérieur",
+      "description": "Éclairage robuste pour jardin et terrasse"
+    },
+    "smartHome": {
+      "title": "Smart Home",
+      "description": "Solutions intelligentes pour toute la maison"
+    },
+    "accessories": {
+      "title": "Prises & Accessoires",
+      "description": "Tout ce dont vous avez besoin pour l'installation"
+    },
+    "cta": "Voir les produits"
+  },
+  "footer": {
+    "description": "Service électrique professionnel à des prix équitables. Électriciens certifiés avec passion pour la qualité et la satisfaction client.",
+    "callUs": "Appelez-nous",
+    "servicesTitle": "Services",
+    "electricalWork": "Travaux électriques",
+    "smartHome": "Smart Home",
+    "business": "Entreprise",
+    "rental": "Location",
+    "productsTitle": "Produits",
+    "indoorLighting": "Éclairage intérieur",
+    "outdoorLighting": "Éclairage extérieur",
+    "accessories": "Accessoires",
+    "copyright": "© 2025 Électricien Pas Cher (ASA ApS). Tous droits réservés.",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions Générales",
+    "contact": "Contact"
   }
 }
