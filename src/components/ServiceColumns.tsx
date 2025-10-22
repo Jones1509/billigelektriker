@@ -42,50 +42,63 @@ export const ServiceColumns = () => {
   ];
   
   return (
-    <section className="py-12 md:py-20 bg-background relative overflow-hidden">
-      {/* Subtle background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.03),transparent_70%)]"></div>
+    <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.08),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(34,197,94,0.08),transparent_50%)]"></div>
+      
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
+        backgroundSize: '32px 32px'
+      }}></div>
       
       <div className="container relative z-10">
-        {/* Header */}
-        <div className="text-center mb-10 md:mb-14 animate-fade-in px-4">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
+        {/* Centered header with improved typography */}
+        <div className="text-center mb-12 md:mb-16 animate-fade-in px-4 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
             {t('serviceColumns.title')}
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
             {t('serviceColumns.subtitle')}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0 max-w-6xl mx-auto">
+        {/* Two column layout with visual separator */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 px-4 md:px-0 max-w-7xl mx-auto">
           {/* Private Column */}
-          <div className="space-y-5 animate-fade-in">
-            {/* Column Header */}
-            <div className="text-center md:text-left mb-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3 border border-primary/20">
+          <div className="space-y-6 animate-fade-in">
+            {/* Column Header - Centered */}
+            <div className="text-center pb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20 shadow-sm">
                 <Home className="h-4 w-4" />
                 {t('serviceColumns.private.badge')}
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">{t('serviceColumns.private.title')}</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="text-3xl md:text-4xl font-bold mb-3">{t('serviceColumns.private.title')}</h3>
+              <p className="text-base text-muted-foreground max-w-md mx-auto">
                 {t('serviceColumns.private.subtitle')}
               </p>
             </div>
 
-            {/* Service Cards */}
-            <div className="space-y-3">
+            {/* Service Cards - Equal height */}
+            <div className="grid gap-4">
               {privateServices.map((service, idx) => (
                 <Card 
                   key={idx} 
-                  className="group border border-border/50 hover:border-primary/30 shadow-sm hover:shadow-md transition-all duration-300 bg-card overflow-hidden"
+                  className="group border border-border/60 hover:border-primary/40 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-card overflow-hidden h-full"
                 >
-                  <CardContent className="flex items-center gap-4 p-5">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all">
-                      <service.icon className="h-6 w-6 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardContent className="relative flex items-center gap-4 p-6 h-full">
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
+                      <service.icon className="h-7 w-7 text-white" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-base mb-0.5 group-hover:text-primary transition-colors">{service.title}</h4>
-                      <p className="text-sm text-muted-foreground line-clamp-1">{service.description}</p>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-lg mb-1.5 group-hover:text-primary transition-colors duration-300">
+                        {service.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {service.description}
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
@@ -93,34 +106,42 @@ export const ServiceColumns = () => {
             </div>
           </div>
 
+          {/* Visual Divider for desktop */}
+          <div className="hidden lg:block absolute left-1/2 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-border to-transparent"></div>
+
           {/* Business Column */}
-          <div className="space-y-5 animate-fade-in">
-            {/* Column Header */}
-            <div className="text-center md:text-left mb-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/10 text-secondary text-sm font-medium mb-3 border border-secondary/20">
+          <div className="space-y-6 animate-fade-in">
+            {/* Column Header - Centered */}
+            <div className="text-center pb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-semibold mb-4 border border-secondary/20 shadow-sm">
                 <Building className="h-4 w-4" />
                 {t('serviceColumns.business.badge')}
               </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">{t('serviceColumns.business.title')}</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="text-3xl md:text-4xl font-bold mb-3">{t('serviceColumns.business.title')}</h3>
+              <p className="text-base text-muted-foreground max-w-md mx-auto">
                 {t('serviceColumns.business.subtitle')}
               </p>
             </div>
 
-            {/* Service Cards */}
-            <div className="space-y-3">
+            {/* Service Cards - Equal height */}
+            <div className="grid gap-4">
               {businessServices.map((service, idx) => (
                 <Card 
                   key={idx} 
-                  className="group border border-border/50 hover:border-secondary/30 shadow-sm hover:shadow-md transition-all duration-300 bg-card overflow-hidden"
+                  className="group border border-border/60 hover:border-secondary/40 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-card overflow-hidden h-full"
                 >
-                  <CardContent className="flex items-center gap-4 p-5">
-                    <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-secondary to-green-600 flex items-center justify-center flex-shrink-0 shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all">
-                      <service.icon className="h-6 w-6 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-secondary/0 via-secondary/0 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardContent className="relative flex items-center gap-4 p-6 h-full">
+                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-secondary to-green-600 flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
+                      <service.icon className="h-7 w-7 text-white" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-base mb-0.5 group-hover:text-secondary transition-colors">{service.title}</h4>
-                      <p className="text-sm text-muted-foreground line-clamp-1">{service.description}</p>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-lg mb-1.5 group-hover:text-secondary transition-colors duration-300">
+                        {service.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {service.description}
+                      </p>
                     </div>
                   </CardContent>
                 </Card>
