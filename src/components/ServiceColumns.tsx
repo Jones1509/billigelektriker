@@ -87,7 +87,7 @@ export const ServiceColumns = () => {
                   key={idx} 
                   className="group border border-border/60 hover:border-primary/40 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-card overflow-hidden h-full"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   <CardContent className="relative flex items-center gap-4 p-6 h-full">
                     <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
                       <service.icon className="h-7 w-7 text-white" />
@@ -130,7 +130,7 @@ export const ServiceColumns = () => {
                   key={idx} 
                   className="group border border-border/60 hover:border-secondary/40 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-card overflow-hidden h-full"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-secondary/0 via-secondary/0 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-secondary/0 via-secondary/0 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   <CardContent className="relative flex items-center gap-4 p-6 h-full">
                     <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-secondary to-green-600 flex items-center justify-center flex-shrink-0 shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
                       <service.icon className="h-7 w-7 text-white" />
