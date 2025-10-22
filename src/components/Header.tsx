@@ -129,8 +129,13 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
       <div className="container flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-3">
-          <img src={logo} alt="Billig Elektriker" className="h-16 md:h-20 w-auto" />
+        <Link to="/" className="flex items-center">
+          <img 
+            src={logo} 
+            alt="Billig Elektriker" 
+            className="h-14 w-auto object-contain"
+            style={{ filter: "brightness(1.1)" }}
+          />
         </Link>
         
         <NavigationMenu className="hidden lg:flex">
