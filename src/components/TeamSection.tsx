@@ -7,7 +7,7 @@ export const TeamSection = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-16 md:py-28 relative overflow-hidden">
+    <section className="py-12 md:py-20 relative overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-green-50/40 to-background"></div>
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse"></div>
