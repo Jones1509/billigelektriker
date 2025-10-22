@@ -58,30 +58,30 @@ export const HeroSection = () => {
             </div>
             
             {/* Trust Badges */}
-            <div className="mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-6 text-xs md:text-sm text-white/90 max-w-2xl">
-              <div className="flex flex-col items-center gap-2 text-center">
-                <div className="h-12 w-12 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                  <svg className="h-6 w-6 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <div className="mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-6 text-white max-w-2xl">
+              <div className="flex flex-col items-center gap-3 text-center">
+                <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-secondary/30 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <svg className="h-7 w-7 md:h-8 md:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="leading-tight font-medium">2 års garanti</span>
+                <span className="text-sm md:text-base leading-tight font-bold drop-shadow-lg">2 års<br/>garanti</span>
               </div>
-              <div className="flex flex-col items-center gap-2 text-center">
-                <div className="h-12 w-12 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                  <svg className="h-6 w-6 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <div className="flex flex-col items-center gap-3 text-center">
+                <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-secondary/30 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <svg className="h-7 w-7 md:h-8 md:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="leading-tight font-medium">Hurtig respons</span>
+                <span className="text-sm md:text-base leading-tight font-bold drop-shadow-lg">Hurtig<br/>respons</span>
               </div>
-              <div className="flex flex-col items-center gap-2 text-center">
-                <div className="h-12 w-12 md:h-12 md:w-12 rounded-full bg-secondary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
-                  <svg className="h-6 w-6 md:h-6 md:w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <div className="flex flex-col items-center gap-3 text-center">
+                <div className="h-14 w-14 md:h-16 md:w-16 rounded-full bg-secondary/30 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <svg className="h-7 w-7 md:h-8 md:w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="leading-tight font-medium">Fri parkering</span>
+                <span className="text-sm md:text-base leading-tight font-bold drop-shadow-lg">Fri<br/>parkering</span>
               </div>
             </div>
           </div>
