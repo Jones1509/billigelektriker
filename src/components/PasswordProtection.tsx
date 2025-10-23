@@ -91,7 +91,10 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
                 src={logo} 
                 alt="Billig Elektriker Logo" 
                 className="relative w-[180px] h-auto mb-4 drop-shadow-2xl"
-                style={{ filter: 'drop-shadow(0 0 40px rgba(14, 165, 233, 0.6))' }}
+                style={{ 
+                  filter: 'drop-shadow(0 0 40px rgba(14, 165, 233, 0.6))',
+                  mixBlendMode: 'screen'
+                }}
               />
             </div>
 
