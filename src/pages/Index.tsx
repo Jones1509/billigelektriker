@@ -10,6 +10,7 @@ import { StarterPackages } from "@/components/StarterPackages";
 import { ProductSlider } from "@/components/ProductSlider";
 import { BookingCTA } from "@/components/BookingCTA";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
+import { GradientSpacer } from "@/components/GradientSpacer";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Zap, Phone } from "lucide-react";
@@ -26,14 +27,26 @@ const Index = () => {
         {/* 1. Hero */}
         <HeroSection />
         
+        {/* Smooth transition: Hero → Service Boxes */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--muted) / 0.3)" />
+        
         {/* 2. Service Boxes */}
         <ServiceBoxes />
+        
+        {/* Smooth transition: Service Boxes → Team */}
+        <GradientSpacer fromColor="hsl(var(--muted) / 0.5)" toColor="hsl(var(--background))" />
         
         {/* 3. Team */}
         <TeamSection />
         
+        {/* Smooth transition: Team → Service Columns */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--background))" />
+        
         {/* 4. Service Columns */}
         <ServiceColumns />
+        
+        {/* Smooth transition: Service Columns → Values */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--muted) / 0.2)" />
         
         {/* 5. Values */}
         <ValuesSection />
@@ -41,23 +54,44 @@ const Index = () => {
         {/* Gradient Divider */}
         <GradientDivider />
         
+        {/* Critical transition: SERVICE → PRODUCTS */}
+        <GradientSpacer fromColor="hsl(var(--blue-tint) / 0.6)" toColor="#F0F6FF" />
+        
         {/* 6. Smart Light */}
         <SmartLightSection />
+        
+        {/* Smooth transition: Smart Light → Product Categories */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--background))" />
         
         {/* 7. Product Categories */}
         <ProductCategories />
         
+        {/* Smooth transition: Product Categories → Starter Packages */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--blue-tint))" />
+        
         {/* 8. Starter Packages */}
         <StarterPackages />
+        
+        {/* Smooth transition: Starter Packages → Product Slider */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--background))" />
         
         {/* 9. Product Slider */}
         <ProductSlider />
         
+        {/* Smooth transition: Product Slider → Booking CTA */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--blue-tint))" />
+        
         {/* 10. Booking CTA */}
         <BookingCTA />
         
+        {/* Smooth transition: Booking CTA → Newsletter */}
+        <GradientSpacer fromColor="hsl(var(--blue-tint) / 0.5)" toColor="hsl(var(--background))" />
+        
         {/* 11. Newsletter */}
         <NewsletterCTA />
+        
+        {/* Smooth transition: Newsletter → Footer */}
+        <GradientSpacer fromColor="hsl(var(--background))" toColor="hsl(var(--background))" />
       </main>
 
       {/* Footer */}
