@@ -9,8 +9,11 @@ export const ServiceBoxes = () => {
   
   return (
     <section className="py-8 md:py-12 relative overflow-hidden">
+      {/* Smooth fade-out at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-[5]"></div>
+      
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 via-muted/40 to-muted/50"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-muted/50"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       

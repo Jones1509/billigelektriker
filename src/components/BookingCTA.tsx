@@ -8,6 +8,9 @@ export const BookingCTA = () => {
   
   return (
     <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint)) 0%, hsl(var(--blue-tint) / 0.5) 100%)' }}>
+      {/* Top smooth transition */}
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-transparent pointer-events-none z-0"></div>
+      
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
       
       <div className="container relative z-10 px-4">
