@@ -79,13 +79,6 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
       <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
         {/* Animated Electric Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0EA5E9] via-[#A855F7] to-[#EC4899] animate-gradient-shift"></div>
-        
-        {/* Lightning Flash Effects */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="lightning-flash absolute top-1/4 left-1/4 w-1 h-32 bg-white opacity-0 animate-lightning-1"></div>
-          <div className="lightning-flash absolute top-1/2 right-1/3 w-1 h-24 bg-white opacity-0 animate-lightning-2"></div>
-          <div className="lightning-flash absolute bottom-1/3 left-2/3 w-1 h-28 bg-white opacity-0 animate-lightning-3"></div>
-        </div>
 
         {/* Content Container */}
         <div className="relative z-10 w-full max-w-2xl animate-fade-in">
@@ -202,11 +195,6 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
             100% { background-position: 0% 50%; }
           }
           
-          @keyframes lightning-flash {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 0.5; }
-          }
-          
           @keyframes pulse-glow {
             0%, 100% { 
               box-shadow: 0 0 20px rgba(255,255,255,0.3);
@@ -224,18 +212,6 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           .animate-gradient-shift {
             background-size: 400% 400%;
             animation: gradient-shift 12s ease infinite;
-          }
-          
-          .animate-lightning-1 {
-            animation: lightning-flash 0.3s ease-in-out 4s infinite;
-          }
-          
-          .animate-lightning-2 {
-            animation: lightning-flash 0.3s ease-in-out 6s infinite;
-          }
-          
-          .animate-lightning-3 {
-            animation: lightning-flash 0.3s ease-in-out 8s infinite;
           }
           
           .animate-pulse-glow {
