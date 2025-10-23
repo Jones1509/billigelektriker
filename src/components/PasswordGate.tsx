@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
-import logoClean from '@/assets/logo-clean.png';
+import logoComingSoon from '@/assets/logo-coming-soon.png';
 
 const SITE_PASSWORD = 'Zack2410';
 const COMING_SOON_PASSWORD = 'billigelektriker2025';
@@ -88,20 +88,20 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)]" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-[60px] py-[30px] md:py-[60px]">
-        <div className="flex flex-col items-center text-center space-y-8 md:space-y-12">
+      <div className="relative z-10 w-full max-w-[900px] mx-auto px-6 py-8 md:py-12">
+        <div className="flex flex-col items-center space-y-6 md:space-y-8">
           {/* Logo */}
-          <div className="mb-[50px]">
+          <div className="mb-2">
             <img 
-              src={logoClean} 
+              src={logoComingSoon} 
               alt="Billig Elektriker" 
-              className="w-[180px] h-auto drop-shadow-2xl"
+              className="w-[100px] md:w-[120px] h-auto drop-shadow-2xl"
             />
           </div>
 
           {/* Main heading */}
           <h1 
-            className="text-[48px] md:text-[72px] font-[800] text-white mb-6"
+            className="text-[32px] md:text-[48px] font-[800] text-white text-center"
             style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)' }}
           >
             Billig Elektriker
@@ -109,13 +109,13 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
 
           {/* Coming Soon text */}
           <p 
-            className="text-[24px] font-[600] text-white tracking-[4px] uppercase mb-[50px]"
+            className="text-[18px] md:text-[20px] font-[600] text-white tracking-[3px] uppercase"
           >
             COMING SOON
           </p>
 
           {/* Countdown timer */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-[60px] w-full">
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 w-full my-6">
             {[
               { value: timeLeft.days, label: 'DAGE' },
               { value: timeLeft.hours, label: 'TIMER' },
@@ -124,7 +124,7 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
             ].map((item, index) => (
               <div
                 key={index}
-                className="w-[90px] h-[90px] md:w-[140px] md:h-[140px] flex flex-col items-center justify-center p-5 rounded-[20px] border-2"
+                className="w-[75px] h-[75px] md:w-[100px] md:h-[100px] flex flex-col items-center justify-center p-3 md:p-4 rounded-[16px] border-2"
                 style={{
                   background: 'rgba(255,255,255,0.2)',
                   borderColor: 'rgba(255,255,255,0.4)',
@@ -132,10 +132,10 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
                   boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
                 }}
               >
-                <div className="text-[36px] md:text-[56px] font-bold text-white leading-none mb-2">
+                <div className="text-[28px] md:text-[40px] font-bold text-white leading-none mb-1">
                   {String(item.value).padStart(2, '0')}
                 </div>
-                <div className="text-[16px] text-white uppercase tracking-[1px]">
+                <div className="text-[12px] md:text-[14px] text-white uppercase tracking-[1px]">
                   {item.label}
                 </div>
               </div>
@@ -144,7 +144,7 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
 
           {/* Mission statement */}
           <div 
-            className="max-w-[800px] w-full p-[40px] rounded-[24px] border-2 mb-[50px]"
+            className="max-w-[700px] w-full p-6 md:p-8 rounded-[20px] border-2"
             style={{
               background: 'rgba(255,255,255,0.15)',
               borderColor: 'rgba(255,255,255,0.3)',
@@ -153,33 +153,30 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
             }}
           >
             <div 
-              className="text-[16px] md:text-[18px] leading-[1.8] text-white space-y-4"
+              className="text-[15px] md:text-[16px] leading-[1.7] text-white text-left space-y-3"
               style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}
             >
               <p>
-                Vi er Billig Elektriker – dit nye valg for professionel el-service i København og omegn.
+                Vi bygger en platform hvor service møder handel.
               </p>
               <p>
-                Vores mission er simpel: At levere førsteklasses el-arbejde til ærlige priser, uden at gå på kompromis med kvaliteten. Vi er et ungt, dynamisk team af certificerede elektrikere med passion for faget.
+                Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
               </p>
               <p>
-                Fra den mindste fejlfinding til store installationsprojekter – vi løser dine problemer hurtigt, professionelt og til en pris der giver mening.
-              </p>
-              <p>
-                Snart kan du opleve forskellen selv. Vi glæder os til at servicere dig!
+                Fra akut fejlfinding til planlagte installationer. Fra Smart Home-udstyr til el-komponenter. Vi gør det nemt at få præcis den hjælp eller de produkter du har brug for.
               </p>
             </div>
           </div>
 
           {/* Password section */}
-          <div className="max-w-[500px] w-full">
-            <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="max-w-[450px] w-full mt-4">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <Input
                 type="password"
                 placeholder="Indtast adgangskode"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full h-auto px-6 py-[18px] text-[16px] rounded-[12px] border-2"
+                className="w-full h-auto px-5 py-[14px] text-[15px] rounded-[12px] border-2"
                 style={{
                   background: 'rgba(255,255,255,0.95)',
                   borderColor: 'rgba(255,255,255,0.5)',
@@ -190,13 +187,13 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
               <Button
                 type="submit"
                 disabled={!password.trim()}
-                className="w-full h-auto px-12 py-[18px] text-[18px] font-bold rounded-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white transition-all duration-200 hover:-translate-y-0.5"
+                className="w-full h-auto px-10 py-[14px] text-[16px] font-bold rounded-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white transition-all duration-200 hover:-translate-y-0.5"
               >
                 Få adgang
               </Button>
             </form>
             
-            <p className="text-[14px] mt-6" style={{ color: 'rgba(255,255,255,0.8)' }}>
+            <p className="text-[13px] mt-4" style={{ color: 'rgba(255,255,255,0.8)' }}>
               Kontakt administratoren for at få adgang
             </p>
           </div>
