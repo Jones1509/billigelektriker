@@ -62,26 +62,26 @@ const ComingSoon = () => {
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
       {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B6B] to-[#A855F7]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#C084FC] via-[#A855F7] to-[#9333EA]" />
       
       {/* Overlay pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)]" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-[60px] py-[30px] md:py-[60px]">
-        <div className="flex flex-col items-center text-center space-y-8 md:space-y-12">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-12">
+        <div className="flex flex-col items-center text-center space-y-8">
           {/* Logo */}
-          <div className="mb-[50px]">
+          <div className="mb-4">
             <img 
               src={logoClean} 
               alt="Billig Elektriker" 
-              className="w-[180px] h-auto drop-shadow-2xl"
+              className="w-32 h-auto drop-shadow-2xl"
             />
           </div>
 
           {/* Main heading */}
           <h1 
-            className="text-[48px] md:text-[72px] font-[800] text-white mb-6"
+            className="text-5xl md:text-7xl font-black text-white -mb-2"
             style={{ textShadow: '0 4px 12px rgba(0,0,0,0.3)' }}
           >
             Billig Elektriker
@@ -89,13 +89,13 @@ const ComingSoon = () => {
 
           {/* Coming Soon text */}
           <p 
-            className="text-[24px] font-[600] text-white tracking-[4px] uppercase mb-[50px]"
+            className="text-2xl font-semibold text-white/90 tracking-[0.3em] uppercase mb-6"
           >
             COMING SOON
           </p>
 
           {/* Countdown timer */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-[60px] w-full">
+          <div className="flex flex-wrap justify-center gap-4 mb-8 w-full">
             {[
               { value: timeLeft.days, label: 'DAGE' },
               { value: timeLeft.hours, label: 'TIMER' },
@@ -104,18 +104,18 @@ const ComingSoon = () => {
             ].map((item, index) => (
               <div
                 key={index}
-                className="w-[90px] h-[90px] md:w-[140px] md:h-[140px] flex flex-col items-center justify-center p-5 rounded-[20px] border-2"
+                className="w-28 h-28 md:w-36 md:h-36 flex flex-col items-center justify-center rounded-2xl border-2"
                 style={{
-                  background: 'rgba(255,255,255,0.2)',
-                  borderColor: 'rgba(255,255,255,0.4)',
+                  background: 'rgba(255,255,255,0.15)',
+                  borderColor: 'rgba(255,255,255,0.3)',
                   backdropFilter: 'blur(10px)',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
                 }}
               >
-                <div className="text-[36px] md:text-[56px] font-bold text-white leading-none mb-2">
+                <div className="text-5xl md:text-6xl font-bold text-white leading-none mb-1">
                   {String(item.value).padStart(2, '0')}
                 </div>
-                <div className="text-[16px] text-white uppercase tracking-[1px]">
+                <div className="text-sm text-white/80 uppercase tracking-wider">
                   {item.label}
                 </div>
               </div>
@@ -124,7 +124,7 @@ const ComingSoon = () => {
 
           {/* Mission statement */}
           <div 
-            className="max-w-[800px] w-full p-[40px] rounded-[24px] border-2 mb-[50px]"
+            className="max-w-2xl w-full p-8 md:p-10 rounded-3xl border-2 mb-6"
             style={{
               background: 'rgba(255,255,255,0.15)',
               borderColor: 'rgba(255,255,255,0.3)',
@@ -132,62 +132,68 @@ const ComingSoon = () => {
               boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
             }}
           >
-            <div 
-              className="text-[16px] md:text-[18px] leading-[1.8] text-white space-y-4"
-              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}
-            >
-              <p>
-                Vi er Billig Elektriker – dit nye valg for professionel el-service i København og omegn.
+            <div className="text-left space-y-5">
+              <div className="flex items-start gap-3 mb-4">
+                <span className="text-2xl">⚡</span>
+                <h2 className="text-xl md:text-2xl font-bold text-white">
+                  Vi bygger noget helt nyt og spændende!
+                </h2>
+              </div>
+              
+              <p className="text-base md:text-lg text-white/95 leading-relaxed">
+                Billig Elektriker er på vej med Danmarks mest moderne platform for elektriker-ydelser. Vi kombinerer professionel service, konkurrencedygtige priser og smart teknologi for at gøre dit hjem mere sikkert og energieffektivt.
               </p>
-              <p>
-                Vores mission er simpel: At levere førsteklasses el-arbejde til ærlige priser, uden at gå på kompromis med kvaliteten. Vi er et ungt, dynamisk team af certificerede elektrikere med passion for faget.
-              </p>
-              <p>
-                Fra den mindste fejlfinding til store installationsprojekter – vi løser dine problemer hurtigt, professionelt og til en pris der giver mening.
-              </p>
-              <p>
-                Snart kan du opleve forskellen selv. Vi glæder os til at servicere dig!
-              </p>
+
+              <div className="space-y-3 mt-6">
+                <div className="flex items-center gap-3 text-white/95">
+                  <span className="text-xl">🔌</span>
+                  <span className="text-base md:text-lg">Professionelle elektrikere</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/95">
+                  <span className="text-xl">💡</span>
+                  <span className="text-base md:text-lg">Smart home installation</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/95">
+                  <span className="text-xl">⚡</span>
+                  <span className="text-base md:text-lg">Hurtig service</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/95">
+                  <span className="text-xl">💰</span>
+                  <span className="text-base md:text-lg">Gennemsigtige priser</span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Password section */}
           {!isAuthenticated && (
-            <div className="max-w-[500px] w-full">
+            <div className="max-w-xl w-full">
               <form onSubmit={handlePasswordSubmit} className="space-y-4">
                 <Input
                   type="password"
                   placeholder="Indtast adgangskode"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-auto px-6 py-[18px] text-[16px] rounded-[12px] border-2"
-                  style={{
-                    background: 'rgba(255,255,255,0.95)',
-                    borderColor: 'rgba(255,255,255,0.5)',
-                  }}
+                  className="w-full h-14 px-6 text-base rounded-xl border-2 bg-white/90 border-white/50 placeholder:text-gray-400"
                 />
                 
                 <Button
                   type="submit"
-                  className="w-full h-auto px-12 py-[18px] text-[18px] font-bold rounded-[12px] bg-[#3B82F6] hover:bg-[#2563EB] text-white transition-all duration-200 hover:-translate-y-0.5"
+                  className="w-full h-14 text-lg font-bold rounded-xl bg-[#06B6D4] hover:bg-[#0891B2] text-white shadow-lg transition-all duration-200"
                 >
-                  Få adgang
+                  Lås Op
                 </Button>
               </form>
-              
-              <p className="text-[14px] mt-6" style={{ color: 'rgba(255,255,255,0.8)' }}>
-                Kontakt administratoren for at få adgang
-              </p>
             </div>
           )}
 
           {/* Authenticated message */}
           {isAuthenticated && (
             <div 
-              className="max-w-[600px] w-full p-8 rounded-[20px] border-2"
+              className="max-w-xl w-full p-8 rounded-3xl border-2"
               style={{
-                background: 'rgba(255,255,255,0.2)',
-                borderColor: 'rgba(255,255,255,0.4)',
+                background: 'rgba(255,255,255,0.15)',
+                borderColor: 'rgba(255,255,255,0.3)',
                 backdropFilter: 'blur(10px)',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
               }}
