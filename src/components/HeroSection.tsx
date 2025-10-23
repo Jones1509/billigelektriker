@@ -88,10 +88,11 @@ export const HeroSection = () => {
           
           {/* Image - Right Side */}
           <div className="relative hidden lg:block animate-fade-in">
+            <div className="absolute -inset-4 bg-gradient-to-r from-secondary/30 to-primary/30 rounded-3xl blur-3xl opacity-50 animate-pulse"></div>
             <img 
               src={switchesImage} 
               alt="Forskellige farverige stikkontakter og afbrydere" 
-              className="relative w-full h-auto rounded-2xl hover:scale-105 transition-transform duration-500"
+              className="relative w-full h-auto rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-500"
               style={{ 
                 imageRendering: "-webkit-optimize-contrast",
                 WebkitFontSmoothing: "antialiased"

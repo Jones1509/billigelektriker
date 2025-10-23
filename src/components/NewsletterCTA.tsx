@@ -21,10 +21,7 @@ export const NewsletterCTA = () => {
   };
 
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint) / 0.5) 0%, hsl(var(--primary)) 100%)' }}>
-      {/* Top smooth transition */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[hsl(var(--blue-tint)/0.5)] to-transparent pointer-events-none z-0"></div>
-      
+    <section className="py-8 md:py-12 bg-gradient-to-br from-primary via-blue-600 to-primary text-primary-foreground relative overflow-hidden">
       {/* Premium background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(34,197,94,0.15),transparent_50%)]"></div>
