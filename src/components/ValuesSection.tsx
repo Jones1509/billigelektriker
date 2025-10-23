@@ -32,9 +32,8 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative py-8 md:py-12 pb-0 overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--muted) / 0.2) 0%, hsl(var(--blue-tint) / 0.6) 100%)' }}>
-      {/* Smooth top fade */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--muted)/0.2)] to-transparent pointer-events-none z-[5]"></div>
+    <section className="py-10 md:py-12 bg-background relative overflow-hidden">
+      {/* Smooth top fade - removed since gradient spacer handles this */}
       
       {/* Decorative electrical circuit pattern */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none">

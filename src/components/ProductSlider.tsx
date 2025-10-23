@@ -25,11 +25,9 @@ export const ProductSlider = () => {
 
   return (
     <section 
-      className="py-8 md:py-12 relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--blue-tint)) 100%)' }}
+      className="py-10 md:py-12 relative overflow-hidden"
+      style={{ background: 'hsl(var(--blue-tint))' }}
     >
-      {/* Top smooth transition */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--background))] to-transparent pointer-events-none z-0"></div>
       
       {/* Premium background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]"></div>
