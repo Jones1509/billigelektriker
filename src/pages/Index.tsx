@@ -3,8 +3,7 @@ import { ServiceBoxes } from "@/components/ServiceBoxes";
 import { TeamSection } from "@/components/TeamSection";
 import { ServiceColumns } from "@/components/ServiceColumns";
 import { ValuesSection } from "@/components/ValuesSection";
-import { SectionSeparator } from "@/components/SectionSeparator";
-import { GradientSpacer } from "@/components/GradientSpacer";
+import { GradientDivider } from "@/components/GradientDivider";
 import { SmartLightSection } from "@/components/SmartLightSection";
 import { ProductCategories } from "@/components/ProductCategories";
 import { StarterPackages } from "@/components/StarterPackages";
@@ -24,16 +23,11 @@ const Index = () => {
       <Header />
       
       <main>
-        {/* DEL 1: SERVICE */}
-        
         {/* 1. Hero */}
         <HeroSection />
         
         {/* 2. Service Boxes */}
         <ServiceBoxes />
-        
-        {/* Smooth transition: muted → white */}
-        <GradientSpacer fromColor="hsl(var(--muted) / 0.5)" toColor="hsl(var(--background))" height="40px" />
         
         {/* 3. Team */}
         <TeamSection />
@@ -44,16 +38,11 @@ const Index = () => {
         {/* 5. Values */}
         <ValuesSection />
         
-        {/* CRITICAL TRANSITION: SERVICE → PRODUCTS */}
-        <SectionSeparator />
-        
-        {/* DEL 2: PRODUKTER */}
+        {/* Gradient Divider */}
+        <GradientDivider />
         
         {/* 6. Smart Light */}
         <SmartLightSection />
-        
-        {/* Smooth transition: light blue → white */}
-        <GradientSpacer fromColor="#EFF6FF" toColor="hsl(var(--background))" height="40px" />
         
         {/* 7. Product Categories */}
         <ProductCategories />
@@ -61,20 +50,11 @@ const Index = () => {
         {/* 8. Starter Packages */}
         <StarterPackages />
         
-        {/* Smooth transition: blue tint → white */}
-        <GradientSpacer fromColor="hsl(var(--blue-tint))" toColor="hsl(var(--background))" height="40px" />
-        
         {/* 9. Product Slider */}
         <ProductSlider />
         
-        {/* Smooth transition: blue tint → gray */}
-        <GradientSpacer fromColor="hsl(var(--blue-tint))" toColor="#F8FAFC" height="40px" />
-        
         {/* 10. Booking CTA */}
         <BookingCTA />
-        
-        {/* Smooth transition: gray → white */}
-        <GradientSpacer fromColor="#F8FAFC" toColor="hsl(var(--background))" height="40px" />
         
         {/* 11. Newsletter */}
         <NewsletterCTA />

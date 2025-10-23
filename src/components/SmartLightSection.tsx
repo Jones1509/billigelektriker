@@ -52,7 +52,9 @@ export const SmartLightSection = () => {
   }, [currentIndex]);
   
   return (
-    <section className="relative overflow-hidden py-10 md:py-12">
+    <section className="relative overflow-hidden py-8 md:py-12">
+      {/* Smooth top transition from previous gradient divider */}
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-[#F0F6FF] pointer-events-none z-[2]"></div>
       
       {/* Smooth gradient background */}
       <div 

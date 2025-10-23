@@ -34,10 +34,11 @@ export const StarterPackages = () => {
 
   return (
     <section 
-      className="py-10 md:py-12 relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 100%)' }}
+      className="py-8 md:py-12 relative overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint)) 0%, hsl(var(--background)) 50%, hsl(var(--background)) 100%)' }}
     >
-      {/* Top fade removed - gradient spacer handles this */}
+      {/* Top fade from previous section */}
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-transparent pointer-events-none z-0"></div>
       <div className="container relative z-10">
         <div className="text-center mb-8 px-4 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#1E293B]">
