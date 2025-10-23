@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Lock } from "lucide-react";
@@ -10,6 +10,10 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
   const [password, setPassword] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    console.log("🔒 Password Protection Active - Blocking all content");
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
