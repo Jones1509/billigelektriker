@@ -53,7 +53,10 @@ export const SmartLightSection = () => {
   
   return (
     <section className="relative overflow-hidden py-8 md:py-12">
-      {/* Smooth gradient background starting with light blue */}
+      {/* Smooth top transition from previous gradient divider */}
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-[#F0F6FF] pointer-events-none z-[2]"></div>
+      
+      {/* Smooth gradient background */}
       <div 
         className="absolute inset-0 z-0"
         style={{

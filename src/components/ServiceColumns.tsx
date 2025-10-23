@@ -42,7 +42,10 @@ export const ServiceColumns = () => {
   ];
   
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden bg-background border-t border-border/40">
+    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.2) 100%)' }}>
+      {/* Top smooth fade */}
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--background))] to-transparent pointer-events-none z-0"></div>
+      
       {/* Very subtle gradient only */}
       <div className="absolute inset-0 bg-gradient-to-b from-muted/10 to-background pointer-events-none"></div>
       
