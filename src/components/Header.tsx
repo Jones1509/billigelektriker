@@ -408,21 +408,15 @@ export const Header = () => {
                       <Link
                         to="/om-os"
                         onClick={closeMobileMenu}
-                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                        className="block p-3 rounded-lg hover:bg-accent transition-colors"
                       >
-                        <div className="rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 p-2 shadow-md">
-                          <Info className="h-4 w-4 text-white" />
-                        </div>
                         <span className="font-medium">{t('header.about')}</span>
                       </Link>
                       <Link
                         to="/kontakt"
                         onClick={closeMobileMenu}
-                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                        className="block p-3 rounded-lg hover:bg-accent transition-colors"
                       >
-                        <div className="rounded-lg bg-gradient-to-br from-green-500 to-green-600 p-2 shadow-md">
-                          <Mail className="h-4 w-4 text-white" />
-                        </div>
                         <span className="font-medium">{t('header.contact')}</span>
                       </Link>
                     </div>
