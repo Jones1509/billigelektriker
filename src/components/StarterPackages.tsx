@@ -34,10 +34,10 @@ export const StarterPackages = () => {
 
   return (
     <section 
-      className="py-16 md:py-16 relative overflow-hidden bg-gradient-to-b from-white to-gray-50"
+      className="py-8 md:py-12 relative overflow-hidden bg-gradient-to-b from-white to-gray-50"
     >
       <div className="container relative z-10">
-        <div className="text-center mb-12 px-4 animate-fade-in">
+        <div className="text-center mb-8 px-4 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#1E293B]">
             Smart-Lys Pakker med Installation
           </h2>
