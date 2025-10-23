@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Lock, Zap } from "lucide-react";
-import logo from "@/assets/logo.avif";
+import logo from "@/assets/logo-new.png";
 
 const CORRECT_PASSWORD = "billigelektriker2025";
 // Beregn 45 dage fra nu
