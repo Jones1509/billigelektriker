@@ -132,40 +132,51 @@
     }
   },
   "starterPackages": {
-    "badge": "✨ Smarte Pakkeløsninger",
-    "title": "Kom i gang med smart lys – nemt og hurtigt",
-    "subtitle": "Vælg den pakke der passer til dit behov – alt er inkluderet",
+    "badge": "Smart Home Pakker",
+    "title": "Vælg Din Smart-Lys Løsning",
+    "subtitle": "Professionel installation inkluderet. Bridge opsætning, netværk og instruktion – alt er med.",
+    "mostPopular": "Mest Populære",
+    "includes": "Indeholder:",
+    "vatIncluded": "Inkl. moms",
     "starter": {
       "name": "Start-pakke",
-      "price": "999",
-      "description": "Perfekt til at komme i gang med smart lys",
+      "price": "2.499",
+      "description": "Perfekt til 1-2 rum – få den smarte oplevelse uden kompleksitet",
+      "perfectFor": "Perfekt til: Stue eller soveværelse",
       "features": [
-        "2x E27 RGB-pærer",
-        "1x trådløs switch",
-        "Gratis app til iOS & Android",
-        "Nem installation"
+        "1x Philips Hue Bridge (inkl. installation)",
+        "2x E27 RGB smart-pærer",
+        "1x Trådløs switch",
+        "Gratis app-opsætning + instruktion"
       ]
     },
     "expansion": {
       "name": "Udvidelses-pakke",
-      "price": "1.799",
-      "description": "Udvid din smarte belysning til flere rum",
+      "price": "3.999",
+      "description": "Dæk hele lejligheden med intelligent lys og automatisering",
+      "perfectFor": "Perfekt til: 3-4 rum (hele lejlighed eller flere zoner)",
       "features": [
-        "4x E27 RGB-pærer",
-        "2x trådløse switches",
-        "1x bevægelsessensor",
-        "Timer-funktioner"
+        "1x Philips Hue Bridge (inkl. installation)",
+        "4x E27 RGB smart-pærer",
+        "2x Trådløse switches",
+        "1x Bevægelsessensor",
+        "Timer-funktioner + scener",
+        "Gratis app-opsætning + instruktion"
       ]
     },
     "complete": {
       "name": "Komplet-pakke",
-      "price": "2.499",
-      "description": "Alt du behøver til indendørs og udendørs",
+      "price": "6.499",
+      "description": "Hele huset inklusive have – komplet smart home løsning",
+      "perfectFor": "Perfekt til: Hele huset inkl. have/terrasse",
       "features": [
-        "6x E27 RGB-pærer",
-        "3x trådløse switches",
-        "2x bevægelsessensorer",
-        "4x udendørs spots (IP65)"
+        "1x Philips Hue Bridge (inkl. installation)",
+        "6x E27 RGB smart-pærer (indendørs)",
+        "4x Udendørs smart spots (IP65)",
+        "3x Trådløse switches",
+        "2x Bevægelsessensorer",
+        "Avanceret opsætning (zoner, scener, automation)",
+        "Gratis app-instruktion + support i 30 dage"
       ]
     },
     "cta": "Køb nu"

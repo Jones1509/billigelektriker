@@ -132,40 +132,51 @@
     }
   },
   "starterPackages": {
-    "badge": "✨ Intelligente Paketlösungen",
-    "title": "Starten Sie mit intelligenter Beleuchtung – einfach und schnell",
-    "subtitle": "Wählen Sie das Paket, das zu Ihren Bedürfnissen passt – alles inklusive",
+    "badge": "Smart Home Pakete",
+    "title": "Wählen Sie Ihre Smart-Licht-Lösung",
+    "subtitle": "Professionelle Installation inklusive. Bridge-Einrichtung, Netzwerk und Anleitung – alles ist dabei.",
+    "mostPopular": "Am beliebtesten",
+    "includes": "Beinhaltet:",
+    "vatIncluded": "Inkl. MwSt.",
     "starter": {
       "name": "Starter-Paket",
-      "price": "999",
-      "description": "Perfekt für den Einstieg in die intelligente Beleuchtung",
+      "price": "2.499",
+      "description": "Perfekt für 1-2 Räume – intelligente Erfahrung ohne Komplexität",
+      "perfectFor": "Perfekt für: Wohnzimmer oder Schlafzimmer",
       "features": [
-        "2x E27 RGB-Lampen",
-        "1x kabelloser Schalter",
-        "Kostenlose App für iOS & Android",
-        "Einfache Installation"
+        "1x Philips Hue Bridge (inkl. Installation)",
+        "2x E27 RGB intelligente Lampen",
+        "1x Kabelloser Schalter",
+        "Kostenlose App-Einrichtung + Anleitung"
       ]
     },
     "expansion": {
       "name": "Erweiterungs-Paket",
-      "price": "1.799",
-      "description": "Erweitern Sie Ihre intelligente Beleuchtung auf mehr Räume",
+      "price": "3.999",
+      "description": "Decken Sie Ihre gesamte Wohnung mit intelligentem Licht und Automatisierung ab",
+      "perfectFor": "Perfekt für: 3-4 Räume (ganze Wohnung oder mehrere Zonen)",
       "features": [
-        "4x E27 RGB-Lampen",
-        "2x kabellose Schalter",
+        "1x Philips Hue Bridge (inkl. Installation)",
+        "4x E27 RGB intelligente Lampen",
+        "2x Kabellose Schalter",
         "1x Bewegungssensor",
-        "Timer-Funktionen"
+        "Timer-Funktionen + Szenen",
+        "Kostenlose App-Einrichtung + Anleitung"
       ]
     },
     "complete": {
       "name": "Komplett-Paket",
-      "price": "2.499",
-      "description": "Alles, was Sie für Innen- und Außenbereich benötigen",
+      "price": "6.499",
+      "description": "Ganzes Haus inklusive Garten – komplette Smart-Home-Lösung",
+      "perfectFor": "Perfekt für: Ganzes Haus inkl. Garten/Terrasse",
       "features": [
-        "6x E27 RGB-Lampen",
-        "3x kabellose Schalter",
+        "1x Philips Hue Bridge (inkl. Installation)",
+        "6x E27 RGB intelligente Lampen (innen)",
+        "4x Intelligente Außen-Spots (IP65)",
+        "3x Kabellose Schalter",
         "2x Bewegungssensoren",
-        "4x Außen-Spots (IP65)"
+        "Erweiterte Einrichtung (Zonen, Szenen, Automatisierung)",
+        "Kostenlose App-Anleitung + 30 Tage Support"
       ]
     },
     "cta": "Jetzt kaufen"

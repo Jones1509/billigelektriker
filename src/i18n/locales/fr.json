@@ -132,40 +132,51 @@
     }
   },
   "starterPackages": {
-    "badge": "✨ Solutions de Forfaits Intelligents",
-    "title": "Commencez avec l'éclairage intelligent – facile et rapide",
-    "subtitle": "Choisissez le forfait qui correspond à vos besoins – tout est inclus",
+    "badge": "Forfaits Smart Home",
+    "title": "Choisissez Votre Solution d'Éclairage Intelligent",
+    "subtitle": "Installation professionnelle incluse. Configuration du Bridge, réseau et instructions – tout est inclus.",
+    "mostPopular": "Le Plus Populaire",
+    "includes": "Comprend:",
+    "vatIncluded": "TVA incluse",
     "starter": {
       "name": "Forfait Démarrage",
-      "price": "999",
-      "description": "Parfait pour commencer avec l'éclairage intelligent",
+      "price": "2 499",
+      "description": "Parfait pour 1-2 pièces – obtenez l'expérience intelligente sans complexité",
+      "perfectFor": "Parfait pour: Salon ou chambre",
       "features": [
-        "2x ampoules E27 RGB",
-        "1x interrupteur sans fil",
-        "Application gratuite pour iOS & Android",
-        "Installation facile"
+        "1x Philips Hue Bridge (incl. installation)",
+        "2x ampoules E27 RGB intelligentes",
+        "1x Interrupteur sans fil",
+        "Configuration gratuite de l'application + instructions"
       ]
     },
     "expansion": {
       "name": "Forfait Extension",
-      "price": "1 799",
-      "description": "Étendez votre éclairage intelligent à plus de pièces",
+      "price": "3 999",
+      "description": "Couvrez tout votre appartement avec éclairage intelligent et automatisation",
+      "perfectFor": "Parfait pour: 3-4 pièces (appartement entier ou plusieurs zones)",
       "features": [
-        "4x ampoules E27 RGB",
-        "2x interrupteurs sans fil",
-        "1x détecteur de mouvement",
-        "Fonctions de minuterie"
+        "1x Philips Hue Bridge (incl. installation)",
+        "4x ampoules E27 RGB intelligentes",
+        "2x Interrupteurs sans fil",
+        "1x Détecteur de mouvement",
+        "Fonctions de minuterie + scènes",
+        "Configuration gratuite de l'application + instructions"
       ]
     },
     "complete": {
       "name": "Forfait Complet",
-      "price": "2 499",
-      "description": "Tout ce dont vous avez besoin pour l'intérieur et l'extérieur",
+      "price": "6 499",
+      "description": "Maison entière y compris jardin – solution smart home complète",
+      "perfectFor": "Parfait pour: Maison entière incl. jardin/terrasse",
       "features": [
-        "6x ampoules E27 RGB",
-        "3x interrupteurs sans fil",
-        "2x détecteurs de mouvement",
-        "4x spots extérieurs (IP65)"
+        "1x Philips Hue Bridge (incl. installation)",
+        "6x ampoules E27 RGB intelligentes (intérieur)",
+        "4x Spots intelligents extérieurs (IP65)",
+        "3x Interrupteurs sans fil",
+        "2x Détecteurs de mouvement",
+        "Configuration avancée (zones, scènes, automatisation)",
+        "Instructions gratuites de l'application + support 30 jours"
       ]
     },
     "cta": "Acheter maintenant"

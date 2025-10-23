@@ -11,40 +11,41 @@ export const StarterPackages = () => {
       name: t('starterPackages.starter.name'),
       price: t('starterPackages.starter.price'),
       description: t('starterPackages.starter.description'),
-      features: t('starterPackages.starter.features', { returnObjects: true }) as string[]
+      features: t('starterPackages.starter.features', { returnObjects: true }) as string[],
+      perfectFor: t('starterPackages.starter.perfectFor'),
+      popular: false
     },
     {
       name: t('starterPackages.expansion.name'),
       price: t('starterPackages.expansion.price'),
       description: t('starterPackages.expansion.description'),
-      features: t('starterPackages.expansion.features', { returnObjects: true }) as string[]
+      features: t('starterPackages.expansion.features', { returnObjects: true }) as string[],
+      perfectFor: t('starterPackages.expansion.perfectFor'),
+      popular: true
     },
     {
       name: t('starterPackages.complete.name'),
       price: t('starterPackages.complete.price'),
       description: t('starterPackages.complete.description'),
-      features: t('starterPackages.complete.features', { returnObjects: true }) as string[]
+      features: t('starterPackages.complete.features', { returnObjects: true }) as string[],
+      perfectFor: t('starterPackages.complete.perfectFor'),
+      popular: false
     }
   ];
 
   return (
     <section 
-      className="py-8 md:py-12 relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 100%)' }}
+      className="py-12 md:py-20 relative overflow-hidden bg-gradient-to-b from-background via-gray-50/30 to-background dark:via-gray-900/30"
     >
-      {/* Premium background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(147,51,234,0.08),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
-      
       <div className="container relative z-10">
-        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
-          <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-primary/10 text-purple-600 dark:text-purple-400 text-sm font-semibold mb-4 border border-purple-500/20">
+        <div className="text-center mb-12 md:mb-16 animate-fade-in px-4">
+          <span className="inline-block px-3 py-1.5 rounded-full bg-blue-500/10 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium mb-6 border border-blue-500/30">
             {t('starterPackages.badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-foreground">
             {t('starterPackages.title')}
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-medium">
             {t('starterPackages.subtitle')}
           </p>
         </div>
@@ -53,38 +54,63 @@ export const StarterPackages = () => {
           {packages.map((pkg, idx) => (
             <Card 
               key={idx} 
-              className="group flex flex-col relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20 overflow-hidden animate-fade-in"
+              className="group flex flex-col relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1 overflow-hidden animate-fade-in rounded-[20px]"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
-              {/* Animated gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
-              <CardHeader className="relative text-center pb-4 md:pb-6 pt-4 md:pt-6">
-                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 group-hover:text-primary transition-colors">{pkg.name}</h3>
-                <div className="mb-3 md:mb-4">
-                  <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">{pkg.price}</span>
-                  <span className="text-muted-foreground text-base md:text-lg"> kr.</span>
+              {/* Popular badge */}
+              {pkg.popular && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                  <span className="inline-block px-5 py-2 rounded-full bg-[#FFB800] text-[#1E293B] text-xs font-bold shadow-lg">
+                    {t('starterPackages.mostPopular')}
+                  </span>
                 </div>
-                <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">{pkg.description}</p>
+              )}
+              
+              <CardHeader className="relative text-center pb-6 pt-8">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">{pkg.name}</h3>
+                <div className="mb-3">
+                  <span className="text-5xl md:text-6xl font-extrabold text-[#0EA5E9]">{pkg.price}</span>
+                  <span className="text-muted-foreground text-xl font-normal"> kr.</span>
+                </div>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed italic">{pkg.description}</p>
               </CardHeader>
 
-              <CardContent className="relative flex-grow px-4 md:px-6">
-                <ul className="space-y-2 md:space-y-3">
+              <CardContent className="relative flex-grow px-6">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/60 mb-4">
+                  {t('starterPackages.includes')}
+                </p>
+                <ul className="space-y-3 mb-6">
                   {pkg.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-2 md:gap-3">
-                      <div className="p-1 bg-primary/10 rounded-full flex-shrink-0 mt-0.5">
-                        <Check className="h-3 w-3 md:h-4 md:w-4 text-primary" />
+                    <li key={fIdx} className="flex items-start gap-3">
+                      <div className="p-1 bg-[#0EA5E9]/10 rounded-full flex-shrink-0 mt-0.5">
+                        <Check className="h-4 w-4 text-[#0EA5E9]" />
                       </div>
-                      <span className="text-xs md:text-sm">{feature}</span>
+                      <span className="text-sm text-foreground/80 font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
+                
+                <div className="pt-5 border-t border-border">
+                  <p className="text-sm text-muted-foreground italic">
+                    {pkg.perfectFor}
+                  </p>
+                </div>
               </CardContent>
 
-              <CardFooter className="relative pt-4 md:pt-6 px-4 md:px-6">
-                <Button className="w-full text-sm md:text-base group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-primary transition-all duration-300 shadow-md hover:shadow-lg" size="lg">
+              <CardFooter className="relative pt-6 px-6 pb-6 flex flex-col items-center">
+                <Button 
+                  className={`w-full text-base font-bold rounded-xl py-6 shadow-[0_2px_8px_rgba(14,165,233,0.3)] hover:shadow-[0_4px_12px_rgba(14,165,233,0.4)] transition-all duration-200 hover:-translate-y-0.5 ${
+                    pkg.popular 
+                      ? 'bg-[#8B5CF6] hover:bg-[#7C3AED] text-white' 
+                      : 'bg-[#0EA5E9] hover:bg-[#0284C7] text-white'
+                  }`}
+                  size="lg"
+                >
                   {t('starterPackages.cta')}
                 </Button>
+                <p className="text-xs text-muted-foreground/60 mt-3 text-center">
+                  {t('starterPackages.vatIncluded')}
+                </p>
               </CardFooter>
             </Card>
           ))}
