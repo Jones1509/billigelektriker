@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Lock, Zap } from "lucide-react";
-import logo from "@/assets/logo-new.png";
+import logo from "@/assets/logo-clean.png";
 
 const CORRECT_PASSWORD = "billigelektriker2025";
 // Beregn 45 dage fra nu
@@ -84,18 +84,12 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
         <div className="relative z-10 w-full max-w-2xl animate-fade-in">
           <div className="flex flex-col items-center gap-8">
             
-            {/* Logo with Electric Glow */}
-            <div className="relative animate-pulse-glow">
-              <div className="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-40"></div>
+            {/* Logo */}
+            <div>
               <img 
                 src={logo} 
                 alt="Billig Elektriker Logo" 
-                className="relative w-[180px] h-auto mb-4"
-                style={{ 
-                  filter: 'drop-shadow(0 0 40px rgba(14, 165, 233, 0.6)) brightness(1.1) contrast(1.2)',
-                  mixBlendMode: 'screen',
-                  backgroundColor: 'transparent'
-                }}
+                className="w-[180px] h-auto mb-4"
               />
             </div>
 
