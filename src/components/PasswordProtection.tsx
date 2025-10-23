@@ -5,7 +5,8 @@ import { Lock, Zap } from "lucide-react";
 import logo from "@/assets/logo.avif";
 
 const CORRECT_PASSWORD = "billigelektriker2025";
-const LAUNCH_DATE = new Date("2025-03-10T00:00:00"); // 45 dage fra nu
+// Beregn 45 dage fra nu
+const LAUNCH_DATE = new Date(Date.now() + 45 * 24 * 60 * 60 * 1000);
 
 interface TimeLeft {
   days: number;
