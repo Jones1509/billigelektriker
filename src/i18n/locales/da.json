@@ -182,16 +182,11 @@
     "cta": "Køb nu"
   },
   "bookingCta": {
-    "title": "Vi Hjælper Dig Med At Finde Den Rigtige Løsning",
-    "subtitle": "Book en uforpligtende samtale med vores elektrikere. Vi rådgiver dig om den bedste smart-lys løsning til dit hjem – helt gratis.",
-    "bookCall": "Book Gratis Samtale",
-    "callNow": "Ring Nu",
-    "trustPoints": {
-      "certified": "Certificerede elektrikere",
-      "noCommitment": "Ingen forpligtelser",
-      "sameDay": "Svar samme dag"
-    },
-    "badges": "Ingen forpligtelser • Gratis rådgivning • Få svar med det samme"
+    "title": "Brug for hjælp til at vælge det rigtige lys?",
+    "subtitle": "Book en gratis 10-minutters samtale – vi hjælper dig med at finde den bedste løsning til dit projekt.",
+    "bookCall": "Book gratis samtale",
+    "callNow": "Ring nu",
+    "benefits": "✓ Ingen forpligtelser • ✓ Gratis rådgivning • ✓ Få svar med det samme"
   },
   "newsletter": {
     "title": "Få 10% rabat på din første ordre",

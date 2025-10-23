@@ -34,7 +34,7 @@ export const StarterPackages = () => {
 
   return (
     <section 
-      className="py-12 md:py-16 relative overflow-hidden"
+      className="py-8 md:py-12 relative overflow-hidden"
       style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint)) 0%, hsl(var(--background)) 50%, hsl(var(--background)) 100%)' }}
     >
       {/* Top fade from previous section */}

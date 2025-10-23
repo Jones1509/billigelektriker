@@ -182,16 +182,11 @@
     "cta": "Buy now"
   },
   "bookingCta": {
-    "title": "We Help You Find The Right Solution",
-    "subtitle": "Book a non-binding conversation with our electricians. We advise you on the best smart light solution for your home – completely free.",
-    "bookCall": "Book Free Consultation",
-    "callNow": "Call Now",
-    "trustPoints": {
-      "certified": "Certified electricians",
-      "noCommitment": "No obligations",
-      "sameDay": "Same day response"
-    },
-    "badges": "No obligations • Free consultation • Get answers immediately"
+    "title": "Need help choosing the right lighting?",
+    "subtitle": "Book a free 10-minute call – we'll help you find the best solution for your project.",
+    "bookCall": "Book free call",
+    "callNow": "Call now",
+    "benefits": "✓ No obligations • ✓ Free advice • ✓ Get answers immediately"
   },
   "newsletter": {
     "title": "Get 10% off your first order",

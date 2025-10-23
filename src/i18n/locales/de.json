@@ -182,16 +182,11 @@
     "cta": "Jetzt kaufen"
   },
   "bookingCta": {
-    "title": "Wir Helfen Ihnen, Die Richtige Lösung Zu Finden",
-    "subtitle": "Buchen Sie ein unverbindliches Gespräch mit unseren Elektrikern. Wir beraten Sie über die beste Smart-Light-Lösung für Ihr Zuhause – völlig kostenlos.",
-    "bookCall": "Kostenlose Beratung Buchen",
-    "callNow": "Jetzt Anrufen",
-    "trustPoints": {
-      "certified": "Zertifizierte Elektriker",
-      "noCommitment": "Keine Verpflichtungen",
-      "sameDay": "Antwort am selben Tag"
-    },
-    "badges": "Keine Verpflichtungen • Kostenlose Beratung • Sofortige Antworten"
+    "title": "Brauchen Sie Hilfe bei der Auswahl der richtigen Beleuchtung?",
+    "subtitle": "Buchen Sie ein kostenloses 10-Minuten-Gespräch – wir helfen Ihnen, die beste Lösung für Ihr Projekt zu finden.",
+    "bookCall": "Kostenloses Gespräch buchen",
+    "callNow": "Jetzt anrufen",
+    "benefits": "✓ Keine Verpflichtungen • ✓ Kostenlose Beratung • ✓ Sofort Antworten erhalten"
   },
   "newsletter": {
     "title": "Erhalten Sie 10% Rabatt auf Ihre erste Bestellung",

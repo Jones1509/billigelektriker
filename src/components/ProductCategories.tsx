@@ -37,7 +37,7 @@ export const ProductCategories = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint) / 0.3) 50%, hsl(var(--blue-tint)) 100%)' }}>
+    <section className="py-12 md:py-20 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint) / 0.3) 50%, hsl(var(--blue-tint)) 100%)' }}>
       {/* Smooth top fade */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[hsl(var(--background))] to-transparent pointer-events-none z-[2]"></div>
       <div className="container relative z-10">
