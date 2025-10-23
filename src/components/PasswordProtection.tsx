@@ -134,18 +134,13 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
                 <Zap className="h-6 w-6 text-yellow-300 flex-shrink-0 mt-1" />
                 <div className="text-white space-y-3">
                   <p className="text-lg md:text-xl font-semibold leading-relaxed">
-                    Vi bygger noget helt nyt og spændende!
+                    Vi bygger en platform hvor service møder handel.
                   </p>
                   <p className="text-sm md:text-base text-white/90 leading-relaxed">
-                    Billig Elektriker er på vej med Danmarks mest moderne platform for elektriker-ydelser. 
-                    Vi kombinerer professionel service, konkurrencedygtige priser og smart teknologi 
-                    for at gøre dit hjem mere sikkert og energieffektivt.
+                    Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
                   </p>
                   <p className="text-sm md:text-base text-white/90 leading-relaxed">
-                    🔌 Professionelle elektrikere<br />
-                    💡 Smart home installation<br />
-                    ⚡ Hurtig service<br />
-                    💰 Gennemsigtige priser
+                    Fra akut fejlfinding til planlagte installationer. Fra Smart Home-udstyr til el-komponenter. Vi gør det nemt at få præcis den hjælp eller de produkter du har brug for.
                   </p>
                 </div>
               </div>
