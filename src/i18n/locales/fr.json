@@ -182,11 +182,16 @@
     "cta": "Acheter maintenant"
   },
   "bookingCta": {
-    "title": "Besoin d'aide pour choisir le bon éclairage?",
-    "subtitle": "Réservez un appel gratuit de 10 minutes – nous vous aiderons à trouver la meilleure solution pour votre projet.",
-    "bookCall": "Réserver un appel gratuit",
-    "callNow": "Appelez maintenant",
-    "benefits": "✓ Aucune obligation • ✓ Conseils gratuits • ✓ Obtenez des réponses immédiatement"
+    "title": "Nous Vous Aidons À Trouver La Bonne Solution",
+    "subtitle": "Réservez une conversation sans engagement avec nos électriciens. Nous vous conseillons sur la meilleure solution d'éclairage intelligent pour votre maison – entièrement gratuit.",
+    "bookCall": "Réserver Consultation Gratuite",
+    "callNow": "Appelez Maintenant",
+    "trustPoints": {
+      "certified": "Électriciens certifiés",
+      "noCommitment": "Aucun engagement",
+      "sameDay": "Réponse le jour même"
+    },
+    "badges": "Aucun engagement • Consultation gratuite • Obtenez des réponses immédiatement"
   },
   "newsletter": {
     "title": "Obtenez 10% de réduction sur votre première commande",

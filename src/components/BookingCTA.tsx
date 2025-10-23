@@ -1,52 +1,89 @@
 import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
-import { Calendar, Phone } from "lucide-react";
+import { Calendar, Phone, Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import teamPhoto from "@/assets/team-photo-branded.jpg";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint)) 0%, hsl(var(--blue-tint) / 0.5) 100%)' }}>
-      {/* Top smooth transition */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-transparent pointer-events-none z-0"></div>
-      
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
-      
-      <div className="container relative z-10 px-4">
-        <div className="max-w-4xl mx-auto">
-          <Card className="border-0 shadow-2xl bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-900 dark:to-blue-950/30 overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
-            <CardContent className="relative p-6 md:p-8 text-center space-y-4 md:space-y-6">
-              <div className="inline-flex p-4 md:p-6 bg-gradient-to-br from-primary to-blue-600 rounded-2xl shadow-xl">
-                <Calendar className="h-8 w-8 md:h-12 md:w-12 text-white" />
-              </div>
+    <section className="py-20 bg-background">
+      <div className="container px-4">
+        <div className="max-w-6xl mx-auto">
+          {/* Split-screen layout */}
+          <div className="grid lg:grid-cols-2 gap-0 bg-white dark:bg-gray-900 rounded-3xl overflow-hidden shadow-xl">
+            
+            {/* Left Side - Image */}
+            <div className="relative h-[350px] lg:h-auto min-h-[500px]">
+              <img 
+                src={teamPhoto} 
+                alt="Billig Elektriker team" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Right Side - Content */}
+            <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20">
               
-              <div className="space-y-3 md:space-y-4">
-                <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-tight">
-                  {t('bookingCta.title')}
-                </h2>
-                <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-                  {t('bookingCta.subtitle')}
-                </p>
+              {/* Small Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 w-fit">
+                <Check className="h-4 w-4" />
+                Gratis Rådgivning
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
-                <Button size="lg" className="w-full sm:w-auto group shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700">
-                  <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              {/* Heading */}
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight">
+                {t('bookingCta.title')}
+              </h2>
+
+              {/* Subtext */}
+              <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-md leading-relaxed">
+                {t('bookingCta.subtitle')}
+              </p>
+
+              {/* Trust Elements */}
+              <div className="space-y-2 mb-8">
+                <div className="flex items-center gap-3 text-foreground">
+                  <Check className="h-5 w-5 text-primary flex-shrink-0" />
+                  <span className="text-base">{t('bookingCta.trustPoints.certified')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-foreground">
+                  <Check className="h-5 w-5 text-primary flex-shrink-0" />
+                  <span className="text-base">{t('bookingCta.trustPoints.noCommitment')}</span>
+                </div>
+                <div className="flex items-center gap-3 text-foreground">
+                  <Check className="h-5 w-5 text-primary flex-shrink-0" />
+                  <span className="text-base">{t('bookingCta.trustPoints.sameDay')}</span>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                <Button 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg hover:shadow-xl transition-all"
+                >
+                  <Calendar className="mr-2 h-5 w-5" />
                   {t('bookingCta.bookCall')}
                 </Button>
-                <Button size="lg" variant="outline" className="w-full sm:w-auto shadow-md hover:shadow-lg transition-all duration-300">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary/5 font-semibold transition-all"
+                >
                   <Phone className="mr-2 h-5 w-5" />
                   {t('bookingCta.callNow')}
                 </Button>
               </div>
 
-              <p className="text-xs md:text-sm text-muted-foreground pt-2 md:pt-4">
-                {t('bookingCta.benefits')}
-              </p>
-            </CardContent>
-          </Card>
+              {/* Trust Badges */}
+              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                <Check className="h-4 w-4 text-primary" />
+                <span>{t('bookingCta.badges')}</span>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </section>
