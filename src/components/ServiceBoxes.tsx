@@ -8,7 +8,7 @@ export const ServiceBoxes = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden">
+    <section className="py-12 md:py-16 relative overflow-hidden">
       {/* Smooth fade-out at bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-[5]"></div>
       
