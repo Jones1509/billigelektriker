@@ -17,14 +17,63 @@ serve(async (req) => {
     const body = await req.json();
     const { text, texts, targetLang, sourceLang = 'da' } = body;
     
+    // Validate targetLang against allowed values to prevent injection
+    const allowedLanguages = ['en', 'fr', 'de', 'da'];
+    if (!targetLang || typeof targetLang !== 'string' || !allowedLanguages.includes(targetLang)) {
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid target language', 
+          allowed: allowedLanguages 
+        }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Validate sourceLang
+    if (typeof sourceLang !== 'string' || !allowedLanguages.includes(sourceLang)) {
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid source language', 
+          allowed: allowedLanguages 
+        }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+    
     // Support both single text and batch texts
     const textsToTranslate = texts || (text ? [text] : []);
     
-    if (textsToTranslate.length === 0 || !targetLang) {
+    if (textsToTranslate.length === 0) {
       return new Response(
-        JSON.stringify({ error: 'Missing text/texts or targetLang' }),
+        JSON.stringify({ error: 'Missing text or texts array' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
+    }
+
+    // Validate all texts are strings and check length limits
+    const MAX_TEXT_LENGTH = 5000;
+    const MAX_BATCH_SIZE = 50;
+    
+    if (textsToTranslate.length > MAX_BATCH_SIZE) {
+      return new Response(
+        JSON.stringify({ error: `Batch size must be less than ${MAX_BATCH_SIZE} items` }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    for (const txt of textsToTranslate) {
+      if (typeof txt !== 'string') {
+        return new Response(
+          JSON.stringify({ error: 'All texts must be strings' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+      if (txt.length > MAX_TEXT_LENGTH) {
+        return new Response(
+          JSON.stringify({ error: `Each text must be less than ${MAX_TEXT_LENGTH} characters` }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
     }
     
     console.log(`Translating ${textsToTranslate.length} texts from ${sourceLang} to ${targetLang}`);

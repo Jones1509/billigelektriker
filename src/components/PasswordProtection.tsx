@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Lock, Zap } from "lucide-react";
 import logo from "@/assets/logo-clean.png";
 
+// SECURITY WARNING: This is a temporary preview password stored in client code.
+// This provides NO real security - anyone can view this in browser DevTools.
+// For production: Remove this password protection or implement proper Supabase Auth.
 const CORRECT_PASSWORD = "billigelektriker2025";
 // Beregn 45 dage fra nu
 const LAUNCH_DATE = new Date(Date.now() + 45 * 24 * 60 * 60 * 1000);
