@@ -7,30 +7,43 @@ import logo from "@/assets/logo.avif";
 const CORRECT_PASSWORD = "billigelektriker2025";
 
 export const PasswordProtection = ({ children }: { children: React.ReactNode }) => {
+  // CRITICAL: Default to LOCKED state
   const [password, setPassword] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [error, setError] = useState("");
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    console.log("🔒 Password Protection Active - Status:", isUnlocked ? "UNLOCKED" : "LOCKED");
-  }, [isUnlocked]);
+    // Force component to be ready and in locked state
+    setIsReady(true);
+    console.log("🔒 PASSWORD WALL ACTIVE - ALL CONTENT BLOCKED");
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("🔑 Password attempt");
+    console.log("🔑 Attempting password:", password.substring(0, 3) + "...");
     
-    if (password === CORRECT_PASSWORD) {
-      console.log("✅ Password correct - unlocking");
+    if (password.trim() === CORRECT_PASSWORD) {
+      console.log("✅ CORRECT PASSWORD - UNLOCKING CONTENT");
       setIsUnlocked(true);
       setError("");
     } else {
-      console.log("❌ Password incorrect");
+      console.log("❌ WRONG PASSWORD");
       setError("Forkert adgangskode - prøv igen");
       setPassword("");
     }
   };
 
-  // CRITICAL: Always show password screen when locked
+  // Show nothing until ready (prevents flash of content)
+  if (!isReady) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-blue-600 to-secondary">
+        <div className="text-white text-2xl">Loading...</div>
+      </div>
+    );
+  }
+
+  // CRITICAL: Block all content until unlocked
   if (!isUnlocked) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary via-blue-600 to-secondary p-4">
