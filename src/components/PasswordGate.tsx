@@ -81,8 +81,13 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#C084FC] via-[#A855F7] to-[#9333EA]" />
+      {/* Electric animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#10b981] via-[#3b82f6] to-[#ef4444] animate-electric-flow" 
+           style={{ backgroundSize: '400% 400%' }} />
+      
+      {/* Secondary animated layer for lightning effect */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#ef4444] via-[#10b981] to-[#3b82f6] animate-electric-pulse opacity-50" 
+           style={{ backgroundSize: '400% 400%' }} />
       
       {/* Overlay pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.1),transparent)]" />
@@ -153,33 +158,26 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
             }}
           >
             <div className="text-left space-y-5">
-              <div className="flex items-start gap-3 mb-4">
-                <span className="text-2xl">⚡</span>
-                <h2 className="text-xl md:text-2xl font-bold text-white">
-                  Vi bygger noget helt nyt og spændende!
-                </h2>
-              </div>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
+                Vi bygger noget helt nyt og spændende!
+              </h2>
               
               <p className="text-base md:text-lg text-white/95 leading-relaxed">
                 Billig Elektriker er på vej med Danmarks mest moderne platform for elektriker-ydelser. Vi kombinerer professionel service, konkurrencedygtige priser og smart teknologi for at gøre dit hjem mere sikkert og energieffektivt.
               </p>
 
-              <div className="space-y-3 mt-6">
-                <div className="flex items-center gap-3 text-white/95">
-                  <span className="text-xl">🔌</span>
-                  <span className="text-base md:text-lg">Professionelle elektrikere</span>
+              <div className="space-y-3 mt-6 text-white/95">
+                <div className="flex items-start gap-3">
+                  <span className="text-base md:text-lg font-medium">• Professionelle elektrikere</span>
                 </div>
-                <div className="flex items-center gap-3 text-white/95">
-                  <span className="text-xl">💡</span>
-                  <span className="text-base md:text-lg">Smart home installation</span>
+                <div className="flex items-start gap-3">
+                  <span className="text-base md:text-lg font-medium">• Smart home installation</span>
                 </div>
-                <div className="flex items-center gap-3 text-white/95">
-                  <span className="text-xl">⚡</span>
-                  <span className="text-base md:text-lg">Hurtig service</span>
+                <div className="flex items-start gap-3">
+                  <span className="text-base md:text-lg font-medium">• Hurtig service</span>
                 </div>
-                <div className="flex items-center gap-3 text-white/95">
-                  <span className="text-xl">💰</span>
-                  <span className="text-base md:text-lg">Gennemsigtige priser</span>
+                <div className="flex items-start gap-3">
+                  <span className="text-base md:text-lg font-medium">• Gennemsigtige priser</span>
                 </div>
               </div>
             </div>
@@ -209,6 +207,54 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
           </div>
         </div>
       </div>
+
+      {/* CSS for electric animations */}
+      <style>{`
+        @keyframes electric-flow {
+          0% {
+            background-position: 0% 50%;
+          }
+          25% {
+            background-position: 100% 50%;
+          }
+          50% {
+            background-position: 50% 100%;
+          }
+          75% {
+            background-position: 0% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        
+        @keyframes electric-pulse {
+          0% {
+            background-position: 100% 0%;
+            opacity: 0.3;
+          }
+          33% {
+            background-position: 0% 100%;
+            opacity: 0.5;
+          }
+          66% {
+            background-position: 100% 100%;
+            opacity: 0.4;
+          }
+          100% {
+            background-position: 100% 0%;
+            opacity: 0.3;
+          }
+        }
+        
+        .animate-electric-flow {
+          animation: electric-flow 8s ease-in-out infinite;
+        }
+        
+        .animate-electric-pulse {
+          animation: electric-pulse 6s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };
