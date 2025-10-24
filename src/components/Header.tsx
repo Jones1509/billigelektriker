@@ -317,15 +317,6 @@ export const Header = () => {
             <LanguageSwitcher />
           </div>
           
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="hidden md:flex items-center gap-2 text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10"
-          >
-            <Phone className="h-4 w-4" />
-            <span>{t('header.callUs')}</span>
-          </Button>
-          
           {/* Mobile Menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
