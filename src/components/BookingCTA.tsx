@@ -1,54 +1,97 @@
 import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
-import { Calendar, Phone } from "lucide-react";
+import { Calendar, Phone, CheckCircle2, Zap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint)) 0%, hsl(var(--blue-tint) / 0.5) 100%)' }}>
-      {/* Top smooth transition */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-transparent pointer-events-none z-0"></div>
+    <section className="w-full bg-[#F8FAFC] py-16 md:py-24 lg:py-28 relative overflow-hidden">
+      {/* Gradient transitions */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-[#F8FAFC] pointer-events-none"></div>
       
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
-      
-      <div className="container relative z-10 px-4">
-        <div className="max-w-4xl mx-auto">
-          <Card className="border-0 shadow-2xl bg-gradient-to-br from-white to-blue-50/50 dark:from-gray-900 dark:to-blue-950/30 overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl"></div>
-            <CardContent className="relative p-6 md:p-8 text-center space-y-4 md:space-y-6">
-              <div className="inline-flex p-4 md:p-6 bg-gradient-to-br from-primary to-blue-600 rounded-2xl shadow-xl">
-                <Calendar className="h-8 w-8 md:h-12 md:w-12 text-white" />
+      <div className="max-w-7xl mx-auto px-5 md:px-10 lg:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+          {/* LEFT SIDE - 60% */}
+          <div className="lg:col-span-3">
+            {/* Badge */}
+            <div className="inline-block mb-5">
+              <span className="inline-block px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-[#0369A1] bg-[rgba(14,165,233,0.12)] border-2 border-[rgba(14,165,233,0.3)] rounded-full">
+                Professionel Rådgivning
+              </span>
+            </div>
+            
+            {/* Heading */}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1E293B] leading-tight mb-4 max-w-[600px]">
+              Vi Hjælper Dig Med At Finde Den Rigtige Løsning
+            </h2>
+            
+            {/* Subtitle */}
+            <p className="text-base md:text-lg text-[#64748B] leading-relaxed mb-8 max-w-[550px]">
+              Book en uforpligtende samtale med vores elektrikere. Vi rådgiver dig om den bedste smart-lys løsning til dit hjem – helt gratis.
+            </p>
+            
+            {/* Trust bullets */}
+            <div className="space-y-4 mb-9">
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-[rgba(14,165,233,0.25)]">
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-base font-semibold text-[#475569]">Certificerede elektrikere</span>
               </div>
               
-              <div className="space-y-3 md:space-y-4">
-                <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold leading-tight">
-                  {t('bookingCta.title')}
-                </h2>
-                <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-                  {t('bookingCta.subtitle')}
-                </p>
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-[rgba(14,165,233,0.25)]">
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-base font-semibold text-[#475569]">Ingen forpligtelser</span>
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4">
-                <Button size="lg" className="w-full sm:w-auto group shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-700">
-                  <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                  {t('bookingCta.bookCall')}
-                </Button>
-                <Button size="lg" variant="outline" className="w-full sm:w-auto shadow-md hover:shadow-lg transition-all duration-300">
-                  <Phone className="mr-2 h-5 w-5" />
-                  {t('bookingCta.callNow')}
-                </Button>
+              
+              <div className="flex items-center gap-3">
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-[#0EA5E9] to-[#3B82F6] flex items-center justify-center shadow-lg shadow-[rgba(14,165,233,0.25)]">
+                  <CheckCircle2 className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-base font-semibold text-[#475569]">Svar samme dag</span>
               </div>
-
-              <p className="text-xs md:text-sm text-muted-foreground pt-2 md:pt-4">
-                {t('bookingCta.benefits')}
-              </p>
-            </CardContent>
-          </Card>
+            </div>
+            
+            {/* CTA Button */}
+            <Button 
+              size="lg" 
+              className="inline-flex items-center gap-2 px-11 py-6 text-lg font-bold text-white bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] hover:from-[#0284C7] hover:to-[#0369A1] rounded-xl shadow-[0_6px_24px_rgba(14,165,233,0.35)] hover:shadow-[0_8px_32px_rgba(14,165,233,0.45)] hover:scale-105 transition-all duration-300"
+            >
+              <Calendar className="w-5 h-5" />
+              Book Gratis Samtale
+            </Button>
+            
+            {/* Phone info */}
+            <p className="mt-5 text-[15px] text-[#64748B]">
+              Eller ring direkte:{" "}
+              <a 
+                href="tel:71997171" 
+                className="font-bold text-[#0EA5E9] hover:text-[#0284C7] hover:underline transition-colors"
+              >
+                71 99 71 71
+              </a>
+            </p>
+            
+            {/* Small text */}
+            <p className="mt-4 text-[13px] text-[#94A3B8]">
+              Ingen forpligtelser • Gratis rådgivning • Vi ringer inden for 24 timer
+            </p>
+          </div>
+          
+          {/* RIGHT SIDE - 40% */}
+          <div className="lg:col-span-2 flex justify-center lg:justify-end">
+            <div className="w-full max-w-[400px] aspect-square bg-gradient-to-br from-[#0EA5E9] to-[#8B5CF6] rounded-3xl shadow-[0_12px_40px_rgba(14,165,233,0.25)] flex items-center justify-center">
+              <Zap className="w-28 h-28 md:w-32 md:h-32 text-white opacity-90" strokeWidth={2} />
+            </div>
+          </div>
         </div>
       </div>
+      
+      {/* Bottom gradient transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-[#F8FAFC] pointer-events-none"></div>
     </section>
   );
 };
