@@ -1,156 +1,165 @@
-import { Button } from "./ui/button";
-import { Check } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { Check, Zap, Phone, Mail, Star, Shield, Clock, Award } from "lucide-react";
 
 export const StarterPackages = () => {
-  const { t } = useTranslation();
-  
-  const packages = [
+  const services = [
     {
-      name: t('starterPackages.starter.name'),
-      price: t('starterPackages.starter.price'),
-      description: t('starterPackages.starter.description'),
-      features: t('starterPackages.starter.features', { returnObjects: true }) as string[],
-      perfectFor: t('starterPackages.starter.perfectFor'),
-      popular: false
+      name: "Standard Service",
+      description: "Daglige el-opgaver og mindre reparationer",
+      price: "650",
+      priceNote: "per time",
+      features: [
+        "Fejlfinding og reparation",
+        "Installation af stikkontakter",
+        "Udskiftning af lamper",
+        "El-tjek og eftersyn"
+      ],
+      buttonText: "Book Nu",
+      buttonIcon: "phone",
+      featured: false
     },
     {
-      name: t('starterPackages.expansion.name'),
-      price: t('starterPackages.expansion.price'),
-      description: t('starterPackages.expansion.description'),
-      features: t('starterPackages.expansion.features', { returnObjects: true }) as string[],
-      perfectFor: t('starterPackages.expansion.perfectFor'),
-      popular: true
+      name: "Premium Pakke",
+      description: "Komplette installationer med garanti",
+      price: "850",
+      priceNote: "per time",
+      features: [
+        "Alt fra Standard Service",
+        "Smart home installation",
+        "Nye elinstallationer",
+        "El-tavle opgradering",
+        "2 års garanti inkluderet"
+      ],
+      buttonText: "Vælg Premium",
+      buttonIcon: "zap",
+      featured: true
     },
     {
-      name: t('starterPackages.complete.name'),
-      price: t('starterPackages.complete.price'),
-      description: t('starterPackages.complete.description'),
-      features: t('starterPackages.complete.features', { returnObjects: true }) as string[],
-      perfectFor: t('starterPackages.complete.perfectFor'),
-      popular: false
+      name: "Erhverv",
+      description: "Professionelle løsninger til virksomheder",
+      price: "Kontakt",
+      priceNote: "for tilbud",
+      features: [
+        "Skræddersyet løsning",
+        "Større projekter",
+        "Fast servicetekniker",
+        "Fleksibel planlægning",
+        "Serviceaftale"
+      ],
+      buttonText: "Få Tilbud",
+      buttonIcon: "mail",
+      featured: false
     }
   ];
 
   return (
-    <section 
-      className="py-8 md:py-12 relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint)) 0%, hsl(var(--background)) 50%, hsl(var(--background)) 100%)' }}
-    >
-      {/* Top fade from previous section */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-transparent pointer-events-none z-0"></div>
-      <div className="container relative z-10">
-        <div className="text-center mb-8 px-4 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#1E293B]">
-            Smart-Lys Pakker med Installation
+    <section className="py-20 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+      <div className="max-w-[1300px] mx-auto px-10">
+        {/* Section Header */}
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-primary/8 border border-primary/15 rounded-full text-primary text-[11px] font-bold uppercase tracking-wider mb-5">
+            <Zap className="w-3.5 h-3.5" />
+            TRANSPARENTE PRISER
+          </div>
+          <h2 className="text-5xl font-black text-slate-900 mb-4 tracking-tight">
+            Vores Services & Priser
           </h2>
-          <p className="text-base text-[#64748B] max-w-2xl mx-auto">
-            Inkluderer bridge, installation og opsætning af certificeret elektriker.
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Professionel el-service med klare, fair priser. Ingen skjulte omkostninger.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 px-4 md:px-0">
-          {packages.map((pkg, idx) => (
-            <div 
-              key={idx} 
-              className="package-card group flex flex-col relative bg-white rounded-2xl transition-all duration-200 animate-fade-in"
-              style={{ 
-                border: pkg.popular ? '3px solid #0EA5E9' : '2px solid #E2E8F0',
-                boxShadow: pkg.popular 
-                  ? '0 8px 24px rgba(14,165,233,0.15)' 
-                  : '0 4px 16px rgba(0,0,0,0.06)',
-                padding: '32px 28px',
-                maxHeight: '650px',
-                animationDelay: `${idx * 100}ms`
-              }}
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {services.map((service, idx) => (
+            <div
+              key={idx}
+              className={`relative flex flex-col gap-7 p-10 rounded-[20px] transition-all duration-500 ${
+                service.featured
+                  ? 'bg-gradient-to-br from-primary to-primary/90 text-white scale-105 shadow-[0_24px_48px_rgba(0,102,255,0.25)] hover:shadow-[0_32px_64px_rgba(0,102,255,0.3)] hover:scale-105 hover:-translate-y-2 border-none'
+                  : 'bg-white border border-slate-200 hover:border-primary/20 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]'
+              } animate-fade-in`}
+              style={{ animationDelay: `${idx * 100}ms` }}
             >
-              {/* Simple popular badge */}
-              {pkg.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                  <span 
-                    className="inline-block px-5 py-2 rounded-2xl text-xs font-bold uppercase tracking-wide text-white bg-[#0EA5E9]"
-                  >
-                    Mest Populære
-                  </span>
+              {/* Featured Badge */}
+              {service.featured && (
+                <div className="absolute top-5 right-5 flex items-center gap-1.5 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full">
+                  <Star className="w-3.5 h-3.5 fill-white" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider">Mest Valgt</span>
                 </div>
               )}
-              
-              <div className="relative text-center mb-6">
-                <h3 className="text-2xl font-bold mb-4 text-[#1E293B]">
-                  {pkg.name}
+
+              {/* Card Header */}
+              <div className="text-center">
+                <h3 className={`text-2xl font-extrabold mb-2 tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
+                  {service.name}
                 </h3>
-                
-                {/* Clean solid price */}
-                <div className="mb-3">
-                  <span className="text-5xl font-black text-[#0EA5E9]">
-                    {pkg.price}
+                <p className={`text-[15px] leading-relaxed ${service.featured ? 'text-white/95' : 'text-slate-600'}`}>
+                  {service.description}
+                </p>
+              </div>
+
+              {/* Price Section */}
+              <div className={`text-center py-6 border-t border-b ${service.featured ? 'border-white/20' : 'border-slate-200'}`}>
+                <div className="flex items-baseline justify-center gap-1 mb-1">
+                  <span className={`text-5xl font-black tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
+                    {service.price}
                   </span>
-                  <span className="text-xl font-medium text-[#64748B] align-top ml-2">
-                    kr.
-                  </span>
+                  {service.price !== "Kontakt" && (
+                    <span className={`text-xl font-bold ${service.featured ? 'text-white/90' : 'text-slate-600'}`}>
+                      kr
+                    </span>
+                  )}
                 </div>
-                
-                <p className="text-sm italic text-[#64748B] leading-relaxed max-w-xs mx-auto">
-                  {pkg.description}
+                <p className={`text-[13px] font-medium ${service.featured ? 'text-white/80' : 'text-slate-500'}`}>
+                  {service.priceNote}
                 </p>
               </div>
 
-              {/* Simple separator */}
-              <div className="w-4/5 h-px bg-[#E2E8F0] mx-auto mb-6"></div>
+              {/* Features List */}
+              <ul className="flex-grow space-y-3">
+                {service.features.map((feature, fIdx) => (
+                  <li key={fIdx} className="flex items-center gap-2.5">
+                    <Check className={`w-[18px] h-[18px] flex-shrink-0 ${service.featured ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
+                    <span className={`text-[15px] font-medium ${service.featured ? 'text-white/95' : 'text-slate-700'}`}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
-              <div className="relative flex-grow">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#94A3B8] mb-4">
-                  Indeholder:
-                </p>
-                <ul className="space-y-2.5 mb-5">
-                  {pkg.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-2.5">
-                      <div className="w-[18px] h-[18px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#0EA5E9]">
-                        <Check className="h-3 w-3 text-white" strokeWidth={3} />
-                      </div>
-                      <span className="text-sm font-medium text-[#475569] leading-relaxed">
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <div className="pt-4 mt-5 border-t border-[#E2E8F0]">
-                  <p className="text-sm italic text-center text-[#64748B]">
-                    {pkg.perfectFor}
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative pt-6 flex flex-col items-center">
-                <Button 
-                  className={`w-full h-12 text-base font-bold rounded-xl transition-all duration-200 ${
-                    pkg.popular 
-                      ? 'bg-[#0EA5E9] hover:bg-[#0284C7] text-white' 
-                      : 'bg-transparent text-[#0EA5E9] hover:bg-[#0EA5E9] hover:text-white border-2 border-[#0EA5E9]'
-                  }`}
-                  style={pkg.popular ? {
-                    boxShadow: '0 4px 12px rgba(14,165,233,0.2)'
-                  } : {}}
-                >
-                  Køb nu
-                </Button>
-                <p className="text-xs text-[#94A3B8] mt-2 text-center">
-                  Inkl. moms
-                </p>
-              </div>
+              {/* CTA Button */}
+              <button
+                className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-[15px] font-bold transition-all duration-300 ${
+                  service.featured
+                    ? 'bg-white text-primary shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:-translate-y-0.5'
+                    : 'bg-primary text-white shadow-[0_4px_12px_rgba(0,102,255,0.2)] hover:bg-primary/90 hover:shadow-[0_6px_20px_rgba(0,102,255,0.3)] hover:-translate-y-0.5'
+                }`}
+              >
+                {service.buttonIcon === 'phone' && <Phone className="w-[18px] h-[18px]" />}
+                {service.buttonIcon === 'zap' && <Zap className="w-[18px] h-[18px]" />}
+                {service.buttonIcon === 'mail' && <Mail className="w-[18px] h-[18px]" />}
+                {service.buttonText}
+              </button>
             </div>
           ))}
         </div>
-      </div>
 
-      <style>{`
-        .package-card:hover {
-          border-color: #0EA5E9;
-          box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-          transform: translateY(-2px);
-        }
-      `}</style>
+        {/* Trust Section */}
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 pt-12 border-t border-slate-200 animate-fade-in">
+          <div className="flex items-center gap-3">
+            <Shield className="w-6 h-6 text-primary" />
+            <p className="text-sm text-slate-700 font-semibold m-0">Certificerede elektrikere</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <Clock className="w-6 h-6 text-primary" />
+            <p className="text-sm text-slate-700 font-semibold m-0">Samme dag service</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <Award className="w-6 h-6 text-primary" />
+            <p className="text-sm text-slate-700 font-semibold m-0">2 års garanti</p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
