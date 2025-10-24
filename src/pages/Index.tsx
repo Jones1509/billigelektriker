@@ -8,7 +8,7 @@ import { SmartLightSection } from "@/components/SmartLightSection";
 import { ProductCategories } from "@/components/ProductCategories";
 import { StarterPackages } from "@/components/StarterPackages";
 import { ProductSlider } from "@/components/ProductSlider";
-import { BookingCTA } from "@/components/BookingCTA";
+import { ConsultationSection } from "@/components/ConsultationSection";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
@@ -53,8 +53,8 @@ const Index = () => {
         {/* 9. Product Slider */}
         <ProductSlider />
         
-        {/* 10. Booking CTA */}
-        <BookingCTA />
+        {/* 10. Consultation CTA */}
+        <ConsultationSection />
         
         {/* 11. Newsletter */}
         <NewsletterCTA />
