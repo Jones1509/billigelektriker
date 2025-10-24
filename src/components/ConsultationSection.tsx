@@ -106,30 +106,39 @@ export const ConsultationSection = () => {
               </div>
             </div>
             
-            {/* CTA Button */}
-            <Button 
-              size="lg"
-              className="w-fit gap-2 px-9 py-6 text-lg font-bold shadow-lg hover:shadow-xl transition-all"
-            >
-              <Calendar className="w-5 h-5" />
-              Book Gratis Samtale
-            </Button>
+            {/* Guide til form */}
+            <div className="p-4 bg-primary/10 border-l-4 border-primary rounded-lg">
+              <p className="text-base font-semibold text-foreground">
+                📝 Udfyld formularen til højre for at booke
+              </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Vi kontakter dig inden for 24 timer
+              </p>
+            </div>
             
-            {/* Phone */}
-            <p className="text-base text-muted-foreground">
-              Eller ring direkte:{" "}
+            {/* Phone Box */}
+            <div className="p-6 bg-gradient-to-br from-slate-50 to-blue-50 border border-primary/10 rounded-2xl">
+              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold mb-3">
+                Har du det travlt? Ring nu:
+              </p>
               <a 
                 href="tel:71997171" 
-                className="font-bold text-primary hover:underline transition-colors"
+                className="inline-flex items-center gap-3 text-3xl font-extrabold text-primary hover:text-primary/80 transition-all hover:translate-x-1"
               >
+                <Phone className="w-7 h-7" />
                 71 99 71 71
               </a>
-            </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Tilgængelig mandag-fredag 8-17
+              </p>
+            </div>
             
             {/* Trust badges */}
-            <p className="text-sm text-muted-foreground/80">
-              Ingen forpligtelser • Gratis rådgivning • Vi ringer inden for 24 timer
-            </p>
+            <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+              <span>✓ Ingen forpligtelser</span>
+              <span>✓ Gratis rådgivning</span>
+              <span>✓ 24/7 nødservice</span>
+            </div>
           </div>
           
           {/* RIGHT SIDE - Contact Form Card */}
