@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
-import { Calendar, Phone, CheckCircle2, Zap } from "lucide-react";
+import { Calendar, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import consultationImage from "@/assets/consultation-illustration.png";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
@@ -83,8 +84,12 @@ export const BookingCTA = () => {
           
           {/* RIGHT SIDE - 40% */}
           <div className="lg:col-span-2 flex justify-center lg:justify-end">
-            <div className="w-full max-w-[400px] aspect-square bg-gradient-to-br from-[#0EA5E9] to-[#8B5CF6] rounded-3xl shadow-[0_12px_40px_rgba(14,165,233,0.25)] flex items-center justify-center">
-              <Zap className="w-28 h-28 md:w-32 md:h-32 text-white opacity-90" strokeWidth={2} />
+            <div className="w-full max-w-[450px]">
+              <img 
+                src={consultationImage} 
+                alt="Elektriker i professionel samtale med kunde om el-løsninger" 
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>
