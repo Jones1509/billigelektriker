@@ -1,6 +1,5 @@
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Gift } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
@@ -32,10 +31,6 @@ export const NewsletterCTA = () => {
       
       <div className="container relative z-10 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
-          <div className="inline-flex p-4 md:p-6 bg-white/10 backdrop-blur-sm rounded-2xl mb-2 md:mb-4 shadow-xl">
-            <Gift className="h-8 w-8 md:h-10 md:w-10" />
-          </div>
-          
           <div className="space-y-3 md:space-y-4">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               {t('newsletter.title')}
