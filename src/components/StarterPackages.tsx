@@ -90,15 +90,15 @@ export const StarterPackages = () => {
   ];
 
   return (
-    <section className="py-20 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-12 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1300px] mx-auto px-10">
         {/* Section Header */}
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-primary/8 border border-primary/15 rounded-full text-primary text-[11px] font-bold uppercase tracking-wider mb-5">
+        <div className="text-center mb-6 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-primary/8 border border-primary/15 rounded-full text-primary text-[11px] font-bold uppercase tracking-wider mb-3">
             <Zap className="w-3.5 h-3.5" />
             TRANSPARENTE PRISER
           </div>
-          <h2 className="text-5xl font-black text-slate-900 mb-4 tracking-tight">
+          <h2 className="text-5xl font-black text-slate-900 mb-2 tracking-tight">
             Vores Services & Priser
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -107,13 +107,14 @@ export const StarterPackages = () => {
         </div>
 
         {/* Price Controls */}
-        <div className="max-w-4xl mx-auto mb-12 space-y-6">
-          {/* Customer Type Toggle */}
-          <div className="flex justify-center">
+        <div className="max-w-5xl mx-auto mb-6">
+          {/* All controls in one row */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {/* Customer Type Toggle */}
             <div className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
               <button
                 onClick={() => setCustomerType("privat")}
-                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${
+                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                   customerType === "privat"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -123,7 +124,7 @@ export const StarterPackages = () => {
               </button>
               <button
                 onClick={() => setCustomerType("erhverv")}
-                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${
+                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                   customerType === "erhverv"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -132,15 +133,12 @@ export const StarterPackages = () => {
                 Erhverv
               </button>
             </div>
-          </div>
 
-          {/* Time Type and Subscription Row */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
             {/* Time Type Toggle */}
-            <div className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm flex-wrap justify-center">
+            <div className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
               <button
                 onClick={() => setTimeType("dagtimer")}
-                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
                   timeType === "dagtimer"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -150,7 +148,7 @@ export const StarterPackages = () => {
               </button>
               <button
                 onClick={() => setTimeType("overarbejde")}
-                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
                   timeType === "overarbejde"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -160,7 +158,7 @@ export const StarterPackages = () => {
               </button>
               <button
                 onClick={() => setTimeType("akut")}
-                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
                   timeType === "akut"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -170,7 +168,7 @@ export const StarterPackages = () => {
               </button>
               <button
                 onClick={() => setTimeType("nattevagt")}
-                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
                   timeType === "nattevagt"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -184,7 +182,7 @@ export const StarterPackages = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-5 py-3 shadow-sm">
+                  <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-4 py-2.5 shadow-sm">
                     <Switch
                       checked={hasSubscription}
                       onCheckedChange={setHasSubscription}
@@ -204,11 +202,11 @@ export const StarterPackages = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 pt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {services.map((service, idx) => (
             <div
               key={idx}
-              className={`relative flex flex-col gap-7 p-10 rounded-[20px] transition-all duration-500 ${
+              className={`relative flex flex-col gap-4 py-8 px-8 rounded-[20px] transition-all duration-500 ${
                 service.featured
                   ? 'bg-gradient-to-br from-primary to-primary/90 text-white shadow-[0_24px_48px_rgba(0,102,255,0.25)] hover:shadow-[0_32px_64px_rgba(0,102,255,0.3)] hover:-translate-y-2 border-none'
                   : service.exclusive
@@ -234,17 +232,17 @@ export const StarterPackages = () => {
               )}
 
               {/* Card Header */}
-              <div className={`text-center ${service.featured || service.exclusive ? 'pt-3' : ''}`}>
-                <h3 className={`text-2xl font-extrabold mb-2 tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
+              <div className={`text-center ${service.featured || service.exclusive ? 'pt-2' : ''}`}>
+                <h3 className={`text-2xl font-extrabold mb-1 tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
                   {service.name}
                 </h3>
-                <p className={`text-[15px] leading-relaxed ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-600'}`}>
+                <p className={`text-[14px] leading-relaxed ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-600'}`}>
                   {service.description}
                 </p>
               </div>
 
               {/* Price Section */}
-              <div className={`text-center py-6 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
+              <div className={`text-center py-4 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
                 <>
                   <div className="flex items-baseline justify-center gap-1 mb-1">
                     <span className={`text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
@@ -254,7 +252,7 @@ export const StarterPackages = () => {
                       kr
                     </span>
                   </div>
-                  <p className={`text-[13px] font-medium mb-3 ${service.featured || service.exclusive ? 'text-white/80' : 'text-slate-500'}`}>
+                  <p className={`text-[13px] font-medium mb-2 ${service.featured || service.exclusive ? 'text-white/80' : 'text-slate-500'}`}>
                     per time
                   </p>
                   
@@ -270,7 +268,7 @@ export const StarterPackages = () => {
 
                   {/* Subscription Badge */}
                   {hasSubscription && (
-                    <div className="mt-2">
+                    <div className="mt-1.5">
                       <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-semibold ${
                         service.exclusive ? 'bg-amber-400/20 text-amber-300' : 'bg-primary/10 text-primary'
                       }`}>
@@ -282,7 +280,7 @@ export const StarterPackages = () => {
               </div>
 
               {/* Features List */}
-              <ul className="flex-grow space-y-3 mb-4">
+              <ul className="flex-grow space-y-2 mb-3">
                 {service.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-2.5">
                     <Check className={`w-[18px] h-[18px] flex-shrink-0 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
@@ -297,7 +295,7 @@ export const StarterPackages = () => {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className={`flex items-center gap-1.5 text-[11px] mb-4 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
+                    <div className={`flex items-center gap-1.5 text-[11px] mb-3 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
                       <Info className="w-3.5 h-3.5" />
                       <span className="font-medium">Transport efter afstand</span>
                     </div>
