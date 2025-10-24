@@ -48,101 +48,101 @@ export const ConsultationSection = () => {
 
   return (
     <section className="relative w-full py-12 overflow-hidden bg-white" style={{ marginTop: 0 }}>
-      <div className="relative max-w-[1100px] mx-auto px-8">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-12 lg:items-center lg:min-h-[560px]">
+      <div className="relative max-w-[1150px] mx-auto px-10">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 lg:items-center">
           {/* LEFT SIDE - Content */}
-          <div className="flex flex-col gap-3.5 lg:h-[392px] lg:max-h-[392px] justify-between flex-1">
+          <div className="flex flex-col gap-4 lg:flex-[0.85]">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 w-fit px-4 py-2 bg-primary/8 border border-primary/15 rounded-full">
+            <div className="inline-flex items-center gap-2 w-fit px-3.5 py-1.5 bg-primary/8 border border-primary/15 rounded-full">
               <Zap className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-primary">
                 Eksperthjælp Fra Certificerede Elektrikere
               </span>
             </div>
             
             {/* Heading */}
-            <h2 className="text-4xl font-extrabold text-slate-900 leading-[1.15]">
+            <h2 className="text-[32px] font-extrabold text-slate-900 leading-[1.15] mb-0">
               Få Professionel Rådgivning – 100% Gratis & Uforpligtende
             </h2>
             
             {/* Description */}
-            <p className="text-base text-slate-600 leading-relaxed">
+            <p className="text-[15px] text-slate-600 leading-[1.5]">
               Hos Billig Elektriker får du kvalificeret hjælp fra autoriserede fagfolk med over 15 års erfaring. Vi håndterer alt fra akutte fejl til komplette smart home-installationer – altid til fair priser.
             </p>
             
             {/* Features */}
-            <div className="flex flex-col gap-3 my-1">
+            <div className="flex flex-col gap-2.5">
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-[18px] h-[18px] text-emerald-500 flex-shrink-0" />
-                <span className="text-[15px] font-medium text-slate-800">
+                <CheckCircle2 className="w-[17px] h-[17px] text-emerald-500 flex-shrink-0" />
+                <span className="text-[14px] font-medium text-slate-800">
                   Certificerede & forsikrede elektrikere
                 </span>
               </div>
               
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-[18px] h-[18px] text-emerald-500 flex-shrink-0" />
-                <span className="text-[15px] font-medium text-slate-800">
+                <CheckCircle2 className="w-[17px] h-[17px] text-emerald-500 flex-shrink-0" />
+                <span className="text-[14px] font-medium text-slate-800">
                   Fast-pris tilbud uden skjulte gebyrer
                 </span>
               </div>
               
               <div className="flex items-center gap-2.5">
-                <CheckCircle2 className="w-[18px] h-[18px] text-emerald-500 flex-shrink-0" />
-                <span className="text-[15px] font-medium text-slate-800">
+                <CheckCircle2 className="w-[17px] h-[17px] text-emerald-500 flex-shrink-0" />
+                <span className="text-[14px] font-medium text-slate-800">
                   Svar inden 2 timer på hverdage
                 </span>
               </div>
             </div>
             
             {/* Guide til form */}
-            <div className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border-l-[3px] border-primary rounded-lg">
-              <p className="text-sm font-semibold text-slate-700">
+            <div className="p-3.5 bg-gradient-to-r from-primary/5 to-primary/10 border-l-[3px] border-primary rounded-lg">
+              <p className="text-[13px] font-semibold text-slate-700">
                 📋 Beskriv dit projekt i formularen → Vi vender tilbage med et skræddersyet tilbud
               </p>
             </div>
             
             {/* Phone Box */}
-            <div className="p-6 bg-gradient-to-br from-white to-slate-50 border-2 border-primary/20 rounded-xl mt-auto shadow-sm">
-              <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-3">
+            <div className="p-5 bg-gradient-to-br from-white to-slate-50 border-2 border-primary/20 rounded-xl shadow-sm">
+              <p className="text-[11px] text-slate-500 uppercase tracking-wider font-semibold mb-2.5">
                 🚨 Akut behov for elektriker?
               </p>
               <a 
                 href="tel:71997171" 
-                className="flex items-center gap-2.5 text-[28px] font-extrabold text-primary hover:text-primary/80 transition-colors w-fit"
+                className="flex items-center gap-2 text-[26px] font-extrabold text-primary hover:text-primary/80 transition-colors w-fit"
               >
-                <Phone className="w-6 h-6" />
+                <Phone className="w-5 h-5" />
                 71 99 71 71
               </a>
-              <p className="text-sm text-slate-600 mt-2 font-medium">
+              <p className="text-[13px] text-slate-600 mt-2 font-medium">
                 Ring nu – Vi tager telefonen man-fre kl. 8-17
               </p>
             </div>
           </div>
           
           {/* RIGHT SIDE - Contact Form Card */}
-          <div className="flex flex-col flex-1">
-            <div className="bg-white border border-slate-200 rounded-2xl px-7 py-8 shadow-lg flex flex-col justify-between w-full max-w-[480px] mx-auto lg:h-[560px] lg:min-h-[560px]">
+          <div className="flex flex-col lg:flex-1">
+            <div className="bg-white border border-slate-200 rounded-2xl px-8 py-8 shadow-lg flex flex-col justify-between w-full max-w-[520px] mx-auto lg:max-w-none">
               {/* Card Header */}
-              <div className="text-center mb-7">
-                <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center shadow-lg">
-                  <Phone className="w-6 h-6 text-white" />
+              <div className="text-center mb-6">
+                <div className="w-12 h-12 mx-auto mb-3.5 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center shadow-lg">
+                  <Phone className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                <h3 className="text-[20px] font-bold text-slate-900 mb-1.5">
                   Få Dit Gratis Tilbud Nu
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-[13px] text-slate-500">
                   Udfyld formularen – vi svarer inden 2 timer
                 </p>
               </div>
               
               {/* Form */}
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex-1 flex flex-col justify-center">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5 flex-1 flex flex-col justify-center">
                 <div>
                   <Input
                     {...register("name")}
                     type="text"
                     placeholder="Dit fulde navn"
-                    className="h-10 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[13px]"
+                    className="h-11 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[14px]"
                     disabled={isSubmitting}
                   />
                   {errors.name && (
@@ -155,7 +155,7 @@ export const ConsultationSection = () => {
                     {...register("email")}
                     type="email"
                     placeholder="Din email"
-                    className="h-10 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[13px]"
+                    className="h-11 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[14px]"
                     disabled={isSubmitting}
                   />
                   {errors.email && (
@@ -168,7 +168,7 @@ export const ConsultationSection = () => {
                     {...register("phone")}
                     type="tel"
                     placeholder="Dit telefonnummer"
-                    className="h-10 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[13px]"
+                    className="h-11 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[14px]"
                     disabled={isSubmitting}
                   />
                   {errors.phone && (
@@ -181,7 +181,7 @@ export const ConsultationSection = () => {
                     {...register("message")}
                     placeholder="Beskriv kort dit projekt eller behov..."
                     rows={3}
-                    className="bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all resize-y min-h-[80px] rounded-[10px] text-[13px]"
+                    className="bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all resize-y min-h-[90px] rounded-[10px] text-[14px]"
                     disabled={isSubmitting}
                   />
                   {errors.message && (
@@ -191,7 +191,7 @@ export const ConsultationSection = () => {
                 
                 <button 
                   type="submit" 
-                  className="w-full flex items-center justify-center gap-2.5 h-11 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-[10px] transition-all hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed mt-1"
+                  className="w-full flex items-center justify-center gap-2.5 h-12 bg-primary hover:bg-primary/90 text-white text-[15px] font-bold rounded-[10px] transition-all hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed mt-1"
                   disabled={isSubmitting}
                 >
                   <Send className="w-4 h-4" />
@@ -201,7 +201,7 @@ export const ConsultationSection = () => {
               
               {/* Privacy text */}
               <div className="text-center mt-5 pt-4 border-t border-slate-100">
-                <p className="text-xs text-slate-500 mb-2">
+                <p className="text-[12px] text-slate-500 mb-1.5">
                   🔒 Dine oplysninger behandles 100% fortroligt
                 </p>
                 <p className="text-[11px] text-slate-400">
