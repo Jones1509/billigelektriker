@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { Zap, Loader2, ArrowLeft, Shield, CheckCircle2, Mail, Lock } from "lucide-react";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
-import logo from "@/assets/logo.avif";
+import logo from "@/assets/logo-auth.png";
 
 const signUpSchema = z.object({
   firstName: z.string().trim().min(1, "Fornavn er påkrævet").max(50, "Fornavn må max være 50 tegn"),
