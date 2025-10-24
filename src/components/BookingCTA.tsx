@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import { Calendar, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import electricalComposition from "@/assets/electrical-composition-light.png";
+import consultationConcept from "@/assets/consultation-concept.png";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
@@ -101,14 +101,12 @@ export const BookingCTA = () => {
                      animation: 'pulse 3s ease-in-out infinite'
                    }}>
                 <img 
-                  src={electricalComposition} 
-                  alt="Abstrakt elektrisk komposition med lyn-symbol og service-ikoner" 
+                  src={consultationConcept} 
+                  alt="Professionel rådgivning med telefon og service-ikoner" 
                   className="w-full h-auto"
                   style={{
-                    mixBlendMode: 'screen',
-                    opacity: 0.95,
-                    maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)',
-                    WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)'
+                    mixBlendMode: 'normal',
+                    opacity: 0.95
                   }}
                 />
               </div>
