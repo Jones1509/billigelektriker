@@ -48,8 +48,8 @@ export const ConsultationSection = () => {
 
   return (
     <section className="relative w-full py-16 overflow-hidden bg-white" style={{ marginTop: 0 }}>
-      <div className="relative max-w-[1200px] mx-auto px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch" style={{ gridAutoRows: '1fr' }}>
+      <div className="relative max-w-[1300px] mx-auto px-10">
+        <div className="grid grid-cols-1 gap-16 items-stretch lg:grid-cols-[1.3fr_1fr] lg:gap-20" style={{ gridAutoRows: '1fr' }}>
           {/* LEFT SIDE - Content */}
           <div className="flex flex-col gap-5 h-full justify-between">
             {/* Badge */}
@@ -121,7 +121,7 @@ export const ConsultationSection = () => {
           
           {/* RIGHT SIDE - Contact Form Card */}
           <div className="h-full flex flex-col">
-            <div className="bg-white border border-slate-200 rounded-2xl px-8 py-10 shadow-lg h-full flex flex-col justify-between">
+            <div className="bg-white border border-slate-200 rounded-2xl px-7 py-9 shadow-lg h-full flex flex-col justify-between w-full max-w-[480px] mx-auto lg:ml-auto lg:mr-0">
               {/* Card Header */}
               <div className="text-center mb-7">
                 <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center shadow-lg">
