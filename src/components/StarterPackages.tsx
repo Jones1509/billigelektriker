@@ -90,10 +90,10 @@ export const StarterPackages = () => {
   ];
 
   return (
-    <section className="py-12 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-10 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1300px] mx-auto px-10">
         {/* Section Header */}
-        <div className="text-center mb-6 animate-fade-in">
+        <div className="text-center mb-4 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-primary/8 border border-primary/15 rounded-full text-primary text-[11px] font-bold uppercase tracking-wider mb-3">
             <Zap className="w-3.5 h-3.5" />
             TRANSPARENTE PRISER
@@ -107,7 +107,7 @@ export const StarterPackages = () => {
         </div>
 
         {/* Price Controls */}
-        <div className="max-w-5xl mx-auto mb-6">
+        <div className="max-w-5xl mx-auto mb-8">
           {/* All controls in one row */}
           <div className="flex flex-wrap items-center justify-center gap-3">
             {/* Customer Type Toggle */}
@@ -206,7 +206,7 @@ export const StarterPackages = () => {
           {services.map((service, idx) => (
             <div
               key={idx}
-              className={`relative flex flex-col gap-4 py-8 px-8 rounded-[20px] transition-all duration-500 ${
+              className={`relative flex flex-col gap-3 py-6 px-8 rounded-[20px] transition-all duration-500 ${
                 service.featured
                   ? 'bg-gradient-to-br from-primary to-primary/90 text-white shadow-[0_24px_48px_rgba(0,102,255,0.25)] hover:shadow-[0_32px_64px_rgba(0,102,255,0.3)] hover:-translate-y-2 border-none'
                   : service.exclusive
@@ -242,7 +242,7 @@ export const StarterPackages = () => {
               </div>
 
               {/* Price Section */}
-              <div className={`text-center py-4 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
+              <div className={`text-center py-3 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
                 <>
                   <div className="flex items-baseline justify-center gap-1 mb-1">
                     <span className={`text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
@@ -280,7 +280,7 @@ export const StarterPackages = () => {
               </div>
 
               {/* Features List */}
-              <ul className="flex-grow space-y-2 mb-3">
+              <ul className="flex-grow space-y-2 mb-2">
                 {service.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-2.5">
                     <Check className={`w-[18px] h-[18px] flex-shrink-0 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
@@ -295,7 +295,7 @@ export const StarterPackages = () => {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className={`flex items-center gap-1.5 text-[11px] mb-3 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
+                    <div className={`flex items-center gap-1.5 text-[11px] mb-2 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
                       <Info className="w-3.5 h-3.5" />
                       <span className="font-medium">Transport efter afstand</span>
                     </div>
