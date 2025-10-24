@@ -1,15 +1,27 @@
 import { Button } from "./ui/button";
 import { Calendar, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import consultationConcept from "@/assets/consultation-concept.png";
+import electricalDiagram from "@/assets/electrical-diagram.png";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="w-full bg-[#F8FAFC] py-16 md:py-24 lg:py-28 relative overflow-hidden">
+    <section className="w-full py-16 md:py-24 lg:py-28 relative overflow-hidden"
+             style={{
+               background: 'linear-gradient(135deg, #F0F9FF 0%, #F8FAFC 50%, #EFF6FF 100%)'
+             }}>
       {/* Gradient transitions */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-[#F8FAFC] pointer-events-none"></div>
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[hsl(var(--blue-tint))] to-transparent pointer-events-none"></div>
+      
+      {/* Subtle animated background pattern */}
+      <div className="absolute inset-0 opacity-[0.03]"
+           style={{
+             backgroundImage: `radial-gradient(circle at 20% 50%, rgba(14,165,233,0.4) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(139,92,246,0.3) 0%, transparent 50%)`,
+             animation: 'pulse 8s ease-in-out infinite'
+           }}>
+      </div>
       
       <div className="max-w-7xl mx-auto px-5 md:px-10 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
@@ -85,30 +97,55 @@ export const BookingCTA = () => {
           {/* RIGHT SIDE - 40% */}
           <div className="lg:col-span-2 flex justify-center lg:justify-end items-center p-10 lg:p-0">
             <div className="relative flex items-center justify-center">
-              {/* Gradient glow background */}
-              <div className="absolute inset-0 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 transition-all duration-500 group-hover:opacity-120 group-hover:blur-[50px]"
+              {/* Multi-layer gradient glow */}
+              <div className="absolute inset-0 w-[650px] h-[650px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"
                    style={{
-                     background: 'radial-gradient(circle, rgba(14,165,233,0.12) 0%, rgba(139,92,246,0.08) 50%, transparent 100%)',
-                     filter: 'blur(40px)',
-                     zIndex: 0
+                     background: 'radial-gradient(circle, rgba(14,165,233,0.15) 0%, rgba(255,184,0,0.08) 40%, transparent 70%)',
+                     filter: 'blur(50px)',
+                     zIndex: 0,
+                     animation: 'pulse 4s ease-in-out infinite'
                    }}>
               </div>
               
-              {/* Illustration with smooth blend and animation */}
-              <div className="relative z-10 w-full max-w-[400px] md:max-w-[450px] lg:max-w-[550px] transition-all duration-500 hover:scale-105 group"
+              {/* Rotating glow ring */}
+              <div className="absolute inset-0 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"
                    style={{
-                     filter: 'drop-shadow(0 20px 60px rgba(14,165,233,0.2))',
-                     animation: 'pulse 3s ease-in-out infinite'
+                     background: 'conic-gradient(from 0deg, transparent 0%, rgba(14,165,233,0.2) 50%, transparent 100%)',
+                     filter: 'blur(30px)',
+                     zIndex: 0,
+                     animation: 'spin 20s linear infinite'
                    }}>
-                <img 
-                  src={consultationConcept} 
-                  alt="Professionel rådgivning med telefon og service-ikoner" 
-                  className="w-full h-auto"
-                  style={{
-                    mixBlendMode: 'normal',
-                    opacity: 0.95
-                  }}
-                />
+              </div>
+              
+              {/* Electrical diagram with animations */}
+              <div className="relative z-10 w-full max-w-[350px] md:max-w-[420px] lg:max-w-[480px]">
+                {/* Rotating outer ring */}
+                <div className="absolute inset-0 animate-spin-slow"
+                     style={{
+                       animation: 'spin 30s linear infinite'
+                     }}>
+                  <img 
+                    src={electricalDiagram} 
+                    alt="Elektrisk rådgivnings-diagram med lyn-symbol" 
+                    className="w-full h-auto opacity-90"
+                    style={{
+                      filter: 'drop-shadow(0 0 30px rgba(14,165,233,0.4)) drop-shadow(0 0 60px rgba(255,184,0,0.2))'
+                    }}
+                  />
+                </div>
+                
+                {/* Static center with pulse */}
+                <div className="absolute inset-0 flex items-center justify-center"
+                     style={{
+                       animation: 'pulse 2s ease-in-out infinite'
+                     }}>
+                  <div className="w-[40%] h-[40%] rounded-full"
+                       style={{
+                         background: 'radial-gradient(circle, rgba(255,184,0,0.3) 0%, transparent 70%)',
+                         filter: 'blur(20px)'
+                       }}>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -116,7 +153,7 @@ export const BookingCTA = () => {
       </div>
       
       {/* Bottom gradient transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-[#F8FAFC] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
     </section>
   );
 };
