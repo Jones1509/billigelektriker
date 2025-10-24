@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import { Calendar, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import electricalComposition from "@/assets/electrical-composition.png";
+import electricalComposition from "@/assets/electrical-composition-light.png";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
@@ -94,15 +94,22 @@ export const BookingCTA = () => {
                    }}>
               </div>
               
-              {/* Illustration with hover effect */}
-              <div className="relative z-10 w-full max-w-[400px] md:max-w-[450px] lg:max-w-[550px] transition-transform duration-400 hover:scale-103 group"
+              {/* Illustration with smooth blend and animation */}
+              <div className="relative z-10 w-full max-w-[400px] md:max-w-[450px] lg:max-w-[550px] transition-all duration-500 hover:scale-105 group"
                    style={{
-                     filter: 'drop-shadow(0 20px 60px rgba(14,165,233,0.15))'
+                     filter: 'drop-shadow(0 20px 60px rgba(14,165,233,0.2))',
+                     animation: 'pulse 3s ease-in-out infinite'
                    }}>
                 <img 
                   src={electricalComposition} 
                   alt="Abstrakt elektrisk komposition med lyn-symbol og service-ikoner" 
                   className="w-full h-auto"
+                  style={{
+                    mixBlendMode: 'screen',
+                    opacity: 0.95,
+                    maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)',
+                    WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0) 100%)'
+                  }}
                 />
               </div>
             </div>
