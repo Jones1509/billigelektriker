@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import { Calendar, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import electricalDiagram from "@/assets/electrical-diagram.png";
+import consultationProfessional from "@/assets/consultation-professional.png";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
@@ -95,57 +95,33 @@ export const BookingCTA = () => {
           </div>
           
           {/* RIGHT SIDE - 40% */}
-          <div className="lg:col-span-2 flex justify-center lg:justify-end items-center p-10 lg:p-0">
-            <div className="relative flex items-center justify-center">
-              {/* Multi-layer gradient glow */}
-              <div className="absolute inset-0 w-[650px] h-[650px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"
+          <div className="lg:col-span-2 flex justify-center lg:justify-end items-center">
+            <div className="relative w-full max-w-[450px] lg:max-w-[520px]">
+              {/* Subtle glow behind image */}
+              <div className="absolute inset-0 -z-10"
                    style={{
-                     background: 'radial-gradient(circle, rgba(14,165,233,0.15) 0%, rgba(255,184,0,0.08) 40%, transparent 70%)',
-                     filter: 'blur(50px)',
-                     zIndex: 0,
-                     animation: 'pulse 4s ease-in-out infinite'
+                     background: 'radial-gradient(circle at center, rgba(14,165,233,0.15) 0%, transparent 70%)',
+                     filter: 'blur(40px)',
+                     transform: 'scale(1.1)'
                    }}>
               </div>
               
-              {/* Rotating glow ring */}
-              <div className="absolute inset-0 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"
+              {/* Professional electrician image */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl"
                    style={{
-                     background: 'conic-gradient(from 0deg, transparent 0%, rgba(14,165,233,0.2) 50%, transparent 100%)',
-                     filter: 'blur(30px)',
-                     zIndex: 0,
-                     animation: 'spin 20s linear infinite'
+                     boxShadow: '0 20px 60px rgba(14,165,233,0.2), 0 0 0 1px rgba(14,165,233,0.1)'
                    }}>
-              </div>
-              
-              {/* Electrical diagram with animations */}
-              <div className="relative z-10 w-full max-w-[350px] md:max-w-[420px] lg:max-w-[480px]">
-                {/* Rotating outer ring */}
-                <div className="absolute inset-0 animate-spin-slow"
-                     style={{
-                       animation: 'spin 30s linear infinite'
-                     }}>
-                  <img 
-                    src={electricalDiagram} 
-                    alt="Elektrisk rådgivnings-diagram med lyn-symbol" 
-                    className="w-full h-auto opacity-90"
-                    style={{
-                      filter: 'drop-shadow(0 0 30px rgba(14,165,233,0.4)) drop-shadow(0 0 60px rgba(255,184,0,0.2))'
-                    }}
-                  />
-                </div>
+                <img 
+                  src={consultationProfessional} 
+                  alt="Professionel elektriker med værktøj og kabler" 
+                  className="w-full h-auto object-cover"
+                  style={{
+                    aspectRatio: '4/5'
+                  }}
+                />
                 
-                {/* Static center with pulse */}
-                <div className="absolute inset-0 flex items-center justify-center"
-                     style={{
-                       animation: 'pulse 2s ease-in-out infinite'
-                     }}>
-                  <div className="w-[40%] h-[40%] rounded-full"
-                       style={{
-                         background: 'radial-gradient(circle, rgba(255,184,0,0.3) 0%, transparent 70%)',
-                         filter: 'blur(20px)'
-                       }}>
-                  </div>
-                </div>
+                {/* Subtle gradient overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[rgba(14,165,233,0.1)] to-transparent pointer-events-none"></div>
               </div>
             </div>
           </div>
