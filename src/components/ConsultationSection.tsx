@@ -56,19 +56,18 @@ export const ConsultationSection = () => {
             <div className="inline-flex items-center gap-2 w-fit px-4 py-2 bg-primary/8 border border-primary/15 rounded-full">
               <Zap className="w-3.5 h-3.5 text-primary" />
               <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary">
-                Professionel Rådgivning
+                Eksperthjælp Fra Certificerede Elektrikere
               </span>
             </div>
             
             {/* Heading */}
             <h2 className="text-4xl font-extrabold text-slate-900 leading-[1.15]">
-              Vi Hjælper Dig Med Den Rigtige Løsning
+              Få Professionel Rådgivning – 100% Gratis & Uforpligtende
             </h2>
             
             {/* Description */}
-            <p className="text-base text-slate-600 leading-normal">
-              Gratis konsultation med certificerede elektrikere. 
-              Vi løser alt fra fejlfinding til komplette installationer.
+            <p className="text-base text-slate-600 leading-relaxed">
+              Hos Billig Elektriker får du kvalificeret hjælp fra autoriserede fagfolk med over 15 års erfaring. Vi håndterer alt fra akutte fejl til komplette smart home-installationer – altid til fair priser.
             </p>
             
             {/* Features */}
@@ -76,36 +75,36 @@ export const ConsultationSection = () => {
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-[18px] h-[18px] text-emerald-500 flex-shrink-0" />
                 <span className="text-[15px] font-medium text-slate-800">
-                  Certificerede elektrikere
+                  Certificerede & forsikrede elektrikere
                 </span>
               </div>
               
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-[18px] h-[18px] text-emerald-500 flex-shrink-0" />
                 <span className="text-[15px] font-medium text-slate-800">
-                  Ingen forpligtelser
+                  Fast-pris tilbud uden skjulte gebyrer
                 </span>
               </div>
               
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-[18px] h-[18px] text-emerald-500 flex-shrink-0" />
                 <span className="text-[15px] font-medium text-slate-800">
-                  Hurtig respons
+                  Svar inden 2 timer på hverdage
                 </span>
               </div>
             </div>
             
             {/* Guide til form */}
-            <div className="p-3.5 bg-slate-50 border-l-[3px] border-primary rounded-lg">
-              <p className="text-sm font-medium text-slate-600">
-                Udfyld formularen, så kontakter vi dig hurtigst muligt
+            <div className="p-4 bg-gradient-to-r from-primary/5 to-primary/10 border-l-[3px] border-primary rounded-lg">
+              <p className="text-sm font-semibold text-slate-700">
+                📋 Beskriv dit projekt i formularen → Vi vender tilbage med et skræddersyet tilbud
               </p>
             </div>
             
             {/* Phone Box */}
-            <div className="p-5.5 bg-white border-2 border-slate-200 rounded-xl mt-auto">
-              <p className="text-[13px] text-slate-500 uppercase tracking-wider font-semibold mb-3">
-                Har du brug for hurtig hjælp?
+            <div className="p-6 bg-gradient-to-br from-white to-slate-50 border-2 border-primary/20 rounded-xl mt-auto shadow-sm">
+              <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-3">
+                🚨 Akut behov for elektriker?
               </p>
               <a 
                 href="tel:71997171" 
@@ -114,33 +113,36 @@ export const ConsultationSection = () => {
                 <Phone className="w-6 h-6" />
                 71 99 71 71
               </a>
-              <p className="text-sm text-slate-500 mt-2">
-                Mandag-fredag 8-17
+              <p className="text-sm text-slate-600 mt-2 font-medium">
+                Ring nu – Vi tager telefonen man-fre kl. 8-17
               </p>
             </div>
           </div>
           
           {/* RIGHT SIDE - Contact Form Card */}
           <div className="h-full flex flex-col">
-            <div className="bg-white border border-slate-200 rounded-2xl p-10 shadow-sm h-full flex flex-col justify-between">
+            <div className="bg-white border border-slate-200 rounded-2xl px-8 py-10 shadow-lg h-full flex flex-col justify-between">
               {/* Card Header */}
-              <div className="text-center mb-6">
-                <div className="w-12 h-12 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-primary" />
+              <div className="text-center mb-7">
+                <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center shadow-lg">
+                  <Phone className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-[22px] font-bold text-slate-900">
-                  Book Din Gratis Rådgivning
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
+                  Få Dit Gratis Tilbud Nu
                 </h3>
+                <p className="text-xs text-slate-500">
+                  Udfyld formularen – vi svarer inden 2 timer
+                </p>
               </div>
               
               {/* Form */}
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5 flex-1 flex flex-col justify-center">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex-1 flex flex-col justify-center">
                 <div>
                   <Input
                     {...register("name")}
                     type="text"
                     placeholder="Dit fulde navn"
-                    className="h-11 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-sm"
+                    className="h-10 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[13px]"
                     disabled={isSubmitting}
                   />
                   {errors.name && (
@@ -153,7 +155,7 @@ export const ConsultationSection = () => {
                     {...register("email")}
                     type="email"
                     placeholder="Din email"
-                    className="h-11 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-sm"
+                    className="h-10 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[13px]"
                     disabled={isSubmitting}
                   />
                   {errors.email && (
@@ -166,7 +168,7 @@ export const ConsultationSection = () => {
                     {...register("phone")}
                     type="tel"
                     placeholder="Dit telefonnummer"
-                    className="h-11 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-sm"
+                    className="h-10 bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all rounded-[10px] text-[13px]"
                     disabled={isSubmitting}
                   />
                   {errors.phone && (
@@ -177,9 +179,9 @@ export const ConsultationSection = () => {
                 <div>
                   <Textarea
                     {...register("message")}
-                    placeholder="Beskriv kort dit projekt"
+                    placeholder="Beskriv kort dit projekt eller behov..."
                     rows={3}
-                    className="bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all resize-y min-h-[90px] rounded-[10px] text-sm"
+                    className="bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary focus:ring-[3px] focus:ring-primary/8 transition-all resize-y min-h-[80px] rounded-[10px] text-[13px]"
                     disabled={isSubmitting}
                   />
                   {errors.message && (
@@ -189,7 +191,7 @@ export const ConsultationSection = () => {
                 
                 <button 
                   type="submit" 
-                  className="w-full flex items-center justify-center gap-2.5 h-12 bg-primary hover:bg-primary/90 text-white text-[15px] font-bold rounded-[10px] transition-all hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed mt-1"
+                  className="w-full flex items-center justify-center gap-2.5 h-11 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-[10px] transition-all hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed mt-1"
                   disabled={isSubmitting}
                 >
                   <Send className="w-4 h-4" />
@@ -198,9 +200,14 @@ export const ConsultationSection = () => {
               </form>
               
               {/* Privacy text */}
-              <p className="text-center text-xs text-slate-500 mt-4">
-                Dine oplysninger behandles fortroligt
-              </p>
+              <div className="text-center mt-5 pt-4 border-t border-slate-100">
+                <p className="text-xs text-slate-500 mb-2">
+                  🔒 Dine oplysninger behandles 100% fortroligt
+                </p>
+                <p className="text-[11px] text-slate-400">
+                  Vi deler aldrig dine data med tredjepart
+                </p>
+              </div>
             </div>
           </div>
         </div>
