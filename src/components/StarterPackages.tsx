@@ -1,12 +1,36 @@
-import { Check, Zap, Phone, Mail, Star, Shield, Clock, Award } from "lucide-react";
+import { useState } from "react";
+import { Check, Zap, Phone, Mail, Star, Shield, Clock, Award, Info } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const StarterPackages = () => {
+  const [customerType, setCustomerType] = useState<"privat" | "erhverv">("privat");
+  const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "akut" | "nattevagt">("dagtimer");
+  const [hasSubscription, setHasSubscription] = useState(false);
+
+  // Pricing calculation
+  const basePrice = customerType === "privat" ? 550 : 510;
+  const multipliers = {
+    dagtimer: 1.0,
+    overarbejde: 1.25,
+    akut: 1.5,
+    nattevagt: 1.75
+  };
+  const multiplier = multipliers[timeType];
+  const priceBeforeDiscount = basePrice * multiplier;
+  const finalPrice = hasSubscription ? priceBeforeDiscount * 0.9 : priceBeforeDiscount;
+
+  const timeTypeLabels = {
+    dagtimer: "Dagtimer (07–16)",
+    overarbejde: "Overarbejde (16–21)",
+    akut: "Akut (samme dag)",
+    nattevagt: "Nattevagt (21–07)"
+  };
+
   const services = [
     {
       name: "Standard Service",
       description: "Daglige el-opgaver og mindre reparationer",
-      price: "650",
-      priceNote: "per time",
       features: [
         "Fejlfinding og reparation",
         "Installation af stikkontakter",
@@ -20,8 +44,6 @@ export const StarterPackages = () => {
     {
       name: "Premium Pakke",
       description: "Komplette installationer med garanti",
-      price: "850",
-      priceNote: "per time",
       features: [
         "Alt fra Standard Service",
         "Smart home installation",
@@ -36,8 +58,6 @@ export const StarterPackages = () => {
     {
       name: "Erhverv",
       description: "Professionelle løsninger til virksomheder",
-      price: "Kontakt",
-      priceNote: "for tilbud",
       features: [
         "Skræddersyet løsning",
         "Større projekter",
@@ -55,7 +75,7 @@ export const StarterPackages = () => {
     <section className="py-20 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1300px] mx-auto px-10">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
+        <div className="text-center mb-12 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-5 py-2 bg-primary/8 border border-primary/15 rounded-full text-primary text-[11px] font-bold uppercase tracking-wider mb-5">
             <Zap className="w-3.5 h-3.5" />
             TRANSPARENTE PRISER
@@ -66,6 +86,103 @@ export const StarterPackages = () => {
           <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
             Professionel el-service med klare, fair priser. Ingen skjulte omkostninger.
           </p>
+        </div>
+
+        {/* Price Controls */}
+        <div className="max-w-4xl mx-auto mb-12 space-y-6">
+          {/* Customer Type Toggle */}
+          <div className="flex justify-center">
+            <div className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
+              <button
+                onClick={() => setCustomerType("privat")}
+                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${
+                  customerType === "privat"
+                    ? "bg-primary text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Privat
+              </button>
+              <button
+                onClick={() => setCustomerType("erhverv")}
+                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${
+                  customerType === "erhverv"
+                    ? "bg-primary text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Erhverv
+              </button>
+            </div>
+          </div>
+
+          {/* Time Type and Subscription Row */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
+            {/* Time Type Toggle */}
+            <div className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm flex-wrap justify-center">
+              <button
+                onClick={() => setTimeType("dagtimer")}
+                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                  timeType === "dagtimer"
+                    ? "bg-primary text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Dagtimer (07–16)
+              </button>
+              <button
+                onClick={() => setTimeType("overarbejde")}
+                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                  timeType === "overarbejde"
+                    ? "bg-primary text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Overarbejde (16–21)
+              </button>
+              <button
+                onClick={() => setTimeType("akut")}
+                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                  timeType === "akut"
+                    ? "bg-primary text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Akut (samme dag)
+              </button>
+              <button
+                onClick={() => setTimeType("nattevagt")}
+                className={`px-4 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                  timeType === "nattevagt"
+                    ? "bg-primary text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Nattevagt (21–07)
+              </button>
+            </div>
+
+            {/* Subscription Switch */}
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-5 py-3 shadow-sm">
+                    <Switch
+                      checked={hasSubscription}
+                      onCheckedChange={setHasSubscription}
+                      id="subscription"
+                    />
+                    <label htmlFor="subscription" className="text-sm font-semibold text-slate-700 cursor-pointer">
+                      Abonnement
+                    </label>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Stamkunde-rabat på timepris</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
         </div>
 
         {/* Services Grid */}
@@ -100,23 +217,60 @@ export const StarterPackages = () => {
 
               {/* Price Section */}
               <div className={`text-center py-6 border-t border-b ${service.featured ? 'border-white/20' : 'border-slate-200'}`}>
-                <div className="flex items-baseline justify-center gap-1 mb-1">
-                  <span className={`text-5xl font-black tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
-                    {service.price}
-                  </span>
-                  {service.price !== "Kontakt" && (
-                    <span className={`text-xl font-bold ${service.featured ? 'text-white/90' : 'text-slate-600'}`}>
-                      kr
-                    </span>
-                  )}
-                </div>
-                <p className={`text-[13px] font-medium ${service.featured ? 'text-white/80' : 'text-slate-500'}`}>
-                  {service.priceNote}
-                </p>
+                {idx === 2 ? (
+                  // Erhverv card - show "Kontakt" for featured display, but explain pricing below
+                  <>
+                    <div className="flex items-baseline justify-center gap-1 mb-1">
+                      <span className={`text-5xl font-black tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
+                        Kontakt
+                      </span>
+                    </div>
+                    <p className={`text-[13px] font-medium ${service.featured ? 'text-white/80' : 'text-slate-500'}`}>
+                      for tilbud
+                    </p>
+                    <p className={`text-xs mt-2 ${service.featured ? 'text-white/70' : 'text-slate-500'}`}>
+                      Fra 510 kr/time (ekskl. moms) ved dagtimer
+                    </p>
+                  </>
+                ) : (
+                  // Standard and Premium cards - show dynamic pricing
+                  <>
+                    <div className="flex items-baseline justify-center gap-1 mb-1">
+                      <span className={`text-5xl font-black tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
+                        {Math.round(finalPrice)}
+                      </span>
+                      <span className={`text-xl font-bold ${service.featured ? 'text-white/90' : 'text-slate-600'}`}>
+                        kr
+                      </span>
+                    </div>
+                    <p className={`text-[13px] font-medium mb-3 ${service.featured ? 'text-white/80' : 'text-slate-500'}`}>
+                      per time
+                    </p>
+                    
+                    {/* Price Labels */}
+                    <div className="flex flex-wrap justify-center gap-2 text-[11px]">
+                      <span className={`px-2 py-1 rounded ${service.featured ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                        {customerType === "privat" ? "Privat (inkl. moms)" : "Erhverv (ekskl. moms)"}
+                      </span>
+                      <span className={`px-2 py-1 rounded ${service.featured ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                        {timeTypeLabels[timeType]}
+                      </span>
+                    </div>
+
+                    {/* Subscription Badge */}
+                    {hasSubscription && (
+                      <div className="mt-2">
+                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary text-[11px] font-semibold rounded">
+                          Spar 10 % med abonnement
+                        </span>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
 
               {/* Features List */}
-              <ul className="flex-grow space-y-3">
+              <ul className="flex-grow space-y-3 mb-4">
                 {service.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-2.5">
                     <Check className={`w-[18px] h-[18px] flex-shrink-0 ${service.featured ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
@@ -126,6 +280,23 @@ export const StarterPackages = () => {
                   </li>
                 ))}
               </ul>
+
+              {/* Transport Info */}
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className={`flex items-center gap-1.5 text-[11px] mb-4 ${service.featured ? 'text-white/70' : 'text-slate-500'}`}>
+                      <Info className="w-3.5 h-3.5" />
+                      <span className="font-medium">Transport efter afstand</span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">
+                      Zone A (0–15 km): 0 kr · Zone B (15–30 km): 199 kr · Zone C (30–50 km): 399 kr · &gt;50 km: 8 kr/km
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
 
               {/* CTA Button */}
               <button
