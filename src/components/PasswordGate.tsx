@@ -159,27 +159,16 @@ export const PasswordGate = ({ children }: PasswordGateProps) => {
           >
             <div className="text-left space-y-5">
               <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
-                Vi bygger noget helt nyt og spændende!
+                Vi bygger en platform hvor service møder handel.
               </h2>
               
               <p className="text-base md:text-lg text-white/95 leading-relaxed">
-                Billig Elektriker er på vej med Danmarks mest moderne platform for elektriker-ydelser. Vi kombinerer professionel service, konkurrencedygtige priser og smart teknologi for at gøre dit hjem mere sikkert og energieffektivt.
+                Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
               </p>
 
-              <div className="space-y-3 mt-6 text-white/95">
-                <div className="flex items-start gap-3">
-                  <span className="text-base md:text-lg font-medium">• Professionelle elektrikere</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-base md:text-lg font-medium">• Smart home installation</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-base md:text-lg font-medium">• Hurtig service</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-base md:text-lg font-medium">• Gennemsigtige priser</span>
-                </div>
-              </div>
+              <p className="text-base md:text-lg text-white/95 leading-relaxed">
+                Fra akut fejlfinding til planlagte installationer. Fra Smart Home-udstyr til el-komponenter. Vi gør det nemt at få præcis den hjælp eller de produkter du har brug for.
+              </p>
             </div>
           </div>
 
