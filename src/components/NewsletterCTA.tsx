@@ -20,61 +20,44 @@ export const NewsletterCTA = () => {
   };
 
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint) / 0.5) 0%, hsl(var(--primary)) 100%)' }}>
-      {/* Top smooth transition */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[hsl(var(--blue-tint)/0.5)] to-transparent pointer-events-none z-0"></div>
-      
-      {/* Premium background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(34,197,94,0.15),transparent_50%)]"></div>
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-      
-      <div className="container relative z-10 px-4">
-        <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
-          <div className="space-y-3 md:space-y-4">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+    <section className="py-16 md:py-20 bg-gradient-to-b from-white via-slate-50 to-slate-100 border-t border-slate-200/50">
+      <div className="container max-w-4xl mx-auto px-4">
+        <div className="text-center space-y-6">
+          {/* Header */}
+          <div className="space-y-3">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900">
               {t('newsletter.title')}
-            </h2>
-            
-            <p className="text-base md:text-xl text-primary-foreground/95 leading-relaxed">
+            </h3>
+            <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
               {t('newsletter.subtitle')}
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-lg mx-auto">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
             <Input 
               type="email" 
               placeholder={t('newsletter.placeholder')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="bg-white text-foreground h-12 md:h-14 px-4 md:px-6 text-base md:text-lg shadow-lg"
+              className="flex-1 h-12 px-4 bg-white border-2 border-slate-200 focus:border-primary rounded-lg text-base"
             />
-            <Button type="submit" variant="secondary" size="lg" className="h-12 md:h-14 px-6 md:px-8 whitespace-nowrap shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold">
+            <Button 
+              type="submit" 
+              className="h-12 px-8 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-all duration-300 whitespace-nowrap"
+            >
               {t('newsletter.cta')}
             </Button>
           </form>
 
-          <div className="flex flex-wrap gap-4 md:gap-6 justify-center pt-4 text-xs md:text-sm text-primary-foreground/90">
-            <div className="flex items-center gap-2">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <span>{t('newsletter.noSpam')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <span>{t('newsletter.maxOneMail')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              <span>{t('newsletter.unsubscribe')}</span>
-            </div>
-          </div>
+          {/* Trust line */}
+          <p className="text-sm text-slate-500 flex items-center justify-center gap-2">
+            <svg className="h-4 w-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span>{t('newsletter.noSpam')} — {t('newsletter.unsubscribe')}</span>
+          </p>
         </div>
       </div>
     </section>
