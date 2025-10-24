@@ -1,7 +1,7 @@
 import { Button } from "./ui/button";
 import { Calendar, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import consultationImage from "@/assets/consultation-illustration.png";
+import electricalComposition from "@/assets/electrical-composition.png";
 
 export const BookingCTA = () => {
   const { t } = useTranslation();
@@ -100,8 +100,8 @@ export const BookingCTA = () => {
                      filter: 'drop-shadow(0 20px 60px rgba(14,165,233,0.15))'
                    }}>
                 <img 
-                  src={consultationImage} 
-                  alt="Elektriker i professionel samtale med kunde om el-løsninger" 
+                  src={electricalComposition} 
+                  alt="Abstrakt elektrisk komposition med lyn-symbol og service-ikoner" 
                   className="w-full h-auto"
                 />
               </div>
