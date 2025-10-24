@@ -3,6 +3,7 @@ import { Input } from "./ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
+import { Zap, Lightbulb, Award, Users, Shield } from "lucide-react";
 
 export const NewsletterCTA = () => {
   const { t } = useTranslation();
@@ -20,82 +21,99 @@ export const NewsletterCTA = () => {
   };
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-20">
-      {/* Deep electrician blue gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0A1E3D] via-[#0D2847] to-[#1a365d]" />
+    <section className="relative overflow-hidden py-20 md:py-28">
+      {/* Light electric blue gradient background with glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#E0F2FE] via-[#BAE6FD] to-[#7DD3FC]" />
       
-      {/* Subtle circuit pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.03]">
+      {/* Radiant glow effects - light and energetic */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-400/30 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s' }} />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-400/25 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '5s' }} />
+      
+      {/* Subtle circuit pattern overlay - very light */}
+      <div className="absolute inset-0 opacity-[0.04]">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="circuit-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-              <circle cx="10" cy="10" r="1.5" fill="currentColor" className="text-white" />
-              <circle cx="90" cy="90" r="1.5" fill="currentColor" className="text-white" />
-              <line x1="10" y1="10" x2="50" y2="10" stroke="currentColor" strokeWidth="0.5" className="text-white" />
-              <line x1="50" y1="10" x2="50" y2="50" stroke="currentColor" strokeWidth="0.5" className="text-white" />
-              <line x1="50" y1="50" x2="90" y2="90" stroke="currentColor" strokeWidth="0.5" className="text-white" />
-              <circle cx="50" cy="50" r="2" fill="currentColor" className="text-white" />
+            <pattern id="light-circuit" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+              <circle cx="15" cy="15" r="2" fill="currentColor" className="text-blue-600" />
+              <circle cx="105" cy="105" r="2" fill="currentColor" className="text-blue-600" />
+              <line x1="15" y1="15" x2="60" y2="15" stroke="currentColor" strokeWidth="0.8" className="text-blue-500" />
+              <line x1="60" y1="15" x2="60" y2="60" stroke="currentColor" strokeWidth="0.8" className="text-blue-500" />
+              <line x1="60" y1="60" x2="105" y2="105" stroke="currentColor" strokeWidth="0.8" className="text-blue-500" />
+              <circle cx="60" cy="60" r="3" fill="currentColor" className="text-cyan-500" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#circuit-pattern)" />
+          <rect width="100%" height="100%" fill="url(#light-circuit)" />
         </svg>
       </div>
-      
-      {/* Subtle glow effects */}
-      <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 right-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-400/8 rounded-full blur-3xl" />
+
+      {/* Decorative icons on the sides */}
+      <div className="absolute top-1/4 left-[5%] opacity-10 text-blue-600 hidden lg:block">
+        <Lightbulb className="w-24 h-24" strokeWidth={1.5} />
+      </div>
+      <div className="absolute top-1/3 right-[8%] opacity-10 text-cyan-600 hidden lg:block">
+        <Zap className="w-20 h-20" strokeWidth={1.5} />
+      </div>
+      <div className="absolute bottom-1/4 left-[8%] opacity-10 text-blue-500 hidden lg:block">
+        <Zap className="w-16 h-16" strokeWidth={1.5} />
+      </div>
+      <div className="absolute bottom-1/3 right-[6%] opacity-10 text-cyan-500 hidden lg:block">
+        <Lightbulb className="w-20 h-20" strokeWidth={1.5} />
+      </div>
       
       <div className="container relative z-10 px-4">
-        <div className="max-w-3xl mx-auto text-center space-y-8">
-          {/* Header */}
-          <div className="space-y-3">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white tracking-tight">
+        <div className="max-w-4xl mx-auto">
+          {/* Header with more breathing room */}
+          <div className="text-center space-y-5 mb-12">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900 tracking-tight px-4">
               {t('newsletter.title')}
             </h2>
             
-            <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto font-light">
+            <p className="text-lg md:text-xl text-slate-700 leading-relaxed max-w-3xl mx-auto font-normal px-4">
               {t('newsletter.subtitle')}
             </p>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+          {/* Form - wider and more prominent */}
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto mb-10 px-4">
             <Input 
               type="email" 
-              placeholder={t('newsletter.placeholder')}
+              placeholder="Indtast din e-mail – få rabatten med det samme"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="bg-white/95 backdrop-blur-sm text-foreground h-12 md:h-14 px-5 md:px-6 text-base md:text-lg border-white/20 focus:border-white/40 shadow-lg rounded-xl transition-all duration-300 focus:shadow-xl"
+              className="bg-white text-slate-900 h-14 md:h-16 px-6 text-base md:text-lg border-2 border-slate-200 focus:border-cyan-500 shadow-md rounded-2xl transition-all duration-300 focus:shadow-xl focus:ring-4 focus:ring-cyan-200/50 placeholder:text-slate-400"
             />
             <Button 
               type="submit" 
               size="lg" 
-              className="h-12 md:h-14 px-6 md:px-8 whitespace-nowrap shadow-xl hover:shadow-2xl transition-all duration-300 font-semibold text-base rounded-xl bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white border-0 hover:scale-105"
+              className="h-14 md:h-16 px-8 md:px-10 whitespace-nowrap shadow-lg hover:shadow-2xl transition-all duration-300 font-semibold text-base md:text-lg rounded-2xl bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 hover:from-emerald-600 hover:via-green-600 hover:to-emerald-700 text-white border-0 hover:scale-105 flex items-center gap-2 group"
             >
+              <Zap className="w-5 h-5 group-hover:rotate-12 transition-transform" />
               {t('newsletter.cta')}
             </Button>
           </form>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap gap-6 justify-center pt-2 text-sm text-white/60">
-            <div className="flex items-center gap-2 group">
-              <svg className="h-4 w-4 text-white/40 group-hover:text-white/60 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-              </svg>
-              <span className="font-light">{t('newsletter.noSpam')}</span>
+          {/* Trust badges - more prominent and professional */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto px-4">
+            <div className="flex flex-col items-center gap-3 bg-white/60 backdrop-blur-sm rounded-2xl p-5 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                <Award className="w-6 h-6 text-white" strokeWidth={2.5} />
+              </div>
+              <span className="text-sm font-semibold text-slate-800 text-center">Certificeret elektriker</span>
             </div>
-            <div className="flex items-center gap-2 group">
-              <svg className="h-4 w-4 text-white/40 group-hover:text-white/60 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-              </svg>
-              <span className="font-light">{t('newsletter.maxOneMail')}</span>
+            
+            <div className="flex flex-col items-center gap-3 bg-white/60 backdrop-blur-sm rounded-2xl p-5 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-xl flex items-center justify-center shadow-md">
+                <Users className="w-6 h-6 text-white" strokeWidth={2.5} />
+              </div>
+              <span className="text-sm font-semibold text-slate-800 text-center">Over 500 glade kunder</span>
             </div>
-            <div className="flex items-center gap-2 group">
-              <svg className="h-4 w-4 text-white/40 group-hover:text-white/60 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-              </svg>
-              <span className="font-light">{t('newsletter.unsubscribe')}</span>
+            
+            <div className="flex flex-col items-center gap-3 bg-white/60 backdrop-blur-sm rounded-2xl p-5 shadow-md hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-md">
+                <Shield className="w-6 h-6 text-white" strokeWidth={2.5} />
+              </div>
+              <span className="text-sm font-semibold text-slate-800 text-center">Ingen spam – kun tips</span>
             </div>
           </div>
         </div>
