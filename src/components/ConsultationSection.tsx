@@ -47,11 +47,11 @@ export const ConsultationSection = () => {
   };
 
   return (
-    <section className="relative w-full py-16 overflow-hidden bg-white" style={{ marginTop: 0 }}>
-      <div className="relative max-w-[1300px] mx-auto px-10">
-        <div className="grid grid-cols-1 gap-16 items-stretch lg:grid-cols-[1.3fr_1fr] lg:gap-20" style={{ gridAutoRows: '1fr' }}>
+    <section className="relative w-full py-12 overflow-hidden bg-white" style={{ marginTop: 0 }}>
+      <div className="relative max-w-[1100px] mx-auto px-8">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-12 lg:items-center lg:min-h-[560px]">
           {/* LEFT SIDE - Content */}
-          <div className="flex flex-col gap-5 h-full justify-between">
+          <div className="flex flex-col gap-3.5 lg:h-[392px] lg:max-h-[392px] justify-between flex-1">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 w-fit px-4 py-2 bg-primary/8 border border-primary/15 rounded-full">
               <Zap className="w-3.5 h-3.5 text-primary" />
@@ -120,8 +120,8 @@ export const ConsultationSection = () => {
           </div>
           
           {/* RIGHT SIDE - Contact Form Card */}
-          <div className="h-full flex flex-col">
-            <div className="bg-white border border-slate-200 rounded-2xl px-7 py-9 shadow-lg h-full flex flex-col justify-between w-full max-w-[480px] mx-auto lg:ml-auto lg:mr-0">
+          <div className="flex flex-col flex-1">
+            <div className="bg-white border border-slate-200 rounded-2xl px-7 py-8 shadow-lg flex flex-col justify-between w-full max-w-[480px] mx-auto lg:h-[560px] lg:min-h-[560px]">
               {/* Card Header */}
               <div className="text-center mb-7">
                 <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-br from-primary to-primary/70 rounded-full flex items-center justify-center shadow-lg">
