@@ -83,13 +83,28 @@ export const BookingCTA = () => {
           </div>
           
           {/* RIGHT SIDE - 40% */}
-          <div className="lg:col-span-2 flex justify-center lg:justify-end">
-            <div className="w-full max-w-[450px]">
-              <img 
-                src={consultationImage} 
-                alt="Elektriker i professionel samtale med kunde om el-løsninger" 
-                className="w-full h-auto"
-              />
+          <div className="lg:col-span-2 flex justify-center lg:justify-end items-center p-10 lg:p-0">
+            <div className="relative flex items-center justify-center">
+              {/* Gradient glow background */}
+              <div className="absolute inset-0 w-[600px] h-[600px] -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 transition-all duration-500 group-hover:opacity-120 group-hover:blur-[50px]"
+                   style={{
+                     background: 'radial-gradient(circle, rgba(14,165,233,0.12) 0%, rgba(139,92,246,0.08) 50%, transparent 100%)',
+                     filter: 'blur(40px)',
+                     zIndex: 0
+                   }}>
+              </div>
+              
+              {/* Illustration with hover effect */}
+              <div className="relative z-10 w-full max-w-[400px] md:max-w-[450px] lg:max-w-[550px] transition-transform duration-400 hover:scale-103 group"
+                   style={{
+                     filter: 'drop-shadow(0 20px 60px rgba(14,165,233,0.15))'
+                   }}>
+                <img 
+                  src={consultationImage} 
+                  alt="Elektriker i professionel samtale med kunde om el-løsninger" 
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
