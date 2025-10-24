@@ -22,13 +22,13 @@ export const BookingCTA = () => {
             </div>
             
             {/* Heading */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#1E293B] leading-tight mb-4 max-w-[600px]">
-              Vi Hjælper Dig Med At Finde Den Rigtige Løsning
+            <h2 className="text-[34px] md:text-[48px] font-extrabold text-[#1E293B] leading-[1.3] tracking-[-0.3px] [word-spacing:2px] mb-4 max-w-[650px]">
+              Vi Hjælper Dig Med Den Rigtige Løsning
             </h2>
             
             {/* Subtitle */}
-            <p className="text-base md:text-lg text-[#64748B] leading-relaxed mb-8 max-w-[550px]">
-              Book en uforpligtende samtale med vores elektrikere. Vi rådgiver dig om den bedste smart-lys løsning til dit hjem – helt gratis.
+            <p className="text-base md:text-lg text-[#64748B] leading-[1.7] mb-8 max-w-[550px]">
+              Book en gratis rådgivning med vores certificerede elektrikere. Vi hjælper dig med alt fra fejlfinding til smart home-installationer.
             </p>
             
             {/* Trust bullets */}
