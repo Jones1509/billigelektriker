@@ -24,9 +24,9 @@ export const BookingCTA = () => {
       </div>
       
       <div className="max-w-7xl mx-auto px-5 md:px-10 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
-          {/* LEFT SIDE - 60% */}
-          <div className="lg:col-span-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* LEFT SIDE */}
+          <div className="w-full">
             {/* Badge */}
             <div className="inline-block mb-5">
               <span className="inline-block px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-[#0369A1] bg-[rgba(14,165,233,0.12)] border-2 border-[rgba(14,165,233,0.3)] rounded-full">
@@ -94,9 +94,9 @@ export const BookingCTA = () => {
             </p>
           </div>
           
-          {/* RIGHT SIDE - 40% */}
-          <div className="lg:col-span-2 flex justify-center lg:justify-end items-center">
-            <div className="relative w-full max-w-[450px] lg:max-w-[520px]">
+          {/* RIGHT SIDE */}
+          <div className="w-full flex justify-center lg:justify-end items-center">
+            <div className="relative w-full max-w-[400px] lg:max-w-[480px]">
               {/* Subtle glow behind image */}
               <div className="absolute inset-0 -z-10"
                    style={{
