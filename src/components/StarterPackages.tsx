@@ -90,31 +90,31 @@ export const StarterPackages = () => {
   ];
 
   return (
-    <section className="py-10 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
-      <div className="max-w-[1300px] mx-auto px-10">
+    <section className="py-8 md:py-10 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+      <div className="max-w-[1300px] mx-auto px-4 md:px-10">
         {/* Section Header */}
-        <div className="text-center mb-4 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-primary/8 border border-primary/15 rounded-full text-primary text-[11px] font-bold uppercase tracking-wider mb-3">
-            <Zap className="w-3.5 h-3.5" />
+        <div className="text-center mb-6 md:mb-4 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 md:px-5 md:py-2 bg-primary/8 border border-primary/15 rounded-full text-primary text-[10px] md:text-[11px] font-bold uppercase tracking-wider mb-2 md:mb-3">
+            <Zap className="w-3 h-3 md:w-3.5 md:h-3.5" />
             TRANSPARENTE PRISER
           </div>
-          <h2 className="text-5xl font-black text-slate-900 mb-2 tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-2 tracking-tight px-4">
             Vores Services & Priser
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed px-4">
             Professionel el-service med klare, fair priser. Ingen skjulte omkostninger.
           </p>
         </div>
 
         {/* Price Controls */}
-        <div className="max-w-5xl mx-auto mb-8">
-          {/* All controls in one row */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="max-w-5xl mx-auto mb-6 md:mb-8">
+          {/* Controls stacked on mobile, row on desktop */}
+          <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-2 md:gap-3">
             {/* Customer Type Toggle */}
-            <div className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
+            <div className="inline-flex w-full md:w-auto bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
               <button
                 onClick={() => setCustomerType("privat")}
-                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                className={`flex-1 md:flex-none px-4 md:px-6 py-2 md:py-2.5 rounded-lg text-sm font-semibold transition-all ${
                   customerType === "privat"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -124,7 +124,7 @@ export const StarterPackages = () => {
               </button>
               <button
                 onClick={() => setCustomerType("erhverv")}
-                className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                className={`flex-1 md:flex-none px-4 md:px-6 py-2 md:py-2.5 rounded-lg text-sm font-semibold transition-all ${
                   customerType === "erhverv"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -135,46 +135,46 @@ export const StarterPackages = () => {
             </div>
 
             {/* Time Type Toggle */}
-            <div className="inline-flex bg-white border border-slate-200 rounded-xl p-1 shadow-sm">
+            <div className="inline-flex w-full md:w-auto bg-white border border-slate-200 rounded-xl p-1 shadow-sm overflow-x-auto">
               <button
                 onClick={() => setTimeType("dagtimer")}
-                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "dagtimer"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                Dagtimer (07–16)
+                Dagtimer
               </button>
               <button
                 onClick={() => setTimeType("overarbejde")}
-                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "overarbejde"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                Overarbejde (16–21)
+                Overarbejde
               </button>
               <button
                 onClick={() => setTimeType("akut")}
-                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "akut"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                Akut (samme dag)
+                Akut
               </button>
               <button
                 onClick={() => setTimeType("nattevagt")}
-                className={`px-3 py-2.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "nattevagt"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                Nattevagt (21–07)
+                Nattevagt
               </button>
             </div>
 
@@ -182,7 +182,7 @@ export const StarterPackages = () => {
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-4 py-2.5 shadow-sm">
+                  <div className="flex items-center gap-3 w-full md:w-auto bg-white border border-slate-200 rounded-xl px-4 py-2 md:py-2.5 shadow-sm">
                     <Switch
                       checked={hasSubscription}
                       onCheckedChange={setHasSubscription}
@@ -202,11 +202,11 @@ export const StarterPackages = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
           {services.map((service, idx) => (
             <div
               key={idx}
-              className={`relative flex flex-col gap-3 py-6 px-8 rounded-[20px] transition-all duration-500 ${
+              className={`relative flex flex-col gap-3 py-6 px-6 md:px-8 rounded-[20px] transition-all duration-500 ${
                 service.featured
                   ? 'bg-gradient-to-br from-primary to-primary/90 text-white shadow-[0_24px_48px_rgba(0,102,255,0.25)] hover:shadow-[0_32px_64px_rgba(0,102,255,0.3)] hover:-translate-y-2 border-none'
                   : service.exclusive
@@ -217,26 +217,26 @@ export const StarterPackages = () => {
             >
               {/* Featured Badge - ABOVE CARD */}
               {service.featured && (
-                <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full shadow-[0_6px_16px_rgba(255,215,0,0.4),0_0_0_4px_white,0_0_0_5px_rgba(0,102,255,0.2)] z-10 whitespace-nowrap">
-                  <Star className="w-[15px] h-[15px] fill-slate-900" />
-                  <span className="text-[11px] font-black uppercase tracking-[0.12em] text-slate-900">Mest Valgt</span>
+                <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 md:px-6 py-2 md:py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full shadow-[0_6px_16px_rgba(255,215,0,0.4),0_0_0_4px_white,0_0_0_5px_rgba(0,102,255,0.2)] z-10 whitespace-nowrap">
+                  <Star className="w-[13px] h-[13px] md:w-[15px] md:h-[15px] fill-slate-900" />
+                  <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.12em] text-slate-900">Mest Valgt</span>
                 </div>
               )}
               
               {/* Exclusive Badge - ABOVE CARD */}
               {service.exclusive && (
-                <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 rounded-full shadow-[0_6px_16px_rgba(251,191,36,0.5),0_0_0_4px_rgb(15,23,42),0_0_0_5px_rgba(251,191,36,0.3)] z-10 whitespace-nowrap">
-                  <Zap className="w-[15px] h-[15px] fill-slate-900" />
-                  <span className="text-[11px] font-black uppercase tracking-[0.12em] text-slate-900">⚡ VIP Service</span>
+                <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 md:px-6 py-2 md:py-2.5 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 rounded-full shadow-[0_6px_16px_rgba(251,191,36,0.5),0_0_0_4px_rgb(15,23,42),0_0_0_5px_rgba(251,191,36,0.3)] z-10 whitespace-nowrap">
+                  <Zap className="w-[13px] h-[13px] md:w-[15px] md:h-[15px] fill-slate-900" />
+                  <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.12em] text-slate-900">⚡ VIP Service</span>
                 </div>
               )}
 
               {/* Card Header */}
               <div className={`text-center ${service.featured || service.exclusive ? 'pt-2' : ''}`}>
-                <h3 className={`text-2xl font-extrabold mb-1 tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
+                <h3 className={`text-xl md:text-2xl font-extrabold mb-1 tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
                   {service.name}
                 </h3>
-                <p className={`text-[14px] leading-relaxed ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-600'}`}>
+                <p className={`text-[13px] md:text-[14px] leading-relaxed ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-600'}`}>
                   {service.description}
                 </p>
               </div>
@@ -245,19 +245,19 @@ export const StarterPackages = () => {
               <div className={`text-center py-3 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
                 <>
                   <div className="flex items-baseline justify-center gap-1 mb-1">
-                    <span className={`text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
+                    <span className={`text-4xl md:text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
                       {Math.round(calculatePrice(service.packageType))}
                     </span>
-                    <span className={`text-xl font-bold ${service.featured || service.exclusive ? 'text-white/90' : 'text-slate-600'}`}>
+                    <span className={`text-lg md:text-xl font-bold ${service.featured || service.exclusive ? 'text-white/90' : 'text-slate-600'}`}>
                       kr
                     </span>
                   </div>
-                  <p className={`text-[13px] font-medium mb-2 ${service.featured || service.exclusive ? 'text-white/80' : 'text-slate-500'}`}>
+                  <p className={`text-xs md:text-[13px] font-medium mb-2 ${service.featured || service.exclusive ? 'text-white/80' : 'text-slate-500'}`}>
                     per time
                   </p>
                   
                   {/* Price Labels */}
-                  <div className="flex flex-wrap justify-center gap-2 text-[11px]">
+                  <div className="flex flex-wrap justify-center gap-1.5 md:gap-2 text-[10px] md:text-[11px]">
                     <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
                       {customerType === "privat" ? "Privat (inkl. moms)" : "Erhverv (ekskl. moms)"}
                     </span>
@@ -269,7 +269,7 @@ export const StarterPackages = () => {
                   {/* Subscription Badge */}
                   {hasSubscription && (
                     <div className="mt-1.5">
-                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-semibold ${
+                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] md:text-[11px] font-semibold ${
                         service.exclusive ? 'bg-amber-400/20 text-amber-300' : 'bg-primary/10 text-primary'
                       }`}>
                         Spar 10 % med abonnement
@@ -283,8 +283,8 @@ export const StarterPackages = () => {
               <ul className="flex-grow space-y-2 mb-2">
                 {service.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-2.5">
-                    <Check className={`w-[18px] h-[18px] flex-shrink-0 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
-                    <span className={`text-[15px] font-medium ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-700'}`}>
+                    <Check className={`w-[16px] h-[16px] md:w-[18px] md:h-[18px] flex-shrink-0 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
+                    <span className={`text-[14px] md:text-[15px] font-medium ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-700'}`}>
                       {feature}
                     </span>
                   </li>
@@ -295,7 +295,7 @@ export const StarterPackages = () => {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className={`flex items-center gap-1.5 text-[11px] mb-2 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
+                    <div className={`flex items-center gap-1.5 text-[10px] md:text-[11px] mb-2 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
                       <Info className="w-3.5 h-3.5" />
                       <span className="font-medium">Transport efter afstand</span>
                     </div>
@@ -310,7 +310,7 @@ export const StarterPackages = () => {
 
               {/* CTA Button */}
               <button
-                className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-[15px] font-bold transition-all duration-300 ${
+                className={`flex items-center justify-center gap-2 px-6 py-3.5 md:py-4 rounded-xl text-[14px] md:text-[15px] font-bold transition-all duration-300 ${
                   service.featured
                     ? 'bg-white text-primary shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:-translate-y-0.5'
                     : service.exclusive
@@ -318,9 +318,9 @@ export const StarterPackages = () => {
                     : 'bg-primary text-white shadow-[0_4px_12px_rgba(0,102,255,0.2)] hover:bg-primary/90 hover:shadow-[0_6px_20px_rgba(0,102,255,0.3)] hover:-translate-y-0.5'
                 }`}
               >
-                {service.buttonIcon === 'phone' && <Phone className="w-[18px] h-[18px]" />}
-                {service.buttonIcon === 'zap' && <Zap className="w-[18px] h-[18px]" />}
-                {service.buttonIcon === 'mail' && <Mail className="w-[18px] h-[18px]" />}
+                {service.buttonIcon === 'phone' && <Phone className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" />}
+                {service.buttonIcon === 'zap' && <Zap className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" />}
+                {service.buttonIcon === 'mail' && <Mail className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" />}
                 {service.buttonText}
               </button>
             </div>
