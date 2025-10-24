@@ -3,7 +3,6 @@ import { Input } from "./ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
-import { Zap, Shield, Gift, Mail } from "lucide-react";
 
 export const NewsletterCTA = () => {
   const { t } = useTranslation();
@@ -21,119 +20,60 @@ export const NewsletterCTA = () => {
   };
 
   return (
-    <section className="relative py-20 md:py-24 overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-blue-50/30" />
-      <div 
-        className="absolute inset-0 opacity-[0.02]" 
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230066FF' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}
-      />
+    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--blue-tint) / 0.5) 0%, hsl(var(--primary)) 100%)' }}>
+      {/* Top smooth transition */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[hsl(var(--blue-tint)/0.5)] to-transparent pointer-events-none z-0"></div>
       
-      <div className="container relative max-w-5xl mx-auto px-4">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-200/60 overflow-hidden">
-          <div className="grid md:grid-cols-2 gap-0">
+      {/* Premium background effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(34,197,94,0.15),transparent_50%)]"></div>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+      
+      <div className="container relative z-10 px-4">
+        <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
+          <div className="space-y-3 md:space-y-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+              {t('newsletter.title')}
+            </h2>
             
-            {/* Left side - Value proposition */}
-            <div className="p-8 md:p-10 bg-gradient-to-br from-slate-900 to-slate-800 text-white relative overflow-hidden">
-              {/* Subtle circuit pattern overlay */}
-              <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                <Zap className="w-full h-full" strokeWidth={1} />
-              </div>
-              
-              <div className="relative z-10 space-y-6">
-                <div className="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm border border-emerald-400/30">
-                  <Gift className="w-4 h-4" />
-                  <span>Eksklusivt Tilbud</span>
-                </div>
-                
-                <div className="space-y-3">
-                  <h3 className="text-2xl md:text-3xl font-bold leading-tight">
-                    Spar 10% på Din Næste El-service
-                  </h3>
-                  <p className="text-slate-300 text-base leading-relaxed">
-                    Tilmeld dig vores nyhedsbrev og modtag værdifulde el-tips, 
-                    sikkerhedsråd og eksklusive tilbud direkte i din indbakke.
-                  </p>
-                </div>
-                
-                <div className="space-y-3 pt-2">
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                    </div>
-                    <p className="text-sm text-slate-300">
-                      Praktiske råd fra certificerede elektrikere
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                    </div>
-                    <p className="text-sm text-slate-300">
-                      Tidlig adgang til sæsontilbud og kampagner
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                    </div>
-                    <p className="text-sm text-slate-300">
-                      Kun relevant indhold – max én mail om måneden
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <p className="text-base md:text-xl text-primary-foreground/95 leading-relaxed">
+              {t('newsletter.subtitle')}
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 md:gap-4 max-w-lg mx-auto">
+            <Input 
+              type="email" 
+              placeholder={t('newsletter.placeholder')}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="bg-white text-foreground h-12 md:h-14 px-4 md:px-6 text-base md:text-lg shadow-lg"
+            />
+            <Button type="submit" variant="secondary" size="lg" className="h-12 md:h-14 px-6 md:px-8 whitespace-nowrap shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold">
+              {t('newsletter.cta')}
+            </Button>
+          </form>
+
+          <div className="flex flex-wrap gap-4 md:gap-6 justify-center pt-4 text-xs md:text-sm text-primary-foreground/90">
+            <div className="flex items-center gap-2">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{t('newsletter.noSpam')}</span>
             </div>
-
-            {/* Right side - Form */}
-            <div className="p-8 md:p-10 flex flex-col justify-center">
-              <div className="space-y-6">
-                <div className="flex items-center gap-3 text-slate-700">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-slate-900">Få din rabatkode</h4>
-                    <p className="text-sm text-slate-600">Gælder både private og erhverv</p>
-                  </div>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Input 
-                      type="email" 
-                      placeholder="Din email adresse"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="h-12 px-4 bg-white border-2 border-slate-200 focus:border-primary rounded-lg text-base transition-all"
-                    />
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full h-12 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-2"
-                  >
-                    <Zap className="w-4 h-4" />
-                    Få 10% Rabatkode Nu
-                  </Button>
-                </form>
-
-                <div className="pt-2 space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <Shield className="w-4 h-4 text-slate-400" />
-                    <span>Ingen spam – afmeld når som helst</span>
-                  </div>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Vi respekterer din privatliv og sender kun relevant information 
-                    om el-services, sikkerhed og tilbud.
-                  </p>
-                </div>
-              </div>
+            <div className="flex items-center gap-2">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{t('newsletter.maxOneMail')}</span>
             </div>
-
+            <div className="flex items-center gap-2">
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              <span>{t('newsletter.unsubscribe')}</span>
+            </div>
           </div>
         </div>
       </div>
