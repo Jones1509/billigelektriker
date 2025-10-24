@@ -8,17 +8,28 @@ export const StarterPackages = () => {
   const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "akut" | "nattevagt">("dagtimer");
   const [hasSubscription, setHasSubscription] = useState(false);
 
-  // Pricing calculation
-  const basePrice = customerType === "privat" ? 550 : 510;
+  // Base prices for each package
+  const basePrices = {
+    standard: customerType === "privat" ? 650 : 510,
+    premium: customerType === "privat" ? 850 : 670,
+    exclusive: customerType === "privat" ? 1050 : 850
+  };
+
+  // Multipliers for time types
   const multipliers = {
     dagtimer: 1.0,
     overarbejde: 1.25,
     akut: 1.5,
     nattevagt: 1.75
   };
-  const multiplier = multipliers[timeType];
-  const priceBeforeDiscount = basePrice * multiplier;
-  const finalPrice = hasSubscription ? priceBeforeDiscount * 0.9 : priceBeforeDiscount;
+
+  // Calculate price for a specific package
+  const calculatePrice = (packageType: "standard" | "premium" | "exclusive") => {
+    const basePrice = basePrices[packageType];
+    const multiplier = multipliers[timeType];
+    const priceBeforeDiscount = basePrice * multiplier;
+    return hasSubscription ? priceBeforeDiscount * 0.9 : priceBeforeDiscount;
+  };
 
   const timeTypeLabels = {
     dagtimer: "Dagtimer (07–16)",
@@ -31,6 +42,7 @@ export const StarterPackages = () => {
     {
       name: "Standard Service",
       description: "Daglige el-opgaver og mindre reparationer",
+      packageType: "standard" as const,
       features: [
         "Fejlfinding og reparation",
         "Installation af stikkontakter",
@@ -39,11 +51,13 @@ export const StarterPackages = () => {
       ],
       buttonText: "Book Nu",
       buttonIcon: "phone",
-      featured: false
+      featured: false,
+      exclusive: false
     },
     {
       name: "Premium Pakke",
       description: "Komplette installationer med garanti",
+      packageType: "premium" as const,
       features: [
         "Alt fra Standard Service",
         "Smart home installation",
@@ -53,21 +67,25 @@ export const StarterPackages = () => {
       ],
       buttonText: "Vælg Premium",
       buttonIcon: "zap",
-      featured: true
+      featured: true,
+      exclusive: false
     },
     {
-      name: "Erhverv",
-      description: "Professionelle løsninger til virksomheder",
+      name: "Eksklusiv Pakke",
+      description: "Avancerede løsninger og 24/7-service",
+      packageType: "exclusive" as const,
       features: [
-        "Skræddersyet løsning",
-        "Større projekter",
-        "Fast servicetekniker",
-        "Fleksibel planlægning",
-        "Serviceaftale"
+        "Alt fra Premium Pakke",
+        "VIP-prioritering",
+        "Døgndækning 24/7",
+        "Teknisk specialdesign",
+        "Dedikeret projektleder",
+        "Skræddersyet serviceaftale"
       ],
       buttonText: "Få Tilbud",
       buttonIcon: "mail",
-      featured: false
+      featured: false,
+      exclusive: true
     }
   ];
 
@@ -193,6 +211,8 @@ export const StarterPackages = () => {
               className={`relative flex flex-col gap-7 p-10 rounded-[20px] transition-all duration-500 ${
                 service.featured
                   ? 'bg-gradient-to-br from-primary to-primary/90 text-white shadow-[0_24px_48px_rgba(0,102,255,0.25)] hover:shadow-[0_32px_64px_rgba(0,102,255,0.3)] hover:-translate-y-2 border-none'
+                  : service.exclusive
+                  ? 'bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-amber-500/30 shadow-[0_24px_48px_rgba(251,191,36,0.15)] hover:shadow-[0_32px_64px_rgba(251,191,36,0.25)] hover:-translate-y-2'
                   : 'bg-white border border-slate-200 hover:border-primary/20 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]'
               } animate-fade-in`}
               style={{ animationDelay: `${idx * 100}ms` }}
@@ -204,77 +224,69 @@ export const StarterPackages = () => {
                   <span className="text-[11px] font-black uppercase tracking-[0.12em] text-slate-900">Mest Valgt</span>
                 </div>
               )}
+              
+              {/* Exclusive Badge - ABOVE CARD */}
+              {service.exclusive && (
+                <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 rounded-full shadow-[0_6px_16px_rgba(251,191,36,0.5),0_0_0_4px_rgb(15,23,42),0_0_0_5px_rgba(251,191,36,0.3)] z-10 whitespace-nowrap">
+                  <Zap className="w-[15px] h-[15px] fill-slate-900" />
+                  <span className="text-[11px] font-black uppercase tracking-[0.12em] text-slate-900">⚡ VIP Service</span>
+                </div>
+              )}
 
               {/* Card Header */}
-              <div className={`text-center ${service.featured ? 'pt-3' : ''}`}>
-                <h3 className={`text-2xl font-extrabold mb-2 tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
+              <div className={`text-center ${service.featured || service.exclusive ? 'pt-3' : ''}`}>
+                <h3 className={`text-2xl font-extrabold mb-2 tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
                   {service.name}
                 </h3>
-                <p className={`text-[15px] leading-relaxed ${service.featured ? 'text-white/95' : 'text-slate-600'}`}>
+                <p className={`text-[15px] leading-relaxed ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-600'}`}>
                   {service.description}
                 </p>
               </div>
 
               {/* Price Section */}
-              <div className={`text-center py-6 border-t border-b ${service.featured ? 'border-white/20' : 'border-slate-200'}`}>
-                {idx === 2 ? (
-                  // Erhverv card - show "Kontakt" for featured display, but explain pricing below
-                  <>
-                    <div className="flex items-baseline justify-center gap-1 mb-1">
-                      <span className={`text-5xl font-black tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
-                        Kontakt
-                      </span>
-                    </div>
-                    <p className={`text-[13px] font-medium ${service.featured ? 'text-white/80' : 'text-slate-500'}`}>
-                      for tilbud
-                    </p>
-                    <p className={`text-xs mt-2 ${service.featured ? 'text-white/70' : 'text-slate-500'}`}>
-                      Fra 510 kr/time (ekskl. moms) ved dagtimer
-                    </p>
-                  </>
-                ) : (
-                  // Standard and Premium cards - show dynamic pricing
-                  <>
-                    <div className="flex items-baseline justify-center gap-1 mb-1">
-                      <span className={`text-5xl font-black tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
-                        {Math.round(finalPrice)}
-                      </span>
-                      <span className={`text-xl font-bold ${service.featured ? 'text-white/90' : 'text-slate-600'}`}>
-                        kr
-                      </span>
-                    </div>
-                    <p className={`text-[13px] font-medium mb-3 ${service.featured ? 'text-white/80' : 'text-slate-500'}`}>
-                      per time
-                    </p>
-                    
-                    {/* Price Labels */}
-                    <div className="flex flex-wrap justify-center gap-2 text-[11px]">
-                      <span className={`px-2 py-1 rounded ${service.featured ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
-                        {customerType === "privat" ? "Privat (inkl. moms)" : "Erhverv (ekskl. moms)"}
-                      </span>
-                      <span className={`px-2 py-1 rounded ${service.featured ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
-                        {timeTypeLabels[timeType]}
-                      </span>
-                    </div>
+              <div className={`text-center py-6 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
+                <>
+                  <div className="flex items-baseline justify-center gap-1 mb-1">
+                    <span className={`text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
+                      {Math.round(calculatePrice(service.packageType))}
+                    </span>
+                    <span className={`text-xl font-bold ${service.featured || service.exclusive ? 'text-white/90' : 'text-slate-600'}`}>
+                      kr
+                    </span>
+                  </div>
+                  <p className={`text-[13px] font-medium mb-3 ${service.featured || service.exclusive ? 'text-white/80' : 'text-slate-500'}`}>
+                    per time
+                  </p>
+                  
+                  {/* Price Labels */}
+                  <div className="flex flex-wrap justify-center gap-2 text-[11px]">
+                    <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                      {customerType === "privat" ? "Privat (inkl. moms)" : "Erhverv (ekskl. moms)"}
+                    </span>
+                    <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                      {timeTypeLabels[timeType]}
+                    </span>
+                  </div>
 
-                    {/* Subscription Badge */}
-                    {hasSubscription && (
-                      <div className="mt-2">
-                        <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary text-[11px] font-semibold rounded">
-                          Spar 10 % med abonnement
-                        </span>
-                      </div>
-                    )}
-                  </>
-                )}
+                  {/* Subscription Badge */}
+                  {hasSubscription && (
+                    <div className="mt-2">
+                      <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-semibold ${
+                        service.exclusive ? 'bg-amber-400/20 text-amber-300' : 'bg-primary/10 text-primary'
+                      }`}>
+                        Spar 10 % med abonnement
+                      </span>
+                    </div>
+                  )}
+                </>
               </div>
 
               {/* Features List */}
               <ul className="flex-grow space-y-3 mb-4">
                 {service.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-2.5">
-                    <Check className={`w-[18px] h-[18px] flex-shrink-0 ${service.featured ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
-                    <span className={`text-[15px] font-medium ${service.featured ? 'text-white/95' : 'text-slate-700'}`}>
+                    <Check className={`w-[18px] h-[18px] flex-shrink-0 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
+                    <span className={`text-[15px] font-medium ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-700'}`}>
                       {feature}
                     </span>
                   </li>
@@ -285,7 +297,7 @@ export const StarterPackages = () => {
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className={`flex items-center gap-1.5 text-[11px] mb-4 ${service.featured ? 'text-white/70' : 'text-slate-500'}`}>
+                    <div className={`flex items-center gap-1.5 text-[11px] mb-4 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
                       <Info className="w-3.5 h-3.5" />
                       <span className="font-medium">Transport efter afstand</span>
                     </div>
@@ -303,6 +315,8 @@ export const StarterPackages = () => {
                 className={`flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-[15px] font-bold transition-all duration-300 ${
                   service.featured
                     ? 'bg-white text-primary shadow-[0_4px_12px_rgba(0,0,0,0.1)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] hover:-translate-y-0.5'
+                    : service.exclusive
+                    ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 shadow-[0_4px_12px_rgba(251,191,36,0.3)] hover:shadow-[0_6px_20px_rgba(251,191,36,0.4)] hover:-translate-y-0.5'
                     : 'bg-primary text-white shadow-[0_4px_12px_rgba(0,102,255,0.2)] hover:bg-primary/90 hover:shadow-[0_6px_20px_rgba(0,102,255,0.3)] hover:-translate-y-0.5'
                 }`}
               >
@@ -315,21 +329,6 @@ export const StarterPackages = () => {
           ))}
         </div>
 
-        {/* Trust Section */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 pt-12 border-t border-slate-200 animate-fade-in">
-          <div className="flex items-center gap-3">
-            <Shield className="w-6 h-6 text-primary" />
-            <p className="text-sm text-slate-700 font-semibold m-0">Certificerede elektrikere</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Clock className="w-6 h-6 text-primary" />
-            <p className="text-sm text-slate-700 font-semibold m-0">Samme dag service</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Award className="w-6 h-6 text-primary" />
-            <p className="text-sm text-slate-700 font-semibold m-0">2 års garanti</p>
-          </div>
-        </div>
       </div>
     </section>
   );
