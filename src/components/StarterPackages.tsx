@@ -69,27 +69,27 @@ export const StarterPackages = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 pt-8">
           {services.map((service, idx) => (
             <div
               key={idx}
               className={`relative flex flex-col gap-7 p-10 rounded-[20px] transition-all duration-500 ${
                 service.featured
-                  ? 'bg-gradient-to-br from-primary to-primary/90 text-white scale-105 shadow-[0_24px_48px_rgba(0,102,255,0.25)] hover:shadow-[0_32px_64px_rgba(0,102,255,0.3)] hover:scale-105 hover:-translate-y-2 border-none'
+                  ? 'bg-gradient-to-br from-primary to-primary/90 text-white shadow-[0_24px_48px_rgba(0,102,255,0.25)] hover:shadow-[0_32px_64px_rgba(0,102,255,0.3)] hover:-translate-y-2 border-none'
                   : 'bg-white border border-slate-200 hover:border-primary/20 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]'
               } animate-fade-in`}
               style={{ animationDelay: `${idx * 100}ms` }}
             >
-              {/* Featured Badge */}
+              {/* Featured Badge - ABOVE CARD */}
               {service.featured && (
-                <div className="absolute top-5 right-5 flex items-center gap-1.5 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full">
-                  <Star className="w-3.5 h-3.5 fill-white" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider">Mest Valgt</span>
+                <div className="absolute -top-[18px] left-1/2 -translate-x-1/2 flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full shadow-[0_6px_16px_rgba(255,215,0,0.4),0_0_0_4px_white,0_0_0_5px_rgba(0,102,255,0.2)] z-10 whitespace-nowrap">
+                  <Star className="w-[15px] h-[15px] fill-slate-900" />
+                  <span className="text-[11px] font-black uppercase tracking-[0.12em] text-slate-900">Mest Valgt</span>
                 </div>
               )}
 
               {/* Card Header */}
-              <div className="text-center">
+              <div className={`text-center ${service.featured ? 'pt-3' : ''}`}>
                 <h3 className={`text-2xl font-extrabold mb-2 tracking-tight ${service.featured ? 'text-white' : 'text-slate-900'}`}>
                   {service.name}
                 </h3>
