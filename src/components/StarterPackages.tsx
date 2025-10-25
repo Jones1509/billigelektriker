@@ -8,49 +8,47 @@ export const StarterPackages = () => {
   const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "nat" | "akut">("dagtimer");
   const [hasSubscription, setHasSubscription] = useState(false);
 
-  // Base prices (daytime)
+  // Base prices (daytime) - Private is ALWAYS cheaper than Business
   const basePrices = {
-    standard: { privat: 550, erhverv: 510 },
-    premium: { privat: 650, erhverv: 600 },
-    exclusive: { privat: 850, erhverv: 800 }
+    standard: { privat: 510, erhverv: 550 },
+    premium: { privat: 650, erhverv: 700 },
+    exclusive: { privat: 850, erhverv: 900 }
   };
 
-  // Time surcharges (added to base)
+  // Time surcharges (same for all packages)
   const timeSurcharges = {
-    dagtimer: { standard: 0, premium: 0, exclusive: 0 },
-    overarbejde: { standard: 200, premium: 150, exclusive: 100 },
-    nat: { standard: 650, premium: 450, exclusive: 150 },
-    akut: { standard: 500, premium: 300, exclusive: 0 }
+    dagtimer: 0,
+    overarbejde: 200,
+    nat: 600,
+    akut: 400
   };
 
-  // Subscription discounts
-  const subscriptionDiscounts = {
-    standard: 0.10,
-    premium: 0.13,
-    exclusive: 0.15
-  };
+  // Subscription = ONLY 20% discount on hourly rate (no other benefits)
+  const subscriptionDiscount = 0.20;
 
   // Calculate price for a package
   const calculatePrice = (packageType: "standard" | "premium" | "exclusive") => {
     const basePrice = basePrices[packageType][customerType];
-    const surcharge = timeSurcharges[timeType][packageType];
+    const surcharge = timeSurcharges[timeType];
     const fullPrice = basePrice + surcharge;
     
     if (hasSubscription) {
-      const discount = subscriptionDiscounts[packageType];
-      return Math.round(fullPrice * (1 - discount));
+      return Math.round(fullPrice * (1 - subscriptionDiscount));
     }
     return fullPrice;
   };
 
-  // Calculate savings with subscription
-  const calculateSavings = (packageType: "standard" | "premium" | "exclusive") => {
+  // Calculate full price without discount (for display)
+  const calculateFullPrice = (packageType: "standard" | "premium" | "exclusive") => {
     const basePrice = basePrices[packageType][customerType];
-    const surcharge = timeSurcharges[timeType][packageType];
-    const fullPrice = basePrice + surcharge;
-    const discountedPrice = calculatePrice(packageType);
-    const transport = hasSubscription ? (packageType === "standard" ? 300 : packageType === "premium" ? 300 : 0) : 0;
-    return Math.round(fullPrice - discountedPrice + transport);
+    const surcharge = timeSurcharges[timeType];
+    return basePrice + surcharge;
+  };
+
+  // Calculate savings with subscription (only 20% off hourly rate)
+  const calculateSavings = (packageType: "standard" | "premium" | "exclusive") => {
+    const fullPrice = calculateFullPrice(packageType);
+    return Math.round(fullPrice * subscriptionDiscount);
   };
 
   const timeTypeLabels = {
@@ -64,19 +62,20 @@ export const StarterPackages = () => {
     {
       name: "Standard Service",
       badge: "Budget-venlig",
-      description: "Professionel grundservice",
+      description: "Grundlæggende professionelt arbejde",
       packageType: "standard" as const,
       features: [
-        "Professionel service",
-        "Autoriseret elektriker",
-        "Fejlfinding og reparation",
-        "Installation af stikkontakter"
+        "Professionel autoriseret elektriker",
+        "Vi laver ALLE typer el-arbejde",
+        "Kvalitet og sikkerhed garanteret"
       ],
       notIncluded: [
-        "Ingen garanti",
-        "Standard ventetid (3-5 dage)",
-        "Fuld pris for materialer"
+        "Ingen garanti på arbejdet",
+        "Normal ventetid (3-5 dage)",
+        "Fuld pris på materialer",
+        "Betaler transport (300 kr)"
       ],
+      perfectFor: "Enkle opgaver hvor du ikke har behov for garanti",
       buttonText: "Book Nu",
       buttonIcon: "phone",
       featured: false,
@@ -85,16 +84,17 @@ export const StarterPackages = () => {
     {
       name: "Premium Pakke",
       badge: "Bedste værdi",
-      description: "Mere værdi + sikkerhed",
+      description: "Samme arbejde + ekstra fordele",
       packageType: "premium" as const,
       features: [
-        "Alt fra Standard Service",
-        "2 års garanti på arbejde",
+        "2 års garanti på arbejdet",
         "Prioriteret booking (1-2 dage)",
         "10% rabat på materialer",
-        "Gratis opfølgning første måned",
-        "SMS når elektriker er på vej"
+        "Gratis vedligeholdelse 1 gang om året",
+        "SMS når vi er på vej",
+        "Dokumentation på arbejdet"
       ],
+      perfectFor: "Dig der vil have ro i sindet og ekstra sikkerhed",
       buttonText: "Vælg Premium",
       buttonIcon: "zap",
       featured: true,
@@ -103,18 +103,21 @@ export const StarterPackages = () => {
     {
       name: "Eksklusiv Pakke",
       badge: "VIP Service",
-      description: "Maksimal værdi + tryghed",
+      description: "Samme arbejde + maksimale fordele",
       packageType: "exclusive" as const,
       features: [
-        "Alt fra Premium Pakke",
-        "5 års garanti på arbejde",
+        "5 års garanti på arbejdet",
         "VIP prioritering (samme/næste dag)",
         "20% rabat på materialer",
-        "Dedikeret projektleder",
+        "Gratis transport ALTID",
         "24/7 support hotline",
-        "Gratis årlig eftersyn"
+        "Dedikeret autoriseret elektriker",
+        "Kvartalsvis gratis vedligeholdelse",
+        "Gratis akut-besøg ved problemer",
+        "Detaljeret foto-dokumentation"
       ],
-      buttonText: "Få Tilbud",
+      perfectFor: "Erhverv eller privatpersoner der vil have VIP behandling",
+      buttonText: "Få VIP Status",
       buttonIcon: "mail",
       featured: false,
       exclusive: true
@@ -288,7 +291,7 @@ export const StarterPackages = () => {
                 <div className="flex items-baseline justify-center gap-1">
                   {hasSubscription && (
                     <span className={`text-lg md:text-xl font-bold line-through ${service.featured || service.exclusive ? 'text-white/50' : 'text-slate-400'}`}>
-                      {Math.round(basePrices[service.packageType][customerType] + timeSurcharges[timeType][service.packageType])}
+                      {calculateFullPrice(service.packageType)}
                     </span>
                   )}
                   <span className={`text-3xl md:text-4xl font-black ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
@@ -311,16 +314,44 @@ export const StarterPackages = () => {
               </div>
 
               {/* Features */}
-              <ul className="flex-grow space-y-1.5 mb-3">
-                {service.features.slice(0, 5).map((feature, fIdx) => (
-                  <li key={fIdx} className="flex items-start gap-2">
-                    <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
-                    <span className={`text-xs md:text-[13px] ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-700'}`}>
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <div className="flex-grow mb-3">
+                {service.packageType === "standard" ? (
+                  <>
+                    <ul className="space-y-1.5 mb-3">
+                      {service.features.map((feature, fIdx) => (
+                        <li key={fIdx} className="flex items-start gap-2">
+                          <Check className="w-4 h-4 flex-shrink-0 mt-0.5 text-emerald-500" strokeWidth={3} />
+                          <span className="text-xs md:text-[13px] text-slate-700">
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="pt-2 border-t border-slate-200">
+                      <p className="text-xs font-semibold text-slate-600 mb-1.5">Hvad du IKKE får:</p>
+                      <ul className="space-y-1">
+                        {service.notIncluded?.map((item, idx) => (
+                          <li key={idx} className="text-xs text-slate-500 flex items-start gap-1.5">
+                            <span className="text-red-500 mt-0.5">✗</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <ul className="space-y-1.5">
+                    {service.features.map((feature, fIdx) => (
+                      <li key={fIdx} className="flex items-start gap-2">
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
+                        <span className={`text-xs md:text-[13px] ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-700'}`}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
               {/* CTA */}
               <button
@@ -347,15 +378,15 @@ export const StarterPackages = () => {
             <div className="flex items-center gap-4">
               <Star className="w-8 h-8 md:w-10 md:h-10 text-primary flex-shrink-0" />
               <div>
-                <h4 className="text-base md:text-lg font-bold text-slate-900 mb-0.5">Spar med Abonnement</h4>
-                <p className="text-xs md:text-sm text-slate-600">Fast lav pris + gratis transport + prioriteret service</p>
+                <h4 className="text-base md:text-lg font-bold text-slate-900 mb-0.5">Spar 20% på Alle Timer</h4>
+                <p className="text-xs md:text-sm text-slate-600">Få fast lav timepris med vores abonnement</p>
               </div>
             </div>
             <button
               onClick={() => navigate('/abonnement')}
               className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold text-sm hover:bg-primary/90 transition-all hover:-translate-y-0.5 whitespace-nowrap shadow-lg"
             >
-              Se Abonnement
+              Se Abonnement Fordele
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
