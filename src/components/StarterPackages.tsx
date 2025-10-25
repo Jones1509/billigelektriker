@@ -1,67 +1,53 @@
 import { useState } from "react";
-import { Check, Zap, Phone, Mail, Star, Clock, Info, Sun, Moon, Truck, AlertCircle, Home, Building, TrendingDown } from "lucide-react";
+import { Check, Zap, Phone, Mail, Star, Shield, Clock, Award, Info } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const StarterPackages = () => {
   const [customerType, setCustomerType] = useState<"privat" | "erhverv">("privat");
-  const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "nattevagt">("dagtimer");
+  const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "akut" | "nattevagt">("dagtimer");
   const [hasSubscription, setHasSubscription] = useState(false);
 
-  // Real hourly rates (excluding materials & transport)
-  const hourlyRates = {
-    dagtimer: 500,
-    overarbejde: 650,
-    nattevagt: 1000
+  // Base prices for each package
+  const basePrices = {
+    standard: customerType === "privat" ? 650 : 510,
+    premium: customerType === "privat" ? 850 : 670,
+    exclusive: customerType === "privat" ? 1050 : 850
   };
 
-  // Transport costs based on time
-  const transportCosts = {
-    dagtimer: 300,
-    overarbejde: 400,
-    nattevagt: 500
+  // Multipliers for time types
+  const multipliers = {
+    dagtimer: 1.0,
+    overarbejde: 1.25,
+    akut: 1.5,
+    nattevagt: 1.75
   };
 
-  // Calculate price for standard package
-  const calculateStandardPrice = () => {
-    const baseRate = hourlyRates[timeType];
-    return hasSubscription ? Math.round(baseRate * 0.9) : baseRate;
-  };
-
-  // Calculate price for premium package (varies by time)
-  const calculatePremiumPrice = () => {
-    const baseRate = hourlyRates[timeType];
-    return hasSubscription ? Math.round(baseRate * 0.9) : baseRate;
-  };
-
-  // Calculate price for exclusive package (always premium night rate + emergency)
-  const calculateExclusivePrice = () => {
-    const vipRate = 1500; // 1000 (night) + 500 (emergency)
-    return hasSubscription ? Math.round(vipRate * 0.9) : vipRate;
+  // Calculate price for a specific package
+  const calculatePrice = (packageType: "standard" | "premium" | "exclusive") => {
+    const basePrice = basePrices[packageType];
+    const multiplier = multipliers[timeType];
+    const priceBeforeDiscount = basePrice * multiplier;
+    return hasSubscription ? priceBeforeDiscount * 0.9 : priceBeforeDiscount;
   };
 
   const timeTypeLabels = {
-    dagtimer: "Dagtimer (07-16)",
-    overarbejde: "Overarbejde (16-22)",
-    nattevagt: "Nat (22-07)"
+    dagtimer: "Dagtimer (07–16)",
+    overarbejde: "Overarbejde (16–21)",
+    akut: "Akut (samme dag)",
+    nattevagt: "Nattevagt (21–07)"
   };
 
   const services = [
     {
       name: "Standard Service",
       description: "Daglige el-opgaver og mindre reparationer",
-      price: calculateStandardPrice(),
+      packageType: "standard" as const,
       features: [
         "Fejlfinding og reparation",
         "Installation af stikkontakter",
         "Udskiftning af lamper",
         "El-tjek og eftersyn"
-      ],
-      surcharges: [
-        { icon: Clock, text: `Overarbejde (16-22): 650 kr/time` },
-        { icon: Moon, text: `Nat (22-07): 1000 kr/time` },
-        { icon: Truck, text: `Transport: fra ${transportCosts.dagtimer} kr` }
       ],
       buttonText: "Book Nu",
       buttonIcon: "phone",
@@ -71,19 +57,13 @@ export const StarterPackages = () => {
     {
       name: "Premium Pakke",
       description: "Komplette installationer med garanti",
-      price: calculatePremiumPrice(),
-      priceRange: "500-1000",
+      packageType: "premium" as const,
       features: [
         "Alt fra Standard Service",
         "Smart home installation",
         "Nye elinstallationer",
         "El-tavle opgradering",
         "2 års garanti inkluderet"
-      ],
-      dynamicPricing: [
-        { icon: Sun, text: "Dag (07-16): 500 kr/time" },
-        { icon: Clock, text: "Aften (16-22): 650 kr/time" },
-        { icon: Moon, text: "Nat (22-07): 1000 kr/time" }
       ],
       buttonText: "Vælg Premium",
       buttonIcon: "zap",
@@ -93,7 +73,7 @@ export const StarterPackages = () => {
     {
       name: "Eksklusiv Pakke",
       description: "Avancerede løsninger og 24/7-service",
-      price: calculateExclusivePrice(),
+      packageType: "exclusive" as const,
       features: [
         "Alt fra Premium Pakke",
         "VIP-prioritering",
@@ -102,7 +82,6 @@ export const StarterPackages = () => {
         "Dedikeret projektleder",
         "Skræddersyet serviceaftale"
       ],
-      vipNote: "VIP-pris inkluderer premium timepris (1000 kr) + akut tillæg (500 kr)",
       buttonText: "Få Tilbud",
       buttonIcon: "mail",
       featured: false,
@@ -159,7 +138,7 @@ export const StarterPackages = () => {
             <div className="inline-flex w-full md:w-auto bg-white border border-slate-200 rounded-xl p-1 shadow-sm overflow-x-auto">
               <button
                 onClick={() => setTimeType("dagtimer")}
-                className={`flex-shrink-0 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all whitespace-nowrap ${
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "dagtimer"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -169,7 +148,7 @@ export const StarterPackages = () => {
               </button>
               <button
                 onClick={() => setTimeType("overarbejde")}
-                className={`flex-shrink-0 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all whitespace-nowrap ${
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "overarbejde"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -178,8 +157,18 @@ export const StarterPackages = () => {
                 Overarbejde
               </button>
               <button
+                onClick={() => setTimeType("akut")}
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
+                  timeType === "akut"
+                    ? "bg-primary text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Akut
+              </button>
+              <button
                 onClick={() => setTimeType("nattevagt")}
-                className={`flex-shrink-0 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-xs md:text-sm font-semibold transition-all whitespace-nowrap ${
+                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "nattevagt"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -257,7 +246,7 @@ export const StarterPackages = () => {
                 <>
                   <div className="flex items-baseline justify-center gap-1 mb-1">
                     <span className={`text-4xl md:text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
-                      {service.priceRange || service.price}
+                      {Math.round(calculatePrice(service.packageType))}
                     </span>
                     <span className={`text-lg md:text-xl font-bold ${service.featured || service.exclusive ? 'text-white/90' : 'text-slate-600'}`}>
                       kr
@@ -272,67 +261,23 @@ export const StarterPackages = () => {
                     <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
                       {customerType === "privat" ? "Privat (inkl. moms)" : "Erhverv (ekskl. moms)"}
                     </span>
-                    {!service.exclusive && (
-                      <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
-                        {timeTypeLabels[timeType]}
-                      </span>
-                    )}
-                    {service.exclusive && (
-                      <span className={`px-2 py-1 rounded bg-white/20 text-white/90`}>
-                        Døgnservice 24/7
-                      </span>
-                    )}
+                    <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                      {timeTypeLabels[timeType]}
+                    </span>
                   </div>
 
                   {/* Subscription Badge */}
                   {hasSubscription && (
                     <div className="mt-1.5">
                       <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] md:text-[11px] font-semibold ${
-                        service.exclusive ? 'bg-amber-400/20 text-amber-300' : service.featured ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'
+                        service.exclusive ? 'bg-amber-400/20 text-amber-300' : 'bg-primary/10 text-primary'
                       }`}>
-                        <TrendingDown className="w-3 h-3" /> Spar 10% med abonnement
+                        Spar 10 % med abonnement
                       </span>
                     </div>
                   )}
                 </>
               </div>
-
-              {/* Surcharges/Dynamic Pricing Info */}
-              {service.surcharges && !service.featured && (
-                <div className="space-y-1.5 mb-3">
-                  {service.surcharges.map((surcharge, sIdx) => (
-                    <div key={sIdx} className="flex items-center gap-2 text-xs text-slate-600">
-                      <surcharge.icon className="w-3.5 h-3.5 flex-shrink-0" />
-                      <span>{surcharge.text}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {service.dynamicPricing && service.featured && (
-                <div className="mb-3 p-3 bg-white/10 rounded-lg">
-                  <h4 className="text-xs font-bold text-white mb-2">Priser efter tidspunkt:</h4>
-                  <div className="space-y-1">
-                    {service.dynamicPricing.map((pricing, pIdx) => (
-                      <div key={pIdx} className="flex items-center gap-2 text-xs text-white/90">
-                        <pricing.icon className="w-3.5 h-3.5 flex-shrink-0" />
-                        <span>{pricing.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="flex items-center gap-1.5 mt-2 text-[11px] text-amber-300 font-medium">
-                    <AlertCircle className="w-3 h-3" /> Akut tillæg: +500 kr
-                  </p>
-                </div>
-              )}
-
-              {service.vipNote && service.exclusive && (
-                <div className="mb-3 p-3 bg-white/10 rounded-lg">
-                  <p className="text-xs text-white/90 leading-relaxed">
-                    {service.vipNote}
-                  </p>
-                </div>
-              )}
 
               {/* Features List */}
               <ul className="flex-grow space-y-2 mb-2">
@@ -347,19 +292,21 @@ export const StarterPackages = () => {
               </ul>
 
               {/* Transport Info */}
-              <div className={`flex items-center gap-1.5 text-[10px] md:text-[11px] mb-3 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
-                {service.exclusive ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span className="font-medium">Transport inkluderet</span>
-                  </>
-                ) : (
-                  <>
-                    <Truck className="w-3.5 h-3.5" />
-                    <span className="font-medium">Transport: {transportCosts.dagtimer}-{transportCosts.nattevagt} kr efter tid</span>
-                  </>
-                )}
-              </div>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className={`flex items-center gap-1.5 text-[10px] md:text-[11px] mb-2 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
+                      <Info className="w-3.5 h-3.5" />
+                      <span className="font-medium">Transport efter afstand</span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-xs">
+                      Zone A (0–15 km): 0 kr · Zone B (15–30 km): 199 kr · Zone C (30–50 km): 399 kr · &gt;50 km: 8 kr/km
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
 
               {/* CTA Button */}
               <button
@@ -378,182 +325,6 @@ export const StarterPackages = () => {
               </button>
             </div>
           ))}
-        </div>
-
-        {/* Subscription Section */}
-        <div className="mt-12 md:mt-16 max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-600 text-xs font-bold uppercase tracking-wider mb-3">
-              <Star className="w-4 h-4 fill-current" />
-              ABONNEMENT
-            </div>
-            <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-2 tracking-tight">
-              Få Abonnement & Spar
-            </h3>
-            <p className="text-base md:text-lg text-slate-600">
-              Fast månedlig pris med store besparelser på alle services
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Privat Abonnement */}
-            <Card className="relative overflow-hidden border-2 border-primary/20 hover:border-primary/40 transition-all hover:shadow-xl">
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <Home className="w-6 h-6 text-primary" />
-                  </div>
-                  <CardTitle className="text-2xl">Privat Abonnement</CardTitle>
-                </div>
-                <CardDescription className="text-base">
-                  Perfekt til private husstande
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl font-black text-slate-900">550</span>
-                  <span className="text-xl font-bold text-slate-600">kr</span>
-                  <span className="text-sm text-slate-500">/måned</span>
-                </div>
-
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-emerald-600" />
-                  <span className="text-sm font-semibold text-emerald-700">Spar op til 10% på alle timer</span>
-                </div>
-
-                <ul className="space-y-2.5 my-4">
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">10% rabat på alle timepriser</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Gratis transport inden for 20 km</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Prioriteret booking</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Ingen akut-tillæg</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Årlig gratis el-tjek</span>
-                  </li>
-                </ul>
-
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                  <p className="text-xs font-semibold text-slate-700 mb-2">Eksempel besparelse:</p>
-                  <div className="space-y-1 text-xs">
-                    <div className="flex justify-between text-slate-600">
-                      <span>Normal pris (4 timer):</span>
-                      <span>2000 kr</span>
-                    </div>
-                    <div className="flex justify-between text-emerald-600 font-medium">
-                      <span>Med abonnement:</span>
-                      <span>1800 kr + 0 kr transport</span>
-                    </div>
-                    <div className="pt-2 mt-2 border-t border-slate-300 flex justify-between font-bold text-slate-900">
-                      <span>Du sparer:</span>
-                      <span className="text-emerald-600">500 kr</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-white rounded-xl text-sm font-bold hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                  <Check className="w-5 h-5" />
-                  Få Privat Abonnement
-                </button>
-              </CardContent>
-            </Card>
-
-            {/* Erhverv Abonnement */}
-            <Card className="relative overflow-hidden border-2 border-slate-900/20 hover:border-slate-900/40 transition-all hover:shadow-xl">
-              <div className="absolute top-0 right-0 bg-gradient-to-br from-amber-400 to-amber-500 text-slate-900 text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-bl-lg">
-                BEDSTE VÆRDI
-              </div>
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-slate-900/10 rounded-lg">
-                    <Building className="w-6 h-6 text-slate-900" />
-                  </div>
-                  <CardTitle className="text-2xl">Erhverv Abonnement</CardTitle>
-                </div>
-                <CardDescription className="text-base">
-                  Optimal løsning for virksomheder
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-5xl font-black text-slate-900">510</span>
-                  <span className="text-xl font-bold text-slate-600">kr</span>
-                  <span className="text-sm text-slate-500">/måned</span>
-                </div>
-
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-full">
-                  <TrendingDown className="w-4 h-4 text-emerald-600" />
-                  <span className="text-sm font-semibold text-emerald-700">Spar op til 15% på alle timer</span>
-                </div>
-
-                <ul className="space-y-2.5 my-4">
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">10-15% rabat på alle timepriser</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Gratis transport inden for 30 km</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">VIP-prioritering</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Ingen akut-tillæg i dagtid</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Kvartalsvis serviceaftale</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                    <span className="text-sm font-medium text-slate-700">Dedikeret kontaktperson</span>
-                  </li>
-                </ul>
-
-                <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                  <p className="text-xs font-semibold text-slate-700 mb-2">Eksempel besparelse:</p>
-                  <div className="space-y-1 text-xs">
-                    <div className="flex justify-between text-slate-600">
-                      <span>Normal pris (8 timer):</span>
-                      <span>4000 kr</span>
-                    </div>
-                    <div className="flex justify-between text-emerald-600 font-medium">
-                      <span>Med abonnement:</span>
-                      <span>3400 kr + 0 kr transport</span>
-                    </div>
-                    <div className="pt-2 mt-2 border-t border-slate-300 flex justify-between font-bold text-slate-900">
-                      <span>Du sparer:</span>
-                      <span className="text-emerald-600">1000 kr/måned</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                  <Check className="w-5 h-5" />
-                  Få Erhverv Abonnement
-                </button>
-              </CardContent>
-            </Card>
-          </div>
-
-          <p className="flex items-center justify-center gap-2 mt-6 text-sm text-slate-600">
-            <Info className="w-4 h-4" />
-            <span>Ingen binding - opsiges med 1 måneds varsel</span>
-          </p>
         </div>
 
       </div>
