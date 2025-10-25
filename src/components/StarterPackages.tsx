@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { Check, Zap, Phone, Mail, Star, Crown, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Check, Zap, Phone, Mail, Star, Crown } from "lucide-react";
 
 export const StarterPackages = () => {
-  const navigate = useNavigate();
   const [customerType, setCustomerType] = useState<"privat" | "erhverv">("privat");
   const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "nat" | "akut">("dagtimer");
-  const [hasSubscription, setHasSubscription] = useState(false);
 
   // Base prices (daytime) - Private is ALWAYS cheaper than Business
   const basePrices = {
@@ -23,32 +20,11 @@ export const StarterPackages = () => {
     akut: 400
   };
 
-  // Subscription = ONLY 20% discount on hourly rate (no other benefits)
-  const subscriptionDiscount = 0.20;
-
   // Calculate price for a package
   const calculatePrice = (packageType: "standard" | "premium" | "exclusive") => {
     const basePrice = basePrices[packageType][customerType];
     const surcharge = timeSurcharges[timeType];
-    const fullPrice = basePrice + surcharge;
-    
-    if (hasSubscription) {
-      return Math.round(fullPrice * (1 - subscriptionDiscount));
-    }
-    return fullPrice;
-  };
-
-  // Calculate full price without discount (for display)
-  const calculateFullPrice = (packageType: "standard" | "premium" | "exclusive") => {
-    const basePrice = basePrices[packageType][customerType];
-    const surcharge = timeSurcharges[timeType];
     return basePrice + surcharge;
-  };
-
-  // Calculate savings with subscription (only 20% off hourly rate)
-  const calculateSavings = (packageType: "standard" | "premium" | "exclusive") => {
-    const fullPrice = calculateFullPrice(packageType);
-    return Math.round(fullPrice * subscriptionDiscount);
   };
 
   const timeTypeLabels = {
@@ -211,23 +187,6 @@ export const StarterPackages = () => {
                 Akut
               </button>
             </div>
-
-            {/* Subscription Toggle */}
-            <button
-              onClick={() => setHasSubscription(!hasSubscription)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all shadow-sm ${
-                hasSubscription
-                  ? "bg-emerald-500 text-white border-2 border-emerald-600"
-                  : "bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300"
-              }`}
-            >
-              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
-                hasSubscription ? "bg-white border-white" : "bg-white border-slate-300"
-              }`}>
-                {hasSubscription && <Check className="w-3 h-3 text-emerald-500" strokeWidth={3} />}
-              </div>
-              Abonnement
-            </button>
           </div>
         </div>
 
@@ -279,21 +238,7 @@ export const StarterPackages = () => {
 
               {/* Price Section */}
               <div className={`text-center py-2.5 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
-                {hasSubscription && (
-                  <div className="mb-1.5">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500 text-white">
-                      <Check className="w-3 h-3" strokeWidth={3} />
-                      SPAR {calculateSavings(service.packageType)} KR
-                    </span>
-                  </div>
-                )}
-                
                 <div className="flex items-baseline justify-center gap-1">
-                  {hasSubscription && (
-                    <span className={`text-lg md:text-xl font-bold line-through ${service.featured || service.exclusive ? 'text-white/50' : 'text-slate-400'}`}>
-                      {calculateFullPrice(service.packageType)}
-                    </span>
-                  )}
                   <span className={`text-3xl md:text-4xl font-black ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
                     {calculatePrice(service.packageType)}
                   </span>
@@ -305,12 +250,6 @@ export const StarterPackages = () => {
                 <p className={`text-[10px] md:text-xs mt-0.5 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-500'}`}>
                   {customerType === "privat" ? "Inkl. moms" : "Ekskl. moms"} · {timeTypeLabels[timeType]}
                 </p>
-
-                {hasSubscription && (
-                  <p className={`text-[9px] md:text-[10px] mt-1 font-medium ${service.featured || service.exclusive ? 'text-white/80' : 'text-emerald-600'}`}>
-                    Med abonnement
-                  </p>
-                )}
               </div>
 
               {/* Features */}
@@ -371,27 +310,6 @@ export const StarterPackages = () => {
             </div>
           ))}
         </div>
-
-        {/* Subscription CTA Banner */}
-        <div className="max-w-4xl mx-auto mt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-5 md:p-6 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-primary/30 rounded-2xl">
-            <div className="flex items-center gap-4">
-              <Star className="w-8 h-8 md:w-10 md:h-10 text-primary flex-shrink-0" />
-              <div>
-                <h4 className="text-base md:text-lg font-bold text-slate-900 mb-0.5">Spar 20% på Alle Timer</h4>
-                <p className="text-xs md:text-sm text-slate-600">Få fast lav timepris med vores abonnement</p>
-              </div>
-            </div>
-            <button
-              onClick={() => navigate('/abonnement')}
-              className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold text-sm hover:bg-primary/90 transition-all hover:-translate-y-0.5 whitespace-nowrap shadow-lg"
-            >
-              Se Abonnement Fordele
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
       </div>
     </section>
   );
