@@ -8,6 +8,8 @@ import { Header } from "@/components/Header";
 import { toast } from "sonner";
 import { useCartStore } from "@/stores/cartStore";
 import { useState } from "react";
+import privatSubImage from "@/assets/subscription-privat.png";
+import erhvervSubImage from "@/assets/subscription-erhverv.png";
 
 const Abonnement = () => {
   const navigate = useNavigate();
@@ -33,7 +35,14 @@ const Abonnement = () => {
               currencyCode: 'DKK',
             }
           },
-          images: { edges: [] },
+          images: { 
+            edges: [{
+              node: {
+                url: type === 'private' ? privatSubImage : erhvervSubImage,
+                altText: type === 'private' ? 'Privat Abonnement' : 'Erhverv Abonnement'
+              }
+            }]
+          },
           variants: {
             edges: [{
               node: {
