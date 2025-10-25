@@ -1,30 +1,35 @@
 import { useState } from "react";
-import { Check, Zap, Phone, Mail, Star, Shield, Clock, Award, Info } from "lucide-react";
+import { Check, Zap, Phone, Mail, Star, Shield, Clock, Award, Info, ArrowRight, ChevronDown } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useNavigate } from "react-router-dom";
 
 export const StarterPackages = () => {
+  const navigate = useNavigate();
   const [customerType, setCustomerType] = useState<"privat" | "erhverv">("privat");
-  const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "akut" | "nattevagt">("dagtimer");
+  const [timeType, setTimeType] = useState<"dagtimer" | "overarbejde" | "nattevagt">("dagtimer");
   const [hasSubscription, setHasSubscription] = useState(false);
+  const [showSurcharges, setShowSurcharges] = useState<string | null>(null);
 
-  // Base prices for each package
+  // Base prices for each package (daytime prices)
   const basePrices = {
-    standard: customerType === "privat" ? 650 : 510,
-    premium: customerType === "privat" ? 850 : 670,
-    exclusive: customerType === "privat" ? 1050 : 850
+    standard: customerType === "privat" ? 550 : 510,
+    premium: customerType === "privat" ? 550 : 510,
+    exclusive: 1500 // VIP flat rate - 24/7 akut service
   };
 
-  // Multipliers for time types
+  // Multipliers for time types (only for standard and premium)
   const multipliers = {
     dagtimer: 1.0,
-    overarbejde: 1.25,
-    akut: 1.5,
-    nattevagt: 1.75
+    overarbejde: 1.27, // 650kr for base 510kr
+    nattevagt: 1.96 // 1000kr for base 510kr
   };
 
   // Calculate price for a specific package
   const calculatePrice = (packageType: "standard" | "premium" | "exclusive") => {
+    if (packageType === "exclusive") {
+      return basePrices[packageType]; // VIP fixed price
+    }
     const basePrice = basePrices[packageType];
     const multiplier = multipliers[timeType];
     const priceBeforeDiscount = basePrice * multiplier;
@@ -33,15 +38,14 @@ export const StarterPackages = () => {
 
   const timeTypeLabels = {
     dagtimer: "Dagtimer (07–16)",
-    overarbejde: "Overarbejde (16–21)",
-    akut: "Akut (samme dag)",
-    nattevagt: "Nattevagt (21–07)"
+    overarbejde: "Overarbejde (16–22)",
+    nattevagt: "Nattevagt (22–07)"
   };
 
   const services = [
     {
       name: "Standard Service",
-      description: "Daglige el-opgaver og mindre reparationer",
+      description: "Daglige el-opgaver og reparationer",
       packageType: "standard" as const,
       features: [
         "Fejlfinding og reparation",
@@ -52,7 +56,8 @@ export const StarterPackages = () => {
       buttonText: "Book Nu",
       buttonIcon: "phone",
       featured: false,
-      exclusive: false
+      exclusive: false,
+      showPriceRange: false
     },
     {
       name: "Premium Pakke",
@@ -63,29 +68,30 @@ export const StarterPackages = () => {
         "Smart home installation",
         "Nye elinstallationer",
         "El-tavle opgradering",
-        "2 års garanti inkluderet"
+        "2 års garanti"
       ],
       buttonText: "Vælg Premium",
       buttonIcon: "zap",
       featured: true,
-      exclusive: false
+      exclusive: false,
+      showPriceRange: true
     },
     {
       name: "Eksklusiv Pakke",
-      description: "Avancerede løsninger og 24/7-service",
+      description: "Døgnservice og prioriteret behandling",
       packageType: "exclusive" as const,
       features: [
-        "Alt fra Premium Pakke",
+        "Alt fra Premium",
         "VIP-prioritering",
         "Døgndækning 24/7",
-        "Teknisk specialdesign",
-        "Dedikeret projektleder",
-        "Skræddersyet serviceaftale"
+        "Ingen ventetid",
+        "Dedikeret projektleder"
       ],
       buttonText: "Få Tilbud",
       buttonIcon: "mail",
       featured: false,
-      exclusive: true
+      exclusive: true,
+      showPriceRange: false
     }
   ];
 
@@ -138,7 +144,7 @@ export const StarterPackages = () => {
             <div className="inline-flex w-full md:w-auto bg-white border border-slate-200 rounded-xl p-1 shadow-sm overflow-x-auto">
               <button
                 onClick={() => setTimeType("dagtimer")}
-                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
+                className={`flex-shrink-0 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-[11px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "dagtimer"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -148,7 +154,7 @@ export const StarterPackages = () => {
               </button>
               <button
                 onClick={() => setTimeType("overarbejde")}
-                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
+                className={`flex-shrink-0 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-[11px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "overarbejde"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -157,18 +163,8 @@ export const StarterPackages = () => {
                 Overarbejde
               </button>
               <button
-                onClick={() => setTimeType("akut")}
-                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
-                  timeType === "akut"
-                    ? "bg-primary text-white shadow-md"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                Akut
-              </button>
-              <button
                 onClick={() => setTimeType("nattevagt")}
-                className={`flex-shrink-0 px-2 md:px-3 py-2 md:py-2.5 rounded-lg text-[10px] md:text-xs font-semibold transition-all whitespace-nowrap ${
+                className={`flex-shrink-0 px-3 md:px-4 py-2 md:py-2.5 rounded-lg text-[11px] md:text-xs font-semibold transition-all whitespace-nowrap ${
                   timeType === "nattevagt"
                     ? "bg-primary text-white shadow-md"
                     : "text-slate-600 hover:text-slate-900"
@@ -245,9 +241,15 @@ export const StarterPackages = () => {
               <div className={`text-center py-3 border-t border-b ${service.featured || service.exclusive ? 'border-white/20' : 'border-slate-200'}`}>
                 <>
                   <div className="flex items-baseline justify-center gap-1 mb-1">
-                    <span className={`text-4xl md:text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
-                      {Math.round(calculatePrice(service.packageType))}
-                    </span>
+                    {service.showPriceRange && service.packageType !== "exclusive" ? (
+                      <span className={`text-3xl md:text-4xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
+                        Fra {customerType === "privat" ? "550" : "510"}
+                      </span>
+                    ) : (
+                      <span className={`text-4xl md:text-5xl font-black tracking-tight ${service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}`}>
+                        {service.packageType === "exclusive" ? "1500" : Math.round(calculatePrice(service.packageType))}
+                      </span>
+                    )}
                     <span className={`text-lg md:text-xl font-bold ${service.featured || service.exclusive ? 'text-white/90' : 'text-slate-600'}`}>
                       kr
                     </span>
@@ -258,16 +260,34 @@ export const StarterPackages = () => {
                   
                   {/* Price Labels */}
                   <div className="flex flex-wrap justify-center gap-1.5 md:gap-2 text-[10px] md:text-[11px]">
-                    <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
-                      {customerType === "privat" ? "Privat (inkl. moms)" : "Erhverv (ekskl. moms)"}
-                    </span>
-                    <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
-                      {timeTypeLabels[timeType]}
-                    </span>
+                    {service.packageType === "exclusive" ? (
+                      <span className={`px-2 py-1 rounded ${service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                        24/7 akut service
+                      </span>
+                    ) : (
+                      <>
+                        <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                          {customerType === "privat" ? "Privat" : "Erhverv"} | Dagtid 07-16
+                        </span>
+                        {!service.showPriceRange && (
+                          <span className={`px-2 py-1 rounded ${service.featured || service.exclusive ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                            {customerType === "privat" ? "Privat: 550 kr" : "Erhverv: 510 kr"}
+                          </span>
+                        )}
+                      </>
+                    )}
                   </div>
 
+                  {service.packageType === "premium" && (
+                    <div className="mt-2">
+                      <span className={`px-2 py-1 rounded text-[10px] md:text-[11px] ${service.featured ? 'bg-white/20 text-white/90' : 'bg-slate-100 text-slate-600'}`}>
+                        Inkl. 2 års garanti
+                      </span>
+                    </div>
+                  )}
+
                   {/* Subscription Badge */}
-                  {hasSubscription && (
+                  {hasSubscription && service.packageType !== "exclusive" && (
                     <div className="mt-1.5">
                       <span className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[10px] md:text-[11px] font-semibold ${
                         service.exclusive ? 'bg-amber-400/20 text-amber-300' : 'bg-primary/10 text-primary'
@@ -290,6 +310,26 @@ export const StarterPackages = () => {
                   </li>
                 ))}
               </ul>
+
+              {/* Collapsible Surcharges */}
+              {service.packageType !== "exclusive" && (
+                <details 
+                  open={showSurcharges === service.packageType}
+                  onToggle={(e) => setShowSurcharges((e.target as HTMLDetailsElement).open ? service.packageType : null)}
+                  className={`mb-3 border-t pt-3 ${service.featured ? 'border-white/20' : 'border-slate-200'}`}
+                >
+                  <summary className={`cursor-pointer text-[12px] md:text-[13px] font-semibold flex items-center gap-2 list-none ${service.featured ? 'text-white/90' : 'text-primary'}`}>
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showSurcharges === service.packageType ? 'rotate-180' : ''}`} />
+                    {service.packageType === "standard" ? "Se priser for aften/nat" : "Se alle priser"}
+                  </summary>
+                  <div className={`mt-2 p-3 rounded-lg text-[11px] md:text-[12px] space-y-1 ${service.featured ? 'bg-white/10 text-white/90' : 'bg-slate-50 text-slate-700'}`}>
+                    <div>Dag (07-16): {customerType === "privat" ? "550" : "510"} kr</div>
+                    <div>Aften (16-22): 650 kr</div>
+                    <div>Nat (22-07): 1000 kr</div>
+                    <div className="text-[10px] opacity-70 mt-2">+ Materialer + Transport</div>
+                  </div>
+                </details>
+              )}
 
               {/* Transport Info */}
               <TooltipProvider>
@@ -325,6 +365,26 @@ export const StarterPackages = () => {
               </button>
             </div>
           ))}
+        </div>
+
+        {/* Subscription CTA */}
+        <div className="max-w-[900px] mx-auto mt-8 md:mt-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 p-5 md:p-6 bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-primary/30 rounded-2xl shadow-sm hover:shadow-md transition-all">
+            <div className="flex items-center gap-4 md:gap-5 text-center md:text-left">
+              <Star className="w-9 h-9 md:w-10 md:h-10 text-primary flex-shrink-0" fill="currentColor" />
+              <div>
+                <h4 className="text-lg md:text-xl font-bold text-slate-900 mb-1">Spar med Abonnement</h4>
+                <p className="text-sm md:text-base text-slate-600">Få fast lav pris, gratis transport og prioriteret service</p>
+              </div>
+            </div>
+            <button 
+              onClick={() => navigate('/abonnement')}
+              className="flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-primary text-white font-bold text-sm md:text-base rounded-xl shadow-md hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all whitespace-nowrap"
+            >
+              Se Abonnement
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
+          </div>
         </div>
 
       </div>
