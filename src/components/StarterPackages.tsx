@@ -101,7 +101,7 @@ export const StarterPackages = () => {
   ];
 
   return (
-    <section className="py-8 md:py-10 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+    <section id="pakker" className="py-8 md:py-10 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1300px] mx-auto px-4 md:px-10">
         {/* Section Header */}
         <div className="text-center mb-6 md:mb-4 animate-fade-in">
@@ -293,7 +293,8 @@ export const StarterPackages = () => {
               </div>
 
               {/* CTA */}
-              <button
+              <a
+                href={`/booking?package=${service.packageType}`}
                 className={`w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm md:text-[15px] font-bold transition-all ${
                   service.featured
                     ? 'bg-white text-primary hover:shadow-lg hover:-translate-y-0.5'
@@ -306,7 +307,7 @@ export const StarterPackages = () => {
                 {service.buttonIcon === 'zap' && <Zap className="w-4 h-4" />}
                 {service.buttonIcon === 'mail' && <Mail className="w-4 h-4" />}
                 {service.buttonText}
-              </button>
+              </a>
             </div>
           ))}
         </div>

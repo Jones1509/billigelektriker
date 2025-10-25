@@ -12,6 +12,7 @@ import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Booking from "./pages/Booking";
 import ComingSoon from "./pages/ComingSoon";
 import TranslationAdmin from "./pages/TranslationAdmin";
 import TranslationCheck from "./pages/TranslationCheck";
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/profile" element={<Profile />} />
           <Route path="/om-os" element={<About />} />
           <Route path="/kontakt" element={<Contact />} />
+          <Route path="/booking" element={<Booking />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/admin/translations" element={
             <ProtectedAdminRoute>
