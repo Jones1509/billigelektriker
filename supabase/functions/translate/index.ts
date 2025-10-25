@@ -13,42 +13,9 @@ serve(async (req) => {
   try {
     const { text, targetLang, sourceLang = "da" } = await req.json();
     
-    // Input validation - security measure against abuse
-    if (!text || typeof text !== 'string') {
+    if (!text) {
       return new Response(
-        JSON.stringify({ error: "Text is required and must be a string" }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Length limit to prevent resource exhaustion attacks
-    const MAX_TEXT_LENGTH = 5000;
-    if (text.length > MAX_TEXT_LENGTH) {
-      return new Response(
-        JSON.stringify({ error: `Text must be less than ${MAX_TEXT_LENGTH} characters` }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Validate targetLang against allowed values to prevent injection
-    const allowedLanguages = ['en', 'fr', 'de', 'da', 'sv', 'no'];
-    if (!targetLang || typeof targetLang !== 'string' || !allowedLanguages.includes(targetLang)) {
-      return new Response(
-        JSON.stringify({ 
-          error: "Invalid target language", 
-          allowed: allowedLanguages 
-        }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Validate sourceLang
-    if (typeof sourceLang !== 'string' || !allowedLanguages.includes(sourceLang)) {
-      return new Response(
-        JSON.stringify({ 
-          error: "Invalid source language", 
-          allowed: allowedLanguages 
-        }),
+        JSON.stringify({ error: "Text is required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }

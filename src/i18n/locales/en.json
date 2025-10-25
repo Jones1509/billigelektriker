@@ -132,51 +132,40 @@
     }
   },
   "starterPackages": {
-    "badge": "Smart Home Packages",
-    "title": "Choose Your Smart Light Solution",
-    "subtitle": "Professional installation included. Bridge setup, network and instruction – everything is included.",
-    "mostPopular": "Most Popular",
-    "includes": "Includes:",
-    "vatIncluded": "VAT included",
+    "badge": "✨ Smart Package Solutions",
+    "title": "Get started with smart lighting – easy and fast",
+    "subtitle": "Choose the package that fits your needs – everything included",
     "starter": {
       "name": "Starter Package",
-      "price": "2,499",
-      "description": "Perfect for 1-2 rooms – get the smart experience without complexity",
-      "perfectFor": "Perfect for: Living room or bedroom",
+      "price": "999",
+      "description": "Perfect for getting started with smart lighting",
       "features": [
-        "1x Philips Hue Bridge (incl. installation)",
-        "2x E27 RGB smart bulbs",
-        "1x Wireless switch",
-        "Free app setup + instruction"
+        "2x E27 RGB bulbs",
+        "1x wireless switch",
+        "Free app for iOS & Android",
+        "Easy installation"
       ]
     },
     "expansion": {
       "name": "Expansion Package",
-      "price": "3,999",
-      "description": "Cover your entire apartment with intelligent light and automation",
-      "perfectFor": "Perfect for: 3-4 rooms (entire apartment or multiple zones)",
+      "price": "1,799",
+      "description": "Expand your smart lighting to more rooms",
       "features": [
-        "1x Philips Hue Bridge (incl. installation)",
-        "4x E27 RGB smart bulbs",
-        "2x Wireless switches",
-        "1x Motion sensor",
-        "Timer functions + scenes",
-        "Free app setup + instruction"
+        "4x E27 RGB bulbs",
+        "2x wireless switches",
+        "1x motion sensor",
+        "Timer functions"
       ]
     },
     "complete": {
       "name": "Complete Package",
-      "price": "6,499",
-      "description": "Entire house including garden – complete smart home solution",
-      "perfectFor": "Perfect for: Entire house incl. garden/terrace",
+      "price": "2,499",
+      "description": "Everything you need for indoor and outdoor",
       "features": [
-        "1x Philips Hue Bridge (incl. installation)",
-        "6x E27 RGB smart bulbs (indoor)",
-        "4x Outdoor smart spots (IP65)",
-        "3x Wireless switches",
-        "2x Motion sensors",
-        "Advanced setup (zones, scenes, automation)",
-        "Free app instruction + 30 days support"
+        "6x E27 RGB bulbs",
+        "3x wireless switches",
+        "2x motion sensors",
+        "4x outdoor spots (IP65)"
       ]
     },
     "cta": "Buy now"
