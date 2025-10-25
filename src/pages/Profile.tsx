@@ -243,10 +243,14 @@ export default function Profile() {
           </div>
 
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="profile" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
                 {t('profile.tabs.profile')}
+              </TabsTrigger>
+              <TabsTrigger value="subscription" className="flex items-center gap-2">
+                <CreditCard className="h-4 w-4" />
+                Abonnement
               </TabsTrigger>
               <TabsTrigger value="orders" className="flex items-center gap-2">
                 <ShoppingBag className="h-4 w-4" />
@@ -399,6 +403,80 @@ export default function Profile() {
                   {t('profile.account.logout')}
                 </Button>
               </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="subscription" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Mit Abonnement</CardTitle>
+                  <CardDescription>
+                    Administrer dit abonnement og se dine fordele
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {/* No subscription state */}
+                  <div className="text-center py-12 space-y-4">
+                    <div className="flex justify-center">
+                      <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+                        <CreditCard className="h-8 w-8 text-muted-foreground" />
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Du har ikke et abonnement endnu</h3>
+                      <p className="text-muted-foreground mb-6">
+                        Spar 20% på alle timer med fast månedspris
+                      </p>
+                      <Button onClick={() => navigate("/abonnement")}>
+                        Se abonnement muligheder
+                      </Button>
+                    </div>
+
+                    {/* Benefits preview */}
+                    <div className="mt-8 pt-8 border-t">
+                      <h4 className="font-semibold mb-4">Med abonnement får du:</h4>
+                      <div className="grid gap-3 text-left max-w-md mx-auto">
+                        <div className="flex items-start gap-2">
+                          <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="text-primary text-xs">✓</span>
+                          </div>
+                          <div>
+                            <p className="font-medium">20% rabat på alle timepriser</p>
+                            <p className="text-sm text-muted-foreground">Spar 102-170 kr per time</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="text-primary text-xs">✓</span>
+                          </div>
+                          <div>
+                            <p className="font-medium">Fast lav pris hele året</p>
+                            <p className="text-sm text-muted-foreground">Ingen overraskelser</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="text-primary text-xs">✓</span>
+                          </div>
+                          <div>
+                            <p className="font-medium">Ingen binding</p>
+                            <p className="text-sm text-muted-foreground">Stop når som helst</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* TODO: When user has subscription, show:
+                    - Status badge (Aktivt/Udløber snart)
+                    - Type (Privat/Erhverv)
+                    - Monthly price
+                    - Next billing date
+                    - Started date
+                    - Benefits list with calculated savings
+                    - Actions: View invoices, Update payment, Cancel subscription
+                  */}
+                </CardContent>
               </Card>
             </TabsContent>
 
