@@ -64,19 +64,20 @@ export const StarterPackages = () => {
     {
       name: "Standard Service",
       badge: "Budget-venlig",
-      description: "Professionel grundservice",
+      description: "Professionel el-service til fair pris",
       packageType: "standard" as const,
       features: [
-        "Professionel service",
-        "Autoriseret elektriker",
-        "Fejlfinding og reparation",
-        "Installation af stikkontakter"
+        "Professionel autoriseret elektriker",
+        "Vi udfører alle typer el-arbejde",
+        "Kvalitet og sikkerhed garanteret"
       ],
       notIncluded: [
-        "Ingen garanti",
-        "Standard ventetid (3-5 dage)",
-        "Fuld pris for materialer"
+        "Ingen garanti på arbejdet",
+        "Normal ventetid (3-5 dage)",
+        "Fuld pris på materialer",
+        "Betaler transport (300 kr)"
       ],
+      perfectFor: "Enkle opgaver hvor du ikke har behov for garanti eller ekstra service",
       buttonText: "Book Nu",
       buttonIcon: "phone",
       featured: false,
@@ -85,16 +86,18 @@ export const StarterPackages = () => {
     {
       name: "Premium Pakke",
       badge: "Bedste værdi",
-      description: "Mere værdi + sikkerhed",
+      description: "Ekstra fordele og ro i sindet",
       packageType: "premium" as const,
       features: [
-        "Alt fra Standard Service",
-        "2 års garanti på arbejde",
+        "Vi udfører alle typer el-arbejde professionelt",
+        "2 års garanti på arbejdet",
         "Prioriteret booking (1-2 dage)",
         "10% rabat på materialer",
         "Gratis opfølgning første måned",
-        "SMS når elektriker er på vej"
+        "SMS når vi er på vej",
+        "Dokumentation på arbejdet"
       ],
+      perfectFor: "Dig der vil have ro i sindet og ekstra sikkerhed",
       buttonText: "Vælg Premium",
       buttonIcon: "zap",
       featured: true,
@@ -103,17 +106,20 @@ export const StarterPackages = () => {
     {
       name: "Eksklusiv Pakke",
       badge: "VIP Service",
-      description: "Maksimal værdi + tryghed",
+      description: "Maksimale fordele og VIP behandling",
       packageType: "exclusive" as const,
       features: [
-        "Alt fra Premium Pakke",
-        "5 års garanti på arbejde",
+        "Vi udfører alle typer el-arbejde professionelt",
+        "5 års garanti",
         "VIP prioritering (samme/næste dag)",
         "20% rabat på materialer",
         "Dedikeret projektleder",
+        "Årlig gratis eftersyn",
         "24/7 support hotline",
-        "Gratis årlig eftersyn"
+        "Gratis akut-besøg ved problemer",
+        "Detaljeret dokumentation med fotos"
       ],
+      perfectFor: "Erhverv eller privatpersoner der vil have den bedste service",
       buttonText: "Få Tilbud",
       buttonIcon: "mail",
       featured: false,
@@ -311,8 +317,8 @@ export const StarterPackages = () => {
               </div>
 
               {/* Features */}
-              <ul className="flex-grow space-y-1.5 mb-3">
-                {service.features.slice(0, 5).map((feature, fIdx) => (
+              <ul className="flex-grow space-y-1.5 mb-2">
+                {service.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-start gap-2">
                     <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${service.featured || service.exclusive ? 'text-white/90' : 'text-emerald-500'}`} strokeWidth={3} />
                     <span className={`text-xs md:text-[13px] ${service.featured || service.exclusive ? 'text-white/95' : 'text-slate-700'}`}>
@@ -321,6 +327,32 @@ export const StarterPackages = () => {
                   </li>
                 ))}
               </ul>
+
+              {/* Not Included - Only for Standard */}
+              {service.notIncluded && (
+                <div className={`mb-2 p-2 rounded-lg border ${service.featured || service.exclusive ? 'bg-white/5 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+                  <p className={`text-[10px] font-semibold mb-1 ${service.featured || service.exclusive ? 'text-white/70' : 'text-slate-600'}`}>Ikke inkluderet:</p>
+                  <ul className="space-y-0.5">
+                    {service.notIncluded.map((item, nIdx) => (
+                      <li key={nIdx} className="flex items-start gap-1.5">
+                        <span className={`flex-shrink-0 text-[9px] mt-0.5 ${service.featured || service.exclusive ? 'text-white/50' : 'text-slate-400'}`}>✗</span>
+                        <span className={`text-[10px] ${service.featured || service.exclusive ? 'text-white/60' : 'text-slate-500'}`}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Perfect For */}
+              {service.perfectFor && (
+                <p className={`text-[10px] md:text-xs italic mb-3 p-2 rounded-lg border ${
+                  service.featured || service.exclusive 
+                    ? 'bg-white/5 border-white/10 text-white/80' 
+                    : 'bg-blue-50 border-blue-100 text-slate-700'
+                }`}>
+                  <strong className={service.featured || service.exclusive ? 'text-white' : 'text-slate-900'}>Perfekt for:</strong> {service.perfectFor}
+                </p>
+              )}
 
               {/* CTA */}
               <button
