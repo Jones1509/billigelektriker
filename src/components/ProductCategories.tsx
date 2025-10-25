@@ -1,82 +1,88 @@
-import { Card, CardContent } from "./ui/card";
-import { Home, Sun, Lightbulb, Plug } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ArrowRight } from "lucide-react";
+import indoorImage from "@/assets/category-indoor.jpg";
+import outdoorImage from "@/assets/category-outdoor.jpg";
+import smartHomeImage from "@/assets/category-smart-home.jpg";
+import accessoriesImage from "@/assets/category-accessories.jpg";
 
 export const ProductCategories = () => {
   const { t } = useTranslation();
   
   const categories = [
     {
-      icon: Home,
       title: t('productCategories.indoor.title'),
-      description: t('productCategories.indoor.description'),
+      description: "Skab den perfekte hygge derhjemme",
       link: "/collections/indendors-lys",
-      gradient: "from-blue-500 to-blue-600"
+      image: indoorImage
     },
     {
-      icon: Sun,
       title: t('productCategories.outdoor.title'),
-      description: t('productCategories.outdoor.description'),
+      description: "Robust belysning til have og terrasse",
       link: "/collections/udendors-lys",
-      gradient: "from-orange-500 to-yellow-500"
+      image: outdoorImage
     },
     {
-      icon: Lightbulb,
       title: t('productCategories.smartHome.title'),
-      description: t('productCategories.smartHome.description'),
+      description: "Intelligente løsninger til hele hjemmet",
       link: "/collections/smart-home",
-      gradient: "from-purple-500 to-pink-600"
+      image: smartHomeImage
     },
     {
-      icon: Plug,
       title: t('productCategories.accessories.title'),
-      description: t('productCategories.accessories.description'),
+      description: "Alt du behøver til installationen",
       link: "/collections/tilbehor",
-      gradient: "from-green-500 to-emerald-600"
+      image: accessoriesImage
     }
   ];
 
   return (
-    <section 
-      className="py-8 md:py-12 relative overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--background)) 100%)' }}
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.08),transparent_70%)]"></div>
-      
+    <section className="py-12 md:py-20 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint) / 0.3) 50%, hsl(var(--blue-tint)) 100%)' }}>
+      {/* Smooth top fade */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[hsl(var(--background))] to-transparent pointer-events-none z-[2]"></div>
       <div className="container relative z-10">
-        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 border border-primary/20">
-            {t('productCategories.badge')}
+        <div className="text-center mb-12 md:mb-16 animate-fade-in px-4">
+          <span className="inline-block px-3 py-1.5 rounded-full bg-blue-500/10 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium mb-6 border border-blue-500/30">
+            Udforsk Vores Sortiment
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            {t('productCategories.title')}
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight tracking-tight" style={{ letterSpacing: '-0.5px' }}>
+            Lys Der Forvandler Dit Hjem
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('productCategories.subtitle')}
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto font-medium">
+            Alt fra hyggelig indendørs belysning til robust udendørs lys – samlet ét sted.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 md:gap-6 px-4 md:px-0">
+        <div className="grid sm:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0">
           {categories.map((category, idx) => (
-            <Link key={idx} to={category.link}>
-              <Card className="group h-full border-0 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer bg-gradient-to-br from-white to-blue-50/30 dark:from-gray-900 dark:to-blue-950/20 overflow-hidden animate-fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
-                <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
-                     style={{ backgroundImage: `linear-gradient(135deg, ${category.gradient.split(' ')[1]} 0%, ${category.gradient.split(' ')[2]} 100%)`, opacity: 0.05 }} />
-                <CardContent className="relative p-6 md:p-10 flex flex-col items-center text-center space-y-3 md:space-y-4">
-                  <div className={`p-4 md:p-6 bg-gradient-to-br ${category.gradient} rounded-2xl shadow-lg group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300`}>
-                    <category.icon className="h-8 w-8 md:h-10 md:w-10 text-white" />
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all">{category.title}</h3>
-                  <p className="text-sm md:text-base text-muted-foreground group-hover:text-foreground/80 transition-colors">{category.description}</p>
-                  <div className="pt-2 flex items-center gap-2 text-primary font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                    {t('productCategories.cta')}
-                    <svg className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </CardContent>
-              </Card>
+            <Link 
+              key={idx} 
+              to={category.link}
+              className="group relative h-[280px] md:h-[320px] rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] animate-fade-in"
+              style={{ animationDelay: `${idx * 100}ms` }}
+            >
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                style={{ backgroundImage: `url(${category.image})` }}
+              />
+              
+              {/* Dark Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-all duration-500 group-hover:from-black/60 group-hover:via-black/30" />
+              
+              {/* Content */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10 transition-transform duration-300 group-hover:-translate-y-2">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  {category.title}
+                </h3>
+                <p className="text-sm md:text-base text-white/90 mb-4 leading-relaxed">
+                  {category.description}
+                </p>
+                <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/20 border border-white/40 backdrop-blur-md text-white text-sm font-semibold transition-all duration-300 group-hover:bg-white/30 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+                  Udforsk
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </div>
             </Link>
           ))}
         </div>
