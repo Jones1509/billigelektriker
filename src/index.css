@@ -157,24 +157,4 @@ All colors MUST be HSL.
   .animate-spin-slow {
     animation: spin 30s linear infinite;
   }
-
-  /* Heart pulse animation for wishlist */
-  @keyframes heartPulse {
-    0%, 100% { 
-      transform: scale(1); 
-    }
-    50% { 
-      transform: scale(1.2); 
-    }
-  }
-
-  /* Hide scrollbar for filter navigation */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
 }

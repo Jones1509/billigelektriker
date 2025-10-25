@@ -7,7 +7,7 @@ import { GradientDivider } from "@/components/GradientDivider";
 import { SmartLightSection } from "@/components/SmartLightSection";
 import { ProductCategories } from "@/components/ProductCategories";
 import { StarterPackages } from "@/components/StarterPackages";
-import { ModernProductGrid } from "@/components/ModernProductGrid";
+import { ProductSlider } from "@/components/ProductSlider";
 import { ConsultationSection } from "@/components/ConsultationSection";
 import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Header } from "@/components/Header";
@@ -50,8 +50,8 @@ const Index = () => {
         {/* 8. Starter Packages */}
         <StarterPackages />
         
-        {/* 9. Modern Product Grid */}
-        <ModernProductGrid />
+        {/* 9. Product Slider */}
+        <ProductSlider />
         
         {/* 10. Consultation CTA */}
         <ConsultationSection />
