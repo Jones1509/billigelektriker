@@ -249,8 +249,8 @@ export const Header = () => {
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.services')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="w-screen bg-background border-t-2 border-primary shadow-xl py-8">
+              <NavigationMenuContent className="!w-auto">
+                <div className="-ml-4 w-screen bg-background border-t-2 border-primary shadow-xl py-8">
                   <div className="container mx-auto px-4">
                     <div className="mega-menu-grid-3 max-w-4xl mx-auto">
                       {services.map((column, idx) => (
@@ -284,8 +284,8 @@ export const Header = () => {
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.products')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="w-screen bg-background border-t-2 border-primary shadow-xl py-8">
+              <NavigationMenuContent className="!w-auto">
+                <div className="-ml-4 w-screen bg-background border-t-2 border-primary shadow-xl py-8">
                   <div className="container mx-auto px-4">
                     <div className="mega-menu-grid-6 max-w-7xl mx-auto">
                       {products.map((column) => (
