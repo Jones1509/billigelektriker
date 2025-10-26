@@ -183,43 +183,19 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
   try {
     console.log('Creating checkout for items:', items);
     
-    const lines = items.map(item => ({
-      quantity: item.quantity,
-      merchandiseId: item.variantId,
-    }));
+    // Byg direkte checkout URL i stedet for at bruge Cart API
+    // Dette undgår custom domain redirect problemet
+    const variantIds = items.map(item => {
+      // Fjern "gid://shopify/ProductVariant/" prefix
+      const id = item.variantId.replace('gid://shopify/ProductVariant/', '');
+      return `${id}:${item.quantity}`;
+    }).join(',');
     
-    console.log('Cart lines:', lines);
-
-    const cartData = await storefrontApiRequest(CART_CREATE_MUTATION, {
-      input: {
-        lines,
-      },
-    });
+    // Brug direkte checkout URL på myshopify.com domænet
+    const checkoutUrl = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/cart/${variantIds}`;
     
-    console.log('Cart data response:', cartData);
-
-    if (cartData.data.cartCreate.userErrors.length > 0) {
-      const errorMsg = cartData.data.cartCreate.userErrors.map((e: any) => e.message).join(', ');
-      console.error('Cart creation errors:', errorMsg);
-      throw new Error(`Cart creation failed: ${errorMsg}`);
-    }
-
-    const cart = cartData.data.cartCreate.cart;
-    
-    if (!cart.checkoutUrl) {
-      console.error('No checkoutUrl in cart:', cart);
-      throw new Error('No checkout URL returned from Shopify');
-    }
-
-    // Parse og erstattningen URL for at bruge myshopify.com domain i stedet for custom domain
-    const originalUrl = new URL(cart.checkoutUrl);
-    const fixedUrl = new URL(originalUrl.pathname + originalUrl.search, `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}`);
-    fixedUrl.searchParams.set('channel', 'online_store');
-    const finalCheckoutUrl = fixedUrl.toString();
-    
-    console.log('Original checkout URL:', cart.checkoutUrl);
-    console.log('Fixed checkout URL:', finalCheckoutUrl);
-    return finalCheckoutUrl;
+    console.log('Direct checkout URL:', checkoutUrl);
+    return checkoutUrl;
   } catch (error) {
     console.error('Error creating storefront checkout:', error);
     throw error;
