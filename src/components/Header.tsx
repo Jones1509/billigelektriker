@@ -245,13 +245,13 @@ export const Header = () => {
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
-        <div className="container py-6">
-          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+        <div className="container py-3 md:py-4 lg:py-6">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 md:gap-4">
             <Link to="/" className="flex items-center justify-start">
               <img 
                 src={logo} 
                 alt="Billig Elektriker" 
-                className="h-20 w-auto"
+                className="h-10 sm:h-12 md:h-16 lg:h-20 w-auto"
                 style={{ 
                   imageRendering: "-webkit-optimize-contrast",
                   WebkitFontSmoothing: "antialiased"
@@ -357,7 +357,7 @@ export const Header = () => {
           </NavigationMenuList>
             </NavigationMenu>
             
-            <div className="flex items-center gap-3 justify-end">
+            <div className="flex items-center gap-2 md:gap-3 justify-end">
               <div className="hidden lg:flex items-center gap-1 mr-2">
                 <Button
                   variant="ghost"
@@ -385,9 +385,9 @@ export const Header = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="lg:hidden text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="lg:hidden text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 h-9 w-9"
               >
-                <Menu className="h-6 w-6" />
+                <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-full sm:w-[400px] bg-background">
