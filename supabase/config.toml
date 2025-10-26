@@ -5,3 +5,6 @@ verify_jwt = true
 
 [functions.translate-runtime]
 verify_jwt = true
+
+[functions.verify-access-code]
+verify_jwt = false
