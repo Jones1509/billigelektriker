@@ -607,4 +607,23 @@ All colors MUST be HSL.
       display: none;
     }
   }
+
+  /* Hide scrollbar in mobile menu only */
+  .mobile-menu-scroll [data-radix-scroll-area-scrollbar] {
+    display: none !important;
+  }
+  
+  /* Hide scrollbar in mobile menu only */
+  .mobile-menu-scroll [data-radix-scroll-area-scrollbar] {
+    display: none !important;
+  }
+
+  .mobile-menu-scroll [data-radix-scroll-area-viewport] {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .mobile-menu-scroll [data-radix-scroll-area-viewport]::-webkit-scrollbar {
+    display: none;
+  }
 }
