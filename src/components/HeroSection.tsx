@@ -7,7 +7,7 @@ export const HeroSection = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="relative min-h-[100dvh] md:min-h-[700px] flex items-center overflow-hidden">
+    <section className="relative min-h-[85dvh] md:min-h-[700px] flex items-start md:items-center overflow-hidden pt-12 md:pt-0">
       {/* Video Background */}
       <video
         autoPlay
