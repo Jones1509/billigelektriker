@@ -71,7 +71,6 @@ export default function ProductDetail() {
 
   const selectedVariant = data.variants.edges[selectedVariantIndex]?.node;
   const price = parseFloat(selectedVariant?.price.amount || data.priceRange.minVariantPrice.amount);
-  const currency = selectedVariant?.price.currencyCode || data.priceRange.minVariantPrice.currencyCode;
 
   return (
     <div className="min-h-screen bg-background">
@@ -113,7 +112,7 @@ export default function ProductDetail() {
             <div>
               <h1 className="text-3xl font-bold mb-2">{data.title}</h1>
               <p className="text-3xl font-bold text-accent">
-                {currency} {price.toFixed(2)}
+                DKK {price.toFixed(2)}
               </p>
             </div>
 

@@ -42,7 +42,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   const imageUrl = node.images.edges[0]?.node.url;
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
-  const currency = node.priceRange.minVariantPrice.currencyCode;
 
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
@@ -74,7 +73,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </p>
         )}
         <p className="text-lg md:text-xl font-bold">
-          {currency} {price.toFixed(2)}
+          DKK {price.toFixed(2)}
         </p>
       </CardContent>
       
