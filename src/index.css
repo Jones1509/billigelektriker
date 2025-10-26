@@ -457,7 +457,7 @@ All colors MUST be HSL.
   }
 
   .menu-column:hover .menu-column-title::after {
-    width: 80px;
+    width: 100%;
   }
 
   /* List styling */
