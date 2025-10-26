@@ -336,7 +336,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
 
           {/* Heading */}
           <h1 
-            className="text-[40px] md:text-[40px] font-black text-white leading-[1.2] text-center"
+            className="text-[28px] md:text-[40px] font-black text-white leading-[1.2] text-left md:text-center"
             style={{ 
               textShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               letterSpacing: '-0.5px'
@@ -347,10 +347,10 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
 
           {/* Description */}
           <div className="max-w-[600px] mx-auto space-y-5">
-            <p className="text-[18px] text-white/90 leading-[1.8] text-center font-normal">
+            <p className="text-[18px] text-white/90 leading-[1.8] text-left md:text-center font-normal">
               Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
             </p>
-            <p className="text-[18px] text-white/90 leading-[1.8] text-center font-normal">
+            <p className="text-[18px] text-white/90 leading-[1.8] text-left md:text-center font-normal">
               Fra akut fejlfinding til planlagte installationer. Fra Smart Home-udstyr til el-komponenter. Vi gør det nemt at få præcis den hjælp eller de produkter du har brug for.
             </p>
           </div>
