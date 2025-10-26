@@ -3,7 +3,7 @@ import {
   Phone, User, LogOut, Zap, Search, Smartphone, Car, 
   Server, Briefcase, Power, Lamp, Wifi, Moon, 
   Boxes, Cable, Shield, Menu, Info, Mail, Lightbulb, Bell,
-  Lock, Settings, Wrench, ShoppingCart, Battery, Plug, Box, Grid3x3, Gauge
+  Lock, Settings, Wrench, ShoppingCart, Battery, Plug, Box, Grid3x3, Gauge, ArrowRight
 } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
 import { Link, useNavigate } from "react-router-dom";
@@ -87,64 +87,64 @@ const useServices = () => {
     {
       title: "Lamper & belysning",
       href: "/pages/lamper-belysning",
-      description: "Installation og reparation af alle typer belysning",
-      icon: Lightbulb,
+      description: "Installation og reparation",
+      image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=160&h=160&fit=crop",
       badge: null,
     },
     {
       title: "Stikkontakter & Afbrydere",
       href: "/pages/stikkontakter-afbrydere",
-      description: "Moderne stikkontakter og designer-afbrydere",
-      icon: Plug,
+      description: "Moderne designer-løsninger",
+      image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=160&h=160&fit=crop",
       badge: null,
     },
     {
       title: "Akut Hjælp",
       href: "/pages/akut-hjaelp",
-      description: "Akut el-hjælp døgnet rundt",
-      icon: Bell,
+      description: "Døgnet rundt service",
+      image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=160&h=160&fit=crop",
       badge: "24/7",
     },
     {
       title: "Fejlfinding",
       href: "/pages/fejlfinding",
-      description: "Professionel fejlfinding af el-problemer",
-      icon: Search,
+      description: "Professionel diagnostik",
+      image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=160&h=160&fit=crop",
       badge: null,
     },
     {
       title: "Sikkerhed",
       href: "/pages/sikkerhed",
-      description: "El-tjek, sikring og eftersyn",
-      icon: Shield,
+      description: "El-tjek og eftersyn",
+      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=160&h=160&fit=crop",
       badge: null,
     },
     {
-      title: "Smart Home & Energioptimering",
+      title: "Smart Home",
       href: "/pages/smart-home",
-      description: "Intelligent hjem-automation",
-      icon: Smartphone,
+      description: "Intelligent automation",
+      image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=160&h=160&fit=crop",
       badge: null,
     },
     {
-      title: "Vedligeholdelse & Serviceaftaler",
+      title: "Vedligeholdelse",
       href: "/pages/vedligeholdelse",
-      description: "Regelmæssig service og vedligehold",
-      icon: Settings,
+      description: "Service og vedligehold",
+      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=160&h=160&fit=crop",
       badge: null,
     },
     {
-      title: "Rådgivning & Indkøb",
+      title: "Rådgivning",
       href: "/pages/raadgivning",
-      description: "Professionel rådgivning om el-løsninger",
-      icon: Info,
+      description: "Professionel vejledning",
+      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=160&h=160&fit=crop",
       badge: null,
     },
     {
-      title: "Specialydelser & Udlejning",
+      title: "Specialydelser",
       href: "/pages/specialydelser",
-      description: "Specialiserede el-services",
-      icon: Wrench,
+      description: "Avancerede el-services",
+      image: "https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=160&h=160&fit=crop",
       badge: null,
     },
   ];
@@ -157,7 +157,7 @@ const useProducts = () => {
       {
         title: "Lamper",
         href: "/collections/lamper",
-        icon: Lamp,
+        image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=160&h=160&fit=crop",
         subcategories: [
           { title: "Loftlamper", href: "/collections/loftlamper" },
           { title: "Væglamper", href: "/collections/vaeglamper" },
@@ -168,51 +168,36 @@ const useProducts = () => {
       {
         title: "Stikkontakter",
         href: "/collections/stikkontakter",
-        icon: Plug,
+        image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=160&h=160&fit=crop",
         subcategories: [
-          { title: "Forfradåse", href: "/collections/stikkontakter-forfradaase", category: "Monteringstype" },
-          { title: "Indmuringsdåse", href: "/collections/stikkontakter-indmuring", category: "Monteringstype" },
-          { title: "Vægmonteret", href: "/collections/stikkontakter-vaeg", category: "Monteringstype" },
-          { title: "Stikkontakt", href: "/collections/funktioner-stikkontakt", category: "Funktioner" },
-          { title: "Afbryder", href: "/collections/funktioner-afbryder", category: "Funktioner" },
-          { title: "Lysdæmper", href: "/collections/funktioner-lysdaemper", category: "Funktioner" },
-          { title: "USB-oplader", href: "/collections/funktioner-usb", category: "Funktioner" },
-          { title: "Softline", href: "/collections/rammer-softline", category: "Rammer" },
-          { title: "Baseline", href: "/collections/rammer-baseline", category: "Rammer" },
-          { title: "Pureline", href: "/collections/rammer-pureline", category: "Rammer" },
-          { title: "Slimline", href: "/collections/rammer-slimline", category: "Rammer" },
-          { title: "Design", href: "/collections/rammer-design", category: "Rammer" },
-          { title: "Udendørs underlag", href: "/collections/udendors-underlag", category: "Udendørs" },
-          { title: "Udendørs stikkontakt", href: "/collections/udendors-stikkontakt", category: "Udendørs" },
+          { title: "Monteringstype", href: "/collections/stikkontakter-montering" },
+          { title: "Funktioner", href: "/collections/stikkontakter-funktioner" },
+          { title: "Rammer", href: "/collections/stikkontakter-rammer" },
+          { title: "Tangenter", href: "/collections/stikkontakter-tangenter" },
+          { title: "Udendørs", href: "/collections/stikkontakter-udendoers" },
         ]
       },
       {
         title: "Tavler & Materialer",
         href: "/collections/tavler-materialer",
-        icon: Box,
+        image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=160&h=160&fit=crop",
         subcategories: [
-          { title: "UG 6", href: "/collections/tavler-ug6", category: "El-tavler" },
-          { title: "UG 12", href: "/collections/tavler-ug12", category: "El-tavler" },
-          { title: "UG 18", href: "/collections/tavler-ug18", category: "El-tavler" },
-          { title: "UG 20", href: "/collections/tavler-ug20", category: "El-tavler" },
-          { title: "10A - 20A", href: "/collections/2polet-10-20a", category: "2-polet grupper" },
-          { title: "10A - 32A", href: "/collections/4polet-10-32a", category: "4-polet grupper" },
-          { title: "RCD type A/B/S", href: "/collections/fejlstroms", category: "Fejlstrøms-afbrydere" },
-          { title: "2 polet", href: "/collections/kombi-2polet", category: "Kombiafbrydere" },
-          { title: "4 polet", href: "/collections/kombi-4polet", category: "Kombiafbrydere" },
+          { title: "El-tavler", href: "/collections/el-tavler" },
+          { title: "Gruppesikringer", href: "/collections/gruppesikringer" },
+          { title: "Fejlstrømsafbrydere", href: "/collections/fejlstroemsafbrydere" },
+          { title: "Kombiafbrydere", href: "/collections/kombiafbrydere" },
         ]
       },
       {
         title: "Kabler & Ledninger",
         href: "/collections/kabler-ledninger",
-        icon: Cable,
+        image: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=160&h=160&fit=crop",
         subcategories: [
-          { title: "0,75 mm²", href: "/collections/lampeledning-075", category: "Lampe ledning" },
-          { title: "1,5 mm²", href: "/collections/installations-15", category: "Installations kabel" },
-          { title: "2,5 mm²", href: "/collections/installations-25", category: "Installations kabel" },
-          { title: "4 mm²", href: "/collections/installations-4", category: "Installations kabel" },
-          { title: "6 mm²", href: "/collections/installations-6", category: "Installations kabel" },
-          { title: "10 mm²", href: "/collections/installations-10", category: "Installations kabel" },
+          { title: "Lampe ledning", href: "/collections/lampe-ledning" },
+          { title: "Installationskabel 1,5mm²", href: "/collections/kabel-15mm" },
+          { title: "Installationskabel 2,5mm²", href: "/collections/kabel-25mm" },
+          { title: "Installationskabel 4mm²", href: "/collections/kabel-4mm" },
+          { title: "Installationskabel 6mm+", href: "/collections/kabel-6mm" },
         ]
       },
     ],
@@ -244,6 +229,8 @@ export const Header = () => {
   const products = useProducts();
   const [user, setUser] = useState<any>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   useEffect(() => {
     // Get initial session
@@ -258,6 +245,19 @@ export const Header = () => {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  const handleMenuEnter = (menu: string) => {
+    if (hoverTimeout) clearTimeout(hoverTimeout);
+    const timeout = setTimeout(() => {
+      setActiveMenu(menu);
+    }, 150);
+    setHoverTimeout(timeout);
+  };
+
+  const handleMenuLeave = () => {
+    if (hoverTimeout) clearTimeout(hoverTimeout);
+    setActiveMenu(null);
+  };
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -287,121 +287,109 @@ export const Header = () => {
         
         <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList>
-            <NavigationMenuItem>
+            <NavigationMenuItem
+              onMouseEnter={() => handleMenuEnter("services")}
+              onMouseLeave={handleMenuLeave}
+            >
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-[1200px] p-10 bg-white dark:bg-gray-950">
-                  <ul className="grid gap-4 md:grid-cols-3">
+                <div className="mega-menu-services">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
                     {services.map((service) => (
-                      <li key={service.title}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={service.href}
-                            className="group relative block select-none rounded-xl p-6 leading-none no-underline outline-none transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-800 hover:border-primary"
-                          >
-                            <div className="flex flex-col items-start gap-4">
-                              <div className="relative">
-                                <div className="rounded-lg bg-primary/10 p-3">
-                                  <service.icon className="h-12 w-12 text-primary" />
-                                </div>
-                                {service.badge && (
-                                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                                    {service.badge}
-                                  </span>
-                                )}
-                              </div>
-                              <div className="space-y-2">
-                                <div className="text-base font-bold leading-tight text-slate-900 dark:text-slate-100">
-                                  {service.title}
-                                </div>
-                                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                                  {service.description}
-                                </p>
-                                <div className="flex items-center text-sm text-primary font-medium pt-1 group-hover:gap-2 transition-all">
-                                  <span>Læs mere</span>
-                                  <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
+                      <Link
+                        key={service.href}
+                        to={service.href}
+                        className="service-card group"
+                      >
+                        <div className="relative mb-3">
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-20 h-20 rounded-lg object-cover"
+                            loading="lazy"
+                          />
+                          {service.badge && (
+                            <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-xs font-bold px-2 py-0.5 rounded-full">
+                              {service.badge}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="font-semibold text-[15px] text-foreground mb-1">
+                          {service.title}
+                        </h3>
+                        <p className="text-[13px] text-muted-foreground line-clamp-1 mb-2">
+                          {service.description}
+                        </p>
+                        <span className="text-xs text-primary font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                          Læs mere <span className="text-lg">→</span>
+                        </span>
+                      </Link>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
 
-            <NavigationMenuItem>
+            <NavigationMenuItem
+              onMouseEnter={() => handleMenuEnter("products")}
+              onMouseLeave={handleMenuLeave}
+            >
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-[1400px] bg-white dark:bg-gray-950">
-                  {/* Main Categories */}
-                  <div className="p-10 grid gap-6 md:grid-cols-4">
+                <div className="mega-menu-products">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-4">
                     {products.mainCategories.map((category) => (
-                      <div key={category.title} className="group">
-                        <Link
-                          to={category.href}
-                          className="block rounded-xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary transition-all duration-300 hover:shadow-lg"
-                        >
-                          <div className="space-y-4">
-                            <div className="w-[120px] h-[120px] rounded-lg bg-slate-100 dark:bg-slate-900 flex items-center justify-center">
-                              <category.icon className="h-16 w-16 text-primary" />
-                            </div>
-                            <div className="border-t border-slate-200 dark:border-slate-800 pt-3">
-                              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-3">
-                                {category.title}
-                              </h3>
-                            </div>
-                          </div>
+                      <div key={category.title} className="product-category-card">
+                        <Link to={category.href} className="block mb-3">
+                          <img
+                            src={category.image}
+                            alt={category.title}
+                            className="w-20 h-20 rounded-lg object-cover mb-3"
+                            loading="lazy"
+                          />
+                          <h3 className="font-semibold text-[15px] text-foreground border-b border-border pb-3">
+                            {category.title}
+                          </h3>
                         </Link>
-                        
-                        {/* Subcategories */}
-                        <div className="mt-3 space-y-1.5 pl-2">
-                          {category.subcategories.map((sub, idx) => (
-                            <div key={sub.href}>
-                              {/* Show category header for grouped items */}
-                              {'category' in sub && (
-                                idx === 0 || 
-                                !('category' in category.subcategories[idx - 1]) ||
-                                (category.subcategories[idx - 1] as any).category !== (sub as any).category
-                              ) && (
-                                <div className="text-xs font-semibold text-slate-500 mt-3 mb-1">
-                                  {(sub as any).category}
-                                </div>
-                              )}
+                        <ul className="space-y-2">
+                          {category.subcategories.map((sub) => (
+                            <li key={sub.href}>
                               <Link
                                 to={sub.href}
-                                className="block text-sm text-slate-600 dark:text-slate-400 hover:text-primary hover:pl-1 transition-all"
+                                className="text-[13px] text-muted-foreground hover:text-primary hover:pl-1 transition-all duration-150 inline-block"
                               >
                                 • {sub.title}
                               </Link>
-                            </div>
+                            </li>
                           ))}
-                        </div>
+                        </ul>
                       </div>
                     ))}
                   </div>
-                  
-                  {/* Featured Categories */}
-                  <div className="bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 p-8">
-                    <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4 text-center">
+
+                  <div className="featured-categories">
+                    <h4 className="text-sm font-semibold text-foreground mb-3">
                       POPULÆRE BELYSNINGSKATEGORIER
                     </h4>
-                    <div className="grid gap-6 md:grid-cols-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                       {products.featuredCategories.map((featured) => (
                         <div key={featured.title}>
-                          <h5 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 text-sm">
+                          <h5 className="font-medium text-[14px] text-foreground mb-2">
                             {featured.title}
                           </h5>
                           <ul className="space-y-1.5">
                             {featured.items.map((item) => (
-                              <li key={item} className="text-sm text-slate-600 dark:text-slate-400">
-                                • {item}
+                              <li key={item}>
+                                <Link
+                                  to={`/collections/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                  className="text-[13px] text-muted-foreground hover:text-primary transition-colors"
+                                >
+                                  • {item}
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -452,10 +440,14 @@ export const Header = () => {
                               onClick={closeMobileMenu}
                               className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
                             >
-                              <div className="rounded-lg bg-primary/10 p-2 flex-shrink-0 relative">
-                                <service.icon className="h-4 w-4 text-primary" />
+                              <div className="relative flex-shrink-0">
+                                <img 
+                                  src={service.image} 
+                                  alt={service.title}
+                                  className="w-10 h-10 rounded-lg object-cover"
+                                />
                                 {service.badge && (
-                                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] font-bold px-1 rounded-full">
+                                  <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[8px] font-bold px-1 rounded-full">
                                     {service.badge}
                                   </span>
                                 )}
@@ -482,9 +474,13 @@ export const Header = () => {
                               <Link
                                 to={category.href}
                                 onClick={closeMobileMenu}
-                                className="flex items-start gap-3 p-3 rounded-lg bg-slate-50 dark:bg-slate-900 hover:bg-accent transition-colors font-semibold"
+                                className="flex items-start gap-3 p-3 rounded-lg bg-muted hover:bg-accent transition-colors font-semibold"
                               >
-                                <category.icon className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                                <img 
+                                  src={category.image} 
+                                  alt={category.title}
+                                  className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
+                                />
                                 <span>{category.title}</span>
                               </Link>
                               <div className="pl-8 space-y-1">

@@ -162,7 +162,7 @@ All colors MUST be HSL.
   @keyframes megaMenuFadeIn {
     from {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-8px);
     }
     to {
       opacity: 1;
@@ -177,16 +177,53 @@ All colors MUST be HSL.
     }
     to {
       opacity: 0;
-      transform: translateY(-10px);
+      transform: translateY(-8px);
     }
   }
 
   /* Mega menu smooth entry */
   [data-state="open"] > div[data-radix-navigation-menu-viewport] {
-    animation: megaMenuFadeIn 300ms ease-out;
+    animation: megaMenuFadeIn 250ms ease-out;
   }
 
   [data-state="closed"] > div[data-radix-navigation-menu-viewport] {
     animation: megaMenuFadeOut 200ms ease-in;
+  }
+
+  /* Mega Menu Styles */
+  .mega-menu-services {
+    @apply w-full max-w-[1200px] mx-auto px-6 py-8;
+  }
+
+  .mega-menu-products {
+    @apply w-full max-w-[1400px] mx-auto px-6 py-8;
+  }
+
+  .service-card {
+    @apply block w-full max-w-[280px] h-[200px] p-5 rounded-xl border border-border bg-background;
+    @apply hover:border-primary hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200;
+  }
+
+  .product-category-card {
+    @apply w-full max-w-[260px] p-5 rounded-xl border border-border bg-background;
+    @apply hover:border-primary hover:shadow-md transition-all duration-200;
+  }
+
+  .featured-categories {
+    @apply w-full bg-muted/30 rounded-lg border-t border-border p-6 mt-4;
+  }
+
+  /* Triangle pointer for mega menu */
+  [data-radix-navigation-menu-viewport]::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid hsl(var(--background));
   }
 }
