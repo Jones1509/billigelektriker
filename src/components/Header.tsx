@@ -246,8 +246,8 @@ export const Header = () => {
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
         <div className="container py-6">
-          <div className="flex h-auto items-center justify-between">
-            <Link to="/" className="flex items-center flex-shrink-0">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+            <Link to="/" className="flex items-center justify-start">
               <img 
                 src={logo} 
                 alt="Billig Elektriker" 
@@ -260,17 +260,16 @@ export const Header = () => {
               />
             </Link>
             
-            <div className="flex-1 flex justify-center">
-              <NavigationMenu 
-                className="hidden lg:flex" 
-                value={menuOpen ?? ""}
-                onValueChange={(value) => {
-                  if (!value) {
-                    setMenuOpen(null);
-                    setActiveMenu(null);
-                  }
-                }}
-              >
+            <NavigationMenu 
+              className="hidden lg:flex" 
+              value={menuOpen ?? ""}
+              onValueChange={(value) => {
+                if (!value) {
+                  setMenuOpen(null);
+                  setActiveMenu(null);
+                }
+              }}
+            >
           <NavigationMenuList>
             <NavigationMenuItem
               value="services"
@@ -356,10 +355,9 @@ export const Header = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
           </NavigationMenuList>
-              </NavigationMenu>
-            </div>
+            </NavigationMenu>
             
-            <div className="flex items-center gap-3 flex-shrink-0">
+            <div className="flex items-center gap-3 justify-end">
           <div className="hidden lg:flex">
             <LanguageSwitcher />
           </div>
