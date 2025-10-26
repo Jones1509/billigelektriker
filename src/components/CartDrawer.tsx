@@ -71,11 +71,11 @@ export const CartDrawer = () => {
         <Button 
           variant="ghost" 
           size="icon" 
-          className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105 group"
+          className="relative h-11 w-11 md:h-10 md:w-10 md:rounded-full rounded-[10px] text-white hover:text-white backdrop-blur-sm bg-white/15 md:bg-white/5 hover:bg-white/20 md:hover:bg-white/10 border-0 md:border md:border-white/10 md:hover:border-white/20 transition-all duration-300 md:hover:shadow-lg md:hover:shadow-white/10 active:scale-95 md:hover:scale-105 group"
         >
-          <ShoppingCart className="h-5 w-5 transition-transform group-hover:scale-110" />
+          <ShoppingCart className="h-6 w-6 md:h-5 md:w-5 transition-transform group-hover:scale-110" />
           {totalItems > 0 && (
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs bg-secondary text-white border-2 border-primary shadow-lg animate-scale-in">
+            <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[10px] font-bold bg-destructive text-destructive-foreground border-2 border-primary shadow-lg">
               {totalItems}
             </Badge>
           )}
