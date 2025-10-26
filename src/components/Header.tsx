@@ -358,9 +358,26 @@ export const Header = () => {
             </NavigationMenu>
             
             <div className="flex items-center gap-3 justify-end">
-          <div className="hidden lg:flex">
-            <LanguageSwitcher />
-          </div>
+              <div className="hidden lg:flex items-center gap-1 mr-2">
+                <Button
+                  variant="ghost"
+                  asChild
+                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  <Link to="/om-os">{t('header.about')}</Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  asChild
+                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  <Link to="/kontakt">{t('header.contact')}</Link>
+                </Button>
+              </div>
+              
+              <div className="hidden lg:flex">
+                <LanguageSwitcher />
+              </div>
           
           {/* Mobile Menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
