@@ -261,7 +261,7 @@ export const Header = () => {
                                 <Link to={service.href} className="menu-link">
                                   {service.title}
                                   {service.badge && (
-                                    <span className="akut-badge">
+                                    <span className="badge badge-red">
                                       {service.badge}
                                     </span>
                                   )}
@@ -271,6 +271,12 @@ export const Header = () => {
                           </ul>
                         </div>
                       ))}
+                    </div>
+                    <div className="menu-footer">
+                      <Link to="/services" className="featured-link">
+                        Se alle serviceydelser
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -302,6 +308,16 @@ export const Header = () => {
                           </ul>
                         </div>
                       ))}
+                    </div>
+                    <div className="menu-footer">
+                      <Link to="/products" className="featured-link">
+                        Se alle produkter
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      <Link to="/priser" className="featured-link">
+                        Se priser & pakker
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
                     </div>
                   </div>
                 </div>

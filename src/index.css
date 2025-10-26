@@ -162,7 +162,7 @@ All colors MUST be HSL.
   @keyframes megaMenuFadeIn {
     from { 
       opacity: 0;
-      transform: translateY(-8px);
+      transform: translateY(-12px);
     }
     to { 
       opacity: 1;
@@ -177,14 +177,14 @@ All colors MUST be HSL.
     }
     to { 
       opacity: 0;
-      transform: translateY(-8px);
+      transform: translateY(-12px);
     }
   }
 
-  @keyframes columnFadeIn {
+  @keyframes fadeInUp {
     from {
       opacity: 0;
-      transform: translateY(4px);
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
@@ -192,127 +192,169 @@ All colors MUST be HSL.
     }
   }
 
-  @keyframes backdropFade {
+  @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 
   /* Mega menu smooth entry */
   [data-state="open"] > div[data-radix-navigation-menu-viewport] {
-    animation: megaMenuFadeIn 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    animation: megaMenuFadeIn 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   [data-state="closed"] > div[data-radix-navigation-menu-viewport] {
-    animation: megaMenuFadeOut 200ms ease-in;
+    animation: megaMenuFadeOut 250ms ease-in;
   }
 
-  /* Mega Menu Container */
+  /* Mega Menu Container - FULL WIDTH */
   .mega-menu-container {
-    @apply w-full;
-    max-height: 320px;
-    background: linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    position: relative;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      hsl(var(--background));
     border-top: 2px solid hsl(var(--primary));
-    box-shadow: 
-      0 4px 12px hsl(var(--foreground) / 0.06),
-      0 8px 24px hsl(var(--foreground) / 0.04);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px hsl(var(--foreground) / 0.08);
     will-change: transform, opacity;
     contain: layout style paint;
   }
 
-  .dark .mega-menu-container {
-    background: linear-gradient(
-      135deg, 
-      hsl(var(--primary) / 0.02) 0%, 
-      transparent 100%
-    ),
-    linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
-  }
-
-  /* Inner container with max-width */
+  /* Inner container with max-width and proper spacing */
   .mega-menu-inner {
-    @apply mx-auto px-10;
     max-width: 1400px;
-    padding-top: 32px;
-    padding-bottom: 32px;
+    margin: 0 auto;
+    padding: 40px 48px 48px 48px;
   }
 
-  /* Grid layouts - venstrejusteret */
+  /* Grid layouts - venstrejusteret med korrekt gap */
   .mega-menu-grid-3 {
-    @apply grid grid-cols-3 gap-12 text-left;
-    max-width: 1000px;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: left;
   }
 
   .mega-menu-grid-6 {
-    @apply grid grid-cols-6 gap-8 text-left;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 40px;
+    text-align: left;
   }
 
-  /* Column styling - clean & professionel */
+  /* Column styling med animation og subtle background */
   .menu-column {
-    @apply p-0;
-    animation: columnFadeIn 200ms ease-out both;
+    padding: 20px 16px;
+    animation: fadeInUp 400ms ease-out both;
+    position: relative;
+  }
+
+  .menu-column:nth-child(odd) {
+    background: hsl(var(--primary) / 0.01);
+    border-radius: 8px;
   }
 
   .menu-column:nth-child(1) { animation-delay: 0ms; }
-  .menu-column:nth-child(2) { animation-delay: 30ms; }
-  .menu-column:nth-child(3) { animation-delay: 60ms; }
-  .menu-column:nth-child(4) { animation-delay: 90ms; }
-  .menu-column:nth-child(5) { animation-delay: 120ms; }
-  .menu-column:nth-child(6) { animation-delay: 150ms; }
+  .menu-column:nth-child(2) { animation-delay: 40ms; }
+  .menu-column:nth-child(3) { animation-delay: 80ms; }
+  .menu-column:nth-child(4) { animation-delay: 120ms; }
+  .menu-column:nth-child(5) { animation-delay: 160ms; }
+  .menu-column:nth-child(6) { animation-delay: 200ms; }
 
-  /* Column titles - med accent linje */
-  .menu-column-title {
-    @apply text-[12px] font-bold text-foreground uppercase mb-4 pb-2 inline-block;
-    letter-spacing: 0.8px;
-    border-bottom: 2px solid hsl(var(--primary));
-    width: fit-content;
-    transition: var(--transition-smooth);
-    cursor: default;
+  /* Separator mellem services kolonner */
+  .mega-menu-grid-3 .menu-column:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--border)) 20%,
+      hsl(var(--border)) 80%,
+      transparent
+    );
   }
 
-  .menu-column:hover .menu-column-title {
-    @apply text-primary;
-    border-bottom-color: hsl(var(--primary) / 0.7);
+  /* Column titles med bedre styling */
+  .menu-column-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: hsl(var(--primary));
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid hsl(var(--border));
+    position: relative;
+    cursor: default;
+    transition: var(--transition-smooth);
+  }
+
+  .menu-column-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--primary));
+    transition: width 0.3s ease;
+  }
+
+  .menu-column:hover .menu-column-title::after {
+    width: 80px;
   }
 
   /* List styling */
   .menu-column ul {
-    @apply list-none p-0 m-0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
 
   .menu-column li {
-    @apply m-0 p-0;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Link styling med hover effekt */
+  /* Link styling med bullet og smooth hover */
   .menu-link {
-    @apply inline-block py-1 text-[13px] text-muted-foreground no-underline relative;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    padding: 6px 0 6px 12px;
+    font-size: 14px;
+    color: hsl(var(--muted-foreground));
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease;
     will-change: transform, color;
   }
 
   .menu-link::before {
-    content: '';
+    content: '•';
     position: absolute;
     left: 0;
-    bottom: 2px;
-    width: 0;
-    height: 1px;
-    background: hsl(var(--primary));
-    transition: width 0.3s ease;
+    color: hsl(var(--border));
+    opacity: 0;
+    transition: opacity 0.2s ease;
   }
 
   .menu-link:hover {
-    @apply text-primary;
+    color: hsl(var(--primary));
     transform: translateX(4px);
+    font-weight: 500;
   }
 
   .menu-link:hover::before {
-    width: 100%;
+    opacity: 1;
+    color: hsl(var(--primary));
   }
 
   /* Focus states for accessibility */
@@ -322,43 +364,103 @@ All colors MUST be HSL.
     border-radius: 2px;
   }
 
-  /* Akut badge with pulse effect */
-  .akut-badge {
-    @apply inline-block ml-2 bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded;
+  /* Badge styling */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 4px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
+
+  .badge-red {
+    background: hsl(0 84% 95%);
+    color: hsl(0 84% 60%);
     animation: pulse 2s infinite;
   }
 
-  /* Responsive breakpoints */
+  .badge-green {
+    background: hsl(150 80% 90%);
+    color: hsl(150 80% 35%);
+  }
+
+  .badge-blue {
+    background: hsl(217 91% 90%);
+    color: hsl(217 91% 45%);
+  }
+
+  /* Menu footer with featured links */
+  .menu-footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid hsl(var(--border));
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .featured-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 100%);
+    color: hsl(var(--primary-foreground));
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px hsl(var(--primary) / 0.2);
+  }
+
+  .featured-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px hsl(var(--primary) / 0.3);
+  }
+
+  .featured-link svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Responsive breakpoints med korrekt spacing */
   @media (max-width: 1200px) {
     .mega-menu-inner {
-      @apply px-8;
-      padding-top: 28px;
-      padding-bottom: 28px;
+      padding: 36px 40px 40px 40px;
     }
     
     .mega-menu-grid-6,
     .mega-menu-grid-3 {
-      gap: 24px;
+      gap: 32px;
     }
 
     .menu-link {
-      @apply text-[12px];
+      font-size: 13px;
     }
   }
 
   @media (max-width: 1024px) {
-    .mega-menu-container {
-      max-height: 450px;
-      overflow-y: auto;
+    .mega-menu-inner {
+      padding: 32px 32px 36px 32px;
     }
 
     .mega-menu-grid-6 {
-      @apply grid-cols-3;
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
     .mega-menu-grid-3 {
-      @apply grid-cols-2;
+      gap: 24px;
     }
   }
 
