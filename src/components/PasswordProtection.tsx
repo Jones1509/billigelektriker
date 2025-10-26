@@ -254,7 +254,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
               alt="Billig Elektriker" 
               className="w-auto"
               style={{ 
-                maxWidth: '250px',
+                maxWidth: '125px',
                 filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.3))'
               }}
             />
