@@ -217,10 +217,15 @@ export const Header = () => {
       setHoverTimeout(null);
     }
     
-    // Force close the menu aggressively
+    // Force close the menu aggressively - set to empty string to trigger controlled close
     setForceClose(true);
     setActiveMenu(null);
-    setMenuOpen(null);
+    setMenuOpen("");
+    
+    // Force immediate re-render
+    setTimeout(() => {
+      setMenuOpen(null);
+    }, 0);
     
     // Reset force close after a short delay to allow menu interactions again
     setTimeout(() => {
@@ -254,7 +259,16 @@ export const Header = () => {
           />
         </Link>
         
-        <NavigationMenu className="hidden lg:flex" value={menuOpen || undefined}>
+        <NavigationMenu 
+          className="hidden lg:flex" 
+          value={menuOpen ?? ""}
+          onValueChange={(value) => {
+            if (!value) {
+              setMenuOpen(null);
+              setActiveMenu(null);
+            }
+          }}
+        >
           <NavigationMenuList>
             <NavigationMenuItem
               value="services"
