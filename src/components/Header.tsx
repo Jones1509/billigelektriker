@@ -251,7 +251,7 @@ export const Header = () => {
               <img 
                 src={logo} 
                 alt="Billig Elektriker" 
-                className="h-10 sm:h-12 md:h-16 lg:h-20 w-auto"
+                className="h-10 sm:h-12 md:h-16 lg:h-15 w-auto"
                 style={{ 
                   imageRendering: "-webkit-optimize-contrast",
                   WebkitFontSmoothing: "antialiased"
