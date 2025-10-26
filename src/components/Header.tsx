@@ -193,18 +193,18 @@ export const Header = () => {
   const handleMenuEnter = (menu: string) => {
     if (forceClose) return;
     if (hoverTimeout) clearTimeout(hoverTimeout);
-    const timeout = setTimeout(() => {
-      setActiveMenu(menu);
-      setMenuOpen(menu);
-    }, 150);
-    setHoverTimeout(timeout);
+    setActiveMenu(menu);
+    setMenuOpen(menu);
   };
 
   const handleMenuLeave = () => {
     if (forceClose) return;
     if (hoverTimeout) clearTimeout(hoverTimeout);
-    setActiveMenu(null);
-    setMenuOpen(null);
+    const timeout = setTimeout(() => {
+      setActiveMenu(null);
+      setMenuOpen(null);
+    }, 300);
+    setHoverTimeout(timeout);
   };
 
   const handleCloseMenu = (e: React.MouseEvent) => {
@@ -273,12 +273,11 @@ export const Header = () => {
             <NavigationMenuItem
               value="services"
               onMouseEnter={() => handleMenuEnter("services")}
-              onMouseLeave={handleMenuLeave}
             >
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.services')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent onMouseLeave={handleMenuLeave}>
                 <div className="mega-menu-container">
                   <button 
                     type="button"
@@ -316,12 +315,11 @@ export const Header = () => {
             <NavigationMenuItem
               value="products"
               onMouseEnter={() => handleMenuEnter("products")}
-              onMouseLeave={handleMenuLeave}
             >
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.products')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent onMouseLeave={handleMenuLeave}>
                 <div className="mega-menu-container">
                   <button 
                     type="button"
