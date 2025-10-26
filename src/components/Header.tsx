@@ -207,7 +207,6 @@ export const Header = () => {
   const handleCloseMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (hoverTimeout) clearTimeout(hoverTimeout);
     setActiveMenu(null);
     setMenuOpen(null);
   };

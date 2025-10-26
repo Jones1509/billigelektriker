@@ -437,8 +437,8 @@ All colors MUST be HSL.
     color: hsl(var(--primary));
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin: 0 0 20px -16px;
-    padding: 10px 16px;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
     border-bottom: 2px solid hsl(var(--border));
     position: relative;
     cursor: default;
@@ -452,17 +452,12 @@ All colors MUST be HSL.
     left: 0;
     width: 0;
     height: 2px;
-    background: hsl(var(--primary-foreground));
+    background: hsl(var(--primary));
     transition: width 0.3s ease;
   }
 
-  .menu-column:hover .menu-column-title {
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-  }
-
   .menu-column:hover .menu-column-title::after {
-    width: 100%;
+    width: 80px;
   }
 
   /* List styling */
