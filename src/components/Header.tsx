@@ -249,8 +249,8 @@ export const Header = () => {
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.services')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="mega-menu-flat">
+              <NavigationMenuContent className="!w-[900px]">
+                <div className="mega-menu-flat bg-background border-t-2 border-primary shadow-xl">
                   <div className="mega-menu-grid-3">
                     {services.map((column, idx) => (
                       <div key={idx} className="menu-column">
@@ -282,8 +282,8 @@ export const Header = () => {
               <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.products')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <div className="mega-menu-flat">
+              <NavigationMenuContent className="!w-[1400px]">
+                <div className="mega-menu-flat bg-background border-t-2 border-primary shadow-xl">
                   <div className="mega-menu-grid-6">
                     {products.map((column) => (
                       <div key={column.title} className="menu-column">

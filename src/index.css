@@ -180,7 +180,7 @@ All colors MUST be HSL.
 
   /* Flat Mega Menu - Simple Text Links */
   .mega-menu-flat {
-    @apply w-full max-w-[1400px] mx-auto;
+    @apply w-full;
     max-height: 400px;
     overflow-y: auto;
   }
