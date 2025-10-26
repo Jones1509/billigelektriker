@@ -237,9 +237,9 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
       </div>
 
       {/* Glassmorphism Content Box */}
-      <div className="w-full max-w-[700px] animate-fade-in px-4">
+      <div className="w-full max-w-[700px] animate-fade-in">
         <div 
-          className="rounded-[24px] md:rounded-[32px] p-6 sm:p-8 md:p-12 lg:p-16 space-y-6 md:space-y-10 border border-white/20"
+          className="rounded-[32px] p-12 md:p-16 space-y-10 border border-white/20"
           style={{
             background: 'rgba(255, 255, 255, 0.1)',
             backdropFilter: 'blur(20px)',
@@ -252,22 +252,23 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
             <img 
               src={logo} 
               alt="Billig Elektriker" 
-              className="w-auto h-[120px] sm:h-[150px] md:h-[180px] lg:h-[200px]"
+              className="w-auto"
               style={{ 
+                maxWidth: '250px',
                 filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.3))'
               }}
             />
           </div>
 
           {/* Countdown Section */}
-          <div className="text-center space-y-4 md:space-y-8">
-            <p className="text-[12px] sm:text-[13px] md:text-[14px] font-bold text-white/80 uppercase tracking-[2px] md:tracking-[3px]">
+          <div className="text-center space-y-8">
+            <p className="text-[14px] font-bold text-white/80 uppercase tracking-[3px]">
               Lancering om
             </p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 max-w-[600px] mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-[600px] mx-auto">
               <div 
-                className="rounded-[16px] md:rounded-[20px] p-4 md:p-6 border-2 border-white/30"
+                className="rounded-[20px] p-6 border-2 border-white/30"
                 style={{
                   background: 'rgba(255, 255, 255, 0.15)',
                   backdropFilter: 'blur(10px)',
@@ -275,15 +276,15 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
                 }}
               >
                 <div 
-                  className="text-[36px] sm:text-[44px] md:text-[56px] font-black text-white leading-none"
+                  className="text-[56px] font-black text-white leading-none"
                   style={{ textShadow: '0 0 20px rgba(14,165,233,0.6)' }}
                 >
                   {timeLeft.days}
                 </div>
-                <div className="text-[11px] md:text-[13px] text-white/70 mt-1 md:mt-2 uppercase tracking-[1.5px] md:tracking-[2px] font-semibold">Dage</div>
+                <div className="text-[13px] text-white/70 mt-2 uppercase tracking-[2px] font-semibold">Dage</div>
               </div>
               <div 
-                className="rounded-[16px] md:rounded-[20px] p-4 md:p-6 border-2 border-white/30"
+                className="rounded-[20px] p-6 border-2 border-white/30"
                 style={{
                   background: 'rgba(255, 255, 255, 0.15)',
                   backdropFilter: 'blur(10px)',
@@ -291,15 +292,15 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
                 }}
               >
                 <div 
-                  className="text-[36px] sm:text-[44px] md:text-[56px] font-black text-white leading-none"
+                  className="text-[56px] font-black text-white leading-none"
                   style={{ textShadow: '0 0 20px rgba(14,165,233,0.6)' }}
                 >
                   {timeLeft.hours}
                 </div>
-                <div className="text-[11px] md:text-[13px] text-white/70 mt-1 md:mt-2 uppercase tracking-[1.5px] md:tracking-[2px] font-semibold">Timer</div>
+                <div className="text-[13px] text-white/70 mt-2 uppercase tracking-[2px] font-semibold">Timer</div>
               </div>
               <div 
-                className="rounded-[16px] md:rounded-[20px] p-4 md:p-6 border-2 border-white/30"
+                className="rounded-[20px] p-6 border-2 border-white/30"
                 style={{
                   background: 'rgba(255, 255, 255, 0.15)',
                   backdropFilter: 'blur(10px)',
@@ -307,15 +308,15 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
                 }}
               >
                 <div 
-                  className="text-[36px] sm:text-[44px] md:text-[56px] font-black text-white leading-none"
+                  className="text-[56px] font-black text-white leading-none"
                   style={{ textShadow: '0 0 20px rgba(14,165,233,0.6)' }}
                 >
                   {timeLeft.minutes}
                 </div>
-                <div className="text-[11px] md:text-[13px] text-white/70 mt-1 md:mt-2 uppercase tracking-[1.5px] md:tracking-[2px] font-semibold">Min</div>
+                <div className="text-[13px] text-white/70 mt-2 uppercase tracking-[2px] font-semibold">Min</div>
               </div>
               <div 
-                className="rounded-[16px] md:rounded-[20px] p-4 md:p-6 border-2 border-white/30"
+                className="rounded-[20px] p-6 border-2 border-white/30"
                 style={{
                   background: 'rgba(255, 255, 255, 0.15)',
                   backdropFilter: 'blur(10px)',
@@ -323,19 +324,19 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
                 }}
               >
                 <div 
-                  className="text-[36px] sm:text-[44px] md:text-[56px] font-black text-white leading-none"
+                  className="text-[56px] font-black text-white leading-none"
                   style={{ textShadow: '0 0 20px rgba(14,165,233,0.6)' }}
                 >
                   {timeLeft.seconds}
                 </div>
-                <div className="text-[11px] md:text-[13px] text-white/70 mt-1 md:mt-2 uppercase tracking-[1.5px] md:tracking-[2px] font-semibold">Sek</div>
+                <div className="text-[13px] text-white/70 mt-2 uppercase tracking-[2px] font-semibold">Sek</div>
               </div>
             </div>
           </div>
 
           {/* Heading */}
           <h1 
-            className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[40px] font-black text-white leading-[1.2] text-center px-2"
+            className="text-[40px] md:text-[40px] font-black text-white leading-[1.2] text-center"
             style={{ 
               textShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               letterSpacing: '-0.5px'
@@ -345,27 +346,27 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           </h1>
 
           {/* Description */}
-          <div className="max-w-[600px] mx-auto space-y-4 md:space-y-5 px-2">
-            <p className="text-[15px] sm:text-[16px] md:text-[18px] text-white/90 leading-[1.6] md:leading-[1.8] text-center font-normal">
+          <div className="max-w-[600px] mx-auto space-y-5">
+            <p className="text-[18px] text-white/90 leading-[1.8] text-center font-normal">
               Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
             </p>
-            <p className="text-[15px] sm:text-[16px] md:text-[18px] text-white/90 leading-[1.6] md:leading-[1.8] text-center font-normal">
+            <p className="text-[18px] text-white/90 leading-[1.8] text-center font-normal">
               Fra akut fejlfinding til planlagte installationer. Fra Smart Home-udstyr til el-komponenter. Vi gør det nemt at få præcis den hjælp eller de produkter du har brug for.
             </p>
           </div>
 
           {/* Password Input Section */}
-          <div className="max-w-[400px] mx-auto space-y-4 md:space-y-5 pt-2 md:pt-4">
-            <p className="text-[14px] sm:text-[15px] md:text-[16px] text-white/90 text-center font-semibold">
+          <div className="max-w-[400px] mx-auto space-y-5 pt-4">
+            <p className="text-[16px] text-white/90 text-center font-semibold">
               Har du fået adgang? Indtast kode:
             </p>
-            <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="password"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="Indtast adgangskode"
-                className="w-full h-[48px] sm:h-[52px] md:h-[56px] rounded-[12px] md:rounded-[14px] px-4 md:px-6 text-[15px] md:text-[17px] text-white placeholder-white/50 border-2 border-white/30 transition-all duration-300 focus:outline-none focus:border-[#0EA5E9]"
+                className="w-full h-[56px] rounded-[14px] px-6 text-[17px] text-white placeholder-white/50 border-2 border-white/30 transition-all duration-300 focus:outline-none focus:border-[#0EA5E9]"
                 style={{
                   background: 'rgba(255, 255, 255, 0.15)',
                   backdropFilter: 'blur(10px)',
@@ -380,7 +381,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
               />
               <button
                 type="submit"
-                className="w-full h-[48px] sm:h-[52px] md:h-[56px] rounded-[12px] md:rounded-[14px] text-white text-[16px] sm:text-[17px] md:text-[18px] font-bold transition-all duration-300 hover:scale-[1.02]"
+                className="w-full h-[56px] rounded-[14px] text-white text-[18px] font-bold transition-all duration-300 hover:scale-[1.02]"
                 style={{
                   background: 'linear-gradient(135deg, #0EA5E9 0%, #8B5CF6 100%)',
                   boxShadow: '0 8px 28px rgba(14,165,233,0.4)',
@@ -398,7 +399,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           </div>
 
           {/* Footer */}
-          <p className="text-[12px] sm:text-[13px] md:text-[14px] text-white/60 text-center mt-8 md:mt-12 px-2">
+          <p className="text-[14px] text-white/60 text-center mt-12">
             Spørgsmål? Kontakt os på{" "}
             <a 
               href="mailto:info@billigelektriker.dk"
