@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Zap } from "lucide-react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import logo from "@/assets/logo-new.png";
+import logo from "@/assets/logo-password.png";
 
 // Calculate launch date as 45 days from now
 const calculateLaunchDate = () => {
