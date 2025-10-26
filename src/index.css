@@ -131,16 +131,6 @@ All colors MUST be HSL.
     image-rendering: -webkit-optimize-contrast;
   }
 
-  /* Hide scrollbar completely but keep functionality */
-  .hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
-  }
-
   @keyframes gradient-shift {
     0%, 100% {
       background-position: 0% 50%;

@@ -278,7 +278,7 @@ export const Header = () => {
                   <SheetHeader>
                     <SheetTitle>{t('header.menu')}</SheetTitle>
                   </SheetHeader>
-              <ScrollArea className="h-[calc(100vh-80px)] mt-6 [&>div>div]:!overflow-visible [&_[data-radix-scroll-area-viewport]]:!overflow-y-auto [&_[data-radix-scroll-area-viewport]]:scroll-smooth [&_[data-radix-scroll-area-viewport]]:hide-scrollbar [&_[data-radix-scroll-area-scrollbar]]:!hidden">
+              <ScrollArea className="h-[calc(100vh-80px)] mt-6 [&>div>div]:!overflow-visible [&_[data-radix-scroll-area-viewport]]:!overflow-y-auto [&_[data-radix-scroll-area-scrollbar]]:hidden">
                 <div className="space-y-6 pb-10">
                   <Accordion type="single" collapsible className="w-full">
                     {/* Services */}
