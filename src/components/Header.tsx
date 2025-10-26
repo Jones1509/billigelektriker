@@ -210,12 +210,12 @@ export const Header = () => {
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
-        <div className="container flex h-28 items-center justify-between py-4">
+        <div className="container flex h-20 items-center justify-between py-3">
         <Link to="/" className="flex items-center">
           <img 
             src={logo} 
             alt="Billig Elektriker" 
-            className="h-25 w-auto"
+            className="h-16 w-auto"
             style={{ 
               imageRendering: "-webkit-optimize-contrast",
               WebkitFontSmoothing: "antialiased"
