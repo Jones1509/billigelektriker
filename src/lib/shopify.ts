@@ -211,15 +211,14 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
       throw new Error('No checkout URL returned from Shopify');
     }
 
-    // Erstat custom domain med myshopify.com domænet for at undgå 404 fejl
-    let checkoutUrl = cart.checkoutUrl;
-    checkoutUrl = checkoutUrl.replace('billigelektriker.dk', SHOPIFY_STORE_PERMANENT_DOMAIN);
+    // Parse og erstattningen URL for at bruge myshopify.com domain i stedet for custom domain
+    const originalUrl = new URL(cart.checkoutUrl);
+    const fixedUrl = new URL(originalUrl.pathname + originalUrl.search, `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}`);
+    fixedUrl.searchParams.set('channel', 'online_store');
+    const finalCheckoutUrl = fixedUrl.toString();
     
-    const url = new URL(checkoutUrl);
-    url.searchParams.set('channel', 'online_store');
-    const finalCheckoutUrl = url.toString();
-    
-    console.log('Final checkout URL:', finalCheckoutUrl);
+    console.log('Original checkout URL:', cart.checkoutUrl);
+    console.log('Fixed checkout URL:', finalCheckoutUrl);
     return finalCheckoutUrl;
   } catch (error) {
     console.error('Error creating storefront checkout:', error);
