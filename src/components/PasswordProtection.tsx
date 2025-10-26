@@ -402,10 +402,10 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           <p className="text-[14px] text-white/60 text-center mt-12">
             Spørgsmål? Kontakt os på{" "}
             <a 
-              href="mailto:kontakt@billigelektriker.dk"
+              href="mailto:info@billigelektriker.dk"
               className="hover:text-white transition-colors underline"
             >
-              kontakt@billigelektriker.dk
+              info@billigelektriker.dk
             </a>
           </p>
         </div>
