@@ -174,6 +174,7 @@ export const Header = () => {
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
+  const [forceClose, setForceClose] = useState(false);
 
   useEffect(() => {
     // Get initial session
@@ -190,6 +191,7 @@ export const Header = () => {
   }, []);
 
   const handleMenuEnter = (menu: string) => {
+    if (forceClose) return;
     if (hoverTimeout) clearTimeout(hoverTimeout);
     const timeout = setTimeout(() => {
       setActiveMenu(menu);
@@ -199,6 +201,7 @@ export const Header = () => {
   };
 
   const handleMenuLeave = () => {
+    if (forceClose) return;
     if (hoverTimeout) clearTimeout(hoverTimeout);
     setActiveMenu(null);
     setMenuOpen(null);
@@ -207,8 +210,22 @@ export const Header = () => {
   const handleCloseMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // Clear any pending hover timeouts
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    
+    // Force close the menu aggressively
+    setForceClose(true);
     setActiveMenu(null);
     setMenuOpen(null);
+    
+    // Reset force close after a short delay to allow menu interactions again
+    setTimeout(() => {
+      setForceClose(false);
+    }, 300);
   };
 
   const handleSignOut = async () => {
