@@ -250,7 +250,7 @@ export const Header = () => {
                 {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-screen bg-background border-t-2 border-primary shadow-xl py-8">
+                <div className="w-screen bg-background shadow-xl py-8">
                   <div className="container mx-auto px-4">
                     <div className="mega-menu-grid-3 max-w-4xl mx-auto">
                       {services.map((column, idx) => (
@@ -285,7 +285,7 @@ export const Header = () => {
                 {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-screen bg-background border-t-2 border-primary shadow-xl py-8">
+                <div className="w-screen bg-background shadow-xl py-8">
                   <div className="container mx-auto px-4">
                     <div className="mega-menu-grid-6 max-w-7xl mx-auto">
                       {products.map((column) => (
