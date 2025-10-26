@@ -239,7 +239,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
       {/* Glassmorphism Content Box */}
       <div className="w-full max-w-[700px] animate-fade-in">
         <div 
-          className="rounded-[32px] p-6 md:p-16 space-y-8 md:space-y-10 border border-white/20"
+          className="rounded-[32px] p-6 md:p-16 space-y-8 md:space-y-12 border border-white/20"
           style={{
             background: 'rgba(255, 255, 255, 0.1)',
             backdropFilter: 'blur(20px)',
@@ -261,7 +261,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           </div>
 
           {/* Countdown Section */}
-          <div className="text-center space-y-8">
+          <div className="text-center space-y-6 md:space-y-8">
             <p className="text-[14px] font-bold text-white/80 uppercase tracking-[3px]">
               Lancering om
             </p>
@@ -346,7 +346,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           </h1>
 
           {/* Description */}
-          <div className="max-w-[600px] mx-auto space-y-6">
+          <div className="max-w-[600px] mx-auto space-y-5 md:space-y-6">
             <p className="text-[15px] md:text-[18px] text-white/90 leading-[1.7] md:leading-[1.8] text-left md:text-center font-normal px-2 md:px-0">
               Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
             </p>
