@@ -157,4 +157,36 @@ All colors MUST be HSL.
   .animate-spin-slow {
     animation: spin 30s linear infinite;
   }
+
+  /* Mega Menu Animations */
+  @keyframes megaMenuFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes megaMenuFadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Mega menu smooth entry */
+  [data-state="open"] > div[data-radix-navigation-menu-viewport] {
+    animation: megaMenuFadeIn 300ms ease-out;
+  }
+
+  [data-state="closed"] > div[data-radix-navigation-menu-viewport] {
+    animation: megaMenuFadeOut 200ms ease-in;
+  }
 }
