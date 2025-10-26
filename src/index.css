@@ -498,6 +498,16 @@ All colors MUST be HSL.
 
   .menu-link:hover {
     color: hsl(var(--primary));
+  }
+
+  /* Hide scrollbar in mobile menu */
+  .hide-mobile-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-mobile-scrollbar::-webkit-scrollbar {
+    display: none;
     transform: translateX(4px);
     font-weight: 500;
   }
