@@ -293,7 +293,7 @@ export const Header = () => {
                               key={service.href}
                               to={service.href}
                               onClick={closeMobileMenu}
-                              className="flex items-center gap-2 p-3 rounded-lg active:bg-accent/50 transition-colors"
+                              className="flex items-center gap-2 p-3 rounded-lg border-l-2 border-transparent active:border-primary active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
                             >
                               <span className="font-medium text-sm">{service.title}</span>
                               {service.badge && (
@@ -319,13 +319,13 @@ export const Header = () => {
                               <div className="font-semibold text-sm px-3 py-2 bg-muted rounded-lg">
                                 {category.title}
                               </div>
-                              <div className="pl-4 space-y-1">
+                               <div className="pl-4 space-y-1">
                                 {category.links.slice(0, 5).map((link) => (
                                   <Link
                                     key={link.href}
                                     to={link.href}
                                     onClick={closeMobileMenu}
-                                    className="block text-sm text-muted-foreground active:text-primary py-1 transition-colors"
+                                    className="block text-sm text-muted-foreground active:text-primary py-2 px-2 -ml-2 rounded active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
                                   >
                                     • {link.title}
                                   </Link>
@@ -347,14 +347,14 @@ export const Header = () => {
                       <Link
                         to="/om-os"
                         onClick={closeMobileMenu}
-                        className="block p-3 rounded-lg active:bg-accent/50 transition-colors"
+                        className="block p-3 rounded-lg border-l-2 border-transparent active:border-primary active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
                       >
                         <span className="font-medium">{t('header.about')}</span>
                       </Link>
                       <Link
                         to="/kontakt"
                         onClick={closeMobileMenu}
-                        className="block p-3 rounded-lg active:bg-accent/50 transition-colors"
+                        className="block p-3 rounded-lg border-l-2 border-transparent active:border-primary active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
                       >
                         <span className="font-medium">{t('header.contact')}</span>
                       </Link>
