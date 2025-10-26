@@ -3,7 +3,7 @@ import {
   Phone, User, LogOut, Zap, Search, Smartphone, Car, 
   Server, Briefcase, Power, Lamp, Wifi, Moon, 
   Boxes, Cable, Shield, Menu, Info, Mail, Lightbulb, Bell,
-  Lock, Settings, Wrench, ShoppingCart, Battery, Plug, Box, Grid3x3, Gauge, ArrowRight
+  Lock, Settings, Wrench, ShoppingCart, Battery, Plug, Box, Grid3x3, Gauge, ArrowRight, X
 } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
 import { Link, useNavigate } from "react-router-dom";
@@ -83,21 +83,15 @@ const MobileLanguageSwitcher = () => {
 
 const useServices = () => {
   return [
-    [
-      { title: "Lamper & belysning", href: "/pages/lamper-belysning" },
-      { title: "Stikkontakter & Afbrydere", href: "/pages/stikkontakter-afbrydere" },
-      { title: "Akut Hjælp", href: "/pages/akut-hjaelp", badge: "24/7" },
-    ],
-    [
-      { title: "Fejlfinding", href: "/pages/fejlfinding" },
-      { title: "Sikkerhed", href: "/pages/sikkerhed" },
-      { title: "Smart Home & Energioptimering", href: "/pages/smart-home" },
-    ],
-    [
-      { title: "Vedligeholdelse & Serviceaftaler", href: "/pages/vedligeholdelse" },
-      { title: "Rådgivning & Indkøb", href: "/pages/raadgivning" },
-      { title: "Specialydelser & Udlejning", href: "/pages/specialydelser" },
-    ],
+    { title: "Lamper & belysning", description: "Installation og reparation", href: "/pages/lamper-belysning" },
+    { title: "Stikkontakter & Afbrydere", description: "Moderne og funktionelle", href: "/pages/stikkontakter-afbrydere" },
+    { title: "Akut Hjælp", description: "Døgnservice ved nødsituationer", href: "/pages/akut-hjaelp", badge: "24/7" },
+    { title: "Fejlfinding", description: "Hurtig diagnosticering", href: "/pages/fejlfinding" },
+    { title: "Sikkerhed", description: "El-tjek og eftersyn", href: "/pages/sikkerhed" },
+    { title: "Smart Home & Energioptimering", description: "Intelligent automatisering", href: "/pages/smart-home" },
+    { title: "Vedligeholdelse & Serviceaftaler", description: "Forebyggende vedligehold", href: "/pages/vedligeholdelse" },
+    { title: "Rådgivning & Indkøb", description: "Professionel sparring", href: "/pages/raadgivning" },
+    { title: "Specialydelser & Udlejning", description: "Avancerede løsninger", href: "/pages/specialydelser" },
   ];
 };
 
@@ -105,31 +99,28 @@ const useProducts = () => {
   return [
     {
       title: "LAMPER & SPOTS",
+      allLink: { title: "Alle lamper", href: "/collections/lamper" },
       links: [
         { title: "Loftlamper & pendler", href: "/collections/loftlamper" },
         { title: "Væglamper", href: "/collections/vaeglamper" },
         { title: "Bordlamper", href: "/collections/bordlamper" },
         { title: "Gulvlamper", href: "/collections/gulvlamper" },
         { title: "Spots", href: "/collections/spots" },
-        { title: "Spejllamper", href: "/collections/spejllamper" },
-        { title: "Lysarmaturer", href: "/collections/lysarmaturer" },
-        { title: "Dekorativ belysning", href: "/collections/dekorativ" },
-        { title: "Havelamper", href: "/collections/havelamper" },
-        { title: "Julebelysning", href: "/collections/julebelysning" },
       ]
     },
     {
       title: "LYSKILDER",
+      allLink: { title: "Alle lyskilder", href: "/collections/lyskilder" },
       links: [
         { title: "LED-pærer", href: "/collections/led-paerer" },
         { title: "Halogenpærer", href: "/collections/halogen" },
         { title: "Glødepærer", href: "/collections/gloede" },
         { title: "Lysstofrer", href: "/collections/lysstofrer" },
-        { title: "Kompaktrør", href: "/collections/kompaktroer" },
       ]
     },
     {
       title: "LAMPETILBEHØR",
+      allLink: { title: "Alle tilbehør", href: "/collections/tilbehoer" },
       links: [
         { title: "Strømskinner", href: "/collections/stroemskinner" },
         { title: "Drivere & transformere", href: "/collections/drivere" },
@@ -140,22 +131,18 @@ const useProducts = () => {
     },
     {
       title: "EL-INSTALLATIONER",
+      allLink: { title: "Alle installationer", href: "/collections/installationer" },
       links: [
         { title: "Stikkontakter", href: "/collections/stikkontakter" },
         { title: "Afbrydere", href: "/collections/afbrydere" },
         { title: "Lysdæmpere", href: "/collections/lysdaempere" },
         { title: "Bevægelsessensorer", href: "/collections/bevaegelsessensorer" },
         { title: "Rammer", href: "/collections/rammer" },
-        { title: "Dåser & underlag", href: "/collections/daaser" },
-        { title: "Tangenter & afdækninger", href: "/collections/tangenter" },
-        { title: "Lampeudtag", href: "/collections/lampeudtag" },
-        { title: "Antenne- & datamateriel", href: "/collections/antenne-data" },
-        { title: "Løs el", href: "/collections/loes-el" },
-        { title: "Ladestandere", href: "/collections/ladestandere" },
       ]
     },
     {
       title: "TAVLEMATERIEL",
+      allLink: { title: "Alle tavler", href: "/collections/tavler" },
       links: [
         { title: "Tavlekomponenter", href: "/collections/tavlekomponenter" },
         { title: "Målertavler", href: "/collections/maalertavler" },
@@ -165,13 +152,13 @@ const useProducts = () => {
     },
     {
       title: "KABEL & LEDNING",
+      allLink: { title: "Alle kabler", href: "/collections/kabler" },
       links: [
         { title: "Installations- & flexrør", href: "/collections/flexroer" },
         { title: "Kabler & ledninger", href: "/collections/kabler" },
         { title: "Kabeltromler", href: "/collections/kabeltromler" },
         { title: "Stikdåser & forlængerledninger", href: "/collections/stikdaaser" },
         { title: "Kabelkanaler & befæstigelse", href: "/collections/kabelkanaler" },
-        { title: "Samlemuffer & -dåser", href: "/collections/samlemuffer" },
       ]
     },
   ];
@@ -251,32 +238,32 @@ export const Header = () => {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="mega-menu-container">
+                  <button 
+                    className="mega-menu-close" 
+                    aria-label="Luk menu"
+                    onClick={() => setActiveMenu(null)}
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
                   <div className="mega-menu-inner">
-                    <div className="mega-menu-grid-3">
-                      {services.map((column, idx) => (
-                        <div key={idx} className="menu-column">
-                          <ul>
-                            {column.map((service) => (
-                              <li key={service.href}>
-                                <Link to={service.href} className="menu-link">
-                                  {service.title}
-                                  {service.badge && (
-                                    <span className="badge badge-red">
-                                      {service.badge}
-                                    </span>
-                                  )}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                    <div className="service-grid">
+                      {services.map((service, idx) => (
+                        <Link 
+                          key={service.href} 
+                          to={service.href} 
+                          className="service-card"
+                        >
+                          <h3>
+                            {service.title}
+                            {service.badge && (
+                              <span className="badge badge-red">
+                                {service.badge}
+                              </span>
+                            )}
+                          </h3>
+                          <p>{service.description}</p>
+                        </Link>
                       ))}
-                    </div>
-                    <div className="menu-footer">
-                      <Link to="/services" className="featured-link">
-                        Se alle serviceydelser
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
                     </div>
                   </div>
                 </div>
@@ -292,6 +279,13 @@ export const Header = () => {
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="mega-menu-container">
+                  <button 
+                    className="mega-menu-close" 
+                    aria-label="Luk menu"
+                    onClick={() => setActiveMenu(null)}
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
                   <div className="mega-menu-inner">
                     <div className="mega-menu-grid-6">
                       {products.map((column) => (
@@ -306,18 +300,11 @@ export const Header = () => {
                               </li>
                             ))}
                           </ul>
+                          <Link to={column.allLink.href} className="category-all-link">
+                            {column.allLink.title}
+                          </Link>
                         </div>
                       ))}
-                    </div>
-                    <div className="menu-footer">
-                      <Link to="/products" className="featured-link">
-                        Se alle produkter
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                      <Link to="/priser" className="featured-link">
-                        Se priser & pakker
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
                     </div>
                   </div>
                 </div>
@@ -356,7 +343,7 @@ export const Header = () => {
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-2 pt-2">
-                          {services.flat().map((service) => (
+                          {services.map((service) => (
                             <Link
                               key={service.href}
                               to={service.href}

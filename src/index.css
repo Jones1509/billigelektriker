@@ -212,6 +212,7 @@ All colors MUST be HSL.
     width: 100vw;
     margin: 0;
     padding: 0;
+    max-height: 320px;
     background: 
       radial-gradient(circle at 20% 50%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
       radial-gradient(circle at 80% 50%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
@@ -222,11 +223,156 @@ All colors MUST be HSL.
     contain: layout style paint;
   }
 
+  /* Close Button */
+  .mega-menu-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid hsl(var(--border));
+    border-radius: 10px;
+    background: hsl(var(--background));
+    color: hsl(var(--muted-foreground));
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+  }
+
+  .mega-menu-close:hover {
+    border-color: hsl(var(--primary));
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    transform: rotate(90deg);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.25);
+  }
+
+  .mega-menu-close:active {
+    transform: rotate(90deg) scale(0.95);
+  }
+
+  .mega-menu-close svg {
+    transition: transform 0.3s ease;
+  }
+
+  /* Close animations */
+  @keyframes slideUp {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+
+  .mega-menu-container.closing {
+    animation: slideUp 200ms ease-in both;
+  }
+
   /* Inner container with max-width and proper spacing */
   .mega-menu-inner {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 48px 48px 48px;
+    padding: 32px 40px 32px 40px;
+  }
+
+  /* Service Cards Grid - 2 rows layout */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Service Card */
+  .service-card {
+    position: relative;
+    padding: 24px 20px;
+    background: hsl(var(--background));
+    border: 1.5px solid hsl(var(--border));
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--primary) / 0.02) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .service-card:hover::before {
+    opacity: 1;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: hsl(var(--primary));
+    box-shadow: 
+      0 8px 24px hsl(var(--primary) / 0.15),
+      0 4px 8px hsl(var(--foreground) / 0.05);
+  }
+
+  .service-card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    margin: 0 0 8px 0;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+  .service-card:hover h3 {
+    color: hsl(var(--primary));
+  }
+
+  .service-card p {
+    font-size: 12px;
+    color: hsl(var(--muted-foreground));
+    margin: 0;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-card::after {
+    content: '→';
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    font-size: 18px;
+    color: hsl(var(--primary));
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+  }
+
+  .service-card:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Service badge in card */
+  .service-card .badge {
+    margin-left: 6px;
+    vertical-align: middle;
   }
 
   /* Grid layouts - venstrejusteret med korrekt gap */
@@ -393,44 +539,32 @@ All colors MUST be HSL.
     color: hsl(217 91% 45%);
   }
 
-  /* Menu footer with featured links */
-  .menu-footer {
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid hsl(var(--border));
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-  }
-
-  .featured-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.85) 100%);
-    color: hsl(var(--primary-foreground));
-    border-radius: 8px;
+  /* Category "All" Link */
+  .category-all-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 6px 0;
+    font-size: 13px;
     font-weight: 600;
-    font-size: 14px;
+    color: hsl(var(--primary));
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px hsl(var(--primary) / 0.2);
+    position: relative;
+    transition: color 0.2s ease;
   }
 
-  .featured-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px hsl(var(--primary) / 0.3);
+  .category-all-link::after {
+    content: ' ›';
+    font-size: 16px;
+    transition: transform 0.2s ease;
+    display: inline-block;
   }
 
-  .featured-link svg {
-    width: 16px;
-    height: 16px;
-    transition: transform 0.3s ease;
-  }
-
-  .featured-link:hover svg {
+  .category-all-link:hover::after {
     transform: translateX(4px);
+  }
+
+  .category-all-link:hover {
+    color: hsl(var(--primary) / 0.8);
   }
 
   /* Responsive breakpoints med korrekt spacing */
