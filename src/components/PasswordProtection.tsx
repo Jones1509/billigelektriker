@@ -261,12 +261,12 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           </div>
 
           {/* Countdown Section */}
-          <div className="text-center space-y-6 md:space-y-8">
-            <p className="text-[13px] md:text-[14px] font-bold text-white/80 uppercase tracking-[2px] md:tracking-[3px]">
+          <div className="text-center space-y-8">
+            <p className="text-[14px] font-bold text-white/80 uppercase tracking-[3px]">
               Lancering om
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5 max-w-[320px] md:max-w-[600px] mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-[600px] mx-auto">
               <div 
                 className="rounded-[20px] p-6 border-2 border-white/30"
                 style={{
@@ -336,7 +336,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
 
           {/* Heading */}
           <h1 
-            className="text-[26px] md:text-[40px] font-black text-white leading-[1.3] md:leading-[1.2] text-center px-2"
+            className="text-[40px] md:text-[40px] font-black text-white leading-[1.2] text-center"
             style={{ 
               textShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               letterSpacing: '-0.5px'
@@ -346,18 +346,18 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           </h1>
 
           {/* Description */}
-          <div className="max-w-[600px] mx-auto space-y-4 md:space-y-5 px-4 md:px-0">
-            <p className="text-[15px] md:text-[18px] text-white/90 leading-[1.7] md:leading-[1.8] text-center font-normal">
+          <div className="max-w-[600px] mx-auto space-y-5">
+            <p className="text-[18px] text-white/90 leading-[1.8] text-center font-normal">
               Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
             </p>
-            <p className="text-[15px] md:text-[18px] text-white/90 leading-[1.7] md:leading-[1.8] text-center font-normal">
+            <p className="text-[18px] text-white/90 leading-[1.8] text-center font-normal">
               Fra akut fejlfinding til planlagte installationer. Fra Smart Home-udstyr til el-komponenter. Vi gør det nemt at få præcis den hjælp eller de produkter du har brug for.
             </p>
           </div>
 
           {/* Password Input Section */}
-          <div className="max-w-[400px] mx-auto space-y-4 md:space-y-5 pt-2 md:pt-4 px-4 md:px-0">
-            <p className="text-[15px] md:text-[16px] text-white/90 text-center font-semibold">
+          <div className="max-w-[400px] mx-auto space-y-5 pt-4">
+            <p className="text-[16px] text-white/90 text-center font-semibold">
               Har du fået adgang? Indtast kode:
             </p>
             <form onSubmit={handleSubmit} className="space-y-4">
