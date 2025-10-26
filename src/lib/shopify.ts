@@ -2,9 +2,9 @@ import { toast } from "sonner";
 import { CartItem } from "@/stores/cartStore";
 
 const SHOPIFY_API_VERSION = '2025-07';
-const SHOPIFY_STORE_PERMANENT_DOMAIN = 'sb5qrn-ia.myshopify.com';
+const SHOPIFY_STORE_PERMANENT_DOMAIN = 'storefront-hero-ah7ur.myshopify.com';
 const SHOPIFY_STOREFRONT_URL = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`;
-const SHOPIFY_STOREFRONT_TOKEN = '0240cd16a8c4f0ff4240ee579b8ff171';
+const SHOPIFY_STOREFRONT_TOKEN = 'bc867f2de2db7da250778eed2cd9189b';
 
 export const STOREFRONT_QUERY = `
   query GetProducts($first: Int!) {
