@@ -250,9 +250,9 @@ export const Header = () => {
                 {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-screen bg-background border-t border-border shadow-xl py-8">
-                  <div className="container mx-auto px-4">
-                    <div className="mega-menu-grid-3 max-w-4xl mx-auto">
+                <div className="mega-menu-container">
+                  <div className="mega-menu-inner">
+                    <div className="mega-menu-grid-3">
                       {services.map((column, idx) => (
                         <div key={idx} className="menu-column">
                           <ul>
@@ -261,7 +261,7 @@ export const Header = () => {
                                 <Link to={service.href} className="menu-link">
                                   {service.title}
                                   {service.badge && (
-                                    <span className="ml-2 inline-block bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded">
+                                    <span className="akut-badge">
                                       {service.badge}
                                     </span>
                                   )}
@@ -285,9 +285,9 @@ export const Header = () => {
                 {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-screen bg-background border-t border-border shadow-xl py-8">
-                  <div className="container mx-auto px-4">
-                    <div className="mega-menu-grid-6 max-w-7xl mx-auto">
+                <div className="mega-menu-container">
+                  <div className="mega-menu-inner">
+                    <div className="mega-menu-grid-6">
                       {products.map((column) => (
                         <div key={column.title} className="menu-column">
                           <h3 className="menu-column-title">{column.title}</h3>

@@ -160,78 +160,211 @@ All colors MUST be HSL.
 
   /* Mega Menu Animations */
   @keyframes megaMenuFadeIn {
+    from { 
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes megaMenuFadeOut {
+    from { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to { 
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes columnFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes backdropFade {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 
-  @keyframes megaMenuFadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-
   /* Mega menu smooth entry */
   [data-state="open"] > div[data-radix-navigation-menu-viewport] {
-    animation: megaMenuFadeIn 150ms ease-out;
+    animation: megaMenuFadeIn 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   [data-state="closed"] > div[data-radix-navigation-menu-viewport] {
-    animation: megaMenuFadeOut 150ms ease-in;
+    animation: megaMenuFadeOut 200ms ease-in;
   }
 
-  /* Flat Mega Menu - Simple Text Links */
-  .mega-menu-flat {
+  /* Mega Menu Container */
+  .mega-menu-container {
     @apply w-full;
-    max-height: 400px;
-    overflow-y: auto;
+    max-height: 320px;
+    background: linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+    border-top: 2px solid hsl(var(--primary));
+    box-shadow: 
+      0 4px 12px hsl(var(--foreground) / 0.06),
+      0 8px 24px hsl(var(--foreground) / 0.04);
+    backdrop-filter: blur(8px);
+    will-change: transform, opacity;
+    contain: layout style paint;
   }
 
+  .dark .mega-menu-container {
+    background: linear-gradient(
+      135deg, 
+      hsl(var(--primary) / 0.02) 0%, 
+      transparent 100%
+    ),
+    linear-gradient(to bottom, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+  }
+
+  /* Inner container with max-width */
+  .mega-menu-inner {
+    @apply mx-auto px-10;
+    max-width: 1400px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  /* Grid layouts - venstrejusteret */
   .mega-menu-grid-3 {
-    @apply grid grid-cols-3 gap-0;
+    @apply grid grid-cols-3 gap-12 text-left;
+    max-width: 1000px;
+    margin: 0 auto;
   }
 
   .mega-menu-grid-6 {
-    @apply grid grid-cols-6 gap-0;
+    @apply grid grid-cols-6 gap-8 text-left;
   }
 
+  /* Column styling - clean & professionel */
   .menu-column {
-    @apply py-6 px-5 border-r border-border;
+    @apply p-0;
+    animation: columnFadeIn 200ms ease-out both;
   }
 
-  .menu-column:last-child {
-    @apply border-r-0;
-  }
+  .menu-column:nth-child(1) { animation-delay: 0ms; }
+  .menu-column:nth-child(2) { animation-delay: 30ms; }
+  .menu-column:nth-child(3) { animation-delay: 60ms; }
+  .menu-column:nth-child(4) { animation-delay: 90ms; }
+  .menu-column:nth-child(5) { animation-delay: 120ms; }
+  .menu-column:nth-child(6) { animation-delay: 150ms; }
 
+  /* Column titles - med accent linje */
   .menu-column-title {
-    @apply text-[13px] font-bold text-foreground mb-3 uppercase tracking-wide;
+    @apply text-[12px] font-bold text-foreground uppercase mb-4 pb-2 inline-block;
+    letter-spacing: 0.8px;
+    border-bottom: 2px solid hsl(var(--primary));
+    width: fit-content;
+    transition: var(--transition-smooth);
+    cursor: default;
   }
 
+  .menu-column:hover .menu-column-title {
+    @apply text-primary;
+    border-bottom-color: hsl(var(--primary) / 0.7);
+  }
+
+  /* List styling */
   .menu-column ul {
-    @apply list-none p-0 m-0 space-y-0;
+    @apply list-none p-0 m-0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .menu-column li {
     @apply m-0 p-0;
   }
 
+  /* Link styling med hover effekt */
   .menu-link {
-    @apply block py-1.5 text-[13px] text-muted-foreground no-underline transition-all duration-150;
+    @apply inline-block py-1 text-[13px] text-muted-foreground no-underline relative;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, color;
+  }
+
+  .menu-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 2px;
+    width: 0;
+    height: 1px;
+    background: hsl(var(--primary));
+    transition: width 0.3s ease;
   }
 
   .menu-link:hover {
-    @apply text-primary pl-1;
+    @apply text-primary;
+    transform: translateX(4px);
   }
 
-  /* Responsive columns */
+  .menu-link:hover::before {
+    width: 100%;
+  }
+
+  /* Focus states for accessibility */
+  .menu-link:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Akut badge with pulse effect */
+  .akut-badge {
+    @apply inline-block ml-2 bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded;
+    animation: pulse 2s infinite;
+  }
+
+  /* Responsive breakpoints */
+  @media (max-width: 1200px) {
+    .mega-menu-inner {
+      @apply px-8;
+      padding-top: 28px;
+      padding-bottom: 28px;
+    }
+    
+    .mega-menu-grid-6,
+    .mega-menu-grid-3 {
+      gap: 24px;
+    }
+
+    .menu-link {
+      @apply text-[12px];
+    }
+  }
+
   @media (max-width: 1024px) {
+    .mega-menu-container {
+      max-height: 450px;
+      overflow-y: auto;
+    }
+
     .mega-menu-grid-6 {
       @apply grid-cols-3;
+      gap: 24px;
+    }
+
+    .mega-menu-grid-3 {
+      @apply grid-cols-2;
     }
   }
 
   @media (max-width: 768px) {
-    .mega-menu-grid-6,
-    .mega-menu-grid-3 {
-      @apply grid-cols-2;
+    .mega-menu-container {
+      display: none;
     }
   }
 }
