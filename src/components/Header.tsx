@@ -173,7 +173,7 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [menuOpen, setMenuOpen] = useState<string | null>(null);
+  const [menuValue, setMenuValue] = useState<string>("");
 
   useEffect(() => {
     // Get initial session
@@ -193,7 +193,7 @@ export const Header = () => {
     if (hoverTimeout) clearTimeout(hoverTimeout);
     const timeout = setTimeout(() => {
       setActiveMenu(menu);
-      setMenuOpen(menu);
+      setMenuValue(menu);
     }, 150);
     setHoverTimeout(timeout);
   };
@@ -201,14 +201,14 @@ export const Header = () => {
   const handleMenuLeave = () => {
     if (hoverTimeout) clearTimeout(hoverTimeout);
     setActiveMenu(null);
-    setMenuOpen(null);
+    setMenuValue("");
   };
 
   const handleCloseMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setActiveMenu(null);
-    setMenuOpen(null);
+    setMenuValue("");
   };
 
   const handleSignOut = async () => {
@@ -237,7 +237,11 @@ export const Header = () => {
           />
         </Link>
         
-        <NavigationMenu className="hidden lg:flex" value={menuOpen || undefined}>
+        <NavigationMenu 
+          className="hidden lg:flex" 
+          value={menuValue}
+          onValueChange={setMenuValue}
+        >
           <NavigationMenuList>
             <NavigationMenuItem
               value="services"
