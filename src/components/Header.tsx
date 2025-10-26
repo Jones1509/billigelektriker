@@ -225,7 +225,7 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full border-b bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
+      <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
         <div className="container flex h-auto items-center justify-between py-6">
         <Link to="/" className="flex items-center">
           <img 
@@ -250,7 +250,7 @@ export const Header = () => {
                 {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-screen bg-background shadow-xl py-8">
+                <div className="w-screen bg-background border-t border-border shadow-xl py-8">
                   <div className="container mx-auto px-4">
                     <div className="mega-menu-grid-3 max-w-4xl mx-auto">
                       {services.map((column, idx) => (
@@ -285,7 +285,7 @@ export const Header = () => {
                 {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="w-screen bg-background shadow-xl py-8">
+                <div className="w-screen bg-background border-t border-border shadow-xl py-8">
                   <div className="container mx-auto px-4">
                     <div className="mega-menu-grid-6 max-w-7xl mx-auto">
                       {products.map((column) => (
