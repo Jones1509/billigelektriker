@@ -245,30 +245,32 @@ export const Header = () => {
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
-        <div className="container flex h-auto items-center justify-between py-6 relative">
-        <Link to="/" className="flex items-center flex-shrink-0">
-          <img 
-            src={logo} 
-            alt="Billig Elektriker" 
-            className="h-20 w-auto"
-            style={{ 
-              imageRendering: "-webkit-optimize-contrast",
-              WebkitFontSmoothing: "antialiased"
-            }}
-            loading="eager"
-          />
-        </Link>
-        
-        <NavigationMenu 
-          className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2" 
-          value={menuOpen ?? ""}
-          onValueChange={(value) => {
-            if (!value) {
-              setMenuOpen(null);
-              setActiveMenu(null);
-            }
-          }}
-        >
+        <div className="container py-6">
+          <div className="flex h-auto items-center justify-between">
+            <Link to="/" className="flex items-center flex-shrink-0">
+              <img 
+                src={logo} 
+                alt="Billig Elektriker" 
+                className="h-20 w-auto"
+                style={{ 
+                  imageRendering: "-webkit-optimize-contrast",
+                  WebkitFontSmoothing: "antialiased"
+                }}
+                loading="eager"
+              />
+            </Link>
+            
+            <div className="flex-1 flex justify-center">
+              <NavigationMenu 
+                className="hidden lg:flex" 
+                value={menuOpen ?? ""}
+                onValueChange={(value) => {
+                  if (!value) {
+                    setMenuOpen(null);
+                    setActiveMenu(null);
+                  }
+                }}
+              >
           <NavigationMenuList>
             <NavigationMenuItem
               value="services"
@@ -354,9 +356,10 @@ export const Header = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
           </NavigationMenuList>
-        </NavigationMenu>
-        
-        <div className="flex items-center gap-3 flex-shrink-0">
+              </NavigationMenu>
+            </div>
+            
+            <div className="flex items-center gap-3 flex-shrink-0">
           <div className="hidden lg:flex">
             <LanguageSwitcher />
           </div>
@@ -541,7 +544,8 @@ export const Header = () => {
             </Button>
           )}
           
-          <CartDrawer />
+            <CartDrawer />
+          </div>
         </div>
       </div>
       </header>
