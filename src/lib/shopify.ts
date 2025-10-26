@@ -181,30 +181,41 @@ export async function storefrontApiRequest(query: string, variables: any = {}) {
 
 export async function createStorefrontCheckout(items: CartItem[]): Promise<string> {
   try {
+    console.log('Creating checkout for items:', items);
+    
     const lines = items.map(item => ({
       quantity: item.quantity,
       merchandiseId: item.variantId,
     }));
+    
+    console.log('Cart lines:', lines);
 
     const cartData = await storefrontApiRequest(CART_CREATE_MUTATION, {
       input: {
         lines,
       },
     });
+    
+    console.log('Cart data response:', cartData);
 
     if (cartData.data.cartCreate.userErrors.length > 0) {
-      throw new Error(`Cart creation failed: ${cartData.data.cartCreate.userErrors.map((e: any) => e.message).join(', ')}`);
+      const errorMsg = cartData.data.cartCreate.userErrors.map((e: any) => e.message).join(', ');
+      console.error('Cart creation errors:', errorMsg);
+      throw new Error(`Cart creation failed: ${errorMsg}`);
     }
 
     const cart = cartData.data.cartCreate.cart;
     
     if (!cart.checkoutUrl) {
+      console.error('No checkoutUrl in cart:', cart);
       throw new Error('No checkout URL returned from Shopify');
     }
 
     const url = new URL(cart.checkoutUrl);
     url.searchParams.set('channel', 'online_store');
     const checkoutUrl = url.toString();
+    
+    console.log('Final checkout URL:', checkoutUrl);
     return checkoutUrl;
   } catch (error) {
     console.error('Error creating storefront checkout:', error);

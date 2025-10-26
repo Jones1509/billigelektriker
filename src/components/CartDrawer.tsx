@@ -30,16 +30,28 @@ export const CartDrawer = () => {
 
   const handleCheckout = async () => {
     try {
+      console.log('Starting checkout with items:', items);
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
+      console.log('Checkout URL created:', checkoutUrl);
+      
       if (checkoutUrl) {
+        console.log('Opening checkout URL in new tab');
         window.open(checkoutUrl, '_blank');
         setIsOpen(false);
+        toast.success("Åbner checkout", {
+          description: "Du bliver nu sendt videre til Shopify checkout."
+        });
+      } else {
+        console.error('No checkout URL returned');
+        toast.error("Ingen checkout URL", {
+          description: "Der blev ikke returneret en checkout URL fra Shopify."
+        });
       }
     } catch (error) {
       console.error('Checkout failed:', error);
       toast.error("Kunne ikke oprette checkout", {
-        description: "Prøv venligst igen senere."
+        description: error instanceof Error ? error.message : "Prøv venligst igen senere."
       });
     }
   };
