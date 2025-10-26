@@ -239,7 +239,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
       {/* Glassmorphism Content Box */}
       <div className="w-full max-w-[700px] animate-fade-in">
         <div 
-          className="rounded-[32px] p-12 md:p-16 space-y-10 border border-white/20"
+          className="rounded-[32px] p-6 md:p-16 space-y-8 md:space-y-10 border border-white/20"
           style={{
             background: 'rgba(255, 255, 255, 0.1)',
             backdropFilter: 'blur(20px)',
@@ -336,7 +336,7 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
 
           {/* Heading */}
           <h1 
-            className="text-[28px] md:text-[40px] font-black text-white leading-[1.2] text-left md:text-center"
+            className="text-[24px] md:text-[40px] font-black text-white leading-[1.3] md:leading-[1.2] text-left md:text-center px-2 md:px-0"
             style={{ 
               textShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
               letterSpacing: '-0.5px'
@@ -346,11 +346,11 @@ export const PasswordProtection = ({ children }: { children: React.ReactNode }) 
           </h1>
 
           {/* Description */}
-          <div className="max-w-[600px] mx-auto space-y-5">
-            <p className="text-[18px] text-white/90 leading-[1.8] text-left md:text-center font-normal">
+          <div className="max-w-[600px] mx-auto space-y-6">
+            <p className="text-[15px] md:text-[18px] text-white/90 leading-[1.7] md:leading-[1.8] text-left md:text-center font-normal px-2 md:px-0">
               Billig Elektriker er både autoriseret el-service og webshop. Book certificerede elektrikere til privat eller erhverv – eller køb produkter direkte og gør det selv. Én platform, alle løsninger, fair priser og dokumenteret kvalitet.
             </p>
-            <p className="text-[18px] text-white/90 leading-[1.8] text-left md:text-center font-normal">
+            <p className="text-[15px] md:text-[18px] text-white/90 leading-[1.7] md:leading-[1.8] text-left md:text-center font-normal px-2 md:px-0">
               Fra akut fejlfinding til planlagte installationer. Fra Smart Home-udstyr til el-komponenter. Vi gør det nemt at få præcis den hjælp eller de produkter du har brug for.
             </p>
           </div>
