@@ -82,144 +82,99 @@ const MobileLanguageSwitcher = () => {
 };
 
 const useServices = () => {
-  const { t } = useTranslation();
   return [
-    {
-      title: "Lamper & belysning",
-      href: "/pages/lamper-belysning",
-      description: "Installation og reparation",
-      image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=160&h=160&fit=crop",
-      badge: null,
-    },
-    {
-      title: "Stikkontakter & Afbrydere",
-      href: "/pages/stikkontakter-afbrydere",
-      description: "Moderne designer-løsninger",
-      image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=160&h=160&fit=crop",
-      badge: null,
-    },
-    {
-      title: "Akut Hjælp",
-      href: "/pages/akut-hjaelp",
-      description: "Døgnet rundt service",
-      image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=160&h=160&fit=crop",
-      badge: "24/7",
-    },
-    {
-      title: "Fejlfinding",
-      href: "/pages/fejlfinding",
-      description: "Professionel diagnostik",
-      image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=160&h=160&fit=crop",
-      badge: null,
-    },
-    {
-      title: "Sikkerhed",
-      href: "/pages/sikkerhed",
-      description: "El-tjek og eftersyn",
-      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=160&h=160&fit=crop",
-      badge: null,
-    },
-    {
-      title: "Smart Home",
-      href: "/pages/smart-home",
-      description: "Intelligent automation",
-      image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=160&h=160&fit=crop",
-      badge: null,
-    },
-    {
-      title: "Vedligeholdelse",
-      href: "/pages/vedligeholdelse",
-      description: "Service og vedligehold",
-      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=160&h=160&fit=crop",
-      badge: null,
-    },
-    {
-      title: "Rådgivning",
-      href: "/pages/raadgivning",
-      description: "Professionel vejledning",
-      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=160&h=160&fit=crop",
-      badge: null,
-    },
-    {
-      title: "Specialydelser",
-      href: "/pages/specialydelser",
-      description: "Avancerede el-services",
-      image: "https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=160&h=160&fit=crop",
-      badge: null,
-    },
+    [
+      { title: "Lamper & belysning", href: "/pages/lamper-belysning" },
+      { title: "Stikkontakter & Afbrydere", href: "/pages/stikkontakter-afbrydere" },
+      { title: "Akut Hjælp", href: "/pages/akut-hjaelp", badge: "24/7" },
+    ],
+    [
+      { title: "Fejlfinding", href: "/pages/fejlfinding" },
+      { title: "Sikkerhed", href: "/pages/sikkerhed" },
+      { title: "Smart Home & Energioptimering", href: "/pages/smart-home" },
+    ],
+    [
+      { title: "Vedligeholdelse & Serviceaftaler", href: "/pages/vedligeholdelse" },
+      { title: "Rådgivning & Indkøb", href: "/pages/raadgivning" },
+      { title: "Specialydelser & Udlejning", href: "/pages/specialydelser" },
+    ],
   ];
 };
 
 const useProducts = () => {
-  const { t } = useTranslation();
-  return {
-    mainCategories: [
-      {
-        title: "Lamper",
-        href: "/collections/lamper",
-        image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=160&h=160&fit=crop",
-        subcategories: [
-          { title: "Loftlamper", href: "/collections/loftlamper" },
-          { title: "Væglamper", href: "/collections/vaeglamper" },
-          { title: "Spots", href: "/collections/spots" },
-          { title: "LED-strips", href: "/collections/led-strips" },
-        ]
-      },
-      {
-        title: "Stikkontakter",
-        href: "/collections/stikkontakter",
-        image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=160&h=160&fit=crop",
-        subcategories: [
-          { title: "Monteringstype", href: "/collections/stikkontakter-montering" },
-          { title: "Funktioner", href: "/collections/stikkontakter-funktioner" },
-          { title: "Rammer", href: "/collections/stikkontakter-rammer" },
-          { title: "Tangenter", href: "/collections/stikkontakter-tangenter" },
-          { title: "Udendørs", href: "/collections/stikkontakter-udendoers" },
-        ]
-      },
-      {
-        title: "Tavler & Materialer",
-        href: "/collections/tavler-materialer",
-        image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=160&h=160&fit=crop",
-        subcategories: [
-          { title: "El-tavler", href: "/collections/el-tavler" },
-          { title: "Gruppesikringer", href: "/collections/gruppesikringer" },
-          { title: "Fejlstrømsafbrydere", href: "/collections/fejlstroemsafbrydere" },
-          { title: "Kombiafbrydere", href: "/collections/kombiafbrydere" },
-        ]
-      },
-      {
-        title: "Kabler & Ledninger",
-        href: "/collections/kabler-ledninger",
-        image: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=160&h=160&fit=crop",
-        subcategories: [
-          { title: "Lampe ledning", href: "/collections/lampe-ledning" },
-          { title: "Installationskabel 1,5mm²", href: "/collections/kabel-15mm" },
-          { title: "Installationskabel 2,5mm²", href: "/collections/kabel-25mm" },
-          { title: "Installationskabel 4mm²", href: "/collections/kabel-4mm" },
-          { title: "Installationskabel 6mm+", href: "/collections/kabel-6mm" },
-        ]
-      },
-    ],
-    featuredCategories: [
-      {
-        title: "Indendørs belysning",
-        items: ["Loftlamper", "Væglamper", "Spots", "LED-strips"]
-      },
-      {
-        title: "Udendørs belysning",
-        items: ["Udendørs væglamper", "Havelamper", "Solcellelamper", "Udendørs spots"]
-      },
-      {
-        title: "Smart belysning",
-        items: ["Smart-lamper", "Smart LED-strips", "Smart pærer"]
-      },
-      {
-        title: "Lyskilder",
-        items: ["LED-pærer", "Filamentpærer", "Halogenpærer", "Lysstofrer", "Smart pærer"]
-      }
-    ]
-  };
+  return [
+    {
+      title: "LAMPER & SPOTS",
+      links: [
+        { title: "Loftlamper & pendler", href: "/collections/loftlamper" },
+        { title: "Væglamper", href: "/collections/vaeglamper" },
+        { title: "Bordlamper", href: "/collections/bordlamper" },
+        { title: "Gulvlamper", href: "/collections/gulvlamper" },
+        { title: "Spots", href: "/collections/spots" },
+        { title: "Spejllamper", href: "/collections/spejllamper" },
+        { title: "Lysarmaturer", href: "/collections/lysarmaturer" },
+        { title: "Dekorativ belysning", href: "/collections/dekorativ" },
+        { title: "Havelamper", href: "/collections/havelamper" },
+        { title: "Julebelysning", href: "/collections/julebelysning" },
+      ]
+    },
+    {
+      title: "LYSKILDER",
+      links: [
+        { title: "LED-pærer", href: "/collections/led-paerer" },
+        { title: "Halogenpærer", href: "/collections/halogen" },
+        { title: "Glødepærer", href: "/collections/gloede" },
+        { title: "Lysstofrer", href: "/collections/lysstofrer" },
+        { title: "Kompaktrør", href: "/collections/kompaktroer" },
+      ]
+    },
+    {
+      title: "LAMPETILBEHØR",
+      links: [
+        { title: "Strømskinner", href: "/collections/stroemskinner" },
+        { title: "Drivere & transformere", href: "/collections/drivere" },
+        { title: "Safeboxes", href: "/collections/safeboxes" },
+        { title: "Fatninger & kroge", href: "/collections/fatninger" },
+        { title: "Lampeskærme", href: "/collections/lampeskaerme" },
+      ]
+    },
+    {
+      title: "EL-INSTALLATIONER",
+      links: [
+        { title: "Stikkontakter", href: "/collections/stikkontakter" },
+        { title: "Afbrydere", href: "/collections/afbrydere" },
+        { title: "Lysdæmpere", href: "/collections/lysdaempere" },
+        { title: "Bevægelsessensorer", href: "/collections/bevaegelsessensorer" },
+        { title: "Rammer", href: "/collections/rammer" },
+        { title: "Dåser & underlag", href: "/collections/daaser" },
+        { title: "Tangenter & afdækninger", href: "/collections/tangenter" },
+        { title: "Lampeudtag", href: "/collections/lampeudtag" },
+        { title: "Antenne- & datamateriel", href: "/collections/antenne-data" },
+        { title: "Løs el", href: "/collections/loes-el" },
+        { title: "Ladestandere", href: "/collections/ladestandere" },
+      ]
+    },
+    {
+      title: "TAVLEMATERIEL",
+      links: [
+        { title: "Tavlekomponenter", href: "/collections/tavlekomponenter" },
+        { title: "Målertavler", href: "/collections/maalertavler" },
+        { title: "Gruppetavler", href: "/collections/gruppetavler" },
+        { title: "Tilbehør", href: "/collections/tavle-tilbehoer" },
+      ]
+    },
+    {
+      title: "KABEL & LEDNING",
+      links: [
+        { title: "Installations- & flexrør", href: "/collections/flexroer" },
+        { title: "Kabler & ledninger", href: "/collections/kabler" },
+        { title: "Kabeltromler", href: "/collections/kabeltromler" },
+        { title: "Stikdåser & forlængerledninger", href: "/collections/stikdaaser" },
+        { title: "Kabelkanaler & befæstigelse", href: "/collections/kabelkanaler" },
+        { title: "Samlemuffer & -dåser", href: "/collections/samlemuffer" },
+      ]
+    },
+  ];
 };
 
 export const Header = () => {
@@ -295,37 +250,25 @@ export const Header = () => {
                 {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="mega-menu-services">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
-                    {services.map((service) => (
-                      <Link
-                        key={service.href}
-                        to={service.href}
-                        className="service-card group"
-                      >
-                        <div className="relative mb-3">
-                          <img
-                            src={service.image}
-                            alt={service.title}
-                            className="w-20 h-20 rounded-lg object-cover"
-                            loading="lazy"
-                          />
-                          {service.badge && (
-                            <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground text-xs font-bold px-2 py-0.5 rounded-full">
-                              {service.badge}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="font-semibold text-[15px] text-foreground mb-1">
-                          {service.title}
-                        </h3>
-                        <p className="text-[13px] text-muted-foreground line-clamp-1 mb-2">
-                          {service.description}
-                        </p>
-                        <span className="text-xs text-primary font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                          Læs mere <span className="text-lg">→</span>
-                        </span>
-                      </Link>
+                <div className="mega-menu-flat">
+                  <div className="mega-menu-grid-3">
+                    {services.map((column, idx) => (
+                      <div key={idx} className="menu-column">
+                        <ul>
+                          {column.map((service) => (
+                            <li key={service.href}>
+                              <Link to={service.href} className="menu-link">
+                                {service.title}
+                                {service.badge && (
+                                  <span className="ml-2 inline-block bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded">
+                                    {service.badge}
+                                  </span>
+                                )}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -340,62 +283,22 @@ export const Header = () => {
                 {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="mega-menu-products">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-4">
-                    {products.mainCategories.map((category) => (
-                      <div key={category.title} className="product-category-card">
-                        <Link to={category.href} className="block mb-3">
-                          <img
-                            src={category.image}
-                            alt={category.title}
-                            className="w-20 h-20 rounded-lg object-cover mb-3"
-                            loading="lazy"
-                          />
-                          <h3 className="font-semibold text-[15px] text-foreground border-b border-border pb-3">
-                            {category.title}
-                          </h3>
-                        </Link>
-                        <ul className="space-y-2">
-                          {category.subcategories.map((sub) => (
-                            <li key={sub.href}>
-                              <Link
-                                to={sub.href}
-                                className="text-[13px] text-muted-foreground hover:text-primary hover:pl-1 transition-all duration-150 inline-block"
-                              >
-                                • {sub.title}
+                <div className="mega-menu-flat">
+                  <div className="mega-menu-grid-6">
+                    {products.map((column) => (
+                      <div key={column.title} className="menu-column">
+                        <h3 className="menu-column-title">{column.title}</h3>
+                        <ul>
+                          {column.links.map((link) => (
+                            <li key={link.href}>
+                              <Link to={link.href} className="menu-link">
+                                {link.title}
                               </Link>
                             </li>
                           ))}
                         </ul>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="featured-categories">
-                    <h4 className="text-sm font-semibold text-foreground mb-3">
-                      POPULÆRE BELYSNINGSKATEGORIER
-                    </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                      {products.featuredCategories.map((featured) => (
-                        <div key={featured.title}>
-                          <h5 className="font-medium text-[14px] text-foreground mb-2">
-                            {featured.title}
-                          </h5>
-                          <ul className="space-y-1.5">
-                            {featured.items.map((item) => (
-                              <li key={item}>
-                                <Link
-                                  to={`/collections/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                                  className="text-[13px] text-muted-foreground hover:text-primary transition-colors"
-                                >
-                                  • {item}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </NavigationMenuContent>
@@ -433,29 +336,19 @@ export const Header = () => {
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-2 pt-2">
-                          {services.map((service) => (
+                          {services.flat().map((service) => (
                             <Link
-                              key={service.title}
+                              key={service.href}
                               to={service.href}
                               onClick={closeMobileMenu}
-                              className="flex items-start gap-3 p-3 rounded-lg hover:bg-accent transition-colors"
+                              className="flex items-center gap-2 p-3 rounded-lg hover:bg-accent transition-colors"
                             >
-                              <div className="relative flex-shrink-0">
-                                <img 
-                                  src={service.image} 
-                                  alt={service.title}
-                                  className="w-10 h-10 rounded-lg object-cover"
-                                />
-                                {service.badge && (
-                                  <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[8px] font-bold px-1 rounded-full">
-                                    {service.badge}
-                                  </span>
-                                )}
-                              </div>
-                              <div>
-                                <div className="font-medium text-sm">{service.title}</div>
-                                <p className="text-xs text-muted-foreground line-clamp-2">{service.description}</p>
-                              </div>
+                              <span className="font-medium text-sm">{service.title}</span>
+                              {service.badge && (
+                                <span className="bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded">
+                                  {service.badge}
+                                </span>
+                              )}
                             </Link>
                           ))}
                         </div>
@@ -469,29 +362,20 @@ export const Header = () => {
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-4 pt-2">
-                          {products.mainCategories.map((category) => (
+                          {products.map((category) => (
                             <div key={category.title} className="space-y-2">
-                              <Link
-                                to={category.href}
-                                onClick={closeMobileMenu}
-                                className="flex items-start gap-3 p-3 rounded-lg bg-muted hover:bg-accent transition-colors font-semibold"
-                              >
-                                <img 
-                                  src={category.image} 
-                                  alt={category.title}
-                                  className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
-                                />
-                                <span>{category.title}</span>
-                              </Link>
-                              <div className="pl-8 space-y-1">
-                                {category.subcategories.slice(0, 4).map((sub) => (
+                              <div className="font-semibold text-sm px-3 py-2 bg-muted rounded-lg">
+                                {category.title}
+                              </div>
+                              <div className="pl-4 space-y-1">
+                                {category.links.slice(0, 5).map((link) => (
                                   <Link
-                                    key={sub.href}
-                                    to={sub.href}
+                                    key={link.href}
+                                    to={link.href}
                                     onClick={closeMobileMenu}
                                     className="block text-sm text-muted-foreground hover:text-primary py-1 transition-colors"
                                   >
-                                    • {sub.title}
+                                    • {link.title}
                                   </Link>
                                 ))}
                               </div>

@@ -160,70 +160,78 @@ All colors MUST be HSL.
 
   /* Mega Menu Animations */
   @keyframes megaMenuFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes megaMenuFadeOut {
-    from {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
+    from { opacity: 1; }
+    to { opacity: 0; }
   }
 
   /* Mega menu smooth entry */
   [data-state="open"] > div[data-radix-navigation-menu-viewport] {
-    animation: megaMenuFadeIn 250ms ease-out;
+    animation: megaMenuFadeIn 150ms ease-out;
   }
 
   [data-state="closed"] > div[data-radix-navigation-menu-viewport] {
-    animation: megaMenuFadeOut 200ms ease-in;
+    animation: megaMenuFadeOut 150ms ease-in;
   }
 
-  /* Mega Menu Styles */
-  .mega-menu-services {
-    @apply w-full max-w-[1200px] mx-auto px-6 py-8;
+  /* Flat Mega Menu - Simple Text Links */
+  .mega-menu-flat {
+    @apply w-full max-w-[1400px] mx-auto;
+    max-height: 400px;
+    overflow-y: auto;
   }
 
-  .mega-menu-products {
-    @apply w-full max-w-[1400px] mx-auto px-6 py-8;
+  .mega-menu-grid-3 {
+    @apply grid grid-cols-3 gap-0;
   }
 
-  .service-card {
-    @apply block w-full max-w-[280px] h-[200px] p-5 rounded-xl border border-border bg-background;
-    @apply hover:border-primary hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200;
+  .mega-menu-grid-6 {
+    @apply grid grid-cols-6 gap-0;
   }
 
-  .product-category-card {
-    @apply w-full max-w-[260px] p-5 rounded-xl border border-border bg-background;
-    @apply hover:border-primary hover:shadow-md transition-all duration-200;
+  .menu-column {
+    @apply py-6 px-5 border-r border-border;
   }
 
-  .featured-categories {
-    @apply w-full bg-muted/30 rounded-lg border-t border-border p-6 mt-4;
+  .menu-column:last-child {
+    @apply border-r-0;
   }
 
-  /* Triangle pointer for mega menu */
-  [data-radix-navigation-menu-viewport]::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid hsl(var(--background));
+  .menu-column-title {
+    @apply text-[13px] font-bold text-foreground mb-3 uppercase tracking-wide;
+  }
+
+  .menu-column ul {
+    @apply list-none p-0 m-0 space-y-0;
+  }
+
+  .menu-column li {
+    @apply m-0 p-0;
+  }
+
+  .menu-link {
+    @apply block py-1.5 text-[13px] text-muted-foreground no-underline transition-all duration-150;
+  }
+
+  .menu-link:hover {
+    @apply text-primary pl-1;
+  }
+
+  /* Responsive columns */
+  @media (max-width: 1024px) {
+    .mega-menu-grid-6 {
+      @apply grid-cols-3;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mega-menu-grid-6,
+    .mega-menu-grid-3 {
+      @apply grid-cols-2;
+    }
   }
 }
