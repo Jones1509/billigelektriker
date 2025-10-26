@@ -31,18 +31,27 @@ export const CartDrawer = () => {
   const handleCheckout = async () => {
     try {
       console.log('Starting checkout with items:', items);
+      
+      // Åbn et nyt vindue med det samme for at undgå popup blocker
+      const checkoutWindow = window.open('about:blank', '_blank');
+      
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
       console.log('Checkout URL created:', checkoutUrl);
       
-      if (checkoutUrl) {
-        console.log('Opening checkout URL in new tab');
-        window.open(checkoutUrl, '_blank');
+      if (checkoutUrl && checkoutWindow) {
+        console.log('Redirecting to checkout URL');
+        checkoutWindow.location.href = checkoutUrl;
         setIsOpen(false);
         toast.success("Åbner checkout", {
           description: "Du bliver nu sendt videre til Shopify checkout."
         });
+      } else if (checkoutUrl) {
+        // Fallback hvis popup blev blokeret - redirect i samme vindue
+        console.log('Popup blocked, redirecting in same window');
+        window.location.href = checkoutUrl;
       } else {
+        if (checkoutWindow) checkoutWindow.close();
         console.error('No checkout URL returned');
         toast.error("Ingen checkout URL", {
           description: "Der blev ikke returneret en checkout URL fra Shopify."
