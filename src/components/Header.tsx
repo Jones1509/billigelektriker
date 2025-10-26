@@ -245,8 +245,8 @@ export const Header = () => {
     <>
       <AnnouncementBar />
       <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
-        <div className="container flex h-auto items-center justify-between py-6">
-        <Link to="/" className="flex items-center">
+        <div className="container flex h-auto items-center justify-between py-6 relative">
+        <Link to="/" className="flex items-center flex-shrink-0">
           <img 
             src={logo} 
             alt="Billig Elektriker" 
@@ -260,7 +260,7 @@ export const Header = () => {
         </Link>
         
         <NavigationMenu 
-          className="hidden lg:flex" 
+          className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2" 
           value={menuOpen ?? ""}
           onValueChange={(value) => {
             if (!value) {
@@ -356,7 +356,7 @@ export const Header = () => {
           </NavigationMenuList>
         </NavigationMenu>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-shrink-0">
           <div className="hidden lg:flex">
             <LanguageSwitcher />
           </div>
