@@ -278,88 +278,88 @@ export const Header = () => {
                   <SheetHeader>
                     <SheetTitle>{t('header.menu')}</SheetTitle>
                   </SheetHeader>
-                  <ScrollArea className="h-[calc(100vh-80px)] mt-6">
-                    <div className="space-y-6 pb-10">
-                      <Accordion type="single" collapsible className="w-full">
-                        {/* Services */}
-                        <AccordionItem value="services" className="border-b-0">
-                          <AccordionTrigger className="px-2 text-lg font-semibold text-primary hover:no-underline">
-                            {t('header.services')}
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="space-y-2 pt-2">
-                              {services.map((service) => (
-                                <Link
-                                  key={service.href}
-                                  to={service.href}
-                                  onClick={closeMobileMenu}
-                                  className="flex items-center gap-2 p-3 rounded-lg hover:bg-accent transition-colors"
-                                >
-                                  <span className="font-medium text-sm">{service.title}</span>
-                                  {service.badge && (
-                                    <span className="bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded">
-                                      {service.badge}
-                                    </span>
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
+              <ScrollArea className="h-[calc(100vh-80px)] mt-6 [&>div>div]:!overflow-visible [&_[data-radix-scroll-area-viewport]]:!overflow-y-auto [&_[data-radix-scroll-area-scrollbar]]:hidden">
+                <div className="space-y-6 pb-10">
+                  <Accordion type="single" collapsible className="w-full">
+                    {/* Services */}
+                    <AccordionItem value="services" className="border-b-0">
+                      <AccordionTrigger className="px-2 text-lg font-semibold text-primary hover:no-underline">
+                        {t('header.services')}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-2 pt-2">
+                          {services.map((service) => (
+                            <Link
+                              key={service.href}
+                              to={service.href}
+                              onClick={closeMobileMenu}
+                              className="flex items-center gap-2 p-3 rounded-lg active:bg-accent/50 transition-colors"
+                            >
+                              <span className="font-medium text-sm">{service.title}</span>
+                              {service.badge && (
+                                <span className="bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded">
+                                  {service.badge}
+                                </span>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
 
-                        {/* Products */}
-                        <AccordionItem value="products" className="border-b-0">
-                          <AccordionTrigger className="px-2 text-lg font-semibold text-secondary hover:no-underline">
-                            {t('header.products')}
-                          </AccordionTrigger>
-                          <AccordionContent>
-                            <div className="space-y-4 pt-2">
-                              {products.map((category) => (
-                                <div key={category.title} className="space-y-2">
-                                  <div className="font-semibold text-sm px-3 py-2 bg-muted rounded-lg">
-                                    {category.title}
-                                  </div>
-                                  <div className="pl-4 space-y-1">
-                                    {category.links.slice(0, 5).map((link) => (
-                                      <Link
-                                        key={link.href}
-                                        to={link.href}
-                                        onClick={closeMobileMenu}
-                                        className="block text-sm text-muted-foreground hover:text-primary py-1 transition-colors"
-                                      >
-                                        • {link.title}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                </div>
-                              ))}
+                    {/* Products */}
+                    <AccordionItem value="products" className="border-b-0">
+                      <AccordionTrigger className="px-2 text-lg font-semibold text-secondary hover:no-underline">
+                        {t('header.products')}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-4 pt-2">
+                          {products.map((category) => (
+                            <div key={category.title} className="space-y-2">
+                              <div className="font-semibold text-sm px-3 py-2 bg-muted rounded-lg">
+                                {category.title}
+                              </div>
+                              <div className="pl-4 space-y-1">
+                                {category.links.slice(0, 5).map((link) => (
+                                  <Link
+                                    key={link.href}
+                                    to={link.href}
+                                    onClick={closeMobileMenu}
+                                    className="block text-sm text-muted-foreground active:text-primary py-1 transition-colors"
+                                  >
+                                    • {link.title}
+                                  </Link>
+                                ))}
+                              </div>
                             </div>
-                          </AccordionContent>
-                        </AccordionItem>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
 
                         {/* Language Switcher in Mobile Menu */}
                         <MobileLanguageSwitcher />
                       </Accordion>
 
-                      {/* Additional Links */}
-                      <div className="border-t pt-4">
-                        <div className="space-y-2">
-                          <Link
-                            to="/om-os"
-                            onClick={closeMobileMenu}
-                            className="block p-3 rounded-lg hover:bg-accent transition-colors"
-                          >
-                            <span className="font-medium">{t('header.about')}</span>
-                          </Link>
-                          <Link
-                            to="/kontakt"
-                            onClick={closeMobileMenu}
-                            className="block p-3 rounded-lg hover:bg-accent transition-colors"
-                          >
-                            <span className="font-medium">{t('header.contact')}</span>
-                          </Link>
-                        </div>
-                      </div>
+                  {/* Additional Links */}
+                  <div className="border-t pt-4">
+                    <div className="space-y-2">
+                      <Link
+                        to="/om-os"
+                        onClick={closeMobileMenu}
+                        className="block p-3 rounded-lg active:bg-accent/50 transition-colors"
+                      >
+                        <span className="font-medium">{t('header.about')}</span>
+                      </Link>
+                      <Link
+                        to="/kontakt"
+                        onClick={closeMobileMenu}
+                        className="block p-3 rounded-lg active:bg-accent/50 transition-colors"
+                      >
+                        <span className="font-medium">{t('header.contact')}</span>
+                      </Link>
+                    </div>
+                  </div>
 
                       {/* User Actions */}
                       <div className="border-t pt-4 space-y-2 px-2">
