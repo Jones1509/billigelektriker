@@ -173,6 +173,7 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState<string | null>(null);
 
   useEffect(() => {
     // Get initial session
@@ -192,6 +193,7 @@ export const Header = () => {
     if (hoverTimeout) clearTimeout(hoverTimeout);
     const timeout = setTimeout(() => {
       setActiveMenu(menu);
+      setMenuOpen(menu);
     }, 150);
     setHoverTimeout(timeout);
   };
@@ -199,6 +201,14 @@ export const Header = () => {
   const handleMenuLeave = () => {
     if (hoverTimeout) clearTimeout(hoverTimeout);
     setActiveMenu(null);
+    setMenuOpen(null);
+  };
+
+  const handleCloseMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setActiveMenu(null);
+    setMenuOpen(null);
   };
 
   const handleSignOut = async () => {
@@ -227,9 +237,10 @@ export const Header = () => {
           />
         </Link>
         
-        <NavigationMenu className="hidden lg:flex">
+        <NavigationMenu className="hidden lg:flex" value={menuOpen || undefined}>
           <NavigationMenuList>
             <NavigationMenuItem
+              value="services"
               onMouseEnter={() => handleMenuEnter("services")}
               onMouseLeave={handleMenuLeave}
             >
@@ -239,9 +250,10 @@ export const Header = () => {
               <NavigationMenuContent>
                 <div className="mega-menu-container">
                   <button 
+                    type="button"
                     className="mega-menu-close" 
                     aria-label="Luk menu"
-                    onClick={() => setActiveMenu(null)}
+                    onClick={handleCloseMenu}
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -271,6 +283,7 @@ export const Header = () => {
             </NavigationMenuItem>
 
             <NavigationMenuItem
+              value="products"
               onMouseEnter={() => handleMenuEnter("products")}
               onMouseLeave={handleMenuLeave}
             >
@@ -280,9 +293,10 @@ export const Header = () => {
               <NavigationMenuContent>
                 <div className="mega-menu-container">
                   <button 
+                    type="button"
                     className="mega-menu-close" 
                     aria-label="Luk menu"
-                    onClick={() => setActiveMenu(null)}
+                    onClick={handleCloseMenu}
                   >
                     <X className="h-5 w-5" />
                   </button>
