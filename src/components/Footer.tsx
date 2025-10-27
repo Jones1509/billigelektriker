@@ -242,8 +242,7 @@ export const Footer = () => {
         <div className="max-w-[1200px] mx-auto px-10 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-[#6B7280]">
-              <p className="font-medium text-[#1F2937]">© 2025 Billig Elektriker</p>
-              <p className="text-xs">ASA ApS · CVR: 12345678</p>
+              <p className="font-medium text-[#1F2937]">© 2025 Billig Elektriker · ASA ApS · CVR: 12345678</p>
             </div>
             <div className="flex items-center gap-4 flex-wrap justify-center">
               <span className="text-xs text-[#6B7280] font-medium">Vi accepterer:</span>
