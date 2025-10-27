@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Zap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Zap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -16,20 +16,39 @@ export const Footer = () => {
     setEmail("");
   };
 
+  const paymentMethods = [
+    { name: "Dankort", logo: "💳" },
+    { name: "Visa", logo: "💳" },
+    { name: "Mastercard", logo: "💳" },
+    { name: "MobilePay", logo: "📱" },
+    { name: "Apple Pay", logo: "🍎" },
+    { name: "Google Pay", logo: "🔵" },
+    { name: "Klarna", logo: "💰" },
+    { name: "Maestro", logo: "💳" },
+    { name: "American Express", logo: "💳" },
+    { name: "Forbrugsforeningen", logo: "🏪" },
+  ];
+
   return (
     <footer className="relative overflow-hidden">
-      {/* Modern dark background with subtle texture */}
-      <div className="absolute inset-0 bg-[#1a202c]"></div>
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      {/* Subtle electrical pattern background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 opacity-95"></div>
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          hsl(var(--primary)) 10px,
+          hsl(var(--primary)) 11px
+        )`
       }}></div>
 
       {/* Main Footer Content */}
       <div className="container relative z-10 pt-16 pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr_1.3fr] gap-12 lg:gap-16 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
           
-          {/* Column 1: About + Logo */}
-          <div>
+          {/* Section 1: About + Logo */}
+          <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-gradient-to-br from-primary to-blue-600 rounded-xl shadow-lg shadow-primary/20">
                 <Zap className="h-8 w-8 text-white" />
@@ -85,51 +104,135 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Information */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider relative pb-2">
-              Information
-              <span className="absolute bottom-0 left-0 w-[30px] h-[2px] bg-primary"></span>
-            </h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a href="#" className="text-slate-400 hover:text-white hover:translate-x-0.5 transition-all duration-300 text-sm inline-block">
-                  Sådan bestiller du
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-400 hover:text-white hover:translate-x-0.5 transition-all duration-300 text-sm inline-block">
-                  Hjemmesidens funktion
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-400 hover:text-white hover:translate-x-0.5 transition-all duration-300 text-sm inline-block">
-                  Priser
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-400 hover:text-white hover:translate-x-0.5 transition-all duration-300 text-sm inline-block">
-                  Returnering
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-400 hover:text-white hover:translate-x-0.5 transition-all duration-300 text-sm inline-block">
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-400 hover:text-white hover:translate-x-0.5 transition-all duration-300 text-sm inline-block">
-                  Fragt & levering
-                </a>
-              </li>
-            </ul>
+          {/* Section 2: Quick Links - 3 Columns */}
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {/* Column 1: Services */}
+            <div>
+              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                Services
+              </h4>
+              <ul className="space-y-2.5">
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                    <Zap className="h-3 w-3" />
+                    El-arbejde
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                    <Zap className="h-3 w-3" />
+                    Smart Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                    <Zap className="h-3 w-3" />
+                    Erhverv
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                    <Zap className="h-3 w-3" />
+                    Udlejning
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                    <Zap className="h-3 w-3" />
+                    Akut hjælp
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-primary hover:text-primary/80 transition-colors text-sm font-medium">
+                    Se alle services →
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 2: Information */}
+            <div>
+              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                Information
+              </h4>
+              <ul className="space-y-2.5">
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Sådan bestiller du
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Hjemmesidens funktion
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Priser
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Returnering
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Fragt & levering
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Customer Service */}
+            <div>
+              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                Kundeservice
+              </h4>
+              <ul className="space-y-2.5">
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Handelsbetingelser
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Privatlivspolitik
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Cookiepolitik
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Garanti & ansvar
+                  </a>
+                </li>
+                <li>
+                  <Link to="/kontakt" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Kontakt os
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/om-os" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                    Om os
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* Column 3: Contact + Map */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider relative pb-2">
+          {/* Section 3: Contact + Map */}
+          <div className="lg:col-span-3">
+            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
               Kontakt & Lokation
-              <span className="absolute bottom-0 left-0 w-[30px] h-[2px] bg-primary"></span>
             </h4>
             
             <div className="space-y-3 mb-6">
@@ -187,8 +290,46 @@ export const Footer = () => {
           </div>
         </div>
 
+        {/* Trust Badges */}
+        <div className="flex flex-wrap justify-center gap-6 py-8 border-y border-slate-800 mb-8">
+          <div className="flex items-center gap-2 text-slate-300">
+            <CheckCircle2 className="h-5 w-5 text-primary" />
+            <span className="text-sm font-medium">Autoriseret elektriker</span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-300">
+            <CheckCircle2 className="h-5 w-5 text-primary" />
+            <span className="text-sm font-medium">Certificeret personale</span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-300">
+            <CheckCircle2 className="h-5 w-5 text-primary" />
+            <span className="text-sm font-medium">2 års garanti</span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-300">
+            <CheckCircle2 className="h-5 w-5 text-primary" />
+            <span className="text-sm font-medium">Hurtig respons</span>
+          </div>
+        </div>
+
+        {/* Payment Methods Section */}
+        <div className="bg-slate-800/50 rounded-2xl p-8 mb-8">
+          <h4 className="text-white text-center font-semibold mb-6 text-sm uppercase tracking-wider">
+            Vi accepterer følgende betalingsmetoder
+          </h4>
+          <div className="flex flex-wrap justify-center items-center gap-6">
+            {paymentMethods.map((method) => (
+              <div
+                key={method.name}
+                className="bg-white rounded-lg p-3 w-16 h-10 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300 cursor-pointer"
+                title={method.name}
+              >
+                <span className="text-2xl">{method.logo}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-6">
+        <div className="border-t border-slate-800 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
             <p>
               © 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes. CVR: 12345678
