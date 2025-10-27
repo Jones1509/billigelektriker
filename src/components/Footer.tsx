@@ -21,8 +21,8 @@ export const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-[#F7F9FC] to-[#EEF4FC] relative">
       {/* Main Footer Content */}
-      <div className="max-w-[1200px] mx-auto px-10 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-10 mb-6">
+      <div className="max-w-[1200px] mx-auto px-10 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-12 mb-8">
           
           {/* Kolonne 1: About + Logo */}
           <div>
@@ -175,7 +175,7 @@ export const Footer = () => {
             </h4>
             <div className="h-0.5 w-10 bg-gradient-to-r from-[#2563EB] to-[#3B82F6] rounded-full mb-5 shadow-sm"></div>
             
-            <div className="space-y-2.5 mb-4">
+            <div className="space-y-3 mb-6">
               <div className="flex items-start gap-3 group">
                 <div className="p-1.5 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
                   <MapPin className="h-[18px] w-[18px] text-[#2563EB] flex-shrink-0" />
@@ -250,7 +250,7 @@ export const Footer = () => {
 
       {/* Copyright Bar */}
       <div className="bg-gradient-to-r from-[#E5E7EB] via-[#E8EAED] to-[#E5E7EB] border-t border-[#D1D5DB]">
-        <div className="max-w-[1200px] mx-auto px-10 py-3">
+        <div className="max-w-[1200px] mx-auto px-10 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-[#6B7280]">
               <p className="font-medium text-[#1F2937]">© 2025 Billig Elektriker · ASA ApS · CVR: 12345678</p>
