@@ -257,7 +257,7 @@ export const Footer = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 w-full md:w-auto">
               <span className="text-xs text-[#6B7280] font-medium">Vi accepterer:</span>
-              <div className="grid grid-cols-5 md:flex md:flex-wrap gap-2.5 md:gap-2 justify-items-center place-items-center mx-auto md:mx-0">
+              <div className="flex flex-wrap gap-2.5 md:gap-2 justify-center items-center max-w-[280px] md:max-w-none mx-auto md:mx-0">
                 <div className="group cursor-pointer">
                   <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
                     <img src="/payment-icons/apple_pay.svg" alt="Apple Pay" className="h-7 md:h-6 w-auto" />
