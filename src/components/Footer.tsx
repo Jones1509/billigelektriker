@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Zap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import logoIcon from "@/assets/logo-icon.png";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -17,8 +18,8 @@ export const Footer = () => {
           {/* Section 1: About + Logo */}
           <div className="sm:col-span-2 lg:col-span-3">
             <div className="flex items-center gap-3 mb-5">
-              <div className="p-2.5 bg-gradient-to-br from-primary via-blue-600 to-blue-700 rounded-xl shadow-lg shadow-primary/30 hover:shadow-primary/40 transition-all duration-300 hover:scale-105">
-                <Zap className="h-7 w-7 text-white" />
+              <div className="p-2.5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
               </div>
               <div>
                 <h3 className="text-slate-900 font-bold text-xl tracking-tight">Billig Elektriker</h3>
@@ -64,31 +65,26 @@ export const Footer = () => {
               <ul className="space-y-2">
                 <li>
                   <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    <Zap className="h-3.5 w-3.5 flex-shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
                     El-arbejde
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    <Zap className="h-3.5 w-3.5 flex-shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
                     Smart Home
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    <Zap className="h-3.5 w-3.5 flex-shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
                     Erhverv
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    <Zap className="h-3.5 w-3.5 flex-shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
                     Udlejning
                   </a>
                 </li>
                 <li>
                   <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    <Zap className="h-3.5 w-3.5 flex-shrink-0 text-primary/60 group-hover:text-primary transition-colors" />
                     Akut hjælp
                   </a>
                 </li>
