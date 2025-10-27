@@ -17,45 +17,49 @@ export const Footer = () => {
           
           {/* Section 1: About + Logo */}
           <div className="sm:col-span-2 lg:col-span-3">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="transition-all duration-300 hover:scale-105">
-                <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
-              </div>
-              <div>
-                <h3 className="text-slate-900 font-bold text-xl tracking-tight">Billig Elektriker</h3>
-                <p className="text-slate-500 text-xs font-medium">ASA ApS</p>
-              </div>
-            </div>
-            
-            <p className="text-slate-700 mb-2 text-sm leading-relaxed font-medium">
-              Professionel el-service til fair priser
-            </p>
-            <p className="text-slate-600 mb-4 text-sm leading-relaxed">
-              Certificerede elektrikere med passion for kvalitet og kundetilfredshed
-            </p>
-            
-            <p className="text-slate-500 text-xs mb-4 font-medium">CVR: 12345678</p>
-            
-            <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white mb-4 shadow-lg shadow-primary/20 hover:shadow-primary/30 w-full sm:w-auto min-h-[44px] transition-all duration-300 hover:scale-[1.02]">
-              <Phone className="h-4 w-4 mr-2" />
-              +45 12 34 56 78
-            </Button>
+...
+          </div>
 
-            {/* Social Media */}
-            <div className="flex gap-2.5 mt-4">
-              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
-                <Facebook className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
-              </a>
-              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
-                <Instagram className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
-              </a>
-              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
-                <Linkedin className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
-              </a>
+          {/* Section 2: Contact Info */}
+          <div className="lg:col-span-3">
+            <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
+              Kontakt
+            </h4>
+            
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <MapPin className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-slate-700 text-sm font-semibold leading-relaxed">Grønnevej 259</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">2830 Virum</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <Phone className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <a href="tel:+4512345678" className="text-slate-600 text-sm hover:text-primary transition-all duration-200 hover:translate-x-1 leading-relaxed">
+                  +45 12 34 56 78
+                </a>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <Mail className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <a href="mailto:info@billigelektriker.dk" className="text-slate-600 text-sm hover:text-primary transition-all duration-200 hover:translate-x-1 leading-relaxed break-all">
+                  info@billigelektriker.dk
+                </a>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <Clock className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <div className="text-sm leading-relaxed">
+                  <p className="text-slate-700 font-semibold">Man-Fre: 8-17</p>
+                  <p className="text-slate-600">Weekend: Efter aftale</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Section 2: Quick Links - 2 Columns */}
+          {/* Section 3: Quick Links - 2 Columns */}
           <div className="lg:col-span-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-8">
             {/* Column 1: Customer Service */}
             <div>
@@ -133,45 +137,6 @@ export const Footer = () => {
                   </a>
                 </li>
               </ul>
-            </div>
-          </div>
-
-          {/* Section 3: Contact Info */}
-          <div className="lg:col-span-3">
-            <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
-              Kontakt
-            </h4>
-            
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-slate-700 text-sm font-semibold leading-relaxed">Grønnevej 259</p>
-                  <p className="text-slate-600 text-sm leading-relaxed">2830 Virum</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <Phone className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <a href="tel:+4512345678" className="text-slate-600 text-sm hover:text-primary transition-all duration-200 hover:translate-x-1 leading-relaxed">
-                  +45 12 34 56 78
-                </a>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <Mail className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@billigelektriker.dk" className="text-slate-600 text-sm hover:text-primary transition-all duration-200 hover:translate-x-1 leading-relaxed break-all">
-                  info@billigelektriker.dk
-                </a>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <Clock className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                <div className="text-sm leading-relaxed">
-                  <p className="text-slate-700 font-semibold">Man-Fre: 8-17</p>
-                  <p className="text-slate-600">Weekend: Efter aftale</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
