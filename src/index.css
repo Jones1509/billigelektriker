@@ -556,6 +556,17 @@ All colors MUST be HSL.
     transition: color 0.2s ease;
   }
 
+  .category-all-link::after {
+    content: ' ›';
+    font-size: 16px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .category-all-link:hover::after {
+    transform: translateX(4px);
+  }
+
   .category-all-link:hover {
     color: hsl(var(--primary) / 0.8);
   }
