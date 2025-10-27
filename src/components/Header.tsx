@@ -414,7 +414,7 @@ export const Header = () => {
               <img 
                 src={logo} 
                 alt="Billig Elektriker" 
-                className="h-15 w-auto"
+                className="h-14 w-auto"
                 style={{ 
                   imageRendering: "-webkit-optimize-contrast",
                   WebkitFontSmoothing: "antialiased"
