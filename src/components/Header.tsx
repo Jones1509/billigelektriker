@@ -190,16 +190,22 @@ export const Header = () => {
   }, []);
 
   const handleMenuEnter = (menu: string) => {
+    console.log('handleMenuEnter called with:', menu);
+    console.log('Current menuOpen state:', menuOpen);
     if (hoverTimeout) clearTimeout(hoverTimeout);
     setActiveMenu(menu);
     setMenuOpen(menu);
+    console.log('Setting menuOpen to:', menu);
   };
 
   const handleMenuLeave = () => {
+    console.log('handleMenuLeave called');
+    console.log('Current menuOpen state:', menuOpen);
     if (hoverTimeout) clearTimeout(hoverTimeout);
     const timeout = setTimeout(() => {
       setActiveMenu(null);
       setMenuOpen("");
+      console.log('Menu closed via handleMenuLeave');
     }, 300);
     setHoverTimeout(timeout);
   };
@@ -207,6 +213,8 @@ export const Header = () => {
   const handleCloseMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    console.log('handleCloseMenu called');
+    console.log('Current menuOpen state:', menuOpen);
     
     if (hoverTimeout) {
       clearTimeout(hoverTimeout);
@@ -215,6 +223,7 @@ export const Header = () => {
     
     setActiveMenu(null);
     setMenuOpen("");
+    console.log('Menu closed via X button');
   };
 
   const handleSignOut = async () => {
@@ -412,9 +421,12 @@ export const Header = () => {
             <NavigationMenu 
               value={menuOpen ?? ""}
               onValueChange={(value) => {
+                console.log('NavigationMenu onValueChange:', value);
+                console.log('Current menuOpen:', menuOpen);
                 if (!value) {
                   setMenuOpen("");
                   setActiveMenu(null);
+                  console.log('Menu closed via onValueChange');
                 }
               }}
             >
