@@ -18,7 +18,7 @@ export const Footer = () => {
           {/* Section 1: About + Logo */}
           <div className="sm:col-span-2 lg:col-span-3">
             <div className="flex items-center gap-3 mb-5">
-              <div className="p-2.5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="transition-all duration-300 hover:scale-105">
                 <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
               </div>
               <div>
