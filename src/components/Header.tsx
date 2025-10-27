@@ -199,7 +199,7 @@ export const Header = () => {
     if (hoverTimeout) clearTimeout(hoverTimeout);
     const timeout = setTimeout(() => {
       setActiveMenu(null);
-      setMenuOpen(null);
+      setMenuOpen("");
     }, 300);
     setHoverTimeout(timeout);
   };
@@ -214,7 +214,7 @@ export const Header = () => {
     }
     
     setActiveMenu(null);
-    setMenuOpen(null);
+    setMenuOpen("");
   };
 
   const handleSignOut = async () => {
@@ -413,7 +413,7 @@ export const Header = () => {
               value={menuOpen ?? ""}
               onValueChange={(value) => {
                 if (!value) {
-                  setMenuOpen(null);
+                  setMenuOpen("");
                   setActiveMenu(null);
                 }
               }}
