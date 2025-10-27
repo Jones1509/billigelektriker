@@ -55,48 +55,9 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Section 2: Quick Links - 3 Columns */}
-          <div className="lg:col-span-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-8">
-            {/* Column 1: Services */}
-            <div>
-              <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
-                Services
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    El-arbejde
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    Smart Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    Erhverv
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    Udlejning
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
-                    Akut hjælp
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-primary hover:text-primary/80 transition-all duration-200 text-sm font-semibold flex items-center py-1 hover:translate-x-1">
-                    Se alle services →
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2: Information */}
+          {/* Section 2: Quick Links - 2 Columns */}
+          <div className="lg:col-span-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-8">
+            {/* Column 1: Information */}
             <div>
               <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
                 Information
@@ -135,7 +96,7 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* Column 3: Customer Service */}
+            {/* Column 2: Customer Service */}
             <div>
               <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
                 Kundeservice
