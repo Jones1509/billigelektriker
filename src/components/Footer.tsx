@@ -43,34 +43,48 @@ export const Footer = () => {
             
 
             {/* Newsletter */}
-            <div className="bg-gradient-to-br from-white to-[#F8FAFC] border border-[#E5E7EB] rounded-xl p-5 shadow-lg shadow-blue-100/50 mb-6 hover:shadow-xl hover:shadow-blue-100/70 transition-all duration-300">
-              <h4 className="text-[#1F2937] font-semibold mb-1 text-sm">Få tilbud og tips</h4>
-              <p className="text-[#6B7280] text-xs mb-3">Modtag nyheder og eksklusive tilbud</p>
-              <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+            <div className="relative overflow-hidden bg-white border border-[#E5E7EB] rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300 group mb-4">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#2563EB]/10 to-transparent rounded-full -mr-10 -mt-10"></div>
+              <h4 className="text-[#1F2937] font-bold mb-0.5 text-sm relative">✨ Få tilbud og tips</h4>
+              <p className="text-[#6B7280] text-xs mb-2.5 relative">Eksklusive tilbud direkte til din indbakke</p>
+              <form onSubmit={handleNewsletterSubmit} className="flex gap-1.5 relative">
                 <Input
                   type="email"
-                  placeholder="Din email"
+                  placeholder="din@email.dk"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-white border-[#E5E7EB] text-[#1F2937] placeholder:text-[#9CA3AF] focus:ring-2 focus:ring-[#2563EB]/20 transition-all"
+                  required
+                  className="h-9 bg-[#F9FAFB] border-[#E5E7EB] text-[#1F2937] placeholder:text-[#9CA3AF] text-sm focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] transition-all"
                 />
-                <Button type="submit" size="sm" className="bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#1E40AF] text-white px-6 shadow-md hover:shadow-lg transition-all">
+                <Button type="submit" size="sm" className="h-9 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#1E40AF] text-white px-5 shadow-sm hover:shadow-md transition-all text-sm font-medium">
                   Tilmeld
                 </Button>
               </form>
             </div>
 
             {/* Social Media */}
-            <div className="flex gap-3">
-              <a href="#" className="p-2.5 bg-white border border-[#E5E7EB] rounded-lg hover:bg-gradient-to-br hover:from-[#2563EB] hover:to-[#1D4ED8] hover:border-[#2563EB] transition-all duration-300 group shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                <Facebook className="h-5 w-5 text-[#4B5563] group-hover:text-white transition-colors" />
-              </a>
-              <a href="#" className="p-2.5 bg-white border border-[#E5E7EB] rounded-lg hover:bg-gradient-to-br hover:from-[#2563EB] hover:to-[#1D4ED8] hover:border-[#2563EB] transition-all duration-300 group shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                <Instagram className="h-5 w-5 text-[#4B5563] group-hover:text-white transition-colors" />
-              </a>
-              <a href="#" className="p-2.5 bg-white border border-[#E5E7EB] rounded-lg hover:bg-gradient-to-br hover:from-[#2563EB] hover:to-[#1D4ED8] hover:border-[#2563EB] transition-all duration-300 group shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                <Youtube className="h-5 w-5 text-[#4B5563] group-hover:text-white transition-colors" />
-              </a>
+            <div>
+              <p className="text-[#6B7280] text-xs mb-2 font-medium">Følg os</p>
+              <div className="flex gap-2">
+                <a href="#" className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#1877F2] to-[#0C63D4] rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></div>
+                  <div className="relative p-2 bg-white border border-[#E5E7EB] rounded-lg hover:bg-[#1877F2] hover:border-[#1877F2] transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
+                    <Facebook className="h-4 w-4 text-[#4B5563] group-hover:text-white transition-colors" />
+                  </div>
+                </a>
+                <a href="#" className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#E4405F] via-[#F77737] to-[#FCAF45] rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></div>
+                  <div className="relative p-2 bg-white border border-[#E5E7EB] rounded-lg hover:bg-gradient-to-br hover:from-[#E4405F] hover:to-[#FCAF45] hover:border-transparent transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
+                    <Instagram className="h-4 w-4 text-[#4B5563] group-hover:text-white transition-colors" />
+                  </div>
+                </a>
+                <a href="#" className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF0000] to-[#CC0000] rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></div>
+                  <div className="relative p-2 bg-white border border-[#E5E7EB] rounded-lg hover:bg-[#FF0000] hover:border-[#FF0000] transition-all duration-300 hover:scale-110 hover:-translate-y-0.5">
+                    <Youtube className="h-4 w-4 text-[#4B5563] group-hover:text-white transition-colors" />
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
 
