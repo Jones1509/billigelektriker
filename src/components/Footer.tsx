@@ -42,12 +42,6 @@ export const Footer = () => {
               Certificerede elektrikere med passion for kvalitet og kundetilfredshed
             </p>
             
-            <p className="text-[#6B7280] text-sm mb-6">CVR: 12345678</p>
-            
-            <Button className="bg-[#2563EB] hover:bg-[#1D4ED8] text-white mb-6 w-full md:w-auto px-7 py-3.5 rounded-lg">
-              <Phone className="h-4 w-4 mr-2" />
-              +45 12 34 56 78
-            </Button>
 
             {/* Newsletter */}
             <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm mb-6">
