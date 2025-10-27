@@ -9,54 +9,59 @@ export const Footer = () => {
 
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100">
-
+    <footer className="relative overflow-hidden bg-[#F5F5F5]">
       {/* Main Footer Content */}
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 mb-10 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8 max-w-[1400px] mx-auto">
           
-          {/* Section 1: About + Logo */}
-          <div className="sm:col-span-2 lg:col-span-3">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="p-2.5 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
+          {/* Left Section: Company Info + Social Media */}
+          <div className="lg:col-span-3">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-white rounded-xl shadow-md">
+                <img src={logoIcon} alt="Billig Elektriker Logo" className="h-10 w-10 object-contain" />
               </div>
               <div>
-                <h3 className="text-slate-900 font-bold text-xl tracking-tight">Billig Elektriker</h3>
-                <p className="text-slate-500 text-xs font-medium">ASA ApS</p>
+                <h3 className="text-slate-900 font-bold text-lg">Billig Elektriker</h3>
               </div>
             </div>
             
-            <p className="text-slate-700 mb-2 text-sm leading-relaxed font-medium">
+            <p className="text-slate-700 mb-3 text-sm leading-relaxed">
               Professionel el-service til fair priser
             </p>
-            <p className="text-slate-600 mb-4 text-sm leading-relaxed">
-              Certificerede elektrikere med passion for kvalitet og kundetilfredshed
-            </p>
             
-            <p className="text-slate-500 text-xs mb-4 font-medium">CVR: 12345678</p>
+            <p className="text-slate-500 text-xs mb-4">CVR: 12345678</p>
             
-            <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white mb-4 shadow-lg shadow-primary/20 hover:shadow-primary/30 w-full sm:w-auto min-h-[44px] transition-all duration-300 hover:scale-[1.02]">
+            <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white mb-4 shadow-lg w-full min-h-[44px]">
               <Phone className="h-4 w-4 mr-2" />
               +45 12 34 56 78
             </Button>
 
+            <div className="mb-4">
+              <div className="flex items-start gap-2 text-sm text-slate-700">
+                <Clock className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold">Man-Fre: 8-17</p>
+                  <p className="text-slate-600 text-xs">Weekend: Efter aftale</p>
+                </div>
+              </div>
+            </div>
+
             {/* Social Media */}
-            <div className="flex gap-2.5 mt-4">
-              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
+            <div className="flex gap-2">
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary transition-all duration-300 group w-9 h-9 flex items-center justify-center">
                 <Facebook className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
-              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary transition-all duration-300 group w-9 h-9 flex items-center justify-center">
                 <Instagram className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
-              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary transition-all duration-300 group w-9 h-9 flex items-center justify-center">
                 <Linkedin className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
               </a>
             </div>
           </div>
 
-          {/* Section 2: Quick Links - 3 Columns */}
-          <div className="lg:col-span-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-8">
+          {/* Middle Section: Two Link Columns */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-8">
             {/* Column 1: Services */}
             <div>
               <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
@@ -64,27 +69,27 @@ export const Footer = () => {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     El-arbejde
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Smart Home
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Erhverv
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Udlejning
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Akut hjælp
                   </a>
                 </li>
@@ -103,86 +108,42 @@ export const Footer = () => {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Sådan bestiller du
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Hjemmesidens funktion
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Priser
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Returnering
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Fragt & levering
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Customer Service */}
-            <div>
-              <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
-                Kundeservice
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Handelsbetingelser
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Privatlivspolitik
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Cookiepolitik
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1">
                     Garanti & ansvar
                   </a>
-                </li>
-                <li>
-                  <Link to="/kontakt" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Kontakt os
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/om-os" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Om os
-                  </Link>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* Section 3: Contact Info */}
-          <div className="lg:col-span-3">
+          {/* Right Section: Contact + Google Maps */}
+          <div className="lg:col-span-4">
             <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
               Kontakt
             </h4>
             
-            <div className="space-y-3">
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
+            <div className="space-y-3 mb-4">
+              <div className="flex items-start gap-3">
                 <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-slate-700 text-sm font-semibold">Grønnevej 259</p>
@@ -190,33 +151,40 @@ export const Footer = () => {
                 </div>
               </div>
               
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
+              <div className="flex items-start gap-3">
                 <Phone className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
                 <a href="tel:+4512345678" className="text-slate-700 text-sm font-medium hover:text-primary transition-colors">
                   +45 12 34 56 78
                 </a>
               </div>
               
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
+              <div className="flex items-start gap-3">
                 <Mail className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
                 <a href="mailto:info@billigelektriker.dk" className="text-slate-700 text-sm font-medium hover:text-primary transition-colors break-all">
                   info@billigelektriker.dk
                 </a>
               </div>
-              
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
-                <Clock className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                <div className="text-slate-700 text-sm">
-                  <p className="font-semibold">Man-Fre: 8-17</p>
-                  <p className="text-slate-600">Weekend: Efter aftale</p>
-                </div>
-              </div>
+            </div>
+
+            {/* Google Maps */}
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.8907877193676!2d12.448826776940447!3d55.78947867314778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46525259f9c2f6f1%3A0x9c4c5e5b0f0e0e0e!2sGr%C3%B8nnevej%20259%2C%202830%20Virum!5e0!3m2!1sen!2sdk!4v1234567890123!5m2!1sen!2sdk"
+                width="100%"
+                height="250"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Billig Elektriker Location"
+                className="w-full"
+              ></iframe>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-slate-200/80 pt-6 pb-6 bg-white/30 backdrop-blur-sm -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 -mb-12">
+        {/* Bottom Bar - Copyright */}
+        <div className="border-t border-slate-300 pt-6 bg-slate-200/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 -mb-12 pb-6">
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 text-slate-600">
             <p className="text-center text-xs font-medium">
               © 2025 Billig Elektriker (ASA ApS) · CVR: 12345678
@@ -229,9 +197,9 @@ export const Footer = () => {
               <a href="#" className="hover:text-primary transition-all duration-200 text-xs font-medium hover:underline underline-offset-4">
                 Handelsbetingelser
               </a>
-              <Link to="/kontakt" className="hover:text-primary transition-all duration-200 text-xs font-medium hover:underline underline-offset-4">
-                Kontakt
-              </Link>
+              <a href="#" className="hover:text-primary transition-all duration-200 text-xs font-medium hover:underline underline-offset-4">
+                Cookiepolitik
+              </a>
             </div>
           </div>
         </div>
