@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -13,10 +14,10 @@ export const Footer = () => {
 
       {/* Main Footer Content */}
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 mb-10 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10 max-w-[1200px] mx-auto items-start">
           
           {/* Section 1: About + Logo */}
-          <div className="sm:col-span-2 lg:col-span-3">
+          <div className="lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <div className="transition-all duration-300 hover:scale-105">
                 <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
@@ -34,12 +35,20 @@ export const Footer = () => {
               Certificerede elektrikere med passion for kvalitet og kundetilfredshed
             </p>
             
-            <p className="text-slate-500 text-xs mb-4 font-medium">CVR: 12345678</p>
+            <p className="text-slate-500 text-xs mb-6 font-medium">CVR: 12345678</p>
             
-            <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white mb-4 shadow-lg shadow-primary/20 hover:shadow-primary/30 w-full sm:w-auto min-h-[44px] transition-all duration-300 hover:scale-[1.02]">
-              <Phone className="h-4 w-4 mr-2" />
-              +45 12 34 56 78
-            </Button>
+            {/* Newsletter Form */}
+            <div className="mb-5">
+              <h4 className="text-slate-900 font-bold mb-3 text-base">Få vores nyheder</h4>
+              <Input 
+                type="email" 
+                placeholder="Din email" 
+                className="mb-2.5 h-[45px]"
+              />
+              <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white w-full h-[45px] font-semibold transition-all duration-300">
+                Tilmeld
+              </Button>
+            </div>
 
             {/* Social Media */}
             <div className="flex gap-2.5 mt-4">
@@ -56,7 +65,7 @@ export const Footer = () => {
           </div>
 
           {/* Section 2: Quick Links - 2 Columns */}
-          <div className="lg:col-span-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-8">
+          <div className="lg:col-span-2 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-8">
             {/* Column 1: Information */}
             <div>
               <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
@@ -137,7 +146,7 @@ export const Footer = () => {
           </div>
 
           {/* Section 3: Contact Info */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-1">
             <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
               Kontakt
             </h4>
