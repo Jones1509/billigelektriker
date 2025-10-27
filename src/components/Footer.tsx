@@ -213,24 +213,35 @@ export const Footer = () => {
             </div>
 
             {/* Google Maps Embed */}
-            <div className="rounded-xl overflow-hidden shadow-lg border border-[#E5E7EB] hover:shadow-xl transition-shadow duration-300">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36064.37728910234!2d12.481379!3d55.770249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46524fe90aa1f3fd%3A0x9d24919290c1c4f0!2sLyngby-Taarb%C3%A6k%20Kommune!5e0!3m2!1sen!2sdk!4v1234567890"
-                width="100%"
-                height="200"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#2563EB] via-[#3B82F6] to-[#2563EB] rounded-2xl opacity-0 group-hover:opacity-100 blur transition duration-500"></div>
+              <div className="relative rounded-2xl overflow-hidden border-2 border-[#E5E7EB] group-hover:border-transparent shadow-md group-hover:shadow-xl transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10"></div>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36064.37728910234!2d12.481379!3d55.770249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46524fe90aa1f3fd%3A0x9d24919290c1c4f0!2sLyngby-Taarb%C3%A6k%20Kommune!5e0!3m2!1sen!2sdk!4v1234567890"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="relative z-0"
+                ></iframe>
+              </div>
             </div>
             <a 
               href="https://maps.google.com/?q=Lyngby-Taarbæk+Kommune" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-[#2563EB] text-sm mt-2 inline-flex items-center gap-1 hover:gap-2 transition-all duration-200 font-medium hover:underline"
+              className="group inline-flex items-center gap-2 mt-3 text-[#2563EB] text-sm font-medium hover:text-[#1D4ED8] transition-all duration-300"
             >
-              Vis i Google Maps →
+              <span className="relative">
+                Åbn i Google Maps
+                <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] group-hover:w-full transition-all duration-300"></span>
+              </span>
+              <svg className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </a>
           </div>
         </div>
