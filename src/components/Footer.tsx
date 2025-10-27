@@ -26,12 +26,14 @@ export const Footer = () => {
           
           {/* Kolonne 1: About + Logo */}
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <img src={logoFooter} alt="Billig Elektriker Logo" className="h-16 w-16" />
-              <div>
-                <h3 className="text-[#1F2937] font-bold text-2xl">Billig Elektriker</h3>
-                <p className="text-[#6B7280] text-sm">ASA ApS</p>
-              </div>
+            <h4 className="text-[#1F2937] font-bold mb-2 text-sm uppercase tracking-wider">
+              Billig Elektriker
+            </h4>
+            <div className="h-0.5 w-10 bg-[#2563EB] mb-5"></div>
+            
+            <div className="flex items-center gap-3 mb-4">
+              <img src={logoFooter} alt="Billig Elektriker Logo" className="h-12 w-12" />
+              <p className="text-[#6B7280] text-sm">ASA ApS</p>
             </div>
             
             <p className="text-[#4B5563] mb-2 text-sm leading-relaxed">
