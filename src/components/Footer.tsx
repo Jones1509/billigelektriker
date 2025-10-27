@@ -38,16 +38,20 @@ export const Footer = () => {
             <p className="text-slate-500 text-xs mb-6 font-medium">CVR: 12345678</p>
             
             {/* Newsletter Form */}
-            <div className="mb-5">
-              <h4 className="text-slate-900 font-bold mb-3 text-base">Få vores nyheder</h4>
-              <Input 
-                type="email" 
-                placeholder="Din email" 
-                className="mb-2.5 h-[45px]"
-              />
-              <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white w-full h-[45px] font-semibold transition-all duration-300">
-                Tilmeld
-              </Button>
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100/50 p-5 rounded-xl mb-6 shadow-sm">
+              <h4 className="text-slate-900 font-bold mb-1.5 text-lg">Få vores nyheder</h4>
+              <p className="text-slate-500 text-[13px] mb-3">Modtag tips og tilbud</p>
+              
+              <div className="flex gap-0">
+                <Input 
+                  type="email" 
+                  placeholder="Din email adresse" 
+                  className="w-[70%] h-[50px] rounded-r-none border-r-0 border-2 border-slate-200 focus:border-primary focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] px-[18px] transition-all duration-300"
+                />
+                <Button className="w-[30%] h-[50px] rounded-l-none bg-gradient-to-r from-[#2563EB] to-[#1D4ED8] hover:from-[#1D4ED8] hover:to-[#1E40AF] text-white font-semibold text-[15px] transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] border-0">
+                  Tilmeld
+                </Button>
+              </div>
             </div>
 
             {/* Social Media */}
