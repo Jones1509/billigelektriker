@@ -58,7 +58,7 @@ const MobileLanguageSwitcher = () => {
 
   return (
     <AccordionItem value="language" className="border-0 border-b border-border/20 pb-3">
-      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-200 leading-tight tracking-wide hover:translate-x-0.5">
+      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-300 leading-relaxed tracking-tight hover:translate-x-1">
         Sprog
       </AccordionTrigger>
       <AccordionContent className="pt-3 pb-4">
@@ -69,7 +69,7 @@ const MobileLanguageSwitcher = () => {
               variant={i18n.language === language.code ? "default" : "outline"}
               size="sm"
               onClick={() => i18n.changeLanguage(language.code)}
-              className="justify-center h-11 transition-all duration-200 active:scale-[0.98] text-[14px] font-medium hover:shadow-md"
+              className="justify-center h-11 transition-all duration-300 active:scale-95 text-[14px] font-medium hover:shadow-sm"
             >
               {language.name}
             </Button>
@@ -268,7 +268,7 @@ export const Header = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="text-white hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-200 h-11 w-11 hover:scale-105 active:scale-[0.98] shadow-lg hover:shadow-xl"
+                    className="text-white hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 h-11 w-11 hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl"
                   >
                     <Menu className="h-5 w-5" />
                   </Button>
@@ -284,7 +284,7 @@ export const Header = () => {
                   <Accordion type="single" collapsible className="w-full space-y-3">
                     {/* Services */}
                     <AccordionItem value="services" className="border-0 border-b border-border/20 pb-3">
-                      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-200 leading-tight tracking-wide hover:translate-x-0.5">
+                      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-300 leading-relaxed tracking-tight hover:translate-x-1">
                         Services
                       </AccordionTrigger>
                       <AccordionContent className="pt-3 pb-4">
@@ -294,17 +294,17 @@ export const Header = () => {
                               key={service.href}
                               to={service.href}
                               onClick={closeMobileMenu}
-                              className="flex items-center justify-between gap-3 px-3 py-3.5 rounded-lg hover:bg-primary/5 active:scale-[0.98] transition-all duration-200 group border border-transparent hover:border-primary/10 hover:shadow-md"
+                              className="flex items-center justify-between gap-3 px-3 py-4 rounded-xl hover:bg-primary/5 active:scale-[0.97] transition-all duration-300 group border border-transparent hover:border-primary/10 hover:shadow-sm"
                               style={{
-                                animation: `fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1) ${idx * 0.04}s both`
+                                animation: `fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${idx * 0.05}s both`
                               }}
                             >
                               <div className="flex-1">
-                                <span className="font-medium text-[14px] block group-hover:text-primary transition-colors duration-200 leading-tight tracking-wide">{service.title}</span>
-                                <span className="text-[12.5px] text-muted-foreground leading-tight mt-0.5 block">{service.description}</span>
+                                <span className="font-medium text-[14px] block group-hover:text-primary transition-colors leading-snug">{service.title}</span>
+                                <span className="text-[12.5px] text-muted-foreground leading-relaxed">{service.description}</span>
                               </div>
                               {service.badge && (
-                                <span className="bg-destructive/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm uppercase tracking-wider">
+                                <span className="bg-destructive/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
                                   {service.badge}
                                 </span>
                               )}
@@ -316,7 +316,7 @@ export const Header = () => {
 
                     {/* Products */}
                     <AccordionItem value="products" className="border-0 border-b border-border/20 pb-3">
-                      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-200 leading-tight tracking-wide hover:translate-x-0.5">
+                      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-300 leading-relaxed tracking-tight hover:translate-x-1">
                         Produkter
                       </AccordionTrigger>
                       <AccordionContent className="pt-3 pb-4">
@@ -324,10 +324,10 @@ export const Header = () => {
                           {products.map((category, catIdx) => (
                             <div key={category.title} className="space-y-2"
                               style={{
-                                animation: `fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1) ${catIdx * 0.06}s both`
+                                animation: `fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${catIdx * 0.08}s both`
                               }}
                             >
-                              <div className="font-bold text-[11px] px-3 py-1.5 text-muted-foreground uppercase tracking-[0.1em]">
+                              <div className="font-semibold text-[11px] px-3 py-1.5 text-muted-foreground uppercase tracking-widest">
                                 {category.title}
                               </div>
                               <div className="space-y-0.5">
@@ -336,7 +336,7 @@ export const Header = () => {
                                     key={link.href}
                                     to={link.href}
                                     onClick={closeMobileMenu}
-                                    className="block text-[14px] text-foreground/90 hover:text-primary py-3 px-3 rounded-lg hover:bg-muted/50 active:scale-[0.98] transition-all duration-200 leading-tight hover:pl-4 border border-transparent hover:border-border/50"
+                                    className="block text-[14px] text-foreground/90 hover:text-primary py-3 px-3 rounded-lg hover:bg-muted/50 active:scale-[0.97] transition-all duration-300 leading-snug hover:pl-4 border border-transparent hover:border-border/50"
                                   >
                                     {link.title}
                                   </Link>
@@ -357,21 +357,21 @@ export const Header = () => {
                     <Link
                       to="/om-os"
                       onClick={closeMobileMenu}
-                      className="flex items-center justify-between px-3 py-3.5 rounded-lg hover:bg-muted/50 active:scale-[0.98] transition-all duration-200 group border border-transparent hover:border-border/50"
+                      className="flex items-center justify-between px-3 py-4 rounded-xl hover:bg-muted/50 active:scale-[0.97] transition-all duration-300 group border border-transparent hover:border-border/50"
                     >
-                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors duration-200 leading-tight tracking-wide">Om os</span>
-                      <div className="h-6 w-6 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
-                        <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary transition-all duration-200"></div>
+                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors leading-relaxed">Om os</span>
+                      <div className="h-6 w-6 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                        <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary"></div>
                       </div>
                     </Link>
                     <Link
                       to="/kontakt"
                       onClick={closeMobileMenu}
-                      className="flex items-center justify-between px-3 py-3.5 rounded-lg hover:bg-muted/50 active:scale-[0.98] transition-all duration-200 group border border-transparent hover:border-border/50"
+                      className="flex items-center justify-between px-3 py-4 rounded-xl hover:bg-muted/50 active:scale-[0.97] transition-all duration-300 group border border-transparent hover:border-border/50"
                     >
-                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors duration-200 leading-tight tracking-wide">Kontakt</span>
-                      <div className="h-6 w-6 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-200">
-                        <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary transition-all duration-200"></div>
+                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors leading-relaxed">Kontakt</span>
+                      <div className="h-6 w-6 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                        <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary"></div>
                       </div>
                     </Link>
                   </div>
@@ -382,7 +382,7 @@ export const Header = () => {
                           <>
                             <Button
                               variant="outline"
-                              className="w-full justify-center h-12 transition-all duration-200 active:scale-[0.98] text-[14px] font-medium hover:bg-primary/5 hover:border-primary/30 hover:shadow-md tracking-wide"
+                              className="w-full justify-center h-12 transition-all duration-300 active:scale-95 text-[14px] font-medium hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm"
                               onClick={() => {
                                 closeMobileMenu();
                                 navigate("/profile");
@@ -392,7 +392,7 @@ export const Header = () => {
                             </Button>
                             <Button
                               variant="outline"
-                              className="w-full justify-center h-12 transition-all duration-200 active:scale-[0.98] text-[14px] font-medium hover:bg-destructive/5 hover:border-destructive/30 hover:text-destructive tracking-wide"
+                              className="w-full justify-center h-12 transition-all duration-300 active:scale-95 text-[14px] font-medium hover:bg-destructive/5 hover:border-destructive/30 hover:text-destructive"
                               onClick={() => {
                                 closeMobileMenu();
                                 handleSignOut();
@@ -403,7 +403,7 @@ export const Header = () => {
                           </>
                         ) : (
                           <Button
-                            className="w-full h-12 transition-all duration-200 active:scale-[0.98] text-[15px] font-semibold shadow-lg hover:shadow-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 tracking-wide"
+                            className="w-full h-12 transition-all duration-300 active:scale-95 text-[15px] font-semibold shadow-lg hover:shadow-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80"
                             onClick={() => {
                               closeMobileMenu();
                               navigate("/auth");
@@ -449,7 +449,7 @@ export const Header = () => {
               value="services"
               onMouseEnter={() => handleMenuEnter("services")}
             >
-              <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-200 tracking-wide font-medium">
+              <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent onMouseLeave={handleMenuLeave}>
@@ -491,7 +491,7 @@ export const Header = () => {
               value="products"
               onMouseEnter={() => handleMenuEnter("products")}
             >
-              <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-200 tracking-wide font-medium">
+              <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
                 {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent onMouseLeave={handleMenuLeave}>
@@ -536,14 +536,14 @@ export const Header = () => {
                 <Button
                   variant="ghost"
                   asChild
-                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-200 tracking-wide font-medium"
+                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-300"
                 >
                   <Link to="/om-os">{t('header.about')}</Link>
                 </Button>
                 <Button
                   variant="ghost"
                   asChild
-                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-200 tracking-wide font-medium"
+                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-300"
                 >
                   <Link to="/kontakt">{t('header.contact')}</Link>
                 </Button>
@@ -559,7 +559,7 @@ export const Header = () => {
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
+                      className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
                     >
                       <User className="h-5 w-5" />
                     </Button>
@@ -583,7 +583,7 @@ export const Header = () => {
                   variant="ghost" 
                   size="icon" 
                   onClick={() => navigate("/auth")} 
-                  className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-200 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
+                  className="relative rounded-full text-white hover:text-white backdrop-blur-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-lg hover:shadow-white/10 hover:scale-105"
                 >
                   <User className="h-5 w-5" />
                 </Button>
