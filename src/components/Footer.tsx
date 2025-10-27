@@ -219,33 +219,6 @@ export const Footer = () => {
           </div>
         </div>
 
-
-        {/* Large Interactive Google Maps */}
-        <div className="mb-6">
-          <div className="relative w-full h-[300px] sm:h-[350px] lg:h-[400px] rounded-2xl overflow-hidden shadow-xl border-2 border-slate-200">
-            <iframe
-              src="https://maps.google.com/maps?q=Grønnevej+259+2830+Virum+Danmark&output=embed&z=16"
-              className="w-full h-full"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Billig Elektriker Location"
-            />
-          </div>
-          <div className="text-center mt-4">
-            <p className="text-slate-600 text-sm mb-2">Vi dækker Lyngby, København og Nordsjælland</p>
-            <a 
-              href="https://www.google.com/maps/search/?api=1&query=Grønnevej+259+2830+Virum+Danmark" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary/80 text-sm font-medium inline-flex items-center gap-1 transition-colors"
-            >
-              Vis i Google Maps →
-            </a>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="border-t border-slate-300 pt-5 pb-5 bg-slate-100/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 -mb-8">
           <div className="flex flex-col md:flex-row justify-center items-center gap-3 text-xs text-slate-600">
