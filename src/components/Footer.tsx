@@ -17,72 +17,61 @@ export const Footer = () => {
   };
 
   const paymentMethods = [
-    { name: "Dankort", logo: "💳" },
-    { name: "Visa", logo: "💳" },
-    { name: "Mastercard", logo: "💳" },
-    { name: "MobilePay", logo: "📱" },
-    { name: "Apple Pay", logo: "🍎" },
-    { name: "Google Pay", logo: "🔵" },
-    { name: "Klarna", logo: "💰" },
-    { name: "Maestro", logo: "💳" },
-    { name: "American Express", logo: "💳" },
-    { name: "Forbrugsforeningen", logo: "🏪" },
+    { name: "Dankort", color: "bg-red-600", icon: "💳" },
+    { name: "Visa", color: "bg-blue-600", icon: "💳" },
+    { name: "Mastercard", color: "bg-orange-500", icon: "💳" },
+    { name: "MobilePay", color: "bg-blue-500", icon: "📱" },
+    { name: "Apple Pay", color: "bg-slate-900", icon: "🍎" },
+    { name: "Google Pay", color: "bg-blue-400", icon: "🔵" },
+    { name: "Klarna", color: "bg-pink-500", icon: "💰" },
+    { name: "Maestro", color: "bg-red-500", icon: "💳" },
+    { name: "American Express", color: "bg-blue-700", icon: "💳" },
+    { name: "Forbrugsforeningen", color: "bg-green-600", icon: "🏪" },
   ];
 
   return (
-    <footer className="relative overflow-hidden">
-      {/* Subtle electrical pattern background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 opacity-95"></div>
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 10px,
-          hsl(var(--primary)) 10px,
-          hsl(var(--primary)) 11px
-        )`
-      }}></div>
+    <footer className="relative overflow-hidden bg-slate-50">
 
       {/* Main Footer Content */}
       <div className="container relative z-10 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
           
           {/* Section 1: About + Logo */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-3 bg-gradient-to-br from-primary to-blue-600 rounded-xl shadow-lg shadow-primary/20">
                 <Zap className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h3 className="text-white font-bold text-2xl">Billig Elektriker</h3>
-                <p className="text-blue-300 text-sm">ASA ApS</p>
+                <h3 className="text-slate-900 font-bold text-2xl">Billig Elektriker</h3>
+                <p className="text-slate-600 text-sm">ASA ApS</p>
               </div>
             </div>
             
-            <p className="text-slate-300 mb-2 text-sm leading-relaxed">
+            <p className="text-slate-700 mb-2 text-sm leading-relaxed font-medium">
               Professionel el-service til fair priser
             </p>
-            <p className="text-slate-400 mb-4 text-sm leading-relaxed">
+            <p className="text-slate-600 mb-4 text-sm leading-relaxed">
               Certificerede elektrikere med passion for kvalitet og kundetilfredshed
             </p>
             
-            <p className="text-slate-400 text-sm mb-4">CVR: 12345678</p>
+            <p className="text-slate-500 text-sm mb-4">CVR: 12345678</p>
             
-            <Button className="bg-primary hover:bg-primary/90 text-white mb-6">
+            <Button className="bg-primary hover:bg-primary/90 text-white mb-6 shadow-md">
               <Phone className="h-4 w-4 mr-2" />
               +45 12 34 56 78
             </Button>
 
             {/* Newsletter */}
             <div className="mt-6">
-              <h4 className="text-white font-semibold mb-3 text-sm">Få tilbud og tips</h4>
+              <h4 className="text-slate-900 font-semibold mb-3 text-sm">Få tilbud og tips</h4>
               <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                 <Input
                   type="email"
                   placeholder="Din email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
+                  className="bg-white border-slate-300 text-slate-900"
                 />
                 <Button type="submit" size="sm" className="bg-primary hover:bg-primary/90">
                   Tilmeld
@@ -92,52 +81,52 @@ export const Footer = () => {
 
             {/* Social Media */}
             <div className="flex gap-3 mt-6">
-              <a href="#" className="p-2 bg-slate-800 rounded-lg hover:bg-primary transition-colors">
-                <Facebook className="h-5 w-5 text-slate-300" />
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary transition-colors group">
+                <Facebook className="h-5 w-5 text-slate-600 group-hover:text-white" />
               </a>
-              <a href="#" className="p-2 bg-slate-800 rounded-lg hover:bg-primary transition-colors">
-                <Instagram className="h-5 w-5 text-slate-300" />
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary transition-colors group">
+                <Instagram className="h-5 w-5 text-slate-600 group-hover:text-white" />
               </a>
-              <a href="#" className="p-2 bg-slate-800 rounded-lg hover:bg-primary transition-colors">
-                <Linkedin className="h-5 w-5 text-slate-300" />
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary transition-colors group">
+                <Linkedin className="h-5 w-5 text-slate-600 group-hover:text-white" />
               </a>
             </div>
           </div>
 
           {/* Section 2: Quick Links - 3 Columns */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-8">
             {/* Column 1: Services */}
             <div>
-              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+              <h4 className="text-slate-900 font-semibold mb-4 text-sm uppercase tracking-wider">
                 Services
               </h4>
               <ul className="space-y-2.5">
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm flex items-center gap-2">
                     <Zap className="h-3 w-3" />
                     El-arbejde
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm flex items-center gap-2">
                     <Zap className="h-3 w-3" />
                     Smart Home
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm flex items-center gap-2">
                     <Zap className="h-3 w-3" />
                     Erhverv
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm flex items-center gap-2">
                     <Zap className="h-3 w-3" />
                     Udlejning
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm flex items-center gap-2">
                     <Zap className="h-3 w-3" />
                     Akut hjælp
                   </a>
@@ -152,37 +141,37 @@ export const Footer = () => {
 
             {/* Column 2: Information */}
             <div>
-              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+              <h4 className="text-slate-900 font-semibold mb-4 text-sm uppercase tracking-wider">
                 Information
               </h4>
               <ul className="space-y-2.5">
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Sådan bestiller du
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Hjemmesidens funktion
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Priser
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Returnering
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     FAQ
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Fragt & levering
                   </a>
                 </li>
@@ -191,37 +180,37 @@ export const Footer = () => {
 
             {/* Column 3: Customer Service */}
             <div>
-              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+              <h4 className="text-slate-900 font-semibold mb-4 text-sm uppercase tracking-wider">
                 Kundeservice
               </h4>
               <ul className="space-y-2.5">
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Handelsbetingelser
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Privatlivspolitik
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Cookiepolitik
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <a href="#" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Garanti & ansvar
                   </a>
                 </li>
                 <li>
-                  <Link to="/kontakt" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <Link to="/kontakt" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Kontakt os
                   </Link>
                 </li>
                 <li>
-                  <Link to="/om-os" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                  <Link to="/om-os" className="text-slate-600 hover:text-primary transition-colors text-sm">
                     Om os
                   </Link>
                 </li>
@@ -229,108 +218,118 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Section 3: Contact + Map */}
+          {/* Section 3: Contact Info */}
           <div className="lg:col-span-3">
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
-              Kontakt & Lokation
+            <h4 className="text-slate-900 font-semibold mb-4 text-sm uppercase tracking-wider">
+              Kontakt
             </h4>
             
-            <div className="space-y-3 mb-6">
+            <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-slate-300 text-sm">Lyngby-Taarbæk Kommune</p>
+                  <p className="text-slate-700 text-sm font-medium">Lyngby-Taarbæk Kommune</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-3">
                 <Phone className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                <a href="tel:+4512345678" className="text-slate-300 text-sm hover:text-primary transition-colors">
+                <a href="tel:+4512345678" className="text-slate-700 text-sm hover:text-primary transition-colors">
                   +45 12 34 56 78
                 </a>
               </div>
               
               <div className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@billigelektriker.dk" className="text-slate-300 text-sm hover:text-primary transition-colors">
+                <a href="mailto:info@billigelektriker.dk" className="text-slate-700 text-sm hover:text-primary transition-colors break-all">
                   info@billigelektriker.dk
                 </a>
               </div>
               
               <div className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                <div className="text-slate-300 text-sm">
+                <div className="text-slate-700 text-sm">
                   <p>Man-Fre: 8-17</p>
                   <p>Weekend: Efter aftale</p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Google Maps Embed */}
-            <div className="rounded-xl overflow-hidden shadow-lg border border-slate-700 hover:scale-105 transition-transform duration-300">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36064.37728910234!2d12.481379!3d55.770249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46524fe90aa1f3fd%3A0x9d24919290c1c4f0!2sLyngby-Taarb%C3%A6k%20Kommune!5e0!3m2!1sen!2sdk!4v1234567890"
-                width="100%"
-                height="200"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale hover:grayscale-0 transition-all duration-300"
-              ></iframe>
-            </div>
+        {/* Large Interactive Google Maps */}
+        <div className="mb-12">
+          <div className="rounded-2xl overflow-hidden shadow-xl border-2 border-slate-200 hover:-translate-y-1 transition-transform duration-300">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18000!2d12.5!3d55.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46524fe90aa1f3fd%3A0x9d24919290c1c4f0!2sLyngby-Taarb%C3%A6k%20Kommune!5e0!3m2!1sen!2sdk!4v1234567890"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[300px] md:h-[350px] lg:h-[400px]"
+            ></iframe>
+          </div>
+          <div className="text-center mt-4 space-y-2">
+            <p className="text-slate-600 text-sm flex items-center justify-center gap-2">
+              <MapPin className="h-4 w-4 text-primary" />
+              Vi dækker Lyngby, København og Nordsjælland
+            </p>
             <a 
               href="https://maps.google.com/?q=Lyngby-Taarbæk+Kommune" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary text-sm mt-2 inline-block hover:underline"
+              className="text-primary text-sm font-medium inline-block hover:underline"
             >
               Vis i Google Maps →
             </a>
           </div>
         </div>
 
-        {/* Trust Badges */}
-        <div className="flex flex-wrap justify-center gap-6 py-8 border-y border-slate-800 mb-8">
-          <div className="flex items-center gap-2 text-slate-300">
-            <CheckCircle2 className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium">Autoriseret elektriker</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <CheckCircle2 className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium">Certificeret personale</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <CheckCircle2 className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium">2 års garanti</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-300">
-            <CheckCircle2 className="h-5 w-5 text-primary" />
-            <span className="text-sm font-medium">Hurtig respons</span>
-          </div>
-        </div>
-
         {/* Payment Methods Section */}
-        <div className="bg-slate-800/50 rounded-2xl p-8 mb-8">
-          <h4 className="text-white text-center font-semibold mb-6 text-sm uppercase tracking-wider">
+        <div className="bg-white rounded-2xl p-8 mb-8 border-y-2 border-slate-200">
+          <h4 className="text-slate-900 text-center font-semibold mb-8 text-lg">
             Vi accepterer følgende betalingsmetoder
           </h4>
-          <div className="flex flex-wrap justify-center items-center gap-6">
+          <div className="flex flex-wrap justify-center items-center gap-4">
             {paymentMethods.map((method) => (
               <div
                 key={method.name}
-                className="bg-white rounded-lg p-3 w-16 h-10 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-300 cursor-pointer"
+                className="bg-white rounded-lg p-3 w-20 h-12 flex items-center justify-center border border-slate-200 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer"
                 title={method.name}
               >
-                <span className="text-2xl">{method.logo}</span>
+                <div className={`w-full h-full rounded flex items-center justify-center ${method.color} text-white text-xs font-bold`}>
+                  {method.icon}
+                </div>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Trust Badges */}
+        <div className="flex flex-wrap justify-center gap-8 py-8 mb-8">
+          <div className="flex items-center gap-2 text-slate-700">
+            <CheckCircle2 className="h-6 w-6 text-primary" />
+            <span className="text-sm font-semibold">Autoriseret elektriker</span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-700">
+            <CheckCircle2 className="h-6 w-6 text-primary" />
+            <span className="text-sm font-semibold">Certificeret personale</span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-700">
+            <CheckCircle2 className="h-6 w-6 text-primary" />
+            <span className="text-sm font-semibold">2 års garanti</span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-700">
+            <CheckCircle2 className="h-6 w-6 text-primary" />
+            <span className="text-sm font-semibold">Hurtig respons</span>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="border-t border-slate-800 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+        <div className="border-t border-slate-300 pt-6 bg-slate-100/50 -mx-8 px-8 -mb-8 pb-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-600">
             <p>
               © 2025 Billig Elektriker (ASA ApS). Alle rettigheder forbeholdes. CVR: 12345678
             </p>
