@@ -1,33 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Zap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin, CheckCircle2 } from "lucide-react";
+import { Zap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { toast } from "sonner";
 
 export const Footer = () => {
   const { t } = useTranslation();
-  const [email, setEmail] = useState("");
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success("Tak for din tilmelding!");
-    setEmail("");
-  };
-
-  const paymentMethods = [
-    { name: "Dankort", bgColor: "bg-red-600", textColor: "text-white" },
-    { name: "Visa", bgColor: "bg-blue-600", textColor: "text-yellow-300" },
-    { name: "Mastercard", bgColor: "bg-gradient-to-r from-red-600 to-orange-500", textColor: "text-white" },
-    { name: "MobilePay", bgColor: "bg-blue-500", textColor: "text-white" },
-    { name: "Apple Pay", bgColor: "bg-black", textColor: "text-white" },
-    { name: "Google Pay", bgColor: "bg-white", textColor: "text-blue-600 border border-slate-300" },
-    { name: "Klarna", bgColor: "bg-pink-500", textColor: "text-white" },
-    { name: "Maestro", bgColor: "bg-blue-700", textColor: "text-red-500" },
-    { name: "Amex", bgColor: "bg-blue-700", textColor: "text-white" },
-    { name: "Coop", bgColor: "bg-orange-500", textColor: "text-white" },
-  ];
 
   return (
     <footer className="relative overflow-hidden bg-slate-50">
@@ -241,21 +219,6 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Payment Methods - Above Map */}
-        <div className="py-8 mb-6 border-t border-b border-slate-200 bg-white/50">
-          <p className="text-slate-700 text-center text-sm font-semibold mb-5">Vi accepterer:</p>
-          <div className="flex justify-center items-center gap-3 flex-wrap max-w-[800px] mx-auto">
-            {paymentMethods.map((method) => (
-              <div
-                key={method.name}
-                className={`px-2.5 py-1.5 rounded text-[10px] font-bold ${method.bgColor} ${method.textColor} opacity-70 hover:opacity-100 transition-all cursor-pointer hover:scale-105 h-8 flex items-center justify-center`}
-                title={method.name}
-              >
-                {method.name}
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Large Interactive Google Maps */}
         <div className="mb-6">
