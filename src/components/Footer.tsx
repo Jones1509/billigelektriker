@@ -244,18 +244,16 @@ export const Footer = () => {
             <p className="font-medium">
               © 2025 Billig Elektriker (ASA ApS) · CVR: 12345678
             </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="#" className="hover:text-[#2563EB] transition-colors duration-200">
-                Privatlivspolitik
-              </a>
-              <span className="text-[#D1D5DB]">|</span>
-              <a href="#" className="hover:text-[#2563EB] transition-colors duration-200">
-                Handelsbetingelser
-              </a>
-              <span className="text-[#D1D5DB]">|</span>
-              <a href="#" className="hover:text-[#2563EB] transition-colors duration-200">
-                Cookiepolitik
-              </a>
+            <div className="flex items-center gap-3 flex-wrap justify-center">
+              <div className="text-xs text-[#6B7280] mr-2">Vi accepterer:</div>
+              <img src="https://cdn.worldvectorlogo.com/logos/apple-pay-logo.svg" alt="Apple Pay" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Dankort_logo.svg" alt="Dankort" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Klarna_Pink_Logo.svg" alt="Klarna" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-4 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/MobilePay_Logo.svg" alt="MobilePay" className="h-5 opacity-70 hover:opacity-100 transition-opacity" />
             </div>
           </div>
         </div>
