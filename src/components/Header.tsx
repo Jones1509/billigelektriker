@@ -440,8 +440,8 @@ export const Header = () => {
                     <X className="h-5 w-5" />
                   </button>
                   <div className="mega-menu-inner">
-                    <div className="text-sm font-medium text-muted-foreground mb-4 pb-3 border-b border-border/40">
-                      Vores Serviceydelser
+                    <div className="mega-menu-header">
+                      <h2 className="mega-menu-title">Vores Serviceydelser</h2>
                     </div>
                     <div className="service-grid">
                       {services.map((service, idx) => (
@@ -488,8 +488,8 @@ export const Header = () => {
                     <X className="h-5 w-5" />
                   </button>
                   <div className="mega-menu-inner">
-                    <div className="text-sm font-medium text-muted-foreground mb-4 pb-3 border-b border-border/40">
-                      Vores Produkter
+                    <div className="mega-menu-header">
+                      <h2 className="mega-menu-title">Vores Produkter</h2>
                     </div>
                     <div className="mega-menu-grid-6">
                       {products.map((column) => (
