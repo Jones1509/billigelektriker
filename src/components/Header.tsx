@@ -252,7 +252,7 @@ export const Header = () => {
               <img 
                 src={logo} 
                 alt="Billig Elektriker" 
-                className="h-8 w-auto"
+                className="h-11 w-auto"
                 style={{ 
                   imageRendering: "-webkit-optimize-contrast",
                   WebkitFontSmoothing: "antialiased"
