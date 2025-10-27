@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Zap, MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "sonner";
+import logoFooter from "@/assets/logo-footer.png";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -26,9 +27,7 @@ export const Footer = () => {
           {/* Kolonne 1: About + Logo */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-gradient-to-br from-[#2563EB] to-blue-600 rounded-xl shadow-lg">
-                <Zap className="h-8 w-8 text-white" />
-              </div>
+              <img src={logoFooter} alt="Billig Elektriker Logo" className="h-16 w-16" />
               <div>
                 <h3 className="text-[#1F2937] font-bold text-2xl">Billig Elektriker</h3>
                 <p className="text-[#6B7280] text-sm">ASA ApS</p>
