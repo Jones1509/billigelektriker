@@ -259,49 +259,49 @@ export const Footer = () => {
               <span className="text-xs text-[#6B7280] font-medium">Vi accepterer:</span>
               <div className="flex items-center gap-2">
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-blue-500 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/apple_pay.svg" alt="Apple Pay" className="h-5 w-auto" />
                   </div>
                 </div>
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-400 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-red-600 to-red-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-red-500 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/dankort.svg" alt="Dankort" className="h-5 w-auto" />
                   </div>
                 </div>
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-blue-500 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-blue-500 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-green-500 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/google_pay.svg" alt="Google Pay" className="h-5 w-auto" />
                   </div>
                 </div>
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-pink-400 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-pink-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-pink-500 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/klarna.svg" alt="Klarna" className="h-5 w-auto" />
                   </div>
                 </div>
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-red-500 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-red-500 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-orange-500 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/mastercard.svg" alt="Mastercard" className="h-5 w-auto" />
                   </div>
                 </div>
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-blue-500 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/paypal.svg" alt="PayPal" className="h-5 w-auto" />
                   </div>
                 </div>
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-700 to-blue-500 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-700 to-blue-500 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-blue-600 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/visa.svg" alt="Visa" className="h-5 w-auto" />
                   </div>
                 </div>
                 <div className="relative group cursor-pointer">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-xl opacity-0 group-hover:opacity-75 blur transition duration-300"></div>
                   <div className="relative bg-white p-1.5 rounded-lg border border-[#E5E7EB] group-hover:border-blue-500 group-hover:shadow-md transition-all duration-300 group-hover:scale-110">
                     <img src="/payment-icons/mobilepay.svg" alt="MobilePay" className="h-5 w-auto" />
                   </div>
