@@ -182,32 +182,32 @@ export const Footer = () => {
             </h4>
             
             <div className="space-y-3">
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
-                <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+              <div className="flex items-start gap-3">
+                <MapPin className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-slate-700 text-sm font-semibold">Grønnevej 259</p>
-                  <p className="text-slate-600 text-sm">2830 Virum</p>
+                  <p className="text-slate-700 text-sm font-semibold leading-relaxed">Grønnevej 259</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">2830 Virum</p>
                 </div>
               </div>
               
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
-                <Phone className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                <a href="tel:+4512345678" className="text-slate-700 text-sm font-medium hover:text-primary transition-colors">
+              <div className="flex items-start gap-3">
+                <Phone className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <a href="tel:+4512345678" className="text-slate-600 text-sm hover:text-primary transition-all duration-200 hover:translate-x-1 leading-relaxed">
                   +45 12 34 56 78
                 </a>
               </div>
               
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
-                <Mail className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                <a href="mailto:info@billigelektriker.dk" className="text-slate-700 text-sm font-medium hover:text-primary transition-colors break-all">
+              <div className="flex items-start gap-3">
+                <Mail className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <a href="mailto:info@billigelektriker.dk" className="text-slate-600 text-sm hover:text-primary transition-all duration-200 hover:translate-x-1 leading-relaxed break-all">
                   info@billigelektriker.dk
                 </a>
               </div>
               
-              <div className="flex items-start gap-3 p-3 rounded-lg bg-white/50 hover:bg-white transition-all duration-200 hover:shadow-sm">
-                <Clock className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                <div className="text-slate-700 text-sm">
-                  <p className="font-semibold">Man-Fre: 8-17</p>
+              <div className="flex items-start gap-3">
+                <Clock className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                <div className="text-sm leading-relaxed">
+                  <p className="text-slate-700 font-semibold">Man-Fre: 8-17</p>
                   <p className="text-slate-600">Weekend: Efter aftale</p>
                 </div>
               </div>
