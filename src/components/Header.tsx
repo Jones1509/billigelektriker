@@ -451,6 +451,16 @@ export const Header = () => {
                     <X className="h-5 w-5" />
                   </button>
                   <div className="mega-menu-inner">
+                    {/* Services Header */}
+                    <div className="mb-8 text-center relative">
+                      <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl border border-primary/20">
+                        <Zap className="h-6 w-6 text-primary" />
+                        <div className="text-left">
+                          <h2 className="text-2xl font-bold text-primary mb-0.5">Vores Serviceydelser</h2>
+                          <p className="text-sm text-muted-foreground">Professionelle el-løsninger til dit behov</p>
+                        </div>
+                      </div>
+                    </div>
                     <div className="service-grid">
                       {services.map((service, idx) => (
                         <Link 
@@ -493,6 +503,16 @@ export const Header = () => {
                     <X className="h-5 w-5" />
                   </button>
                   <div className="mega-menu-inner">
+                    {/* Products Header */}
+                    <div className="mb-8 text-center relative">
+                      <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-secondary/5 via-secondary/10 to-secondary/5 rounded-2xl border border-secondary/20">
+                        <Lightbulb className="h-6 w-6 text-secondary" />
+                        <div className="text-left">
+                          <h2 className="text-2xl font-bold text-secondary mb-0.5">Vores Produkter</h2>
+                          <p className="text-sm text-muted-foreground">Kvalitetsudstyr fra førende brands</p>
+                        </div>
+                      </div>
+                    </div>
                     <div className="mega-menu-grid-6">
                       {products.map((column) => (
                         <div key={column.title} className="menu-column">
