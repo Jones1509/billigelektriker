@@ -451,6 +451,9 @@ export const Header = () => {
                     <X className="h-5 w-5" />
                   </button>
                   <div className="mega-menu-inner">
+                    <div className="text-sm font-medium text-muted-foreground mb-4 pb-3 border-b border-border/40">
+                      Vores Serviceydelser
+                    </div>
                     <div className="service-grid">
                       {services.map((service, idx) => (
                         <Link 
@@ -493,6 +496,9 @@ export const Header = () => {
                     <X className="h-5 w-5" />
                   </button>
                   <div className="mega-menu-inner">
+                    <div className="text-sm font-medium text-muted-foreground mb-4 pb-3 border-b border-border/40">
+                      Vores Produkter
+                    </div>
                     <div className="mega-menu-grid-6">
                       {products.map((column) => (
                         <div key={column.title} className="menu-column">
