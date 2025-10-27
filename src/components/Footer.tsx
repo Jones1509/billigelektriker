@@ -13,10 +13,10 @@ export const Footer = () => {
 
       {/* Main Footer Content */}
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10 max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-10 gap-8 mb-10 max-w-[1100px] mx-auto">
           
           {/* Section 1: About + Logo */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-2">
             <div className="flex items-center gap-3 mb-5">
               <div className="transition-all duration-300 hover:scale-105">
                 <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
@@ -56,7 +56,7 @@ export const Footer = () => {
           </div>
 
           {/* Section 2: Contact Info */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-3">
             <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
               Kontakt
             </h4>
@@ -95,7 +95,7 @@ export const Footer = () => {
           </div>
 
           {/* Section 3: Quick Links - 2 Columns */}
-          <div className="lg:col-span-2 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-8">
+          <div className="lg:col-span-5 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-8">
             {/* Column 1: Customer Service */}
             <div>
               <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
