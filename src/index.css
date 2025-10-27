@@ -325,89 +325,65 @@ All colors MUST be HSL.
   /* Service Cards Grid - 2 rows layout */
   .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
 
-  /* Service Card */
+  /* Service Card - Minimalist Style */
   .service-card {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
     padding: 24px 20px;
-    background: hsl(var(--background));
-    border: 1.5px solid hsl(var(--border));
-    border-radius: 12px;
-    text-align: center;
-    cursor: pointer;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border) / 0.3);
+    border-radius: 8px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
+    cursor: pointer;
+    height: 100%;
     text-decoration: none;
-    display: block;
-  }
-
-  .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.05) 0%, hsl(var(--primary) / 0.02) 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .service-card:hover::before {
-    opacity: 1;
   }
 
   .service-card:hover {
-    transform: translateY(-4px);
-    border-color: hsl(var(--primary));
-    box-shadow: 
-      0 8px 24px hsl(var(--primary) / 0.15),
-      0 4px 8px hsl(var(--foreground) / 0.05);
+    background: hsl(var(--accent) / 0.3);
+    border-color: hsl(var(--border) / 0.6);
+    transform: translateY(-1px);
   }
 
-  .service-card h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: hsl(var(--foreground));
-    margin: 0 0 8px 0;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s ease;
-  }
-
-  .service-card:hover h3 {
+  .service-card-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: hsl(var(--primary) / 0.08);
     color: hsl(var(--primary));
-  }
-
-  .service-card p {
-    font-size: 12px;
-    color: hsl(var(--muted-foreground));
-    margin: 0;
-    line-height: 1.4;
-    position: relative;
-    z-index: 1;
-  }
-
-  .service-card::after {
-    content: '→';
-    position: absolute;
-    bottom: 12px;
-    right: 16px;
-    font-size: 18px;
-    color: hsl(var(--primary));
-    opacity: 0;
-    transform: translateX(-8px);
     transition: all 0.3s ease;
   }
 
-  .service-card:hover::after {
-    opacity: 1;
-    transform: translateX(0);
+  .service-card:hover .service-card-icon {
+    background: hsl(var(--primary) / 0.12);
+  }
+
+  .service-card h3,
+  .service-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: hsl(var(--foreground));
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: 0.2px;
+  }
+
+  .service-card p,
+  .service-card-description {
+    font-size: 13px;
+    color: hsl(var(--muted-foreground));
+    line-height: 1.5;
+    margin: 0;
+    opacity: 0.85;
   }
 
   /* Service badge in card */
