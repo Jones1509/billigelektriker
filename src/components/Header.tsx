@@ -83,15 +83,15 @@ const MobileLanguageSwitcher = () => {
 
 const useServices = () => {
   return [
-    { title: "Lamper & belysning", description: "Installation og reparation", href: "/pages/lamper-belysning" },
-    { title: "Stikkontakter & Afbrydere", description: "Moderne og funktionelle", href: "/pages/stikkontakter-afbrydere" },
-    { title: "Akut Hjælp", description: "Døgnservice ved nødsituationer", href: "/pages/akut-hjaelp", badge: "24/7" },
-    { title: "Fejlfinding", description: "Hurtig diagnosticering", href: "/pages/fejlfinding" },
-    { title: "Sikkerhed", description: "El-tjek og eftersyn", href: "/pages/sikkerhed" },
-    { title: "Smart Home & Energioptimering", description: "Intelligent automatisering", href: "/pages/smart-home" },
-    { title: "Vedligeholdelse & Serviceaftaler", description: "Forebyggende vedligehold", href: "/pages/vedligeholdelse" },
-    { title: "Rådgivning & Indkøb", description: "Professionel sparring", href: "/pages/raadgivning" },
-    { title: "Specialydelser & Udlejning", description: "Avancerede løsninger", href: "/pages/specialydelser" },
+    { title: "Lamper & belysning", description: "Installation og reparation", href: "/pages/lamper-belysning", icon: Lightbulb },
+    { title: "Stikkontakter & Afbrydere", description: "Moderne og funktionelle", href: "/pages/stikkontakter-afbrydere", icon: Plug },
+    { title: "Akut Hjælp", description: "Døgnservice ved nødsituationer", href: "/pages/akut-hjaelp", badge: "24/7", icon: Bell },
+    { title: "Fejlfinding", description: "Hurtig diagnosticering", href: "/pages/fejlfinding", icon: Search },
+    { title: "Sikkerhed", description: "El-tjek og eftersyn", href: "/pages/sikkerhed", icon: Shield },
+    { title: "Smart Home & Energioptimering", description: "Intelligent automatisering", href: "/pages/smart-home", icon: Wifi },
+    { title: "Vedligeholdelse & Serviceaftaler", description: "Forebyggende vedligehold", href: "/pages/vedligeholdelse", icon: Settings },
+    { title: "Rådgivning & Indkøb", description: "Professionel sparring", href: "/pages/raadgivning", icon: Briefcase },
+    { title: "Specialydelser & Udlejning", description: "Avancerede løsninger", href: "/pages/specialydelser", icon: Wrench },
   ];
 };
 
@@ -444,23 +444,31 @@ export const Header = () => {
                       <h2 className="mega-menu-title">Vores Serviceydelser</h2>
                     </div>
                     <div className="service-grid">
-                      {services.map((service, idx) => (
-                        <Link 
-                          key={service.href} 
-                          to={service.href} 
-                          className="service-card"
-                        >
-                          <h3>
-                            {service.title}
-                            {service.badge && (
-                              <span className="badge badge-red">
-                                {service.badge}
-                              </span>
-                            )}
-                          </h3>
-                          <p>{service.description}</p>
-                        </Link>
-                      ))}
+                      {services.map((service, idx) => {
+                        const Icon = service.icon;
+                        return (
+                          <Link 
+                            key={service.href} 
+                            to={service.href} 
+                            className="service-card"
+                          >
+                            <div className="service-card-icon">
+                              <Icon className="h-5 w-5" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="service-card-title">
+                                {service.title}
+                                {service.badge && (
+                                  <span className="badge badge-red ml-2">
+                                    {service.badge}
+                                  </span>
+                                )}
+                              </h3>
+                              <p className="service-card-description">{service.description}</p>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
