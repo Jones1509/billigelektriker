@@ -172,8 +172,6 @@ export const Header = () => {
   const [user, setUser] = useState<any>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [menuOpen, setMenuOpen] = useState<string | null>(null);
 
   useEffect(() => {
     // Get initial session
@@ -191,21 +189,17 @@ export const Header = () => {
 
   const handleMenuEnter = (menu: string) => {
     console.log('handleMenuEnter called with:', menu);
-    console.log('Current menuOpen state:', menuOpen);
-    if (hoverTimeout) clearTimeout(hoverTimeout);
-    setActiveMenu(menu);
-    setMenuOpen(menu);
-    console.log('Setting menuOpen to:', menu);
+    if (hoverTimeout) {
+      console.log('Clearing hover timeout');
+      clearTimeout(hoverTimeout);
+    }
   };
 
   const handleMenuLeave = () => {
     console.log('handleMenuLeave called');
-    console.log('Current menuOpen state:', menuOpen);
     if (hoverTimeout) clearTimeout(hoverTimeout);
     const timeout = setTimeout(() => {
-      setActiveMenu(null);
-      setMenuOpen("");
-      console.log('Menu closed via handleMenuLeave');
+      console.log('Menu will close via handleMenuLeave');
     }, 300);
     setHoverTimeout(timeout);
   };
@@ -213,17 +207,12 @@ export const Header = () => {
   const handleCloseMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('handleCloseMenu called');
-    console.log('Current menuOpen state:', menuOpen);
+    console.log('handleCloseMenu called - closing menu via X button');
     
     if (hoverTimeout) {
       clearTimeout(hoverTimeout);
       setHoverTimeout(null);
     }
-    
-    setActiveMenu(null);
-    setMenuOpen("");
-    console.log('Menu closed via X button');
   };
 
   const handleSignOut = async () => {
@@ -419,16 +408,8 @@ export const Header = () => {
             </Link>
             
             <NavigationMenu 
-              value={menuOpen ?? ""}
-              onValueChange={(value) => {
-                console.log('NavigationMenu onValueChange:', value);
-                console.log('Current menuOpen:', menuOpen);
-                if (!value) {
-                  setMenuOpen("");
-                  setActiveMenu(null);
-                  console.log('Menu closed via onValueChange');
-                }
-              }}
+              className="hidden lg:flex"
+              onMouseLeave={handleMenuLeave}
             >
           <NavigationMenuList>
             <NavigationMenuItem
