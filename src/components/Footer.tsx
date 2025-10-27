@@ -246,14 +246,14 @@ export const Footer = () => {
             </p>
             <div className="flex items-center gap-3 flex-wrap justify-center">
               <div className="text-xs text-[#6B7280] mr-2">Vi accepterer:</div>
-              <img src="https://www.svgrepo.com/show/303632/apple-pay-payment-mark-logo.svg" alt="Apple Pay" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-              <img src="https://www.svgrepo.com/show/266095/credit-card-payment.svg" alt="Dankort" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-              <img src="https://www.svgrepo.com/show/303669/google-pay-primary-logo-logo-1.svg" alt="Google Pay" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-              <img src="https://www.svgrepo.com/show/349447/klarna.svg" alt="Klarna" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-              <img src="https://www.svgrepo.com/show/266090/mastercard.svg" alt="Mastercard" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-              <img src="https://www.svgrepo.com/show/349464/paypal.svg" alt="PayPal" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-              <img src="https://www.svgrepo.com/show/362034/visa.svg" alt="Visa" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
-              <img src="https://www.svgrepo.com/show/331475/mobilepay.svg" alt="MobilePay" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/apple_pay.svg" alt="Apple Pay" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/dankort.svg" alt="Dankort" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/google_pay.svg" alt="Google Pay" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/klarna.svg" alt="Klarna" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/mastercard.svg" alt="Mastercard" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/paypal.svg" alt="PayPal" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/visa.svg" alt="Visa" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
+              <img src="/payment-icons/mobilepay.svg" alt="MobilePay" className="h-6 opacity-70 hover:opacity-100 transition-opacity" />
             </div>
           </div>
         </div>
