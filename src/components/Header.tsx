@@ -57,22 +57,22 @@ const MobileLanguageSwitcher = () => {
   ];
 
   return (
-    <AccordionItem value="language" className="border-b-0">
-      <AccordionTrigger className="px-2 text-lg font-semibold text-primary hover:no-underline">
+    <AccordionItem value="language" className="border-b border-border/50">
+      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-foreground/90 hover:no-underline hover:text-foreground transition-colors">
         Sprog / Language
       </AccordionTrigger>
       <AccordionContent>
-        <div className="grid grid-cols-2 gap-2 pt-2 px-2">
+        <div className="grid grid-cols-2 gap-2 pt-1 pb-3 px-4">
           {languages.map((language) => (
             <Button
               key={language.code}
               variant={i18n.language === language.code ? "default" : "outline"}
               size="sm"
               onClick={() => i18n.changeLanguage(language.code)}
-              className="justify-start gap-2"
+              className="justify-start gap-2 h-10 text-[15px] border-border/60"
             >
-              <span className="text-lg">{language.flag}</span>
-              <span className="text-xs">{language.name}</span>
+              <span className="text-base">{language.flag}</span>
+              <span className="text-sm">{language.name}</span>
             </Button>
           ))}
         </div>
@@ -279,25 +279,25 @@ export const Header = () => {
                     <SheetTitle>{t('header.menu')}</SheetTitle>
                   </SheetHeader>
               <ScrollArea className="h-[calc(100vh-80px)] mt-6 mobile-menu-scroll">
-                <div className="space-y-6 pb-10">
+                <div className="space-y-1 pb-10">
                   <Accordion type="single" collapsible className="w-full">
                     {/* Services */}
-                    <AccordionItem value="services" className="border-b-0">
-                      <AccordionTrigger className="px-2 text-lg font-semibold text-primary hover:no-underline">
+                    <AccordionItem value="services" className="border-b border-border/50">
+                      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-primary hover:no-underline hover:text-primary/80 transition-colors">
                         {t('header.services')}
                       </AccordionTrigger>
                       <AccordionContent>
-                        <div className="space-y-2 pt-2">
+                        <div className="space-y-0.5 pt-1 pb-3">
                           {services.map((service) => (
                             <Link
                               key={service.href}
                               to={service.href}
                               onClick={closeMobileMenu}
-                              className="flex items-center gap-2 p-3 rounded-lg border-l-2 border-transparent active:border-primary active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
+                              className="flex items-center justify-between gap-2 px-4 py-3 hover:bg-accent/50 active:bg-accent transition-colors duration-200 group"
                             >
-                              <span className="font-medium text-sm">{service.title}</span>
+                              <span className="text-[15px] text-foreground/90 group-hover:text-foreground group-active:text-primary transition-colors">{service.title}</span>
                               {service.badge && (
-                                <span className="bg-destructive text-destructive-foreground text-[10px] font-bold px-1.5 py-0.5 rounded">
+                                <span className="bg-destructive text-destructive-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
                                   {service.badge}
                                 </span>
                               )}
@@ -308,26 +308,26 @@ export const Header = () => {
                     </AccordionItem>
 
                     {/* Products */}
-                    <AccordionItem value="products" className="border-b-0">
-                      <AccordionTrigger className="px-2 text-lg font-semibold text-secondary hover:no-underline">
+                    <AccordionItem value="products" className="border-b border-border/50">
+                      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-secondary hover:no-underline hover:text-secondary/80 transition-colors">
                         {t('header.products')}
                       </AccordionTrigger>
                       <AccordionContent>
-                        <div className="space-y-4 pt-2">
+                        <div className="space-y-5 pt-1 pb-3">
                           {products.map((category) => (
-                            <div key={category.title} className="space-y-2">
-                              <div className="font-semibold text-sm px-3 py-2 bg-muted rounded-lg">
+                            <div key={category.title} className="space-y-1">
+                              <div className="text-xs font-bold tracking-wider text-muted-foreground/70 px-4 py-2">
                                 {category.title}
                               </div>
-                               <div className="pl-4 space-y-1">
+                              <div className="space-y-0.5">
                                 {category.links.slice(0, 5).map((link) => (
                                   <Link
                                     key={link.href}
                                     to={link.href}
                                     onClick={closeMobileMenu}
-                                    className="block text-sm text-muted-foreground active:text-primary py-2 px-2 -ml-2 rounded active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
+                                    className="block text-[15px] text-foreground/80 hover:text-foreground hover:bg-accent/50 active:bg-accent active:text-secondary py-2.5 px-4 pl-8 transition-colors duration-200"
                                   >
-                                    • {link.title}
+                                    {link.title}
                                   </Link>
                                 ))}
                               </div>
@@ -342,61 +342,63 @@ export const Header = () => {
                       </Accordion>
 
                   {/* Additional Links */}
-                  <div className="border-t pt-4">
-                    <div className="space-y-2">
+                  <div className="border-t border-border/50 pt-2 mt-2">
+                    <div className="space-y-0.5">
                       <Link
                         to="/om-os"
                         onClick={closeMobileMenu}
-                        className="block p-3 rounded-lg border-l-2 border-transparent active:border-primary active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
+                        className="flex items-center gap-3 px-4 py-3.5 hover:bg-accent/50 active:bg-accent transition-colors duration-200 group"
                       >
-                        <span className="font-medium">{t('header.about')}</span>
+                        <Info className="h-4 w-4 text-muted-foreground/60 group-hover:text-foreground/80 transition-colors" />
+                        <span className="text-[15px] font-medium text-foreground/90 group-hover:text-foreground transition-colors">{t('header.about')}</span>
                       </Link>
                       <Link
                         to="/kontakt"
                         onClick={closeMobileMenu}
-                        className="block p-3 rounded-lg border-l-2 border-transparent active:border-primary active:bg-primary/5 transition-all duration-300 ease-out active:scale-[0.98]"
+                        className="flex items-center gap-3 px-4 py-3.5 hover:bg-accent/50 active:bg-accent transition-colors duration-200 group"
                       >
-                        <span className="font-medium">{t('header.contact')}</span>
+                        <Mail className="h-4 w-4 text-muted-foreground/60 group-hover:text-foreground/80 transition-colors" />
+                        <span className="text-[15px] font-medium text-foreground/90 group-hover:text-foreground transition-colors">{t('header.contact')}</span>
                       </Link>
                     </div>
                   </div>
 
                       {/* User Actions */}
-                      <div className="border-t pt-4 space-y-2 px-2">
+                      <div className="border-t border-border/50 pt-4 mt-2 space-y-2 px-4">
                         {user ? (
                           <>
                             <Button
                               variant="outline"
-                              className="w-full justify-start"
+                              className="w-full justify-start h-11 text-[15px] hover:bg-accent hover:text-accent-foreground border-border/60"
                               onClick={() => {
                                 closeMobileMenu();
                                 navigate("/profile");
                               }}
                             >
-                              <User className="mr-2 h-4 w-4" />
+                              <User className="mr-2.5 h-4 w-4" />
                               {t('header.myProfile')}
                             </Button>
                             <Button
                               variant="outline"
-                              className="w-full justify-start"
+                              className="w-full justify-start h-11 text-[15px] hover:bg-accent hover:text-accent-foreground border-border/60"
                               onClick={() => {
                                 closeMobileMenu();
                                 handleSignOut();
                               }}
                             >
-                              <LogOut className="mr-2 h-4 w-4" />
+                              <LogOut className="mr-2.5 h-4 w-4" />
                               {t('header.logout')}
                             </Button>
                           </>
                         ) : (
                           <Button
-                            className="w-full"
+                            className="w-full h-11 text-[15px] font-medium"
                             onClick={() => {
                               closeMobileMenu();
                               navigate("/auth");
                             }}
                           >
-                            <User className="mr-2 h-4 w-4" />
+                            <User className="mr-2.5 h-4 w-4" />
                             {t('header.login')}
                           </Button>
                         )}
