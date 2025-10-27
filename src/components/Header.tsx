@@ -57,7 +57,7 @@ const MobileLanguageSwitcher = () => {
   ];
 
   return (
-    <AccordionItem value="language" className="border-b border-border/50">
+    <AccordionItem value="language" className="border-b-0">
       <AccordionTrigger className="px-4 py-4 text-base font-semibold text-foreground/90 hover:no-underline hover:text-foreground transition-colors">
         Sprog / Language
       </AccordionTrigger>
