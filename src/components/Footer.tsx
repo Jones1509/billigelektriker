@@ -228,7 +228,8 @@ export const Footer = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-slate-700 text-sm font-medium">Lyngby-Taarbæk Kommune</p>
+                  <p className="text-slate-700 text-sm font-medium">Grønnevej 259</p>
+                  <p className="text-slate-600 text-sm">2800 Kongens Lyngby (Sorgenfri)</p>
                 </div>
               </div>
               
@@ -261,7 +262,7 @@ export const Footer = () => {
         <div className="mb-12">
           <div className="rounded-2xl overflow-hidden shadow-xl border-2 border-slate-200 hover:-translate-y-1 transition-transform duration-300">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18000!2d12.5!3d55.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46524fe90aa1f3fd%3A0x9d24919290c1c4f0!2sLyngby-Taarb%C3%A6k%20Kommune!5e0!3m2!1sen!2sdk!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.5!2d12.5009!3d55.7815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465253866f9e6c15%3A0x7f8b1c3e4d5a6b2c!2sGr%C3%B8nnevej%20259%2C%202800%20Kongens%20Lyngby!5e0!3m2!1sda!2sdk!4v1234567890"
               width="100%"
               height="400"
               style={{ border: 0 }}
@@ -274,10 +275,11 @@ export const Footer = () => {
           <div className="text-center mt-4 space-y-2">
             <p className="text-slate-600 text-sm flex items-center justify-center gap-2">
               <MapPin className="h-4 w-4 text-primary" />
-              Vi dækker Lyngby, København og Nordsjælland
+              Grønnevej 259, 2800 Kongens Lyngby (Sorgenfri)
             </p>
+            <p className="text-slate-500 text-xs">Vi dækker Lyngby, København og Nordsjælland</p>
             <a 
-              href="https://maps.google.com/?q=Lyngby-Taarbæk+Kommune" 
+              href="https://maps.google.com/?q=Grønnevej+259+2800+Kongens+Lyngby" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-primary text-sm font-medium inline-block hover:underline"
@@ -287,43 +289,21 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Payment Methods Section */}
-        <div className="bg-white rounded-2xl p-8 mb-8 border-y-2 border-slate-200">
-          <h4 className="text-slate-900 text-center font-semibold mb-8 text-lg">
-            Vi accepterer følgende betalingsmetoder
-          </h4>
-          <div className="flex flex-wrap justify-center items-center gap-4">
+        {/* Payment Methods - Compact Single Row */}
+        <div className="py-6 mb-6 border-t border-slate-200">
+          <p className="text-slate-500 text-center text-xs mb-4">Vi accepterer:</p>
+          <div className="flex justify-center items-center gap-3 flex-wrap">
             {paymentMethods.map((method) => (
               <div
                 key={method.name}
-                className="bg-white rounded-lg p-3 w-20 h-12 flex items-center justify-center border border-slate-200 shadow-sm hover:-translate-y-1 hover:shadow-lg hover:border-primary transition-all duration-300 cursor-pointer"
+                className="w-10 h-6 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity cursor-pointer grayscale hover:grayscale-0"
                 title={method.name}
               >
-                <div className={`w-full h-full rounded flex items-center justify-center ${method.color} text-white text-xs font-bold`}>
+                <div className={`w-full h-full rounded flex items-center justify-center ${method.color} text-white text-[8px] font-bold`}>
                   {method.icon}
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="flex flex-wrap justify-center gap-8 py-8 mb-8">
-          <div className="flex items-center gap-2 text-slate-700">
-            <CheckCircle2 className="h-6 w-6 text-primary" />
-            <span className="text-sm font-semibold">Autoriseret elektriker</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <CheckCircle2 className="h-6 w-6 text-primary" />
-            <span className="text-sm font-semibold">Certificeret personale</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <CheckCircle2 className="h-6 w-6 text-primary" />
-            <span className="text-sm font-semibold">2 års garanti</span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <CheckCircle2 className="h-6 w-6 text-primary" />
-            <span className="text-sm font-semibold">Hurtig respons</span>
           </div>
         </div>
 
