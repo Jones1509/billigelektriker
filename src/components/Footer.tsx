@@ -13,10 +13,10 @@ export const Footer = () => {
 
       {/* Main Footer Content */}
       <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 mb-10 max-w-[1400px] mx-auto">
           
-          {/* Kolonne 1: Firma Info */}
-          <div>
+          {/* Section 1: About + Logo */}
+          <div className="sm:col-span-2 lg:col-span-3">
             <div className="flex items-center gap-3 mb-5">
               <div className="transition-all duration-300 hover:scale-105">
                 <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
@@ -55,42 +55,128 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Kolonne 2: Hurtig Adgang */}
-          <div>
-            <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
-              Hurtig adgang
-            </h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                  Sådan bestiller du
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                  Hjemmesidens funktion
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                  Priser
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-primary hover:text-primary/80 transition-all duration-200 text-sm font-semibold py-1 hover:translate-x-1 inline-block">
-                  Se alle services →
-                </a>
-              </li>
-            </ul>
+          {/* Section 2: Quick Links - 3 Columns */}
+          <div className="lg:col-span-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-8">
+            {/* Column 1: Services */}
+            <div>
+              <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
+                Services
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                    El-arbejde
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                    Smart Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                    Erhverv
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                    Udlejning
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm flex items-center gap-2 py-1 leading-relaxed group">
+                    Akut hjælp
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-primary hover:text-primary/80 transition-all duration-200 text-sm font-semibold flex items-center py-1 hover:translate-x-1">
+                    Se alle services →
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 2: Information */}
+            <div>
+              <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
+                Information
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Sådan bestiller du
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Hjemmesidens funktion
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Priser
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Returnering
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Fragt & levering
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Customer Service */}
+            <div>
+              <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
+                Kundeservice
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Handelsbetingelser
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Privatlivspolitik
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Cookiepolitik
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Garanti & ansvar
+                  </a>
+                </li>
+                <li>
+                  <Link to="/kontakt" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Kontakt os
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/om-os" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Om os
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
 
-          {/* Kolonne 3: Kontakt */}
-          <div>
+          {/* Section 3: Contact Info */}
+          <div className="lg:col-span-3">
             <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
               Kontakt
             </h4>
@@ -143,9 +229,9 @@ export const Footer = () => {
               <a href="#" className="hover:text-primary transition-all duration-200 text-xs font-medium hover:underline underline-offset-4">
                 Handelsbetingelser
               </a>
-              <a href="#" className="hover:text-primary transition-all duration-200 text-xs font-medium hover:underline underline-offset-4">
-                Cookiepolitik
-              </a>
+              <Link to="/kontakt" className="hover:text-primary transition-all duration-200 text-xs font-medium hover:underline underline-offset-4">
+                Kontakt
+              </Link>
             </div>
           </div>
         </div>
