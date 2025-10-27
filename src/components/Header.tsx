@@ -172,6 +172,8 @@ export const Header = () => {
   const [user, setUser] = useState<any>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  const servicesTriggerRef = useState<HTMLButtonElement | null>(null);
+  const productsTriggerRef = useState<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     // Get initial session
@@ -204,7 +206,7 @@ export const Header = () => {
     setHoverTimeout(timeout);
   };
 
-  const handleCloseMenu = (e: React.MouseEvent) => {
+  const handleCloseMenu = (triggerRef: HTMLButtonElement | null) => (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('handleCloseMenu called - closing menu via X button');
@@ -214,18 +216,10 @@ export const Header = () => {
       setHoverTimeout(null);
     }
     
-    // Trigger blur to close the menu
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
+    // Click the trigger button to toggle the menu closed
+    if (triggerRef) {
+      triggerRef.click();
     }
-    
-    // Also click outside to ensure menu closes
-    const event = new MouseEvent('mousedown', {
-      bubbles: true,
-      cancelable: true,
-      view: window
-    });
-    document.body.dispatchEvent(event);
   };
 
   const handleSignOut = async () => {
@@ -429,7 +423,10 @@ export const Header = () => {
               value="services"
               onMouseEnter={() => handleMenuEnter("services")}
             >
-              <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
+              <NavigationMenuTrigger 
+                ref={(el) => servicesTriggerRef[1](el)}
+                className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300"
+              >
                 {t('header.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent onMouseLeave={handleMenuLeave}>
@@ -438,7 +435,7 @@ export const Header = () => {
                     type="button"
                     className="mega-menu-close" 
                     aria-label="Luk menu"
-                    onClick={handleCloseMenu}
+                    onClick={handleCloseMenu(servicesTriggerRef[0])}
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -474,7 +471,10 @@ export const Header = () => {
               value="products"
               onMouseEnter={() => handleMenuEnter("products")}
             >
-              <NavigationMenuTrigger className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
+              <NavigationMenuTrigger 
+                ref={(el) => productsTriggerRef[1](el)}
+                className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300"
+              >
                 {t('header.products')}
               </NavigationMenuTrigger>
               <NavigationMenuContent onMouseLeave={handleMenuLeave}>
@@ -483,7 +483,7 @@ export const Header = () => {
                     type="button"
                     className="mega-menu-close" 
                     aria-label="Luk menu"
-                    onClick={handleCloseMenu}
+                    onClick={handleCloseMenu(productsTriggerRef[0])}
                   >
                     <X className="h-5 w-5" />
                   </button>
