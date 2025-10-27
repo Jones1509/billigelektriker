@@ -262,7 +262,7 @@ export const Footer = () => {
         <div className="mb-8 sm:mb-12">
           <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border-2 border-slate-200 hover:-translate-y-1 transition-transform duration-300">
             <iframe
-              src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=55.7845,12.4521&zoom=16&maptype=roadmap"
+              src="https://maps.google.com/maps?q=Grønnevej+259+2830+Virum+Danmark&output=embed&z=16"
               width="100%"
               height="400"
               style={{ border: 0 }}
