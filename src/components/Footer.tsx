@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import logoIcon from "@/assets/logo-icon.png";
+import logoIcon from "@/assets/logo-footer.png";
 
 export const Footer = () => {
   const { t } = useTranslation();
