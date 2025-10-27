@@ -255,47 +255,47 @@ export const Footer = () => {
             <div className="text-sm text-[#6B7280]">
               <p className="font-medium text-[#1F2937]">© 2025 Billig Elektriker · ASA ApS · CVR: 12345678</p>
             </div>
-            <div className="flex items-center gap-4 flex-wrap justify-center">
+            <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 w-full md:w-auto">
               <span className="text-xs text-[#6B7280] font-medium">Vi accepterer:</span>
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-4 md:flex md:flex-wrap gap-2.5 md:gap-2 justify-center items-center">
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/apple_pay.svg" alt="Apple Pay" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/apple_pay.svg" alt="Apple Pay" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/dankort.svg" alt="Dankort" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/dankort.svg" alt="Dankort" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/google_pay.svg" alt="Google Pay" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/google_pay.svg" alt="Google Pay" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/klarna.svg" alt="Klarna" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/klarna.svg" alt="Klarna" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/mastercard.svg" alt="Mastercard" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/mastercard.svg" alt="Mastercard" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/paypal.svg" alt="PayPal" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/paypal.svg" alt="PayPal" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/visa.svg" alt="Visa" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/visa.svg" alt="Visa" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
                 <div className="group cursor-pointer">
-                  <div className="bg-white p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
-                    <img src="/payment-icons/mobilepay.svg" alt="MobilePay" className="h-5 w-auto" />
+                  <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
+                    <img src="/payment-icons/mobilepay.svg" alt="MobilePay" className="h-7 md:h-6 w-auto" />
                   </div>
                 </div>
               </div>
