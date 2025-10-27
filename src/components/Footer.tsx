@@ -17,7 +17,42 @@ export const Footer = () => {
           
           {/* Section 1: About + Logo */}
           <div className="sm:col-span-2 lg:col-span-3">
-...
+            <div className="flex items-center gap-3 mb-5">
+              <div className="transition-all duration-300 hover:scale-105">
+                <img src={logoIcon} alt="Billig Elektriker Logo" className="h-12 w-12 object-contain" />
+              </div>
+              <div>
+                <h3 className="text-slate-900 font-bold text-xl tracking-tight">Billig Elektriker</h3>
+                <p className="text-slate-500 text-xs font-medium">ASA ApS</p>
+              </div>
+            </div>
+            
+            <p className="text-slate-700 mb-2 text-sm leading-relaxed font-medium">
+              Professionel el-service til fair priser
+            </p>
+            <p className="text-slate-600 mb-4 text-sm leading-relaxed">
+              Certificerede elektrikere med passion for kvalitet og kundetilfredshed
+            </p>
+            
+            <p className="text-slate-500 text-xs mb-4 font-medium">CVR: 12345678</p>
+            
+            <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white mb-4 shadow-lg shadow-primary/20 hover:shadow-primary/30 w-full sm:w-auto min-h-[44px] transition-all duration-300 hover:scale-[1.02]">
+              <Phone className="h-4 w-4 mr-2" />
+              +45 12 34 56 78
+            </Button>
+
+            {/* Social Media */}
+            <div className="flex gap-2.5 mt-4">
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
+                <Facebook className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
+              </a>
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
+                <Instagram className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
+              </a>
+              <a href="#" className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-primary hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-lg group w-9 h-9 flex items-center justify-center">
+                <Linkedin className="h-4 w-4 text-slate-600 group-hover:text-white transition-colors" />
+              </a>
+            </div>
           </div>
 
           {/* Section 2: Contact Info */}
