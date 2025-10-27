@@ -17,7 +17,7 @@ export const Footer = () => {
           {/* Column 1 (Left): Company Info + Social Media */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 bg-white rounded-xl shadow-md border border-slate-200">
+              <div className="p-2">
                 <img src={logoIcon} alt="Billig Elektriker Logo" className="h-10 w-10 object-contain" />
               </div>
               <div>
