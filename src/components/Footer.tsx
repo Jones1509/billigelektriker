@@ -21,8 +21,8 @@ export const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-[#F7F9FC] to-[#EEF4FC] relative">
       {/* Main Footer Content */}
-      <div className="max-w-[1200px] mx-auto px-10 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-12 mb-8">
+      <div className="max-w-[1200px] mx-auto px-10 pt-[15px] pb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-8 mb-6">
           
           {/* Kolonne 1: About + Logo */}
           <div>
