@@ -57,11 +57,11 @@ const MobileLanguageSwitcher = () => {
   ];
 
   return (
-    <AccordionItem value="language" className="border-0 border-b border-border/10">
-      <AccordionTrigger className="px-2 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-colors duration-300 leading-relaxed tracking-tight">
-        Sprog / Language
+    <AccordionItem value="language" className="border-0 border-b border-border/20 pb-3">
+      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-300 leading-relaxed tracking-tight hover:translate-x-1">
+        Sprog
       </AccordionTrigger>
-      <AccordionContent className="pt-2 pb-4">
+      <AccordionContent className="pt-3 pb-4">
         <div className="grid grid-cols-2 gap-2.5">
           {languages.map((language) => (
             <Button
@@ -69,7 +69,7 @@ const MobileLanguageSwitcher = () => {
               variant={i18n.language === language.code ? "default" : "outline"}
               size="sm"
               onClick={() => i18n.changeLanguage(language.code)}
-              className="justify-center h-11 transition-all duration-300 active:scale-95 text-[14px] font-medium"
+              className="justify-center h-11 transition-all duration-300 active:scale-95 text-[14px] font-medium hover:shadow-sm"
             >
               {language.name}
             </Button>
@@ -268,43 +268,43 @@ export const Header = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="text-white hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 h-11 w-11 hover:scale-110 active:scale-95"
+                    className="text-white hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 h-11 w-11 hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl"
                   >
                     <Menu className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:w-[420px] bg-background/95 backdrop-blur-xl border-l border-border/30 p-0">
-                  <SheetHeader className="px-6 py-6 border-b border-border/20">
+                <SheetContent side="right" className="w-full sm:w-[420px] bg-background/98 backdrop-blur-2xl border-l border-border/40 p-0 shadow-2xl">
+                  <SheetHeader className="px-6 py-6 border-b border-border/30 bg-gradient-to-b from-muted/30 to-transparent">
                     <SheetTitle className="text-xl font-semibold text-foreground tracking-tight">
-                      {t('header.menu')}
+                      Menu
                     </SheetTitle>
                   </SheetHeader>
               <ScrollArea className="h-[calc(100vh-80px)] mobile-menu-scroll">
-                <div className="space-y-2 pb-10 px-5 pt-6">
-                  <Accordion type="single" collapsible className="w-full space-y-2">
+                <div className="space-y-3 pb-10 px-5 pt-6">
+                  <Accordion type="single" collapsible className="w-full space-y-3">
                     {/* Services */}
-                    <AccordionItem value="services" className="border-0 border-b border-border/10">
-                      <AccordionTrigger className="px-2 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-colors duration-300 leading-relaxed tracking-tight">
-                        {t('header.services')}
+                    <AccordionItem value="services" className="border-0 border-b border-border/20 pb-3">
+                      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-300 leading-relaxed tracking-tight hover:translate-x-1">
+                        Services
                       </AccordionTrigger>
-                      <AccordionContent className="pt-2 pb-4">
-                        <div className="space-y-0.5">
+                      <AccordionContent className="pt-3 pb-4">
+                        <div className="space-y-1">
                           {services.map((service, idx) => (
                             <Link
                               key={service.href}
                               to={service.href}
                               onClick={closeMobileMenu}
-                              className="flex items-center justify-between gap-3 px-2 py-3.5 rounded-lg hover:bg-muted/40 active:scale-[0.98] transition-all duration-300 group"
+                              className="flex items-center justify-between gap-3 px-3 py-4 rounded-xl hover:bg-primary/5 active:scale-[0.97] transition-all duration-300 group border border-transparent hover:border-primary/10 hover:shadow-sm"
                               style={{
-                                animation: `fade-in 0.4s ease-out ${idx * 0.05}s both`
+                                animation: `fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${idx * 0.05}s both`
                               }}
                             >
                               <div className="flex-1">
                                 <span className="font-medium text-[14px] block group-hover:text-primary transition-colors leading-snug">{service.title}</span>
-                                <span className="text-[12px] text-muted-foreground leading-relaxed">{service.description}</span>
+                                <span className="text-[12.5px] text-muted-foreground leading-relaxed">{service.description}</span>
                               </div>
                               {service.badge && (
-                                <span className="bg-destructive text-destructive-foreground text-[10px] font-bold px-2 py-1 rounded-md">
+                                <span className="bg-destructive/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
                                   {service.badge}
                                 </span>
                               )}
@@ -315,19 +315,19 @@ export const Header = () => {
                     </AccordionItem>
 
                     {/* Products */}
-                    <AccordionItem value="products" className="border-0 border-b border-border/10">
-                      <AccordionTrigger className="px-2 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-colors duration-300 leading-relaxed tracking-tight">
-                        {t('header.products')}
+                    <AccordionItem value="products" className="border-0 border-b border-border/20 pb-3">
+                      <AccordionTrigger className="px-3 py-4 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary transition-all duration-300 leading-relaxed tracking-tight hover:translate-x-1">
+                        Produkter
                       </AccordionTrigger>
-                      <AccordionContent className="pt-2 pb-4">
-                        <div className="space-y-4">
+                      <AccordionContent className="pt-3 pb-4">
+                        <div className="space-y-5">
                           {products.map((category, catIdx) => (
                             <div key={category.title} className="space-y-2"
                               style={{
-                                animation: `fade-in 0.4s ease-out ${catIdx * 0.08}s both`
+                                animation: `fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${catIdx * 0.08}s both`
                               }}
                             >
-                              <div className="font-semibold text-[11px] px-2 py-1.5 text-muted-foreground uppercase tracking-wider">
+                              <div className="font-semibold text-[11px] px-3 py-1.5 text-muted-foreground uppercase tracking-widest">
                                 {category.title}
                               </div>
                               <div className="space-y-0.5">
@@ -336,7 +336,7 @@ export const Header = () => {
                                     key={link.href}
                                     to={link.href}
                                     onClick={closeMobileMenu}
-                                    className="block text-[14px] text-foreground/80 hover:text-primary py-2.5 px-2 rounded-lg hover:bg-muted/40 active:scale-[0.98] transition-all duration-300 leading-snug"
+                                    className="block text-[14px] text-foreground/90 hover:text-primary py-3 px-3 rounded-lg hover:bg-muted/50 active:scale-[0.97] transition-all duration-300 leading-snug hover:pl-4 border border-transparent hover:border-border/50"
                                   >
                                     {link.title}
                                   </Link>
@@ -353,57 +353,63 @@ export const Header = () => {
                       </Accordion>
 
                   {/* Additional Links */}
-                  <div className="border-t border-border/10 pt-3 space-y-0.5">
+                  <div className="border-t border-border/20 pt-4 space-y-1">
                     <Link
                       to="/om-os"
                       onClick={closeMobileMenu}
-                      className="block px-2 py-3.5 rounded-lg hover:bg-muted/40 active:scale-[0.98] transition-all duration-300 group"
+                      className="flex items-center justify-between px-3 py-4 rounded-xl hover:bg-muted/50 active:scale-[0.97] transition-all duration-300 group border border-transparent hover:border-border/50"
                     >
-                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors leading-relaxed">{t('header.about')}</span>
+                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors leading-relaxed">Om os</span>
+                      <div className="h-6 w-6 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                        <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary"></div>
+                      </div>
                     </Link>
                     <Link
                       to="/kontakt"
                       onClick={closeMobileMenu}
-                      className="block px-2 py-3.5 rounded-lg hover:bg-muted/40 active:scale-[0.98] transition-all duration-300 group"
+                      className="flex items-center justify-between px-3 py-4 rounded-xl hover:bg-muted/50 active:scale-[0.97] transition-all duration-300 group border border-transparent hover:border-border/50"
                     >
-                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors leading-relaxed">{t('header.contact')}</span>
+                      <span className="font-medium text-[15px] group-hover:text-primary transition-colors leading-relaxed">Kontakt</span>
+                      <div className="h-6 w-6 rounded-full bg-primary/5 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                        <div className="h-1 w-1 rounded-full bg-primary/40 group-hover:bg-primary"></div>
+                      </div>
                     </Link>
                   </div>
 
                       {/* User Actions */}
-                      <div className="pt-4 space-y-2.5 border-t border-border/10">
+                      <div className="pt-5 space-y-2.5 border-t border-border/20">
                         {user ? (
                           <>
                             <Button
                               variant="outline"
-                              className="w-full justify-center h-12 transition-all duration-300 active:scale-95 text-[14px] font-medium"
+                              className="w-full justify-center h-12 transition-all duration-300 active:scale-95 text-[14px] font-medium hover:bg-primary/5 hover:border-primary/30 hover:shadow-sm"
                               onClick={() => {
                                 closeMobileMenu();
                                 navigate("/profile");
                               }}
                             >
-                              {t('header.myProfile')}
+                              Min profil
                             </Button>
                             <Button
                               variant="outline"
-                              className="w-full justify-center h-12 transition-all duration-300 active:scale-95 text-[14px] font-medium"
+                              className="w-full justify-center h-12 transition-all duration-300 active:scale-95 text-[14px] font-medium hover:bg-destructive/5 hover:border-destructive/30 hover:text-destructive"
                               onClick={() => {
                                 closeMobileMenu();
                                 handleSignOut();
                               }}
                             >
-                              {t('header.logout')}
+                              Log ud
                             </Button>
                           </>
                         ) : (
                           <Button
-                            className="w-full h-12 transition-all duration-300 active:scale-95 text-[15px] font-semibold"
+                            className="w-full h-12 transition-all duration-300 active:scale-95 text-[15px] font-semibold shadow-lg hover:shadow-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80"
                             onClick={() => {
                               closeMobileMenu();
                               navigate("/auth");
                             }}
                           >
-                            {t('header.login')}
+                            Log ind
                           </Button>
                         )}
                       </div>
