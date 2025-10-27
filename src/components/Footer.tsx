@@ -17,16 +17,16 @@ export const Footer = () => {
   };
 
   const paymentMethods = [
-    { name: "Dankort", color: "bg-red-600", icon: "💳" },
-    { name: "Visa", color: "bg-blue-600", icon: "💳" },
-    { name: "Mastercard", color: "bg-orange-500", icon: "💳" },
-    { name: "MobilePay", color: "bg-blue-500", icon: "📱" },
-    { name: "Apple Pay", color: "bg-slate-900", icon: "🍎" },
-    { name: "Google Pay", color: "bg-blue-400", icon: "🔵" },
-    { name: "Klarna", color: "bg-pink-500", icon: "💰" },
-    { name: "Maestro", color: "bg-red-500", icon: "💳" },
-    { name: "American Express", color: "bg-blue-700", icon: "💳" },
-    { name: "Forbrugsforeningen", color: "bg-green-600", icon: "🏪" },
+    { name: "Dankort", bgColor: "bg-red-600", textColor: "text-white" },
+    { name: "Visa", bgColor: "bg-blue-600", textColor: "text-yellow-300" },
+    { name: "Mastercard", bgColor: "bg-gradient-to-r from-red-600 to-orange-500", textColor: "text-white" },
+    { name: "MobilePay", bgColor: "bg-blue-500", textColor: "text-white" },
+    { name: "Apple Pay", bgColor: "bg-black", textColor: "text-white" },
+    { name: "Google Pay", bgColor: "bg-white", textColor: "text-blue-600 border border-slate-300" },
+    { name: "Klarna", bgColor: "bg-pink-500", textColor: "text-white" },
+    { name: "Maestro", bgColor: "bg-blue-700", textColor: "text-red-500" },
+    { name: "Amex", bgColor: "bg-blue-700", textColor: "text-white" },
+    { name: "Coop", bgColor: "bg-orange-500", textColor: "text-white" },
   ];
 
   return (
@@ -229,7 +229,7 @@ export const Footer = () => {
                 <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="text-slate-700 text-sm font-medium">Grønnevej 259</p>
-                  <p className="text-slate-600 text-sm">2800 Kongens Lyngby (Sorgenfri)</p>
+                  <p className="text-slate-600 text-sm">2830 Virum</p>
                 </div>
               </div>
               
@@ -262,7 +262,7 @@ export const Footer = () => {
         <div className="mb-12">
           <div className="rounded-2xl overflow-hidden shadow-xl border-2 border-slate-200 hover:-translate-y-1 transition-transform duration-300">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.5!2d12.5009!3d55.7815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465253866f9e6c15%3A0x7f8b1c3e4d5a6b2c!2sGr%C3%B8nnevej%20259%2C%202800%20Kongens%20Lyngby!5e0!3m2!1sda!2sdk!4v1234567890"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Grønnevej+259+2830+Virum+Denmark&zoom=16"
               width="100%"
               height="400"
               style={{ border: 0 }}
@@ -275,11 +275,11 @@ export const Footer = () => {
           <div className="text-center mt-4 space-y-2">
             <p className="text-slate-600 text-sm flex items-center justify-center gap-2">
               <MapPin className="h-4 w-4 text-primary" />
-              Grønnevej 259, 2800 Kongens Lyngby (Sorgenfri)
+              Grønnevej 259, 2830 Virum
             </p>
             <p className="text-slate-500 text-xs">Vi dækker Lyngby, København og Nordsjælland</p>
             <a 
-              href="https://maps.google.com/?q=Grønnevej+259+2800+Kongens+Lyngby" 
+              href="https://maps.google.com/?q=Grønnevej+259+2830+Virum" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-primary text-sm font-medium inline-block hover:underline"
@@ -292,16 +292,14 @@ export const Footer = () => {
         {/* Payment Methods - Compact Single Row */}
         <div className="py-6 mb-6 border-t border-slate-200">
           <p className="text-slate-500 text-center text-xs mb-4">Vi accepterer:</p>
-          <div className="flex justify-center items-center gap-3 flex-wrap">
+          <div className="flex justify-center items-center gap-2 flex-wrap">
             {paymentMethods.map((method) => (
               <div
                 key={method.name}
-                className="w-10 h-6 flex items-center justify-center opacity-50 hover:opacity-100 transition-opacity cursor-pointer grayscale hover:grayscale-0"
+                className={`px-2 py-1 rounded text-[9px] font-bold ${method.bgColor} ${method.textColor} opacity-70 hover:opacity-100 transition-all cursor-pointer hover:scale-105`}
                 title={method.name}
               >
-                <div className={`w-full h-full rounded flex items-center justify-center ${method.color} text-white text-[8px] font-bold`}>
-                  {method.icon}
-                </div>
+                {method.name}
               </div>
             ))}
           </div>
