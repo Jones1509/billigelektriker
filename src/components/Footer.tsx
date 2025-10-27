@@ -57,46 +57,7 @@ export const Footer = () => {
 
           {/* Section 2: Quick Links - 2 Columns */}
           <div className="lg:col-span-6 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-8">
-            {/* Column 1: Information */}
-            <div>
-              <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
-                Information
-              </h4>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Sådan bestiller du
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Hjemmesidens funktion
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Priser
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Returnering
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    FAQ
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
-                    Fragt & levering
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2: Customer Service */}
+            {/* Column 1: Customer Service */}
             <div>
               <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
                 Kundeservice
@@ -131,6 +92,45 @@ export const Footer = () => {
                   <Link to="/om-os" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
                     Om os
                   </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 2: Information */}
+            <div>
+              <h4 className="text-slate-900 font-bold mb-4 text-sm uppercase tracking-wider">
+                Information
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Sådan bestiller du
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Hjemmesidens funktion
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Priser
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Returnering
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-slate-600 hover:text-primary hover:translate-x-1 transition-all duration-200 text-sm block py-1 leading-relaxed">
+                    Fragt & levering
+                  </a>
                 </li>
               </ul>
             </div>
