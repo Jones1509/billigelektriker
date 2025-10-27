@@ -21,8 +21,8 @@ export const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-[#F7F9FC] to-[#EEF4FC] relative">
       {/* Main Footer Content */}
-      <div className="max-w-[1200px] mx-auto px-10 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-12 mb-12">
+      <div className="max-w-[1200px] mx-auto px-10 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-12 mb-8">
           
           {/* Kolonne 1: About + Logo */}
           <div>
@@ -225,7 +225,7 @@ export const Footer = () => {
 
       {/* Copyright Bar */}
       <div className="bg-gradient-to-r from-[#E5E7EB] via-[#E8EAED] to-[#E5E7EB] border-t border-[#D1D5DB]">
-        <div className="max-w-[1200px] mx-auto px-10 py-6">
+        <div className="max-w-[1200px] mx-auto px-10 py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#6B7280]">
             <p className="font-medium">
               © 2025 Billig Elektriker (ASA ApS) · CVR: 12345678
