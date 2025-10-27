@@ -213,6 +213,19 @@ export const Header = () => {
       clearTimeout(hoverTimeout);
       setHoverTimeout(null);
     }
+    
+    // Trigger blur to close the menu
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    
+    // Also click outside to ensure menu closes
+    const event = new MouseEvent('mousedown', {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    });
+    document.body.dispatchEvent(event);
   };
 
   const handleSignOut = async () => {
