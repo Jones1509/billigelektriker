@@ -255,8 +255,8 @@ export const Footer = () => {
             <div className="text-sm text-[#6B7280]">
               <p className="font-medium text-[#1F2937]">© 2025 Billig Elektriker · ASA ApS · CVR: 12345678</p>
             </div>
-            <div className="flex flex-col items-center gap-3 w-full md:w-auto">
-              <span className="text-xs text-[#6B7280] font-medium">Vi accepterer:</span>
+            <div className="flex flex-col md:flex-row items-center gap-3 w-full md:w-auto">
+              <span className="text-xs text-[#6B7280] font-medium whitespace-nowrap">Vi accepterer:</span>
               {/* Mobile: Stakket i 2 rækker, Tablet/Desktop: Alle på 1 række */}
               <div className="flex flex-col md:flex-row gap-2 items-center">
                 {/* Første række på mobil - 5 ikoner */}
