@@ -38,7 +38,7 @@ export const ServiceBoxes = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-[18px] lg:gap-5 px-4 md:px-0 max-w-6xl mx-auto">
           {/* El-arbejde Card */}
           <Card className="group relative overflow-hidden border-2 border-primary/10 shadow-2xl hover:shadow-primary/20 transition-all duration-700 hover:-translate-y-3 bg-gradient-to-br from-white via-white to-blue-50/80 dark:from-gray-900 dark:via-gray-900 dark:to-blue-950/40 hover:border-primary/30">
             {/* Animated shine effect */}

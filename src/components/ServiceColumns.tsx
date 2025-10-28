@@ -77,7 +77,7 @@ export const ServiceColumns = () => {
             </div>
 
             {/* Service Cards */}
-            <div className="grid gap-3">
+            <div className="grid gap-4 md:gap-[18px] lg:gap-5">
               {privateServices.map((service, idx) => (
                 <Card 
                   key={idx} 
@@ -119,7 +119,7 @@ export const ServiceColumns = () => {
             </div>
 
             {/* Service Cards */}
-            <div className="grid gap-3">
+            <div className="grid gap-4 md:gap-[18px] lg:gap-5">
               {businessServices.map((service, idx) => (
                 <Card 
                   key={idx} 
