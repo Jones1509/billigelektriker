@@ -8,7 +8,7 @@ export const TeamSection = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--muted) / 0.3) 0%, hsl(var(--background)) 100%)' }}>
+    <section className="py-6 md:py-8 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--muted) / 0.3) 0%, hsl(var(--background)) 100%)' }}>
       {/* Top fade from previous section */}
       <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--muted)/0.5)] to-transparent pointer-events-none z-0"></div>
       
@@ -16,7 +16,7 @@ export const TeamSection = () => {
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/[0.02] rounded-full blur-3xl pointer-events-none"></div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
+        <div className="text-center mb-6 md:mb-8 animate-fade-in px-4">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
             {t('team.title')}
           </h2>

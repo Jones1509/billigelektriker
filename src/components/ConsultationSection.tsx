@@ -47,7 +47,7 @@ export const ConsultationSection = () => {
   };
 
   return (
-    <section className="relative w-full py-[45px] overflow-hidden bg-white" style={{ marginTop: 0 }}>
+    <section className="relative w-full py-6 md:py-8 overflow-hidden bg-white" style={{ marginTop: 0 }}>
       <div className="relative max-w-[1050px] mx-auto px-8">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-[50px] lg:items-center">
           {/* LEFT SIDE - Content */}

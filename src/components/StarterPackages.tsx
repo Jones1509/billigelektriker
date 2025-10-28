@@ -101,7 +101,7 @@ export const StarterPackages = () => {
   ];
 
   return (
-    <section id="pakker" className="py-8 md:py-10 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
+    <section id="pakker" className="py-6 md:py-8 relative overflow-hidden bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-[1300px] mx-auto px-4 md:px-10">
         {/* Section Header */}
         <div className="text-center mb-6 md:mb-4 animate-fade-in">
