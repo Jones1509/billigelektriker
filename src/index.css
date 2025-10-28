@@ -807,27 +807,27 @@ All colors MUST be HSL.
     }
   }
 
-  /* MOBIL - UNDER 768PX - VIS 2.5 PRODUKTER */
+  /* MOBIL - UNDER 768PX - PRÆCIS 2 PRODUKTER */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 40px 6px;
+      padding: 40px 8px;
     }
 
-    /* Much smaller products - 2.5 visible */
+    /* Exactly 2 products visible: (100% - 1 gap) / 2 */
     .luxury-products-track {
-      grid-auto-columns: 38%;
-      gap: 8px;
-      padding: 2px;
+      grid-auto-columns: calc((100% - 12px) / 2);
+      gap: 12px;
+      padding: 4px;
     }
 
     .luxury-nav-arrow {
-      width: 32px;
-      height: 32px;
-      top: 35%;
+      width: 36px;
+      height: 36px;
+      top: 40%;
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(8px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .luxury-nav-arrow:active {
@@ -835,16 +835,16 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-icon {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
     }
 
     .luxury-nav-prev {
-      left: 1px;
+      left: 2px;
     }
 
     .luxury-nav-next {
-      right: 1px;
+      right: 2px;
     }
   }
 }
