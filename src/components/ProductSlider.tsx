@@ -3,13 +3,6 @@ import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, ShoppingBag, Zap } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
@@ -20,17 +13,25 @@ export const ProductSlider = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 8 });
+      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
       return response.data.products.edges as ShopifyProduct[];
     },
   });
 
+  // Filter products based on active tab
+  const displayProducts = data ? (
+    activeTab === 'popular' 
+      ? data.slice(0, 4)
+      : activeTab === 'new'
+      ? data.slice(4, 8)
+      : data.slice(8, 12)
+  ) : [];
+
   return (
     <section 
-      className="py-12 md:py-20 relative overflow-hidden"
+      className="py-12 md:py-20 mb-16 md:mb-24 relative overflow-visible"
       style={{ 
-        background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--blue-tint)) 100%)',
-        maxHeight: '800px'
+        background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--blue-tint)) 100%)'
       }}
     >
       {/* Top smooth transition */}
@@ -56,35 +57,38 @@ export const ProductSlider = () => {
             {t('productSlider.subtitle')}
           </p>
           
-          {/* Category Filter Tabs */}
-          <div className="inline-flex items-center gap-1.5 bg-muted/50 rounded-full p-1.5 mb-6">
+          {/* Category Filter Tabs - Responsive */}
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-6 rounded-full" style={{ background: '#F3F4F6' }}>
             <button
               onClick={() => setActiveTab('popular')}
-              className={`px-7 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm sm:text-[15px] font-medium transition-all duration-300 ${
                 activeTab === 'popular' 
-                  ? 'bg-background text-primary shadow-md font-semibold' 
-                  : 'text-muted-foreground hover:text-primary'
+                  ? 'bg-white shadow-md font-semibold' 
+                  : 'bg-transparent hover:text-[#2563EB]'
               }`}
+              style={{ color: activeTab === 'popular' ? '#2563EB' : '#6B7280' }}
             >
               Mest Populær
             </button>
             <button
               onClick={() => setActiveTab('new')}
-              className={`px-7 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm sm:text-[15px] font-medium transition-all duration-300 ${
                 activeTab === 'new' 
-                  ? 'bg-background text-primary shadow-md font-semibold' 
-                  : 'text-muted-foreground hover:text-primary'
+                  ? 'bg-white shadow-md font-semibold' 
+                  : 'bg-transparent hover:text-[#2563EB]'
               }`}
+              style={{ color: activeTab === 'new' ? '#2563EB' : '#6B7280' }}
             >
               Nyhed
             </button>
             <button
               onClick={() => setActiveTab('recommended')}
-              className={`px-7 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-sm sm:text-[15px] font-medium transition-all duration-300 ${
                 activeTab === 'recommended' 
-                  ? 'bg-background text-primary shadow-md font-semibold' 
-                  : 'text-muted-foreground hover:text-primary'
+                  ? 'bg-white shadow-md font-semibold' 
+                  : 'bg-transparent hover:text-[#2563EB]'
               }`}
+              style={{ color: activeTab === 'recommended' ? '#2563EB' : '#6B7280' }}
             >
               Anbefalet
             </button>
@@ -100,30 +104,21 @@ export const ProductSlider = () => {
               </div>
             </div>
           </div>
-        ) : data && data.length > 0 ? (
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-3 md:-ml-6">
-              {data.slice(0, 8).map((product, index) => (
-                <CarouselItem 
+        ) : displayProducts.length > 0 ? (
+          <div className="relative min-h-[600px] pb-8">
+            {/* Responsive Grid - Stacks on mobile */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 transition-all duration-300">
+              {displayProducts.map((product, index) => (
+                <div 
                   key={product.node.id} 
-                  className="pl-3 md:pl-6 basis-[85%] xs:basis-[75%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  className="w-full max-w-[400px] mx-auto sm:max-w-none animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="h-full animate-fade-in">
-                    <ProductCard product={product} />
-                  </div>
-                </CarouselItem>
+                  <ProductCard product={product} />
+                </div>
               ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden lg:flex -left-12 h-12 w-12 bg-background border-2 border-border hover:bg-primary hover:text-white hover:border-primary hover:scale-110 transition-all duration-300 shadow-lg" />
-            <CarouselNext className="hidden lg:flex -right-12 h-12 w-12 bg-background border-2 border-border hover:bg-primary hover:text-white hover:border-primary hover:scale-110 transition-all duration-300 shadow-lg" />
-          </Carousel>
+            </div>
+          </div>
         ) : (
           <div className="text-center py-12">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
