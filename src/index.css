@@ -736,7 +736,7 @@ All colors MUST be HSL.
     .luxury-carousel-inner {
       max-width: 1600px;
       margin: 0 auto;
-      padding: 60px 120px;
+      padding: 60px 140px;
     }
 
     /* 4 products visible: (100% - 3 gaps) / 4 */
@@ -763,18 +763,18 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-prev {
-      left: 40px;
+      left: 20px;
     }
 
     .luxury-nav-next {
-      right: 40px;
+      right: 20px;
     }
   }
 
   /* TABLET - 768PX TIL 1199PX - ALTID 3 PRODUKTER */
   @media (min-width: 768px) and (max-width: 1199px) {
     .luxury-carousel-inner {
-      padding: 60px 80px;
+      padding: 60px 100px;
     }
 
     /* 3 products visible: (100% - 2 gaps) / 3 */
@@ -799,18 +799,18 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-prev {
-      left: 16px;
+      left: 12px;
     }
 
     .luxury-nav-next {
-      right: 16px;
+      right: 12px;
     }
   }
 
   /* MOBIL - UNDER 768PX - ALTID 2 PRODUKTER */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 60px 20px;
+      padding: 60px 70px;
     }
 
     /* 2 products visible: (100% - 1 gap) / 2 */
@@ -822,8 +822,8 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-arrow {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       top: 50%;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -831,16 +831,16 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-icon {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
     }
 
     .luxury-nav-prev {
-      left: 8px;
+      left: 4px;
     }
 
     .luxury-nav-next {
-      right: 8px;
+      right: 4px;
     }
   }
 }
