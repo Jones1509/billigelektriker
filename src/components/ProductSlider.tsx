@@ -6,6 +6,15 @@ import { Loader2, ShoppingBag, Zap, ChevronLeft, ChevronRight } from "lucide-rea
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
+// Touch swipe constants
+const SWIPE_MIN_DISTANCE = 50;
+const SWIPE_MAX_DURATION = 300;
+const SWIPE_RESUME_DELAY = 2000;
+
+// Trackpad scroll constants
+const SCROLL_THRESHOLD = 30;
+const SCROLL_RESUME_DELAY = 3000;
+
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
@@ -196,8 +205,8 @@ export const ProductSlider = () => {
     const touchDiff = touchStartX.current - touchEndX.current;
     const touchDuration = Date.now() - touchStartTime.current;
     
-    const hasMinDistance = Math.abs(touchDiff) > 50;
-    const isQuickSwipe = touchDuration < 300;
+    const hasMinDistance = Math.abs(touchDiff) > SWIPE_MIN_DISTANCE;
+    const isQuickSwipe = touchDuration < SWIPE_MAX_DURATION;
     const isValidSwipe = hasMinDistance && isQuickSwipe;
     
     if (isValidSwipe) {
@@ -212,7 +221,7 @@ export const ProductSlider = () => {
       if (isAutoScrollActive) {
         setIsPaused(false);
       }
-    }, 2000);
+    }, SWIPE_RESUME_DELAY);
   };
 
   const handleWheel = (e: React.WheelEvent) => {
@@ -227,10 +236,9 @@ export const ProductSlider = () => {
       
       setIsPaused(true);
       
-      const scrollThreshold = 30;
-      if (e.deltaX > scrollThreshold) {
+      if (e.deltaX > SCROLL_THRESHOLD) {
         handleNext();
-      } else if (e.deltaX < -scrollThreshold) {
+      } else if (e.deltaX < -SCROLL_THRESHOLD) {
         handlePrevious();
       }
       
@@ -238,7 +246,7 @@ export const ProductSlider = () => {
         if (isAutoScrollActive) {
           setIsPaused(false);
         }
-      }, 3000);
+      }, SCROLL_RESUME_DELAY);
     }
   };
 
