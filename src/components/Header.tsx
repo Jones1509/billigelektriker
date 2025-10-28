@@ -330,16 +330,24 @@ export const Header = () => {
                         <MobileLanguageSwitcher />
                       </Accordion>
 
-                  {/* Tilbud Link */}
+                  {/* Additional Links */}
                   <div className="border-t border-border/50 pt-2 mt-2">
                     <div className="space-y-0.5">
                       <Link
-                        to="/tilbud"
+                        to="/om-os"
                         onClick={closeMobileMenu}
                         className="flex items-center gap-3 px-4 py-3.5 active:bg-muted/30 transition-colors duration-150"
                       >
-                        <Bell className="h-4 w-4 text-muted-foreground/70" />
-                        <span className="text-[15px] font-medium text-foreground/90">Tilbud</span>
+                        <Info className="h-4 w-4 text-muted-foreground/70" />
+                        <span className="text-[15px] font-medium text-foreground/90">{t('header.about')}</span>
+                      </Link>
+                      <Link
+                        to="/kontakt"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3.5 active:bg-muted/30 transition-colors duration-150"
+                      >
+                        <Mail className="h-4 w-4 text-muted-foreground/70" />
+                        <span className="text-[15px] font-medium text-foreground/90">{t('header.contact')}</span>
                       </Link>
                     </div>
                   </div>
@@ -506,21 +514,27 @@ export const Header = () => {
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link 
-                  to="/tilbud" 
-                  className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-base font-medium text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300"
-                >
-                  Tilbud
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
           </NavigationMenuList>
             </NavigationMenu>
             
             <div className="flex items-center gap-3 justify-end">
+              <div className="flex items-center gap-1 mr-2">
+                <Button
+                  variant="ghost"
+                  asChild
+                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  <Link to="/om-os">{t('header.about')}</Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  asChild
+                  className="text-white hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  <Link to="/kontakt">{t('header.contact')}</Link>
+                </Button>
+              </div>
+              
               <div className="flex">
                 <LanguageSwitcher />
               </div>
