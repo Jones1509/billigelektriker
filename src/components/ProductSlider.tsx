@@ -9,10 +9,15 @@ import { useState, useRef, useEffect } from "react";
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
-  const containerRef = useRef<HTMLDivElement>(null);
-  const velocityRef = useRef(0);
-  const lastXRef = useRef(0);
-  const lastTimeRef = useRef(0);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const prevBtnRef = useRef<HTMLButtonElement>(null);
+  const nextBtnRef = useRef<HTMLButtonElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const velocity = useRef(0);
+  const lastX = useRef(0);
+  const lastTime = useRef(0);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -30,127 +35,206 @@ export const ProductSlider = () => {
       : data.slice(8, 20)
   ) : [];
 
-  // Update button states based on scroll position
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const updateButtonStates = () => {
-      const scrollLeft = container.scrollLeft;
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      
-      const prevBtn = container.parentElement?.querySelector('.nav-arrow-prev') as HTMLButtonElement;
-      const nextBtn = container.parentElement?.querySelector('.nav-arrow-next') as HTMLButtonElement;
-      
-      if (prevBtn) {
-        if (scrollLeft <= 10) {
-          prevBtn.style.opacity = '0.3';
-          prevBtn.style.pointerEvents = 'none';
-        } else {
-          prevBtn.style.opacity = '1';
-          prevBtn.style.pointerEvents = 'auto';
-        }
-      }
-      
-      if (nextBtn) {
-        if (scrollLeft >= maxScroll - 10) {
-          nextBtn.style.opacity = '0.3';
-          nextBtn.style.pointerEvents = 'none';
-        } else {
-          nextBtn.style.opacity = '1';
-          nextBtn.style.pointerEvents = 'auto';
-        }
-      }
-    };
-
-    container.addEventListener('scroll', updateButtonStates);
-    updateButtonStates();
-
-    return () => container.removeEventListener('scroll', updateButtonStates);
-  }, [displayProducts]);
-
-  const handlePrevious = () => {
-    if (!containerRef.current) return;
-    const scrollAmount = containerRef.current.offsetWidth * 0.85;
-    containerRef.current.scrollBy({
-      left: -scrollAmount,
-      behavior: 'smooth'
-    });
-  };
-
-  const handleNext = () => {
-    if (!containerRef.current) return;
-    const scrollAmount = containerRef.current.offsetWidth * 0.85;
-    containerRef.current.scrollBy({
-      left: scrollAmount,
-      behavior: 'smooth'
-    });
-  };
-
-  const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
-    setActiveTab(tab);
-    if (containerRef.current) {
-      containerRef.current.scrollLeft = 0;
+  // Update button states
+  const updateButtonStates = () => {
+    if (!viewportRef.current || !prevBtnRef.current || !nextBtnRef.current) return;
+    
+    const { scrollLeft, scrollWidth, clientWidth } = viewportRef.current;
+    const maxScroll = scrollWidth - clientWidth;
+    
+    if (scrollLeft <= 5) {
+      prevBtnRef.current.style.opacity = '0.3';
+      prevBtnRef.current.style.pointerEvents = 'none';
+    } else {
+      prevBtnRef.current.style.opacity = '1';
+      prevBtnRef.current.style.pointerEvents = 'auto';
+    }
+    
+    if (scrollLeft >= maxScroll - 5) {
+      nextBtnRef.current.style.opacity = '0.3';
+      nextBtnRef.current.style.pointerEvents = 'none';
+    } else {
+      nextBtnRef.current.style.opacity = '1';
+      nextBtnRef.current.style.pointerEvents = 'auto';
     }
   };
 
-  // Touch momentum scrolling
-  const handleTouchStart = (e: React.TouchEvent) => {
-    lastXRef.current = e.touches[0].pageX;
-    lastTimeRef.current = Date.now();
-    velocityRef.current = 0;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const currentTime = Date.now();
-    const timeDiff = currentTime - lastTimeRef.current;
-    const distDiff = e.touches[0].pageX - lastXRef.current;
-    velocityRef.current = distDiff / timeDiff;
+  // Apply momentum scroll
+  const applyMomentumScroll = (initialVelocity: number) => {
+    if (!viewportRef.current) return;
     
-    lastXRef.current = e.touches[0].pageX;
-    lastTimeRef.current = currentTime;
-  };
-
-  const handleTouchEnd = () => {
-    if (Math.abs(velocityRef.current) > 0.5) {
-      applyMomentum(velocityRef.current);
-    }
-  };
-
-  const applyMomentum = (initialVelocity: number) => {
-    if (!containerRef.current) return;
-    
-    let velocity = initialVelocity * 40;
-    const deceleration = 0.95;
+    let vel = initialVelocity;
+    const friction = 0.92;
+    const minVelocity = 0.3;
     
     const animate = () => {
-      if (Math.abs(velocity) < 0.5 || !containerRef.current) return;
+      if (Math.abs(vel) < minVelocity || !viewportRef.current) return;
       
-      containerRef.current.scrollLeft -= velocity;
-      velocity *= deceleration;
+      viewportRef.current.scrollLeft += vel;
+      vel *= friction;
       
       requestAnimationFrame(animate);
     };
     
-    animate();
+    requestAnimationFrame(animate);
   };
 
-  const handleWheel = (e: React.WheelEvent) => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.preventDefault();
-      if (containerRef.current) {
-        containerRef.current.scrollLeft += e.deltaX;
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    // Button click handlers
+    const handlePrevClick = () => {
+      const scrollAmount = viewport.clientWidth * 0.9;
+      viewport.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    };
+
+    const handleNextClick = () => {
+      const scrollAmount = viewport.clientWidth * 0.9;
+      viewport.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    };
+
+    // Scroll event
+    const handleScroll = () => {
+      requestAnimationFrame(updateButtonStates);
+    };
+
+    // Touch events
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+    let touchVelocity = 0;
+    let touchLastX = 0;
+    let touchLastTime = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].pageX;
+      touchScrollLeft = viewport.scrollLeft;
+      touchLastX = e.touches[0].pageX;
+      touchLastTime = Date.now();
+      touchVelocity = 0;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touchX = e.touches[0].pageX;
+      const diff = touchStartX - touchX;
+      viewport.scrollLeft = touchScrollLeft + (diff * 2);
+      
+      const now = Date.now();
+      const dt = now - touchLastTime;
+      const dx = touchX - touchLastX;
+      touchVelocity = dx / dt;
+      
+      touchLastX = touchX;
+      touchLastTime = now;
+    };
+
+    const handleTouchEnd = () => {
+      if (Math.abs(touchVelocity) > 0.3) {
+        applyMomentumScroll(-touchVelocity * 50);
       }
+    };
+
+    // Mouse drag events
+    const handleMouseDown = (e: MouseEvent) => {
+      isDragging.current = true;
+      startX.current = e.pageX - viewport.offsetLeft;
+      scrollLeft.current = viewport.scrollLeft;
+      viewport.style.cursor = 'grabbing';
+      lastX.current = e.pageX;
+      lastTime.current = Date.now();
+      velocity.current = 0;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current) return;
+      e.preventDefault();
+      
+      const x = e.pageX - viewport.offsetLeft;
+      const walk = (x - startX.current) * 2;
+      viewport.scrollLeft = scrollLeft.current - walk;
+      
+      const now = Date.now();
+      const dt = now - lastTime.current;
+      const dx = e.pageX - lastX.current;
+      velocity.current = dx / dt;
+      
+      lastX.current = e.pageX;
+      lastTime.current = now;
+    };
+
+    const handleMouseUp = () => {
+      if (isDragging.current && Math.abs(velocity.current) > 0.3) {
+        applyMomentumScroll(-velocity.current * 50);
+      }
+      isDragging.current = false;
+      viewport.style.cursor = 'grab';
+    };
+
+    const handleMouseLeave = () => {
+      isDragging.current = false;
+      viewport.style.cursor = 'grab';
+    };
+
+    // Trackpad wheel event
+    let momentumTimer: NodeJS.Timeout;
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) > 0) {
+        e.preventDefault();
+        viewport.scrollLeft += e.deltaX * 2;
+        
+        clearTimeout(momentumTimer);
+        momentumTimer = setTimeout(() => {
+          if (Math.abs(e.deltaX) > 1) {
+            applyMomentumScroll(e.deltaX * 30);
+          }
+        }, 50);
+      }
+    };
+
+    // Add event listeners
+    if (prevBtnRef.current) prevBtnRef.current.addEventListener('click', handlePrevClick);
+    if (nextBtnRef.current) nextBtnRef.current.addEventListener('click', handleNextClick);
+    viewport.addEventListener('scroll', handleScroll, { passive: true });
+    viewport.addEventListener('touchstart', handleTouchStart, { passive: true });
+    viewport.addEventListener('touchmove', handleTouchMove, { passive: true });
+    viewport.addEventListener('touchend', handleTouchEnd, { passive: true });
+    viewport.addEventListener('mousedown', handleMouseDown);
+    viewport.addEventListener('mousemove', handleMouseMove);
+    viewport.addEventListener('mouseup', handleMouseUp);
+    viewport.addEventListener('mouseleave', handleMouseLeave);
+    viewport.addEventListener('wheel', handleWheel, { passive: false });
+
+    updateButtonStates();
+
+    return () => {
+      if (prevBtnRef.current) prevBtnRef.current.removeEventListener('click', handlePrevClick);
+      if (nextBtnRef.current) nextBtnRef.current.removeEventListener('click', handleNextClick);
+      viewport.removeEventListener('scroll', handleScroll);
+      viewport.removeEventListener('touchstart', handleTouchStart);
+      viewport.removeEventListener('touchmove', handleTouchMove);
+      viewport.removeEventListener('touchend', handleTouchEnd);
+      viewport.removeEventListener('mousedown', handleMouseDown);
+      viewport.removeEventListener('mousemove', handleMouseMove);
+      viewport.removeEventListener('mouseup', handleMouseUp);
+      viewport.removeEventListener('mouseleave', handleMouseLeave);
+      viewport.removeEventListener('wheel', handleWheel);
+      clearTimeout(momentumTimer);
+    };
+  }, [displayProducts]);
+
+  const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
+    setActiveTab(tab);
+    if (viewportRef.current) {
+      viewportRef.current.scrollLeft = 0;
     }
   };
 
   return (
-    <section className="carousel-wrapper">
-      {/* Premium background effects */}
+    <section className="product-carousel-section">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       
-      <div className="max-w-[1400px] mx-auto relative z-10 px-5 md:px-[60px] lg:px-[120px] py-[60px]">
+      <div className="carousel-inner-wrapper">
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
@@ -213,32 +297,23 @@ export const ProductSlider = () => {
           </div>
         ) : displayProducts.length > 0 ? (
           <div className="relative">
-            {/* Navigation Arrows */}
             <button
-              onClick={handlePrevious}
-              className="nav-arrow nav-arrow-prev"
+              ref={prevBtnRef}
+              className="carousel-nav-btn carousel-prev"
               aria-label="Previous"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="carousel-nav-icon" />
             </button>
             
             <button
-              onClick={handleNext}
-              className="nav-arrow nav-arrow-next"
+              ref={nextBtnRef}
+              className="carousel-nav-btn carousel-next"
               aria-label="Next"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="carousel-nav-icon" />
             </button>
 
-            {/* Carousel Container */}
-            <div 
-              ref={containerRef}
-              className="carousel-container"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              onWheel={handleWheel}
-            >
+            <div ref={viewportRef} className="carousel-viewport">
               <div className="carousel-track">
                 {displayProducts.map((product, index) => (
                   <article 
