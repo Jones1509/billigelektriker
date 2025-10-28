@@ -67,7 +67,7 @@ export const ConsultationSection = () => {
             
             {/* Description */}
             <p className="text-[15px] text-slate-600 leading-[1.5]">
-              Hos Billig Elektriker får du kvalificeret hjælp fra autoriserede fagfolk med over 15 års erfaring. Vi håndterer alt fra akutte fejl til komplette smart home-installationer – altid til fair priser.
+              Kvalificeret hjælp fra certificerede elektrikere – hurtig respons og fair priser.
             </p>
             
             {/* Features */}
@@ -75,51 +75,37 @@ export const ConsultationSection = () => {
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <span className="text-[14px] font-medium text-slate-800">
-                  Certificerede & forsikrede elektrikere
+                  Certificerede elektrikere
                 </span>
               </div>
               
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <span className="text-[14px] font-medium text-slate-800">
-                  Fast-pris tilbud uden skjulte gebyrer
+                  Fast-pris tilbud
                 </span>
               </div>
               
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <span className="text-[14px] font-medium text-slate-800">
-                  Svar inden 2 timer på hverdage
+                  Svar inden 2 timer
                 </span>
               </div>
-            </div>
-            
-            {/* Guide til form */}
-            <div className="p-3 bg-gradient-to-r from-primary/5 to-primary/10 border-l-[3px] border-primary rounded-lg flex items-center gap-2.5">
-              <FileText className="w-4 h-4 text-primary flex-shrink-0" />
-              <p className="text-[13px] font-semibold text-slate-700">
-                Beskriv dit projekt i formularen → Vi vender tilbage med et skræddersyet tilbud
-              </p>
             </div>
             
             {/* Phone Box */}
-            <div className="p-[18px] bg-gradient-to-br from-white to-slate-50 border-2 border-primary/20 rounded-xl shadow-sm">
-              <div className="flex items-center gap-2 mb-2">
-                <Zap className="w-4 h-4 text-primary" />
-                <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
-                  Akut behov for elektriker?
-                </p>
-              </div>
+            <div className="mt-2 p-4 bg-gradient-to-br from-white to-slate-50 border border-primary/20 rounded-xl">
+              <p className="text-[11px] text-slate-500 uppercase tracking-wider font-semibold mb-2">
+                Akut behov?
+              </p>
               <a 
                 href="tel:71997171" 
-                className="flex items-center gap-2 text-[24px] font-extrabold text-primary hover:text-primary/80 transition-colors w-fit"
+                className="flex items-center gap-2 text-[22px] font-extrabold text-primary hover:text-primary/80 transition-colors w-fit"
               >
                 <Phone className="w-5 h-5" />
                 71 99 71 71
               </a>
-              <p className="text-[12px] text-slate-600 mt-2 font-medium">
-                Ring nu – Vi tager telefonen man-fre kl. 8-17
-              </p>
             </div>
           </div>
           
