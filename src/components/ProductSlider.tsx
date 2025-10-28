@@ -190,14 +190,16 @@ export const ProductSlider = () => {
     if (prevBtnRef.current) prevBtnRef.current.addEventListener('click', handlePrevClick);
     if (nextBtnRef.current) nextBtnRef.current.addEventListener('click', handleNextClick);
     container.addEventListener('scroll', handleScroll, { passive: true });
-    container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    container.addEventListener('touchmove', handleTouchMove, { passive: true });
-    container.addEventListener('touchend', handleTouchEnd, { passive: true });
-    container.addEventListener('mousedown', handleMouseDown);
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseup', handleMouseUp);
-    container.addEventListener('mouseleave', handleMouseLeave);
-    container.addEventListener('wheel', handleWheel, { passive: false });
+    
+    // Mouse drag kun på desktop (ikke mobil/tablet)
+    const isDesktop = window.innerWidth >= 1024;
+    if (isDesktop) {
+      container.addEventListener('mousedown', handleMouseDown);
+      container.addEventListener('mousemove', handleMouseMove);
+      container.addEventListener('mouseup', handleMouseUp);
+      container.addEventListener('mouseleave', handleMouseLeave);
+      container.addEventListener('wheel', handleWheel, { passive: false });
+    }
 
     // Initial button state
     updateButtonStates();
@@ -206,14 +208,14 @@ export const ProductSlider = () => {
       if (prevBtnRef.current) prevBtnRef.current.removeEventListener('click', handlePrevClick);
       if (nextBtnRef.current) nextBtnRef.current.removeEventListener('click', handleNextClick);
       container.removeEventListener('scroll', handleScroll);
-      container.removeEventListener('touchstart', handleTouchStart);
-      container.removeEventListener('touchmove', handleTouchMove);
-      container.removeEventListener('touchend', handleTouchEnd);
-      container.removeEventListener('mousedown', handleMouseDown);
-      container.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseup', handleMouseUp);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-      container.removeEventListener('wheel', handleWheel);
+      
+      if (isDesktop) {
+        container.removeEventListener('mousedown', handleMouseDown);
+        container.removeEventListener('mousemove', handleMouseMove);
+        container.removeEventListener('mouseup', handleMouseUp);
+        container.removeEventListener('mouseleave', handleMouseLeave);
+        container.removeEventListener('wheel', handleWheel);
+      }
     };
   }, [displayProducts]);
 
