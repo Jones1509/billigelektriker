@@ -4,7 +4,7 @@ import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, ShoppingBag, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
@@ -12,8 +12,15 @@ export const ProductSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const desktopTrackRef = useRef<HTMLDivElement>(null);
+  const tabletTrackRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
   const autoScrollTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const touchStartTime = useRef(0);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -34,42 +41,124 @@ export const ProductSlider = () => {
 
   const totalProducts = displayProducts.length;
 
+  // Get visible products count based on screen size
+  const getVisibleProductsCount = useCallback(() => {
+    if (typeof window === 'undefined') return 4;
+    if (window.innerWidth >= 1024) return 4; // Desktop
+    if (window.innerWidth >= 768) return 3;  // Tablet
+    return 2; // Mobile
+  }, []);
+
+  // Get gap size based on screen size
+  const getGapSize = useCallback(() => {
+    if (typeof window === 'undefined') return 20;
+    if (window.innerWidth >= 1024) return 20; // Desktop
+    if (window.innerWidth >= 768) return 18;  // Tablet
+    return 16; // Mobile
+  }, []);
+
+  // Calculate and apply scroll position
+  const scrollToIndex = useCallback((index: number) => {
+    const visibleProducts = getVisibleProductsCount();
+    const maxIndex = Math.max(0, totalProducts - visibleProducts);
+    const clampedIndex = Math.max(0, Math.min(index, maxIndex));
+    
+    setCurrentIndex(clampedIndex);
+
+    // Get the appropriate track ref based on screen size
+    let trackRef: React.RefObject<HTMLDivElement> | null = null;
+    if (window.innerWidth >= 1024) {
+      trackRef = desktopTrackRef;
+    } else if (window.innerWidth >= 768) {
+      trackRef = tabletTrackRef;
+    } else {
+      trackRef = mobileTrackRef;
+    }
+
+    if (!trackRef?.current || !viewportRef.current) return;
+
+    const viewportWidth = viewportRef.current.offsetWidth;
+    const gap = getGapSize();
+    const totalGapWidth = gap * (visibleProducts - 1);
+    const productWidth = (viewportWidth - totalGapWidth) / visibleProducts;
+    const scrollDistance = productWidth + gap;
+    const translateX = -(clampedIndex * scrollDistance);
+    
+    trackRef.current.style.transform = `translateX(${translateX}px)`;
+  }, [totalProducts, getVisibleProductsCount, getGapSize]);
+
   // Auto-scroll functionality
   useEffect(() => {
     if (!isAutoScrollActive || isPaused || totalProducts === 0) return;
 
     autoScrollTimerRef.current = setInterval(() => {
       setCurrentIndex(prev => {
+        const visibleProducts = getVisibleProductsCount();
         const next = prev + 1;
-        // Seamless loop back to start
-        if (next >= totalProducts) {
+        const maxIndex = Math.max(0, totalProducts - visibleProducts);
+        
+        // Loop back to start if we reach the end
+        if (next > maxIndex) {
           return 0;
         }
         return next;
       });
-    }, 2500); // Auto-scroll every 2.5 seconds
+    }, 2500);
 
     return () => {
       if (autoScrollTimerRef.current) {
         clearInterval(autoScrollTimerRef.current);
       }
     };
-  }, [isAutoScrollActive, isPaused, totalProducts]);
+  }, [isAutoScrollActive, isPaused, totalProducts, getVisibleProductsCount]);
+
+  // Update scroll position when index changes
+  useEffect(() => {
+    scrollToIndex(currentIndex);
+  }, [currentIndex, scrollToIndex]);
+
+  // Handle window resize
+  useEffect(() => {
+    let resizeTimeout: NodeJS.Timeout;
+
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const visibleProducts = getVisibleProductsCount();
+        const maxIndex = Math.max(0, totalProducts - visibleProducts);
+        
+        if (currentIndex > maxIndex) {
+          setCurrentIndex(maxIndex);
+        } else {
+          scrollToIndex(currentIndex);
+        }
+      }, 200);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(resizeTimeout);
+    };
+  }, [currentIndex, totalProducts, getVisibleProductsCount, scrollToIndex]);
 
   const handlePrevious = () => {
-    setIsAutoScrollActive(false); // Stop auto-scroll permanently
+    setIsAutoScrollActive(false);
+    const visibleProducts = getVisibleProductsCount();
     setCurrentIndex(prev => {
       if (prev === 0) {
-        return totalProducts - 1;
+        return Math.max(0, totalProducts - visibleProducts);
       }
       return prev - 1;
     });
   };
 
   const handleNext = () => {
-    setIsAutoScrollActive(false); // Stop auto-scroll permanently
+    setIsAutoScrollActive(false);
+    const visibleProducts = getVisibleProductsCount();
+    const maxIndex = Math.max(0, totalProducts - visibleProducts);
     setCurrentIndex(prev => {
-      if (prev >= totalProducts - 1) {
+      if (prev >= maxIndex) {
         return 0;
       }
       return prev + 1;
@@ -90,6 +179,78 @@ export const ProductSlider = () => {
 
   const handleMouseLeave = () => {
     setIsPaused(false);
+  };
+
+  // Touch event handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartTime.current = Date.now();
+    setIsPaused(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const touchDiff = touchStartX.current - touchEndX.current;
+    const touchDuration = Date.now() - touchStartTime.current;
+    
+    // Minimum swipe distance: 50px, maximum duration: 300ms
+    if (Math.abs(touchDiff) > 50 && touchDuration < 300) {
+      if (touchDiff > 0) {
+        // Swipe left - next
+        handleNext();
+      } else {
+        // Swipe right - previous
+        handlePrevious();
+      }
+    }
+    
+    // Resume auto-scroll after 2 seconds
+    setTimeout(() => {
+      if (isAutoScrollActive) {
+        setIsPaused(false);
+      }
+    }, 2000);
+  };
+
+  // Wheel event handler for trackpad scrolling
+  const handleWheel = (e: React.WheelEvent) => {
+    // Check if it's horizontal scroll (trackpad with 2 fingers)
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.preventDefault();
+      
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+      
+      setIsPaused(true);
+      
+      if (e.deltaX > 30) {
+        handleNext();
+      } else if (e.deltaX < -30) {
+        handlePrevious();
+      }
+      
+      // Resume auto-scroll after 3 seconds of inactivity
+      scrollTimeout.current = setTimeout(() => {
+        if (isAutoScrollActive) {
+          setIsPaused(false);
+        }
+      }, 3000);
+    }
+  };
+
+  // Calculate total pages for dots
+  const getTotalPages = () => {
+    const visibleProducts = getVisibleProductsCount();
+    return Math.ceil(totalProducts / visibleProducts);
+  };
+
+  const getCurrentPage = () => {
+    const visibleProducts = getVisibleProductsCount();
+    return Math.floor(currentIndex / visibleProducts);
   };
 
   return (
@@ -211,21 +372,27 @@ export const ProductSlider = () => {
             </button>
 
             {/* Carousel viewport */}
-            <div className="overflow-hidden w-full">
+            <div 
+              ref={viewportRef}
+              className="overflow-hidden w-full"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onWheel={handleWheel}
+            >
               {/* Desktop - 4 produkter synlige */}
               <div 
-                ref={scrollContainerRef}
-                className="hidden lg:flex flex-nowrap gap-5 transition-transform duration-500 ease-in-out"
-                style={{ 
-                  transform: `translateX(-${currentIndex * (100 / 4 + 1.25)}%)`,
-                }}
+                ref={desktopTrackRef}
+                className="hidden lg:flex flex-nowrap gap-5 transition-transform duration-500 ease-out"
               >
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-desktop-${index}`}
-                    className="flex-shrink-0"
+                    className="flex-shrink-0 flex-grow-0"
                     style={{ 
-                      flex: '0 0 calc((100% - 60px) / 4)',
+                      flexBasis: 'calc((100% - 60px) / 4)',
+                      width: 'calc((100% - 60px) / 4)',
+                      minWidth: 'calc((100% - 60px) / 4)',
                       maxWidth: 'calc((100% - 60px) / 4)'
                     }}
                   >
@@ -236,17 +403,17 @@ export const ProductSlider = () => {
 
               {/* Tablet - 3 produkter synlige */}
               <div 
-                className="hidden md:flex lg:hidden flex-nowrap gap-[18px] transition-transform duration-500 ease-in-out"
-                style={{ 
-                  transform: `translateX(-${currentIndex * (100 / 3 + 1.2)}%)`,
-                }}
+                ref={tabletTrackRef}
+                className="hidden md:flex lg:hidden flex-nowrap gap-[18px] transition-transform duration-500 ease-out"
               >
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-tablet-${index}`}
-                    className="flex-shrink-0"
+                    className="flex-shrink-0 flex-grow-0"
                     style={{ 
-                      flex: '0 0 calc((100% - 36px) / 3)',
+                      flexBasis: 'calc((100% - 36px) / 3)',
+                      width: 'calc((100% - 36px) / 3)',
+                      minWidth: 'calc((100% - 36px) / 3)',
                       maxWidth: 'calc((100% - 36px) / 3)'
                     }}
                   >
@@ -257,17 +424,17 @@ export const ProductSlider = () => {
 
               {/* Mobile - 2 produkter synlige */}
               <div 
-                className="flex md:hidden flex-nowrap gap-4 transition-transform duration-500 ease-in-out"
-                style={{ 
-                  transform: `translateX(-${currentIndex * (100 / 2 + 1.6)}%)`,
-                }}
+                ref={mobileTrackRef}
+                className="flex md:hidden flex-nowrap gap-4 transition-transform duration-500 ease-out"
               >
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-mobile-${index}`}
-                    className="flex-shrink-0"
+                    className="flex-shrink-0 flex-grow-0"
                     style={{ 
-                      flex: '0 0 calc((100% - 16px) / 2)',
+                      flexBasis: 'calc((100% - 16px) / 2)',
+                      width: 'calc((100% - 16px) / 2)',
+                      minWidth: 'calc((100% - 16px) / 2)',
                       maxWidth: 'calc((100% - 16px) / 2)'
                     }}
                   >
@@ -277,21 +444,22 @@ export const ProductSlider = () => {
               </div>
             </div>
 
-            {/* Progress dots */}
+            {/* Progress dots - now showing pages instead of individual products */}
             <div className="flex items-center justify-center gap-2 mt-5">
-              {displayProducts.map((_, index) => (
+              {Array.from({ length: getTotalPages() }).map((_, pageIndex) => (
                 <button
-                  key={index}
+                  key={pageIndex}
                   onClick={() => {
-                    setCurrentIndex(index);
+                    const visibleProducts = getVisibleProductsCount();
+                    setCurrentIndex(pageIndex * visibleProducts);
                     setIsAutoScrollActive(false);
                   }}
                   className={`transition-all duration-300 rounded-full ${
-                    index === currentIndex
+                    pageIndex === getCurrentPage()
                       ? 'w-6 h-2 bg-[#2563EB]'
                       : 'w-2 h-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]'
                   }`}
-                  aria-label={`Gå til produkt ${index + 1}`}
+                  aria-label={`Gå til side ${pageIndex + 1}`}
                 />
               ))}
             </div>
