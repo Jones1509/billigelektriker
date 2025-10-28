@@ -807,23 +807,23 @@ All colors MUST be HSL.
     }
   }
 
-  /* MOBIL - UNDER 768PX - 2 SMÅ PRODUKTER */
+  /* MOBIL - UNDER 768PX - 2 KOMPAKTE PRODUKTER */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 30px 10px;
+      padding: 30px 8px;
     }
 
-    /* 2 small products visible */
+    /* 2 compact products visible */
     .luxury-products-track {
-      grid-auto-columns: 47%;
-      gap: 10px;
+      grid-auto-columns: 45%;
+      gap: 8px;
       padding: 4px;
     }
 
     .luxury-nav-arrow {
-      width: 32px;
-      height: 32px;
-      top: 35%;
+      width: 30px;
+      height: 30px;
+      top: 30%;
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(8px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
@@ -835,16 +835,16 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-icon {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
 
     .luxury-nav-prev {
-      left: 2px;
+      left: 1px;
     }
 
     .luxury-nav-next {
-      right: 2px;
+      right: 1px;
     }
   }
 }
