@@ -677,9 +677,6 @@ All colors MUST be HSL.
   /* Ultra smooth scrolling */
   scroll-padding: 0;
   overscroll-behavior-x: contain;
-  /* Add padding to keep products away from edges */
-  padding-left: 80px;
-  padding-right: 80px;
 }
 
   .luxury-scroll-container::-webkit-scrollbar {
@@ -739,12 +736,7 @@ All colors MUST be HSL.
     .luxury-carousel-inner {
       max-width: 1600px;
       margin: 0 auto;
-      padding: 60px 0;
-    }
-
-    .luxury-scroll-container {
-      padding-left: 100px;
-      padding-right: 100px;
+      padding: 60px 120px;
     }
 
     /* 4 products visible: (100% - 3 gaps) / 4 */
@@ -771,23 +763,18 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-prev {
-      left: 20px;
+      left: 40px;
     }
 
     .luxury-nav-next {
-      right: 20px;
+      right: 40px;
     }
   }
 
   /* TABLET - 768PX TIL 1199PX - ALTID 3 PRODUKTER */
   @media (min-width: 768px) and (max-width: 1199px) {
     .luxury-carousel-inner {
-      padding: 60px 0;
-    }
-
-    .luxury-scroll-container {
-      padding-left: 90px;
-      padding-right: 90px;
+      padding: 60px 80px;
     }
 
     /* 3 products visible: (100% - 2 gaps) / 3 */
@@ -812,23 +799,18 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-prev {
-      left: 12px;
+      left: 16px;
     }
 
     .luxury-nav-next {
-      right: 12px;
+      right: 16px;
     }
   }
 
   /* MOBIL - UNDER 768PX - ALTID 2 PRODUKTER */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 60px 0;
-    }
-
-    .luxury-scroll-container {
-      padding-left: 60px;
-      padding-right: 60px;
+      padding: 60px 20px;
     }
 
     /* 2 products visible: (100% - 1 gap) / 2 */
@@ -840,8 +822,8 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-arrow {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       top: 50%;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -849,16 +831,16 @@ All colors MUST be HSL.
     }
 
     .luxury-nav-icon {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
     }
 
     .luxury-nav-prev {
-      left: 4px;
+      left: 8px;
     }
 
     .luxury-nav-next {
-      right: 4px;
+      right: 8px;
     }
   }
 }
