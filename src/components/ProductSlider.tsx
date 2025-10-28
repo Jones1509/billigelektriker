@@ -146,10 +146,10 @@ export const ProductSlider = () => {
     setIsAutoScrollActive(false); // Stop auto-scroll permanently
     
     const viewport = viewportRef.current;
-    const viewportWidth = viewport.offsetWidth;
+    const scrollAmount = viewport.offsetWidth; // Scroll exactly one viewport width
     
     viewport.scrollBy({
-      left: -viewportWidth,
+      left: -scrollAmount,
       behavior: 'smooth'
     });
   };
@@ -160,7 +160,7 @@ export const ProductSlider = () => {
     setIsAutoScrollActive(false); // Stop auto-scroll permanently
     
     const viewport = viewportRef.current;
-    const viewportWidth = viewport.offsetWidth;
+    const scrollAmount = viewport.offsetWidth; // Scroll exactly one viewport width
     const maxScroll = viewport.scrollWidth - viewport.offsetWidth;
     
     // If at end, scroll to start
@@ -171,7 +171,7 @@ export const ProductSlider = () => {
       });
     } else {
       viewport.scrollBy({
-        left: viewportWidth,
+        left: scrollAmount,
         behavior: 'smooth'
       });
     }
@@ -311,25 +311,14 @@ export const ProductSlider = () => {
             <div 
               ref={viewportRef}
               onScroll={handleScroll}
-              className="carousel-viewport overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory"
-              style={{
-                scrollbarWidth: 'none', // Firefox
-                msOverflowStyle: 'none', // IE/Edge
-                WebkitOverflowScrolling: 'touch' // iOS momentum scrolling
-              }}
+              className="carousel-viewport"
             >
-              <style>{`
-                .carousel-viewport::-webkit-scrollbar {
-                  display: none; /* Chrome, Safari, Opera */
-                }
-              `}</style>
-              
               {/* Carousel track with precise column widths */}
-              <div className="carousel-track flex flex-nowrap gap-3 md:gap-5 lg:gap-6">
+              <div className="carousel-track">
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-${index}`}
-                    className="product-card-wrapper flex-shrink-0 flex-grow-0 snap-start snap-always w-[calc((100%-12px)/2)] min-w-[calc((100%-12px)/2)] max-w-[calc((100%-12px)/2)] md:w-[calc((100%-40px)/3)] md:min-w-[calc((100%-40px)/3)] md:max-w-[calc((100%-40px)/3)] lg:w-[calc((100%-72px)/4)] lg:min-w-[calc((100%-72px)/4)] lg:max-w-[calc((100%-72px)/4)]"
+                    className="product-card-wrapper"
                   >
                     <ProductCard product={product} />
                   </div>
