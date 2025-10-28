@@ -251,6 +251,13 @@ export const Header = () => {
             </Link>
             
             <div className="flex items-center gap-3">
+              <Link 
+                to="/tilbud" 
+                className="inline-flex items-center justify-center px-5 py-2 text-[14px] font-semibold text-white bg-white/20 border-2 border-white rounded-full transition-all duration-300 hover:bg-white hover:text-primary active:scale-95"
+              >
+                Tilbud
+              </Link>
+              
               <CartDrawer />
               
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -506,21 +513,17 @@ export const Header = () => {
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
-
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild>
-                <Link 
-                  to="/tilbud" 
-                  className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-base font-medium text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300"
-                >
-                  Tilbud
-                </Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
           </NavigationMenuList>
             </NavigationMenu>
             
-            <div className="flex items-center gap-3 justify-end">
+            <div className="flex items-center gap-4 justify-end">
+              <Link 
+                to="/tilbud" 
+                className="inline-flex items-center justify-center px-6 py-2.5 text-[15px] font-semibold text-white bg-white/20 border-2 border-white rounded-full transition-all duration-300 hover:bg-white hover:text-primary hover:scale-105 hover:shadow-[0_4px_12px_rgba(255,255,255,0.3)] active:scale-98"
+              >
+                Tilbud
+              </Link>
+              
               <div className="flex">
                 <LanguageSwitcher />
               </div>
