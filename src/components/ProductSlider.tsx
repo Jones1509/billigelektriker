@@ -242,17 +242,17 @@ export const ProductSlider = () => {
   };
 
   return (
-    <section className="luxury-carousel-section">
+    <section className="luxury-carousel-section" aria-label="Populære produkter i webshoppen">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]" aria-hidden="true"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]" aria-hidden="true"></div>
       
       <div className="luxury-carousel-inner">
         {/* Header section */}
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
-            <Zap className="w-3.5 h-3.5" />
+            <Zap className="w-3.5 h-3.5" aria-hidden="true" />
             {t('productSlider.badge')}
           </span>
           
@@ -264,7 +264,8 @@ export const ProductSlider = () => {
           </p>
           
           {/* Tab buttons */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6' }}>
+          <nav aria-label="Produktfiltre">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6' }} role="tablist">
             <button
               onClick={() => handleTabChange('popular')}
               className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
@@ -299,6 +300,7 @@ export const ProductSlider = () => {
               Anbefalet
             </button>
           </div>
+          </nav>
         </div>
 
         {isLoading ? (

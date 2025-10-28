@@ -16,6 +16,27 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const addItem = useCartStore(state => state.addItem);
   const { node } = product;
 
+  // Product schema for SEO
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": node.title,
+    "description": node.description || `Køb ${node.title} hos Billig Elektriker`,
+    "image": node.images.edges[0]?.node.url,
+    "sku": node.id,
+    "offers": {
+      "@type": "Offer",
+      "url": `https://billigelektriker.dk/product/${node.handle}`,
+      "priceCurrency": node.priceRange.minVariantPrice.currencyCode,
+      "price": node.priceRange.minVariantPrice.amount,
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Billig Elektriker"
+      }
+    }
+  };
+
   const handleAddToCart = () => {
     const defaultVariant = node.variants.edges[0]?.node;
     
@@ -42,26 +63,32 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   const imageUrl = node.images.edges[0]?.node.url;
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
+  const altText = node.images.edges[0]?.node.altText || `${node.title} - Smart belysning fra Billig Elektriker`;
 
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
-      <Link to={`/product/${node.handle}`} className="relative block">
-        <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
-          {imageUrl ? (
-            <>
-              <img
-                src={imageUrl}
-                alt={node.title}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
-              />
-              {/* Status badge */}
-              <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white" 
-                    style={{ background: '#10B981' }}>
-                På lager
-              </span>
-            </>
-          ) : (
+    <>
+      <script type="application/ld+json">
+        {JSON.stringify(productSchema)}
+      </script>
+      <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
+        <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
+          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
+            {imageUrl ? (
+              <>
+                <img
+                  src={imageUrl}
+                  alt={altText}
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
+                />
+                {/* Status badge */}
+                <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white" 
+                      style={{ background: '#10B981' }}
+                      aria-label="Produktet er på lager">
+                  På lager
+                </span>
+              </>
+            ) : (
             <div className="w-full h-full flex items-center justify-center text-muted-foreground">
               {t('productCard.noImage')}
             </div>
@@ -70,13 +97,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       </Link>
       
       <CardContent className="p-2 md:p-2.5 lg:p-3.5 flex-1 flex flex-col">
-        <Link to={`/product/${node.handle}`}>
+        <Link to={`/product/${node.handle}`} aria-label={`Læs mere om ${node.title}`}>
           <h3 className="font-semibold text-[11px] md:text-sm lg:text-base leading-tight mb-1 md:mb-1 lg:mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
             {node.title}
           </h3>
         </Link>
         
-        <p className="text-base md:text-lg lg:text-[22px] font-bold text-foreground mb-1.5 md:mb-2 lg:mb-3 mt-auto">
+        <p className="text-base md:text-lg lg:text-[22px] font-bold text-foreground mb-1.5 md:mb-2 lg:mb-3 mt-auto" aria-label={`Pris: ${price.toFixed(0)} kroner`}>
           DKK {price.toFixed(0)}
         </p>
         
@@ -87,12 +114,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             boxShadow: '0 2px 8px rgba(16, 185, 129, 0.25)'
           }}
+          aria-label={`Tilføj ${node.title} til kurv`}
         >
-          <ShoppingCart className="w-3 h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 mr-1 md:mr-1.5 lg:mr-2" />
+          <ShoppingCart className="w-3 h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 mr-1 md:mr-1.5 lg:mr-2" aria-hidden="true" />
           <span className="hidden md:inline">{t('productCard.addToCart')}</span>
           <span className="md:hidden">Køb</span>
         </Button>
       </CardContent>
     </Card>
+    </>
   );
 };
