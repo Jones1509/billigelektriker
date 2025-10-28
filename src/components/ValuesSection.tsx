@@ -32,7 +32,7 @@ export const ValuesSection = () => {
   ];
 
   return (
-    <section className="relative py-6 md:py-8 pb-0 overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--muted) / 0.2) 0%, hsl(var(--blue-tint) / 0.6) 100%)' }}>
+    <section className="relative py-8 md:py-12 pb-0 overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--muted) / 0.2) 0%, hsl(var(--blue-tint) / 0.6) 100%)' }}>
       {/* Smooth top fade */}
       <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--muted)/0.2)] to-transparent pointer-events-none z-[5]"></div>
       
@@ -54,7 +54,7 @@ export const ValuesSection = () => {
       </div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-6 md:mb-8 animate-fade-in px-4">
+        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
           {/* Premium Badge with gentle bounce */}
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DBEAFE] to-[#BFDBFE] text-primary text-sm font-semibold mb-6 shadow-[0_4px_12px_rgba(0,102,255,0.15)] animate-[gentleBounce_2s_ease-in-out_infinite]">
             <div className="w-2 h-2 rounded-full bg-primary"></div>

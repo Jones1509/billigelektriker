@@ -37,11 +37,11 @@ export const ProductCategories = () => {
   ];
 
   return (
-    <section className="py-6 md:py-10 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint) / 0.3) 50%, hsl(var(--blue-tint)) 100%)' }}>
+    <section className="py-12 md:py-20 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint) / 0.3) 50%, hsl(var(--blue-tint)) 100%)' }}>
       {/* Smooth top fade */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[hsl(var(--background))] to-transparent pointer-events-none z-[2]"></div>
       <div className="container relative z-10">
-        <div className="text-center mb-6 md:mb-10 animate-fade-in px-4">
+        <div className="text-center mb-12 md:mb-16 animate-fade-in px-4">
           <span className="inline-block px-3 py-1.5 rounded-full bg-blue-500/10 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium mb-6 border border-blue-500/30">
             Udforsk Vores Sortiment
           </span>

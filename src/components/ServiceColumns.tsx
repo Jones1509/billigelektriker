@@ -42,7 +42,7 @@ export const ServiceColumns = () => {
   ];
   
   return (
-    <section className="py-6 md:py-8 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.2) 100%)' }}>
+    <section className="py-8 md:py-12 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--muted) / 0.2) 100%)' }}>
       {/* Top smooth fade */}
       <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[hsl(var(--background))] to-transparent pointer-events-none z-0"></div>
       
@@ -51,7 +51,7 @@ export const ServiceColumns = () => {
       
       <div className="container relative z-10">
         {/* Centered header */}
-        <div className="text-center mb-6 md:mb-8 animate-fade-in px-4 max-w-3xl mx-auto">
+        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
             {t('serviceColumns.title')}
           </h2>
