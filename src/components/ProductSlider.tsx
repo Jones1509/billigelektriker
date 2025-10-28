@@ -303,39 +303,15 @@ export const ProductSlider = () => {
           </div>
         ) : displayProducts.length > 0 ? (
           <div 
-            className="relative px-[10px] md:px-5 lg:px-[90px]"
+            className="relative px-5 md:px-10 lg:px-20"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {/* Previous Arrow */}
-            <button
-              onClick={handlePrevious}
-              disabled={isAtStart}
-              className={`nav-arrow prev-arrow ${isAtStart ? 'opacity-30 cursor-not-allowed' : ''}`}
-              style={{ touchAction: 'manipulation' }}
-              aria-label="Forrige produkter"
-              aria-disabled={isAtStart}
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            {/* Next Arrow */}
-            <button
-              onClick={handleNext}
-              disabled={isAtEnd}
-              className={`nav-arrow next-arrow ${isAtEnd ? 'opacity-30 cursor-not-allowed' : ''}`}
-              style={{ touchAction: 'manipulation' }}
-              aria-label="Næste produkter"
-              aria-disabled={isAtEnd}
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-
             {/* Carousel viewport with native scroll */}
             <div 
               ref={viewportRef}
               onScroll={handleScroll}
-              className="overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory"
+              className="carousel-viewport overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory"
               style={{
                 scrollbarWidth: 'none', // Firefox
                 msOverflowStyle: 'none', // IE/Edge
@@ -348,17 +324,42 @@ export const ProductSlider = () => {
                 }
               `}</style>
               
-              {/* Single unified track for all screen sizes */}
-              <div className="flex flex-nowrap gap-4 md:gap-[18px] lg:gap-5">
+              {/* Carousel track with precise column widths */}
+              <div className="carousel-track flex flex-nowrap gap-4 md:gap-5 lg:gap-6">
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-${index}`}
-                    className="flex-shrink-0 snap-start snap-always w-[calc((100%-16px)/2)] md:w-[calc((100%-36px)/3)] lg:w-[calc((100%-60px)/4)]"
+                    className="product-card-wrapper flex-shrink-0 flex-grow-0 snap-start snap-always w-[calc((100%-16px)/2)] min-w-[calc((100%-16px)/2)] max-w-[calc((100%-16px)/2)] md:w-[calc((100%-40px)/3)] md:min-w-[calc((100%-40px)/3)] md:max-w-[calc((100%-40px)/3)] lg:w-[calc((100%-72px)/4)] lg:min-w-[calc((100%-72px)/4)] lg:max-w-[calc((100%-72px)/4)]"
                   >
                     <ProductCard product={product} />
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Arrow container - separate overlay */}
+            <div className="arrow-container absolute top-0 left-0 w-full h-[200px] md:h-[250px] lg:h-[300px] flex justify-between items-center pointer-events-none z-[100] px-2 md:px-4 lg:px-5">
+              <button
+                onClick={handlePrevious}
+                disabled={isAtStart}
+                className={`carousel-arrow carousel-arrow-left pointer-events-auto ${isAtStart ? 'opacity-30 cursor-not-allowed' : ''}`}
+                style={{ touchAction: 'manipulation' }}
+                aria-label="Forrige produkter"
+                aria-disabled={isAtStart}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <button
+                onClick={handleNext}
+                disabled={isAtEnd}
+                className={`carousel-arrow carousel-arrow-right pointer-events-auto ${isAtEnd ? 'opacity-30 cursor-not-allowed' : ''}`}
+                style={{ touchAction: 'manipulation' }}
+                aria-label="Næste produkter"
+                aria-disabled={isAtEnd}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
 
             {/* Progress dots */}
