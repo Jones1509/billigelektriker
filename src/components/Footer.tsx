@@ -257,8 +257,9 @@ export const Footer = () => {
             </div>
             <div className="flex flex-col items-center gap-3 w-full md:w-auto">
               <span className="text-xs text-[#6B7280] font-medium">Vi accepterer:</span>
-              <div className="flex flex-col gap-2 items-center">
-                {/* Første række - 5 ikoner */}
+              {/* Mobile: Stakket i 2 rækker, Tablet/Desktop: Alle på 1 række */}
+              <div className="flex flex-col md:flex-row gap-2 items-center">
+                {/* Første række på mobil - 5 ikoner */}
                 <div className="flex gap-2 justify-center items-center">
                   <div className="group cursor-pointer">
                     <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
@@ -287,7 +288,7 @@ export const Footer = () => {
                   </div>
                 </div>
                 
-                {/* Anden række - 3 ikoner centreret */}
+                {/* Anden række på mobil - 3 ikoner */}
                 <div className="flex gap-2 justify-center items-center">
                   <div className="group cursor-pointer">
                     <div className="bg-white p-2 md:p-1.5 rounded-lg border border-[#E5E7EB] hover:shadow-md transition-all duration-300 hover:scale-105">
