@@ -4,23 +4,12 @@ import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, ShoppingBag, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState, useRef, useEffect, useCallback } from "react";
-
-// Auto-scroll constants
-const AUTO_SCROLL_INTERVAL = 2500;
-const AUTO_SCROLL_RESUME_DELAY = 3000;
+import { useState, useRef } from "react";
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
-  const [isPaused, setIsPaused] = useState(false);
-  
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const autoScrollTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const isUserScrollingRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -39,194 +28,34 @@ export const ProductSlider = () => {
       : data.slice(8, 20)
   ) : [];
 
-  const totalProducts = displayProducts.length;
-
-  // Get visible products count based on screen size
-  const getVisibleProductsCount = useCallback(() => {
-    if (typeof window === 'undefined') return 4;
-    if (window.innerWidth >= 1024) return 4; // Desktop
-    if (window.innerWidth >= 768) return 3;  // Tablet
-    return 2; // Mobile
-  }, []);
-
-  // Update current page based on scroll position
-  const updateCurrentPage = useCallback(() => {
-    if (!viewportRef.current) return;
-    
-    const viewport = viewportRef.current;
-    const scrollPosition = viewport.scrollLeft;
-    const viewportWidth = viewport.offsetWidth;
-    const visibleProducts = getVisibleProductsCount();
-    const totalPages = Math.ceil(totalProducts / visibleProducts);
-    
-    // Calculate current page (0-indexed)
-    const calculatedPage = Math.round(scrollPosition / viewportWidth);
-    const clampedPage = Math.max(0, Math.min(calculatedPage, totalPages - 1));
-    
-    setCurrentPage(clampedPage);
-  }, [totalProducts, getVisibleProductsCount]);
-
-  // Handle native scroll events
-  const handleScroll = useCallback(() => {
-    if (!viewportRef.current) return;
-    
-    // User is scrolling manually
-    isUserScrollingRef.current = true;
-    setIsAutoScrollActive(false);
-    
-    // Update current page
-    updateCurrentPage();
-    
-    // Clear existing timeout
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
-    
-    // Resume auto-scroll after user stops scrolling
-    scrollTimeoutRef.current = setTimeout(() => {
-      isUserScrollingRef.current = false;
-      // Only resume if not stopped by arrow click
-      if (isPaused === false) {
-        setIsAutoScrollActive(true);
-      }
-    }, AUTO_SCROLL_RESUME_DELAY);
-  }, [updateCurrentPage, isPaused]);
-
-  // Auto-scroll functionality using native scroll
-  useEffect(() => {
-    if (!isAutoScrollActive || isPaused || totalProducts === 0 || !viewportRef.current) return;
-
-    autoScrollTimerRef.current = setInterval(() => {
-      if (!viewportRef.current || isUserScrollingRef.current) return;
-      
-      const viewport = viewportRef.current;
-      const viewportWidth = viewport.offsetWidth;
-      const maxScroll = viewport.scrollWidth - viewport.offsetWidth;
-      const currentScroll = viewport.scrollLeft;
-      
-      // Check if at the end
-      if (currentScroll >= maxScroll - 10) {
-        // Scroll back to start
-        viewport.scrollTo({
-          left: 0,
-          behavior: 'smooth'
-        });
-      } else {
-        // Scroll to next page
-        viewport.scrollBy({
-          left: viewportWidth,
-          behavior: 'smooth'
-        });
-      }
-    }, AUTO_SCROLL_INTERVAL);
-
-    return () => {
-      if (autoScrollTimerRef.current) {
-        clearInterval(autoScrollTimerRef.current);
-      }
-    };
-  }, [isAutoScrollActive, isPaused, totalProducts]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (autoScrollTimerRef.current) {
-        clearInterval(autoScrollTimerRef.current);
-      }
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, []);
-
   // Handle arrow navigation
   const handlePrevious = () => {
-    if (!viewportRef.current) return;
-    
-    setIsAutoScrollActive(false); // Stop auto-scroll permanently
-    
-    const viewport = viewportRef.current;
-    const scrollAmount = viewport.offsetWidth; // Scroll exactly one viewport width
-    
-    viewport.scrollBy({
-      left: -scrollAmount,
+    if (!containerRef.current) return;
+    containerRef.current.scrollBy({
+      left: -containerRef.current.offsetWidth,
       behavior: 'smooth'
     });
   };
 
   const handleNext = () => {
-    if (!viewportRef.current) return;
-    
-    setIsAutoScrollActive(false); // Stop auto-scroll permanently
-    
-    const viewport = viewportRef.current;
-    const scrollAmount = viewport.offsetWidth; // Scroll exactly one viewport width
-    const maxScroll = viewport.scrollWidth - viewport.offsetWidth;
-    
-    // If at end, scroll to start
-    if (viewport.scrollLeft >= maxScroll - 10) {
-      viewport.scrollTo({
-        left: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      viewport.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    }
+    if (!containerRef.current) return;
+    containerRef.current.scrollBy({
+      left: containerRef.current.offsetWidth,
+      behavior: 'smooth'
+    });
   };
 
   // Reset when tab changes
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
     setActiveTab(tab);
-    setCurrentPage(0);
-    setIsAutoScrollActive(true);
-    
-    // Reset scroll position
-    if (viewportRef.current) {
-      viewportRef.current.scrollTo({ left: 0, behavior: 'auto' });
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ left: 0, behavior: 'auto' });
     }
   };
 
-  // Pause on hover
-  const handleMouseEnter = () => {
-    setIsPaused(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsPaused(false);
-  };
-
-  // Calculate total pages for dots
-  const getTotalPages = () => {
-    const visibleProducts = getVisibleProductsCount();
-    return Math.ceil(totalProducts / visibleProducts);
-  };
-
-  // Handle dot click
-  const handleDotClick = (pageIndex: number) => {
-    if (!viewportRef.current) return;
-    
-    setIsAutoScrollActive(false);
-    
-    const viewport = viewportRef.current;
-    const viewportWidth = viewport.offsetWidth;
-    const targetScroll = pageIndex * viewportWidth;
-    
-    viewport.scrollTo({
-      left: targetScroll,
-      behavior: 'smooth'
-    });
-  };
-
-  // Check if at start/end for arrow disabled states
-  const isAtStart = currentPage === 0;
-  const isAtEnd = currentPage >= getTotalPages() - 1;
-
   return (
     <section 
-      className="py-8 md:py-12 relative overflow-visible"
+      className="products-section py-8 md:py-12 relative"
       style={{ 
         background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--blue-tint)) 100%)'
       }}
@@ -238,8 +67,8 @@ export const ProductSlider = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       
-      <div className="max-w-[1400px] mx-auto relative z-10 px-4 md:px-6 lg:px-0">
-        <div className="text-center mb-5 md:mb-7 animate-fade-in">
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="text-center mb-5 md:mb-7 animate-fade-in px-4">
           {/* Webshop Badge with gradient */}
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
@@ -302,70 +131,37 @@ export const ProductSlider = () => {
             </div>
           </div>
         ) : displayProducts.length > 0 ? (
-          <div 
-            className="relative px-5 md:px-10 lg:px-20"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {/* Carousel viewport with native scroll */}
+          <div className="relative">
+            {/* Products container with horizontal scroll */}
             <div 
-              ref={viewportRef}
-              onScroll={handleScroll}
-              className="carousel-viewport"
+              ref={containerRef}
+              className="products-container"
             >
-              {/* Carousel track with precise column widths */}
-              <div className="carousel-track">
+              <div className="products-grid">
                 {displayProducts.map((product, index) => (
-                  <div 
-                    key={`${product.node.id}-${index}`}
-                    className="product-card-wrapper"
-                  >
+                  <div key={`${product.node.id}-${index}`} className="product-card">
                     <ProductCard product={product} />
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Arrow container - separate overlay */}
-            <div className="arrow-container absolute top-0 left-0 w-full h-[200px] md:h-[250px] lg:h-[300px] flex justify-between items-center pointer-events-none z-[100] px-2 md:px-4 lg:px-5">
-              <button
-                onClick={handlePrevious}
-                disabled={isAtStart}
-                className={`carousel-arrow carousel-arrow-left pointer-events-auto ${isAtStart ? 'opacity-30 cursor-not-allowed' : ''}`}
-                style={{ touchAction: 'manipulation' }}
-                aria-label="Forrige produkter"
-                aria-disabled={isAtStart}
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
+            {/* Arrow buttons */}
+            <button
+              onClick={handlePrevious}
+              className="scroll-btn prev"
+              aria-label="Forrige produkter"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
 
-              <button
-                onClick={handleNext}
-                disabled={isAtEnd}
-                className={`carousel-arrow carousel-arrow-right pointer-events-auto ${isAtEnd ? 'opacity-30 cursor-not-allowed' : ''}`}
-                style={{ touchAction: 'manipulation' }}
-                aria-label="Næste produkter"
-                aria-disabled={isAtEnd}
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Progress dots */}
-            <div className="flex items-center justify-center gap-2 mt-5">
-              {Array.from({ length: getTotalPages() }).map((_, pageIndex) => (
-                <button
-                  key={pageIndex}
-                  onClick={() => handleDotClick(pageIndex)}
-                  className={`transition-all duration-300 rounded-full ${
-                    pageIndex === currentPage
-                      ? 'w-6 h-2 bg-[#2563EB]'
-                      : 'w-2 h-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]'
-                  }`}
-                  aria-label={`Gå til side ${pageIndex + 1}`}
-                />
-              ))}
-            </div>
+            <button
+              onClick={handleNext}
+              className="scroll-btn next"
+              aria-label="Næste produkter"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
           </div>
         ) : (
           <div className="text-center py-12">

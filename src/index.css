@@ -111,192 +111,143 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Carousel Viewport */
-  .carousel-viewport {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    scroll-padding: 0;
-    padding: 0 !important;
-    margin: 0 !important;
+  /* Products Section Styles - Complete Rewrite */
+  .products-section {
+    position: relative;
+    width: 100%;
   }
 
-  .carousel-viewport::-webkit-scrollbar {
+  .products-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 16px;
+  }
+
+  .products-container::-webkit-scrollbar {
     display: none;
   }
 
-  /* Carousel Track */
-  .carousel-track {
+  .products-grid {
     display: flex;
-    flex-wrap: nowrap;
-    padding: 0 !important;
-    margin: 0 !important;
+    gap: 12px;
+    width: max-content;
   }
 
-  /* Product Card Wrapper */
-  .product-card-wrapper {
+  .product-card {
     flex-shrink: 0;
-    flex-grow: 0;
-    scroll-snap-stop: always;
+    scroll-snap-align: start;
   }
 
-  /* Mobile - 2 products per view */
-  @media (max-width: 767px) {
-    .carousel-track {
-      gap: 12px;
-    }
-
-    .product-card-wrapper {
-      width: calc((100% - 12px) / 2);
-      min-width: calc((100% - 12px) / 2);
-      max-width: calc((100% - 12px) / 2);
-    }
-
-    /* Snap only first product in each group of 2 */
-    .product-card-wrapper:nth-child(odd) {
-      scroll-snap-align: start;
-    }
-
-    .product-card-wrapper:nth-child(even) {
-      scroll-snap-align: none;
-    }
-  }
-
-  /* Tablet - 3 products per view */
-  @media (min-width: 768px) and (max-width: 1199px) {
-    .carousel-track {
-      gap: 20px;
-    }
-
-    .product-card-wrapper {
-      width: calc((100% - 40px) / 3);
-      min-width: calc((100% - 40px) / 3);
-      max-width: calc((100% - 40px) / 3);
-    }
-
-    /* Snap only first product in each group of 3 */
-    .product-card-wrapper:nth-child(3n+1) {
-      scroll-snap-align: start;
-    }
-
-    .product-card-wrapper:nth-child(3n+2),
-    .product-card-wrapper:nth-child(3n) {
-      scroll-snap-align: none;
-    }
-  }
-
-  /* Desktop - 4 products per view */
-  @media (min-width: 1200px) {
-    .carousel-track {
-      gap: 24px;
-    }
-
-    .product-card-wrapper {
-      width: calc((100% - 72px) / 4);
-      min-width: calc((100% - 72px) / 4);
-      max-width: calc((100% - 72px) / 4);
-    }
-
-    /* Snap only first product in each group of 4 */
-    .product-card-wrapper:nth-child(4n+1) {
-      scroll-snap-align: start;
-    }
-
-    .product-card-wrapper:nth-child(4n+2),
-    .product-card-wrapper:nth-child(4n+3),
-    .product-card-wrapper:nth-child(4n) {
-      scroll-snap-align: none;
-    }
-  }
-
-  /* Arrow Styles */
-  .carousel-arrow {
+  /* Scroll buttons */
+  .scroll-btn {
     position: absolute;
-    z-index: 100;
-    background: white;
-    border: 1px solid #E5E7EB;
+    top: 35%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    cursor: pointer;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #2563EB;
-    font-size: 20px;
-    width: 48px;
-    height: 48px;
+    cursor: pointer;
     transition: all 0.2s ease;
-    pointer-events: auto;
-    touch-action: manipulation;
   }
 
-  .carousel-arrow:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
+  .scroll-btn:hover {
+    background: #f8f9fa;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
 
-  .carousel-arrow-left {
-    left: 20px;
+  .scroll-btn.prev {
+    left: 8px;
   }
 
-  .carousel-arrow-right {
-    right: 20px;
+  .scroll-btn.next {
+    right: 8px;
   }
 
-  /* Desktop Arrow Styles */
+  /* Mobile styles (under 768px) */
+  @media (max-width: 767px) {
+    .products-container {
+      padding: 0 16px;
+    }
+    
+    .products-grid {
+      gap: 12px;
+    }
+    
+    .product-card {
+      width: calc((100vw - 44px) / 2);
+      min-width: calc((100vw - 44px) / 2);
+      max-width: calc((100vw - 44px) / 2);
+    }
+  }
+
+  /* Tablet styles (768px - 1199px) */
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .products-container {
+      padding: 0 30px;
+    }
+    
+    .products-grid {
+      gap: 16px;
+    }
+    
+    .product-card {
+      width: 280px;
+      min-width: 280px;
+      max-width: 280px;
+    }
+    
+    .scroll-btn {
+      width: 46px;
+      height: 46px;
+    }
+    
+    .scroll-btn.prev {
+      left: 10px;
+    }
+    
+    .scroll-btn.next {
+      right: 10px;
+    }
+  }
+
+  /* Desktop styles (1200px+) */
   @media (min-width: 1200px) {
-    .carousel-arrow {
+    .products-container {
+      padding: 0 100px;
+    }
+    
+    .products-grid {
+      gap: 24px;
+    }
+    
+    .product-card {
+      width: 300px;
+      min-width: 300px;
+      max-width: 300px;
+    }
+    
+    .scroll-btn {
       width: 50px;
       height: 50px;
-      font-size: 20px;
     }
-
-    .carousel-arrow:hover:not(:disabled) {
-      background: #2563EB;
-      color: white;
-      transform: scale(1.05);
-    }
-  }
-
-  /* Tablet Arrow Styles */
-  @media (min-width: 768px) and (max-width: 1199px) {
-    .carousel-arrow {
-      width: 44px;
-      height: 44px;
-      font-size: 20px;
-    }
-
-    .carousel-arrow-left {
-      left: 30px;
-    }
-
-    .carousel-arrow-right {
-      right: 30px;
-    }
-  }
-
-  /* Mobile Arrow Styles */
-  @media (max-width: 767px) {
-    .carousel-arrow {
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-    }
-
-    .carousel-arrow-left {
+    
+    .scroll-btn.prev {
       left: 20px;
     }
-
-    .carousel-arrow-right {
+    
+    .scroll-btn.next {
       right: 20px;
-    }
-
-    .carousel-arrow:active:not(:disabled) {
-      background: #2563EB;
-      color: white;
     }
   }
 }
