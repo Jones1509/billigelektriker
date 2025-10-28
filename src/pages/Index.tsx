@@ -13,6 +13,7 @@ import { NewsletterCTA } from "@/components/NewsletterCTA";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { StructuredData } from "@/components/StructuredData";
+import { FAQSchema } from "@/components/FAQSchema";
 import { Helmet } from "react-helmet";
 
 const Index = () => {
@@ -21,10 +22,28 @@ const Index = () => {
       <Helmet>
         <title>Billig Elektriker København | Certificeret El-Service & Smart Home Webshop</title>
         <meta name="description" content="Billig elektriker i København ⚡ Autoriserede elektrikere til installation, fejlfinding & smart home. Webshop med Philips Hue, IKEA Trådfri m.m. ⭐ Fair priser & høj kvalitet" />
+        <meta name="keywords" content="billig elektriker, elektriker københavn, el-installation, fejlfinding, smart home, philips hue, ikea trådfri, certificeret elektriker, autoriseret elektriker, el-service københavn, stikkontakter, afbrydere, led belysning, smart belysning" />
         <link rel="canonical" href="https://billigelektriker.dk" />
+        
+        {/* Preconnect to critical domains */}
+        <link rel="preconnect" href="https://storefront-hero-ah7ur.myshopify.com" />
+        <link rel="dns-prefetch" href="https://storefront-hero-ah7ur.myshopify.com" />
+        
+        {/* Additional meta tags */}
+        <meta name="author" content="Billig Elektriker ApS" />
+        <meta name="geo.region" content="DK-084" />
+        <meta name="geo.placename" content="København" />
+        <meta name="geo.position" content="55.770249;12.481379" />
+        <meta name="ICBM" content="55.770249, 12.481379" />
+        
+        {/* Mobile optimization */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </Helmet>
       
       <StructuredData />
+      <FAQSchema />
       
       <div className="min-h-screen bg-background">
         <Header />

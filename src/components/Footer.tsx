@@ -25,20 +25,20 @@ export const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-8 md:gap-10 lg:gap-12 mb-8">
           
           {/* Kolonne 1: About + Logo */}
-          <div>
+          <div itemScope itemType="https://schema.org/LocalBusiness">
             <div className="flex items-start gap-3 mb-5 md:mb-6">
-              <img src={logoFooter} alt="Billig Elektriker Logo" className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0" />
+              <img src={logoFooter} alt="Billig Elektriker Logo" className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0" itemProp="logo" />
               <div>
-                <h3 className="text-[#1F2937] font-bold text-lg sm:text-xl leading-tight mb-1">Billig Elektriker</h3>
-                <p className="text-[#6B7280] text-xs sm:text-sm">ASA ApS</p>
+                <h3 className="text-[#1F2937] font-bold text-lg sm:text-xl leading-tight mb-1" itemProp="name">Billig Elektriker</h3>
+                <p className="text-[#6B7280] text-xs sm:text-sm" itemProp="alternateName">ASA ApS</p>
               </div>
             </div>
             
-            <p className="text-[#374151] mb-2 text-sm leading-relaxed font-medium">
+            <p className="text-[#374151] mb-2 text-sm leading-relaxed font-medium" itemProp="description">
               Professionel el-service til fair priser
             </p>
             <p className="text-[#6B7280] mb-4 text-sm leading-relaxed">
-              Certificerede elektrikere med passion for kvalitet og kundetilfredshed
+              Certificerede elektrikere med passion for kvalitet og kundetilfredshed. Specialister i el-installation, fejlfinding, smart home og webshop med el-produkter.
             </p>
             
 

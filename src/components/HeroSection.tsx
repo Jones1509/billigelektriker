@@ -43,9 +43,9 @@ export const HeroSection = () => {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 text-white leading-[1.1] sm:leading-tight">
               {t('hero.title1')}<span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-300">{t('hero.title2')}</span>{t('hero.title3')}
             </h1>
-            <p className="text-base sm:text-lg md:text-xl mb-4 md:mb-5 text-white/95 leading-relaxed">
+            <h2 className="text-base sm:text-lg md:text-xl mb-4 md:mb-5 text-white/95 leading-relaxed font-normal">
               {t('hero.subtitle')}
-            </p>
+            </h2>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <Button size="lg" className="bg-white text-primary hover:bg-white/95 font-semibold shadow-2xl hover:shadow-white/20 hover:scale-105 transition-all duration-300 group h-12 sm:h-14 text-base sm:text-lg">
                 {t('hero.seeOurWork')}
