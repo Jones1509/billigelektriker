@@ -196,7 +196,9 @@ export const ProductSlider = () => {
     const touchDiff = touchStartX.current - touchEndX.current;
     const touchDuration = Date.now() - touchStartTime.current;
     
-    const isValidSwipe = Math.abs(touchDiff) > 50 && touchDuration < 300;
+    const hasMinDistance = Math.abs(touchDiff) > 50;
+    const isQuickSwipe = touchDuration < 300;
+    const isValidSwipe = hasMinDistance && isQuickSwipe;
     
     if (isValidSwipe) {
       if (touchDiff > 0) {
@@ -225,9 +227,10 @@ export const ProductSlider = () => {
       
       setIsPaused(true);
       
-      if (e.deltaX > 30) {
+      const scrollThreshold = 30;
+      if (e.deltaX > scrollThreshold) {
         handleNext();
-      } else if (e.deltaX < -30) {
+      } else if (e.deltaX < -scrollThreshold) {
         handlePrevious();
       }
       
