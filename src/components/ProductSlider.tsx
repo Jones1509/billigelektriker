@@ -196,28 +196,29 @@ export const ProductSlider = () => {
     const touchDiff = touchStartX.current - touchEndX.current;
     const touchDuration = Date.now() - touchStartTime.current;
     
-    // Minimum swipe distance: 50px, maximum duration: 300ms
-    if (Math.abs(touchDiff) > 50 && touchDuration < 300) {
+    const minSwipeDistance = 50;
+    const maxSwipeDuration = 300;
+    
+    if (Math.abs(touchDiff) > minSwipeDistance && touchDuration < maxSwipeDuration) {
       if (touchDiff > 0) {
-        // Swipe left - next
         handleNext();
       } else {
-        // Swipe right - previous
         handlePrevious();
       }
     }
     
-    // Resume auto-scroll after 2 seconds
+    const resumeDelay = 2000;
     setTimeout(() => {
       if (isAutoScrollActive) {
         setIsPaused(false);
       }
-    }, 2000);
+    }, resumeDelay);
   };
 
   // Wheel event handler for trackpad scrolling
   const handleWheel = (e: React.WheelEvent) => {
-    // Check if it's horizontal scroll (trackpad with 2 fingers)
+    const horizontalThreshold = 30;
+    
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       e.preventDefault();
       
@@ -227,18 +228,18 @@ export const ProductSlider = () => {
       
       setIsPaused(true);
       
-      if (e.deltaX > 30) {
+      if (e.deltaX > horizontalThreshold) {
         handleNext();
-      } else if (e.deltaX < -30) {
+      } else if (e.deltaX < -horizontalThreshold) {
         handlePrevious();
       }
       
-      // Resume auto-scroll after 3 seconds of inactivity
+      const inactivityDelay = 3000;
       scrollTimeout.current = setTimeout(() => {
         if (isAutoScrollActive) {
           setIsPaused(false);
         }
-      }, 3000);
+      }, inactivityDelay);
     }
   };
 
