@@ -666,15 +666,14 @@ All colors MUST be HSL.
 .luxury-scroll-container {
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: auto;
-  scroll-snap-type: none; /* Disable snap for ultra smooth trackpad */
-  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth; /* Native smooth scrolling */
+  scroll-snap-type: none;
+  -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
-  transform: translateZ(0);
+  transform: translateZ(0); /* GPU acceleration */
   will-change: scroll-position;
-  /* Ultra smooth scrolling */
   scroll-padding: 0;
   overscroll-behavior-x: contain;
 }

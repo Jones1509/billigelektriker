@@ -115,37 +115,22 @@ export const ProductSlider = () => {
       requestAnimationFrame(updateButtonStates);
     };
 
-    // Touch events for mobile/tablet
+    // Touch events for mobile/tablet - native smooth scrolling
     const handleTouchStart = (e: TouchEvent) => {
       touchStartXRef.current = e.touches[0].pageX;
       touchScrollLeftRef.current = container.scrollLeft;
-      touchLastXRef.current = e.touches[0].pageX;
-      touchLastTimeRef.current = Date.now();
-      touchVelocityRef.current = 0;
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       const touchX = e.touches[0].pageX;
       const diff = touchStartXRef.current - touchX;
       
-      // 1.0x multiplier for smooth, controlled luxury feel (like Instagram)
+      // Native 1:1 smooth scrolling - ingen multiplier
       container.scrollLeft = touchScrollLeftRef.current + diff;
-      
-      // Calculate velocity
-      const now = Date.now();
-      const dt = now - touchLastTimeRef.current;
-      const dx = touchX - touchLastXRef.current;
-      touchVelocityRef.current = dt > 0 ? dx / dt : 0;
-      
-      touchLastXRef.current = touchX;
-      touchLastTimeRef.current = now;
     };
 
     const handleTouchEnd = () => {
-      // Apply momentum with reduced multiplier for smooth luxury scroll
-      if (Math.abs(touchVelocityRef.current) > 0.2) {
-        applyMomentum(-touchVelocityRef.current * 30);
-      }
+      // Ingen momentum - bare native smooth scrolling
     };
 
     // Mouse drag events
