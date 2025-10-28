@@ -4,13 +4,16 @@ import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, ShoppingBag, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const autoScrollTimerRef = useRef<NodeJS.Timeout | null>(null);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -23,27 +26,70 @@ export const ProductSlider = () => {
   // Filter products based on active tab
   const displayProducts = data ? (
     activeTab === 'popular' 
-      ? data.slice(0, 8)
+      ? data.slice(0, 12)
       : activeTab === 'new'
-      ? data.slice(4, 12)
-      : data.slice(8, 16)
+      ? data.slice(4, 16)
+      : data.slice(8, 20)
   ) : [];
 
-  const itemsPerView = 4; // Desktop shows 4 items
-  const maxIndex = Math.max(0, displayProducts.length - itemsPerView);
+  const totalProducts = displayProducts.length;
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!isAutoScrollActive || isPaused || totalProducts === 0) return;
+
+    autoScrollTimerRef.current = setInterval(() => {
+      setCurrentIndex(prev => {
+        const next = prev + 1;
+        // Seamless loop back to start
+        if (next >= totalProducts) {
+          return 0;
+        }
+        return next;
+      });
+    }, 2500); // Auto-scroll every 2.5 seconds
+
+    return () => {
+      if (autoScrollTimerRef.current) {
+        clearInterval(autoScrollTimerRef.current);
+      }
+    };
+  }, [isAutoScrollActive, isPaused, totalProducts]);
 
   const handlePrevious = () => {
-    setCurrentIndex(prev => Math.max(0, prev - itemsPerView));
+    setIsAutoScrollActive(false); // Stop auto-scroll permanently
+    setCurrentIndex(prev => {
+      if (prev === 0) {
+        return totalProducts - 1;
+      }
+      return prev - 1;
+    });
   };
 
   const handleNext = () => {
-    setCurrentIndex(prev => Math.min(maxIndex, prev + itemsPerView));
+    setIsAutoScrollActive(false); // Stop auto-scroll permanently
+    setCurrentIndex(prev => {
+      if (prev >= totalProducts - 1) {
+        return 0;
+      }
+      return prev + 1;
+    });
   };
 
-  // Reset index when tab changes
+  // Reset index and auto-scroll when tab changes
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
     setActiveTab(tab);
     setCurrentIndex(0);
+    setIsAutoScrollActive(true);
+  };
+
+  // Pause on hover
+  const handleMouseEnter = () => {
+    setIsPaused(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsPaused(false);
   };
 
   return (
@@ -124,45 +170,120 @@ export const ProductSlider = () => {
             </div>
           </div>
         ) : displayProducts.length > 0 ? (
-          <div className="relative">
-            {/* Navigation Arrows - Desktop & Tablet */}
+          <div 
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Navigation Arrows - Desktop */}
             <button
               onClick={handlePrevious}
-              disabled={currentIndex === 0}
-              className="hidden lg:flex absolute left-[-70px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-slate-200 disabled:hover:scale-100 shadow-lg group"
-              aria-label="Forrige produkter"
+              className="hidden lg:flex absolute left-[-70px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              aria-label="Forrige produkt"
             >
-              <ChevronLeft className="w-5 h-5 text-[#2563EB] group-hover:text-white transition-colors" />
+              <ChevronLeft className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+            </button>
+            
+            {/* Navigation Arrows - Tablet */}
+            <button
+              onClick={handlePrevious}
+              className="hidden md:flex lg:hidden absolute left-[10px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white/95 border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              aria-label="Forrige produkt"
+            >
+              <ChevronLeft className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
             </button>
             
             <button
               onClick={handleNext}
-              disabled={currentIndex >= maxIndex}
-              className="hidden lg:flex absolute right-[-70px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-slate-200 disabled:hover:scale-100 shadow-lg group"
-              aria-label="Næste produkter"
+              className="hidden lg:flex absolute right-[-70px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              aria-label="Næste produkt"
             >
-              <ChevronRight className="w-5 h-5 text-[#2563EB] group-hover:text-white transition-colors" />
+              <ChevronRight className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
             </button>
 
-            {/* Overflow container */}
+            {/* Navigation Arrows - Tablet */}
+            <button
+              onClick={handleNext}
+              className="hidden md:flex lg:hidden absolute right-[10px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white/95 border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              aria-label="Næste produkt"
+            >
+              <ChevronRight className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+            </button>
+
+            {/* Carousel viewport */}
             <div className="overflow-hidden">
               <div 
                 ref={scrollContainerRef}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 transition-transform duration-400 ease-in-out"
+                className="flex gap-4 md:gap-5 transition-transform duration-500 ease-in-out"
                 style={{ 
-                  transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)`
+                  transform: `translateX(-${currentIndex * (100 / 4)}%)`,
+                  width: `${(totalProducts / 4) * 100}%`
                 }}
               >
                 {displayProducts.map((product, index) => (
                   <div 
-                    key={product.node.id} 
-                    className="w-full animate-fade-in"
-                    style={{ animationDelay: `${index * 50}ms` }}
+                    key={`${product.node.id}-${index}`}
+                    className="flex-shrink-0 w-[calc(100%/4-15px)] hidden lg:block"
                   >
                     <ProductCard product={product} />
                   </div>
                 ))}
               </div>
+
+              {/* Tablet view - 3 columns */}
+              <div 
+                className="flex gap-[18px] transition-transform duration-500 ease-in-out hidden md:flex lg:hidden"
+                style={{ 
+                  transform: `translateX(-${currentIndex * (100 / 3)}%)`,
+                  width: `${(totalProducts / 3) * 100}%`
+                }}
+              >
+                {displayProducts.map((product, index) => (
+                  <div 
+                    key={`${product.node.id}-tablet-${index}`}
+                    className="flex-shrink-0 w-[calc(100%/3-12px)]"
+                  >
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+
+              {/* Mobile view - 2 columns */}
+              <div 
+                className="flex gap-4 transition-transform duration-500 ease-in-out md:hidden"
+                style={{ 
+                  transform: `translateX(-${currentIndex * (100 / 2)}%)`,
+                  width: `${(totalProducts / 2) * 100}%`
+                }}
+              >
+                {displayProducts.map((product, index) => (
+                  <div 
+                    key={`${product.node.id}-mobile-${index}`}
+                    className="flex-shrink-0 w-[calc(100%/2-8px)]"
+                  >
+                    <ProductCard product={product} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Progress dots */}
+            <div className="flex items-center justify-center gap-2 mt-5">
+              {displayProducts.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    setIsAutoScrollActive(false);
+                  }}
+                  className={`transition-all duration-300 rounded-full ${
+                    index === currentIndex
+                      ? 'w-6 h-2 bg-[#2563EB]'
+                      : 'w-2 h-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]'
+                  }`}
+                  aria-label={`Gå til produkt ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
         ) : (
