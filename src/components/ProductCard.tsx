@@ -52,6 +52,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
               <img
                 src={imageUrl}
                 alt={node.title}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
               />
               {/* Status badge */}

@@ -99,6 +99,19 @@ export const ProductSlider = () => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    // Keyboard navigation
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        const scrollAmount = container.clientWidth * 0.85;
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        const scrollAmount = container.clientWidth * 0.85;
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    };
+
     // Button click handlers
     const handlePrevClick = () => {
       const scrollAmount = container.clientWidth * 0.85;
@@ -187,6 +200,7 @@ export const ProductSlider = () => {
     };
 
     // Attach event listeners
+    window.addEventListener('keydown', handleKeyDown);
     if (prevBtnRef.current) prevBtnRef.current.addEventListener('click', handlePrevClick);
     if (nextBtnRef.current) nextBtnRef.current.addEventListener('click', handleNextClick);
     container.addEventListener('scroll', handleScroll, { passive: true });
@@ -205,6 +219,7 @@ export const ProductSlider = () => {
     updateButtonStates();
 
     return () => {
+      window.removeEventListener('keydown', handleKeyDown);
       if (prevBtnRef.current) prevBtnRef.current.removeEventListener('click', handlePrevClick);
       if (nextBtnRef.current) nextBtnRef.current.removeEventListener('click', handleNextClick);
       container.removeEventListener('scroll', handleScroll);
