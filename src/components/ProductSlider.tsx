@@ -190,24 +190,38 @@ export const ProductSlider = () => {
       container.style.cursor = 'grab';
     };
 
-    // Trackpad wheel event
+    // Trackpad wheel event - optimeret til MacBook
     let wheelTimeout: NodeJS.Timeout;
+    let lastWheelTime = Date.now();
+    let wheelVelocity = 0;
+    
     const handleWheel = (e: WheelEvent) => {
-      // Detect horizontal scroll
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-        e.preventDefault();
-        
-        // 2x multiplier for responsiveness
-        container.scrollLeft += e.deltaX * 2;
-        
-        // Apply momentum after scroll stops
-        clearTimeout(wheelTimeout);
-        wheelTimeout = setTimeout(() => {
-          if (Math.abs(e.deltaX) > 1) {
-            applyMomentum(e.deltaX * 30);
-          }
-        }, 50);
-      }
+      e.preventDefault();
+      
+      // Brug både deltaX og deltaY for bedre trackpad support
+      const deltaX = e.deltaX;
+      const deltaY = e.deltaY;
+      
+      // Hvis der er horizontal scroll, brug den
+      // Ellers brug vertikal scroll som horizontal (for bedre trackpad support)
+      const scrollAmount = Math.abs(deltaX) > Math.abs(deltaY) ? deltaX : deltaY;
+      
+      // 2.5x multiplier for ultra responsiveness
+      container.scrollLeft += scrollAmount * 2.5;
+      
+      // Beregn velocity for momentum
+      const now = Date.now();
+      const dt = now - lastWheelTime;
+      wheelVelocity = dt > 0 ? scrollAmount / dt : 0;
+      lastWheelTime = now;
+      
+      // Apply momentum efter scroll stopper
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => {
+        if (Math.abs(wheelVelocity) > 0.1) {
+          applyMomentum(wheelVelocity * 50);
+        }
+      }, 80);
     };
 
     // Attach event listeners
