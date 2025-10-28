@@ -303,7 +303,7 @@ export const ProductSlider = () => {
           </div>
         ) : displayProducts.length > 0 ? (
           <div 
-            className="relative px-5 md:px-10 lg:px-20"
+            className="relative px-4 md:px-10 lg:px-20"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -325,11 +325,11 @@ export const ProductSlider = () => {
               `}</style>
               
               {/* Carousel track with precise column widths */}
-              <div className="carousel-track flex flex-nowrap gap-4 md:gap-5 lg:gap-6">
+              <div className="carousel-track flex flex-nowrap gap-3 md:gap-5 lg:gap-6">
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-${index}`}
-                    className="product-card-wrapper flex-shrink-0 flex-grow-0 snap-start snap-always w-[calc((100%-16px)/2)] min-w-[calc((100%-16px)/2)] max-w-[calc((100%-16px)/2)] md:w-[calc((100%-40px)/3)] md:min-w-[calc((100%-40px)/3)] md:max-w-[calc((100%-40px)/3)] lg:w-[calc((100%-72px)/4)] lg:min-w-[calc((100%-72px)/4)] lg:max-w-[calc((100%-72px)/4)]"
+                    className="product-card-wrapper flex-shrink-0 flex-grow-0 snap-start snap-always w-[calc((100%-12px)/2)] min-w-[calc((100%-12px)/2)] max-w-[calc((100%-12px)/2)] md:w-[calc((100%-40px)/3)] md:min-w-[calc((100%-40px)/3)] md:max-w-[calc((100%-40px)/3)] lg:w-[calc((100%-72px)/4)] lg:min-w-[calc((100%-72px)/4)] lg:max-w-[calc((100%-72px)/4)]"
                   >
                     <ProductCard product={product} />
                   </div>
