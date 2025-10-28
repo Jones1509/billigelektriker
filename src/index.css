@@ -807,44 +807,44 @@ All colors MUST be HSL.
     }
   }
 
-  /* MOBIL - UNDER 768PX - VIS 2.4 PRODUKTER */
+  /* MOBIL - UNDER 768PX - VIS 2.5 PRODUKTER */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 40px 8px;
+      padding: 40px 6px;
     }
 
-    /* 2.4 products visible for smaller cards */
+    /* Much smaller products - 2.5 visible */
     .luxury-products-track {
-      grid-auto-columns: 42%;
-      gap: 10px;
-      padding: 4px;
+      grid-auto-columns: 38%;
+      gap: 8px;
+      padding: 2px;
     }
 
     .luxury-nav-arrow {
-      width: 36px;
-      height: 36px;
-      top: 40%;
+      width: 32px;
+      height: 32px;
+      top: 35%;
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(8px);
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-      opacity: 0.9;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      opacity: 0.85;
     }
 
     .luxury-nav-arrow:active {
-      transform: translateY(-50%) scale(0.92);
+      transform: translateY(-50%) scale(0.9);
     }
 
     .luxury-nav-icon {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
     }
 
     .luxury-nav-prev {
-      left: 2px;
+      left: 1px;
     }
 
     .luxury-nav-next {
-      right: 2px;
+      right: 1px;
     }
   }
 }
