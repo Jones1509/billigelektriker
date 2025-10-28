@@ -663,16 +663,18 @@ All colors MUST be HSL.
   }
 
   /* Scroll container */
-  .luxury-scroll-container {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    cursor: grab;
-  }
+.luxury-scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: auto; /* Changed from smooth for instant response */
+  scroll-snap-type: x proximity; /* Changed from mandatory for smoother feel */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: scroll-position;
+}
 
   .luxury-scroll-container::-webkit-scrollbar {
     display: none;

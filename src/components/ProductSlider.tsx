@@ -80,8 +80,8 @@ export const ProductSlider = () => {
     if (!container) return;
     
     let velocity = initialVelocity;
-    const friction = 0.92;
-    const minVelocity = 0.3;
+    const friction = 0.94; // Less friction for longer, smoother scroll
+    const minVelocity = 0.2; // Lower threshold for longer animation
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity || !scrollContainerRef.current) return;
@@ -128,23 +128,23 @@ export const ProductSlider = () => {
       const touchX = e.touches[0].pageX;
       const diff = touchStartXRef.current - touchX;
       
-      // 2x multiplier for extra responsiveness
-      container.scrollLeft = touchScrollLeftRef.current + (diff * 2);
+      // 2.5x multiplier for ultra responsiveness
+      container.scrollLeft = touchScrollLeftRef.current + (diff * 2.5);
       
       // Calculate velocity
       const now = Date.now();
       const dt = now - touchLastTimeRef.current;
       const dx = touchX - touchLastXRef.current;
-      touchVelocityRef.current = dx / dt;
+      touchVelocityRef.current = dt > 0 ? dx / dt : 0;
       
       touchLastXRef.current = touchX;
       touchLastTimeRef.current = now;
     };
 
     const handleTouchEnd = () => {
-      // Apply momentum if velocity is high
-      if (Math.abs(touchVelocityRef.current) > 0.3) {
-        applyMomentum(-touchVelocityRef.current * 50);
+      // Apply momentum if velocity is high - lower threshold for more sensitivity
+      if (Math.abs(touchVelocityRef.current) > 0.2) {
+        applyMomentum(-touchVelocityRef.current * 80);
       }
     };
 
