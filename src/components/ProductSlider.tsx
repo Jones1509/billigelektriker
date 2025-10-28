@@ -15,12 +15,26 @@ const SWIPE_RESUME_DELAY = 2000;
 const SCROLL_THRESHOLD = 30;
 const SCROLL_RESUME_DELAY = 3000;
 
+// Smooth scroll constants
+const TOUCH_SENSITIVITY = 1.0;
+const TRACKPAD_SENSITIVITY = 0.5;
+const SNAP_DURATION = 300;
+const SNAP_THRESHOLD = 0.5;
+const OVERSCROLL_MAX = 50;
+const SCROLL_STOP_DELAY = 150;
+const MOMENTUM_DECELERATION = 0.95;
+const MOMENTUM_MIN_VELOCITY = 0.1;
+
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [isSnapping, setIsSnapping] = useState(false);
+  const [scrollOffset, setScrollOffset] = useState(0);
+  
   const viewportRef = useRef<HTMLDivElement>(null);
   const desktopTrackRef = useRef<HTMLDivElement>(null);
   const tabletTrackRef = useRef<HTMLDivElement>(null);
@@ -30,6 +44,11 @@ export const ProductSlider = () => {
   const touchEndX = useRef(0);
   const touchStartTime = useRef(0);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const snapTimeout = useRef<NodeJS.Timeout | null>(null);
+  const dragStartOffset = useRef(0);
+  const lastDragX = useRef(0);
+  const velocityRef = useRef(0);
+  const animationFrameRef = useRef<number | null>(null);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -66,15 +85,32 @@ export const ProductSlider = () => {
     return 16; // Mobile
   }, []);
 
-  // Calculate and apply scroll position
-  const scrollToIndex = useCallback((index: number) => {
+  // Apply scroll transform with bounds checking
+  const applyScrollTransform = useCallback((offset: number) => {
     const visibleProducts = getVisibleProductsCount();
     const maxIndex = Math.max(0, totalProducts - visibleProducts);
-    const clampedIndex = Math.max(0, Math.min(index, maxIndex));
+    const gap = getGapSize();
     
-    setCurrentIndex(clampedIndex);
-
-    // Get the appropriate track ref based on screen size
+    if (!viewportRef.current) return;
+    
+    const viewportWidth = viewportRef.current.offsetWidth;
+    const totalGapWidth = gap * (visibleProducts - 1);
+    const productWidth = (viewportWidth - totalGapWidth) / visibleProducts;
+    const scrollDistance = productWidth + gap;
+    const maxOffset = maxIndex * scrollDistance;
+    
+    // Apply overscroll bounds with elastic effect
+    let boundedOffset = offset;
+    const minBound = -OVERSCROLL_MAX;
+    const maxBound = maxOffset + OVERSCROLL_MAX;
+    
+    if (minBound > offset) {
+      boundedOffset = minBound;
+    } else if (offset > maxBound) {
+      boundedOffset = maxBound;
+    }
+    
+    // Get the appropriate track ref
     let trackRef: React.RefObject<HTMLDivElement> | null = null;
     if (window.innerWidth >= 1024) {
       trackRef = desktopTrackRef;
@@ -83,18 +119,33 @@ export const ProductSlider = () => {
     } else {
       trackRef = mobileTrackRef;
     }
+    
+    if (trackRef?.current) {
+      trackRef.current.style.transform = `translateX(${-boundedOffset}px)`;
+    }
+    
+    setScrollOffset(boundedOffset);
+  }, [totalProducts, getVisibleProductsCount, getGapSize]);
 
-    if (!trackRef?.current || !viewportRef.current) return;
+  // Calculate and apply scroll position
+  const scrollToIndex = useCallback((index: number) => {
+    const visibleProducts = getVisibleProductsCount();
+    const maxIndex = Math.max(0, totalProducts - visibleProducts);
+    const clampedIndex = Math.max(0, Math.min(index, maxIndex));
+    
+    setCurrentIndex(clampedIndex);
+
+    if (!viewportRef.current) return;
 
     const viewportWidth = viewportRef.current.offsetWidth;
     const gap = getGapSize();
     const totalGapWidth = gap * (visibleProducts - 1);
     const productWidth = (viewportWidth - totalGapWidth) / visibleProducts;
     const scrollDistance = productWidth + gap;
-    const translateX = -(clampedIndex * scrollDistance);
+    const targetOffset = clampedIndex * scrollDistance;
     
-    trackRef.current.style.transform = `translateX(${translateX}px)`;
-  }, [totalProducts, getVisibleProductsCount, getGapSize]);
+    applyScrollTransform(targetOffset);
+  }, [totalProducts, getVisibleProductsCount, getGapSize, applyScrollTransform]);
 
   // Auto-scroll functionality
   useEffect(() => {
@@ -151,6 +202,24 @@ export const ProductSlider = () => {
     };
   }, [currentIndex, totalProducts, getVisibleProductsCount, scrollToIndex]);
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (autoScrollTimerRef.current) {
+        clearInterval(autoScrollTimerRef.current);
+      }
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+      if (snapTimeout.current) {
+        clearTimeout(snapTimeout.current);
+      }
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
+
   const handlePrevious = () => {
     setIsAutoScrollActive(false);
     const visibleProducts = getVisibleProductsCount();
@@ -190,27 +259,97 @@ export const ProductSlider = () => {
     setIsPaused(false);
   };
 
-  // Touch event handlers
+  // Snap to nearest product
+  const snapToNearest = useCallback(() => {
+    const visibleProducts = getVisibleProductsCount();
+    const gap = getGapSize();
+    
+    if (!viewportRef.current) return;
+    
+    const viewportWidth = viewportRef.current.offsetWidth;
+    const totalGapWidth = gap * (visibleProducts - 1);
+    const productWidth = (viewportWidth - totalGapWidth) / visibleProducts;
+    const scrollDistance = productWidth + gap;
+    
+    // Calculate nearest index
+    const nearestIndex = Math.round(scrollOffset / scrollDistance);
+    const maxIndex = Math.max(0, totalProducts - visibleProducts);
+    const clampedIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+    
+    setCurrentIndex(clampedIndex);
+    setIsSnapping(true);
+    
+    // Smooth snap animation
+    const targetOffset = clampedIndex * scrollDistance;
+    applyScrollTransform(targetOffset);
+    
+    setTimeout(() => {
+      setIsSnapping(false);
+      setIsScrolling(false);
+    }, SNAP_DURATION);
+  }, [scrollOffset, totalProducts, getVisibleProductsCount, getGapSize, applyScrollTransform]);
+
+  // Touch drag handlers
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (isSnapping) return;
+    
     touchStartX.current = e.touches[0].clientX;
+    lastDragX.current = e.touches[0].clientX;
+    dragStartOffset.current = scrollOffset;
     touchStartTime.current = Date.now();
+    
+    setIsScrolling(true);
     setIsPaused(true);
+    
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndX.current = e.touches[0].clientX;
+    if (isSnapping) return;
+    
+    const currentX = e.touches[0].clientX;
+    const dragDiff = lastDragX.current - currentX;
+    const newOffset = dragStartOffset.current + (dragDiff * TOUCH_SENSITIVITY);
+    
+    velocityRef.current = dragDiff;
+    lastDragX.current = currentX;
+    touchEndX.current = currentX;
+    
+    applyScrollTransform(newOffset);
   };
 
   const handleTouchEnd = () => {
-    const touchDiff = touchStartX.current - touchEndX.current;
-    const touchDuration = Date.now() - touchStartTime.current;
+    if (isSnapping) return;
     
-    // Validate swipe: minimum distance and quick duration
-    const distanceValid = Math.abs(touchDiff) > SWIPE_MIN_DISTANCE;
-    const durationValid = SWIPE_MAX_DURATION > touchDuration;
+    if (snapTimeout.current) {
+      clearTimeout(snapTimeout.current);
+    }
     
-    if (distanceValid && durationValid) {
-      touchDiff > 0 ? handleNext() : handlePrevious();
+    // Apply momentum if velocity is high enough
+    const absVelocity = Math.abs(velocityRef.current);
+    const hasHighVelocity = absVelocity > MOMENTUM_MIN_VELOCITY;
+    
+    if (hasHighVelocity) {
+      // Start momentum scroll
+      const momentumScroll = () => {
+        velocityRef.current *= MOMENTUM_DECELERATION;
+        const newOffset = scrollOffset + velocityRef.current;
+        
+        applyScrollTransform(newOffset);
+        
+        const stillScrolling = Math.abs(velocityRef.current) > MOMENTUM_MIN_VELOCITY;
+        if (stillScrolling && !isSnapping) {
+          animationFrameRef.current = requestAnimationFrame(momentumScroll);
+        } else {
+          snapToNearest();
+        }
+      };
+      
+      animationFrameRef.current = requestAnimationFrame(momentumScroll);
+    } else {
+      snapToNearest();
     }
     
     setTimeout(() => {
@@ -220,33 +359,38 @@ export const ProductSlider = () => {
     }, SWIPE_RESUME_DELAY);
   };
 
+  // Trackpad scroll handler
   const handleWheel = (e: React.WheelEvent) => {
     const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
     
     if (isHorizontalScroll) {
       e.preventDefault();
       
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
+      if (isSnapping) return;
       
+      setIsScrolling(true);
       setIsPaused(true);
       
-      // Check scroll direction against threshold
-      const scrollRight = e.deltaX > SCROLL_THRESHOLD;
-      const scrollLeft = -SCROLL_THRESHOLD > e.deltaX;
+      const scrollDelta = e.deltaX * TRACKPAD_SENSITIVITY;
+      const newOffset = scrollOffset + scrollDelta;
       
-      if (scrollRight) {
-        handleNext();
-      } else if (scrollLeft) {
-        handlePrevious();
+      applyScrollTransform(newOffset);
+      
+      // Clear existing snap timeout
+      if (snapTimeout.current) {
+        clearTimeout(snapTimeout.current);
       }
       
-      scrollTimeout.current = setTimeout(() => {
-        if (isAutoScrollActive) {
-          setIsPaused(false);
-        }
-      }, SCROLL_RESUME_DELAY);
+      // Set new snap timeout
+      snapTimeout.current = setTimeout(() => {
+        snapToNearest();
+        
+        setTimeout(() => {
+          if (isAutoScrollActive) {
+            setIsPaused(false);
+          }
+        }, SCROLL_RESUME_DELAY);
+      }, SCROLL_STOP_DELAY);
     }
   };
 
@@ -391,7 +535,9 @@ export const ProductSlider = () => {
               {/* Desktop - 4 produkter synlige */}
               <div 
                 ref={desktopTrackRef}
-                className="hidden lg:flex flex-nowrap gap-5 transition-transform duration-500 ease-out"
+                className={`hidden lg:flex flex-nowrap gap-5 ${
+                  isScrolling && !isSnapping ? '' : 'transition-transform duration-500 ease-out'
+                }`}
               >
                 {displayProducts.map((product, index) => (
                   <div 
@@ -412,7 +558,9 @@ export const ProductSlider = () => {
               {/* Tablet - 3 produkter synlige */}
               <div 
                 ref={tabletTrackRef}
-                className="hidden md:flex lg:hidden flex-nowrap gap-[18px] transition-transform duration-500 ease-out"
+                className={`hidden md:flex lg:hidden flex-nowrap gap-[18px] ${
+                  isScrolling && !isSnapping ? '' : 'transition-transform duration-500 ease-out'
+                }`}
               >
                 {displayProducts.map((product, index) => (
                   <div 
@@ -433,7 +581,9 @@ export const ProductSlider = () => {
               {/* Mobile - 2 produkter synlige */}
               <div 
                 ref={mobileTrackRef}
-                className="flex md:hidden flex-nowrap gap-4 transition-transform duration-500 ease-out"
+                className={`flex md:hidden flex-nowrap gap-4 ${
+                  isScrolling && !isSnapping ? '' : 'transition-transform duration-500 ease-out'
+                }`}
               >
                 {displayProducts.map((product, index) => (
                   <div 
