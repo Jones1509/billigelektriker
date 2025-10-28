@@ -211,55 +211,65 @@ export const ProductSlider = () => {
             </button>
 
             {/* Carousel viewport */}
-            <div className="overflow-hidden">
+            <div className="overflow-hidden w-full">
+              {/* Desktop - 4 produkter synlige */}
               <div 
                 ref={scrollContainerRef}
-                className="flex gap-4 md:gap-5 transition-transform duration-500 ease-in-out"
+                className="hidden lg:flex flex-nowrap gap-5 transition-transform duration-500 ease-in-out"
                 style={{ 
-                  transform: `translateX(-${currentIndex * (100 / 4)}%)`,
-                  width: `${(totalProducts / 4) * 100}%`
+                  transform: `translateX(-${currentIndex * (100 / 4 + 1.25)}%)`,
                 }}
               >
                 {displayProducts.map((product, index) => (
                   <div 
-                    key={`${product.node.id}-${index}`}
-                    className="flex-shrink-0 w-[calc(100%/4-15px)] hidden lg:block"
+                    key={`${product.node.id}-desktop-${index}`}
+                    className="flex-shrink-0"
+                    style={{ 
+                      flex: '0 0 calc((100% - 60px) / 4)',
+                      maxWidth: 'calc((100% - 60px) / 4)'
+                    }}
                   >
                     <ProductCard product={product} />
                   </div>
                 ))}
               </div>
 
-              {/* Tablet view - 3 columns */}
+              {/* Tablet - 3 produkter synlige */}
               <div 
-                className="flex gap-[18px] transition-transform duration-500 ease-in-out hidden md:flex lg:hidden"
+                className="hidden md:flex lg:hidden flex-nowrap gap-[18px] transition-transform duration-500 ease-in-out"
                 style={{ 
-                  transform: `translateX(-${currentIndex * (100 / 3)}%)`,
-                  width: `${(totalProducts / 3) * 100}%`
+                  transform: `translateX(-${currentIndex * (100 / 3 + 1.2)}%)`,
                 }}
               >
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-tablet-${index}`}
-                    className="flex-shrink-0 w-[calc(100%/3-12px)]"
+                    className="flex-shrink-0"
+                    style={{ 
+                      flex: '0 0 calc((100% - 36px) / 3)',
+                      maxWidth: 'calc((100% - 36px) / 3)'
+                    }}
                   >
                     <ProductCard product={product} />
                   </div>
                 ))}
               </div>
 
-              {/* Mobile view - 2 columns */}
+              {/* Mobile - 2 produkter synlige */}
               <div 
-                className="flex gap-4 transition-transform duration-500 ease-in-out md:hidden"
+                className="flex md:hidden flex-nowrap gap-4 transition-transform duration-500 ease-in-out"
                 style={{ 
-                  transform: `translateX(-${currentIndex * (100 / 2)}%)`,
-                  width: `${(totalProducts / 2) * 100}%`
+                  transform: `translateX(-${currentIndex * (100 / 2 + 1.6)}%)`,
                 }}
               >
                 {displayProducts.map((product, index) => (
                   <div 
                     key={`${product.node.id}-mobile-${index}`}
-                    className="flex-shrink-0 w-[calc(100%/2-8px)]"
+                    className="flex-shrink-0"
+                    style={{ 
+                      flex: '0 0 calc((100% - 16px) / 2)',
+                      maxWidth: 'calc((100% - 16px) / 2)'
+                    }}
                   >
                     <ProductCard product={product} />
                   </div>
