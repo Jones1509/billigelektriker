@@ -807,35 +807,35 @@ All colors MUST be HSL.
     }
   }
 
-  /* TABLET - 768PX TIL 1023PX - 2 PÆNE KOLONNER */
+  /* TABLET - 768PX TIL 1023PX - 2 KOMPAKTE KOLONNER */
   @media (min-width: 768px) and (max-width: 1023px) {
     .luxury-carousel-inner {
-      padding: 50px 20px;
+      padding: 40px 16px;
     }
 
     .luxury-products-track {
-      grid-auto-columns: calc(50% - 12px);
-      gap: 24px;
-      padding: 8px;
+      grid-auto-columns: calc(50% - 10px);
+      gap: 20px;
+      padding: 6px;
     }
 
     .luxury-nav-arrow {
-      width: 44px;
-      height: 44px;
-      top: 40%;
+      width: 38px;
+      height: 38px;
+      top: 38%;
     }
 
     .luxury-nav-icon {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
     }
 
     .luxury-nav-prev {
-      left: 8px;
+      left: 6px;
     }
 
     .luxury-nav-next {
-      right: 8px;
+      right: 6px;
     }
   }
 

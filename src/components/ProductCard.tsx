@@ -46,7 +46,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
       <Link to={`/product/${node.handle}`} className="relative block">
-        <div className="relative h-[130px] sm:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
+        <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
           {imageUrl ? (
             <>
               <img
@@ -68,26 +68,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
       
-      <CardContent className="p-2 sm:p-3.5 flex-1 flex flex-col">
+      <CardContent className="p-2 md:p-2.5 lg:p-3.5 flex-1 flex flex-col">
         <Link to={`/product/${node.handle}`}>
-          <h3 className="font-semibold text-[11px] sm:text-base leading-tight mb-1 sm:mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
+          <h3 className="font-semibold text-[11px] md:text-sm lg:text-base leading-tight mb-1 md:mb-1 lg:mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
             {node.title}
           </h3>
         </Link>
         
-        <p className="text-base sm:text-[22px] font-bold text-foreground mb-1.5 sm:mb-3 mt-auto">
+        <p className="text-base md:text-lg lg:text-[22px] font-bold text-foreground mb-1.5 md:mb-2 lg:mb-3 mt-auto">
           DKK {price.toFixed(0)}
         </p>
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full h-8 sm:h-11 text-[10px] sm:text-[14px] font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-[1.02]"
+          className="w-full h-8 md:h-9 lg:h-11 text-[10px] md:text-xs lg:text-[14px] font-semibold rounded-lg lg:rounded-xl transition-all duration-300 hover:scale-[1.02]"
           style={{ 
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             boxShadow: '0 2px 8px rgba(16, 185, 129, 0.25)'
           }}
         >
-          <ShoppingCart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+          <ShoppingCart className="w-3 h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 mr-1 md:mr-1.5 lg:mr-2" />
           <span className="hidden sm:inline">{t('productCard.addToCart')}</span>
           <span className="sm:hidden">Køb</span>
         </Button>
