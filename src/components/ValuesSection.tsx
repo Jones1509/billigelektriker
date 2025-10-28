@@ -54,14 +54,14 @@ export const ValuesSection = () => {
       </div>
       
       <div className="container relative z-10">
-        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
+        <div className="text-center mb-6 md:mb-8 animate-fade-in px-4">
           {/* Premium Badge with gentle bounce */}
-          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DBEAFE] to-[#BFDBFE] text-primary text-sm font-semibold mb-6 shadow-[0_4px_12px_rgba(0,102,255,0.15)] animate-[gentleBounce_2s_ease-in-out_infinite]">
+          <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DBEAFE] to-[#BFDBFE] text-primary text-sm font-semibold mb-4 shadow-[0_4px_12px_rgba(0,102,255,0.15)] animate-[gentleBounce_2s_ease-in-out_infinite]">
             <div className="w-2 h-2 rounded-full bg-primary"></div>
             <span className="tracking-wide">{t('values.badge')}</span>
           </div>
           
-          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-[#0F172A] leading-tight tracking-tight">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-3 text-[#0F172A] leading-tight tracking-tight">
             {t('values.title')}
           </h2>
           <p className="text-lg md:text-xl text-[#64748B] max-w-3xl mx-auto leading-relaxed">
@@ -144,8 +144,8 @@ export const ValuesSection = () => {
         `}</style>
         
         {/* Optional CTA */}
-        <div className="text-center mt-6 md:mt-8 animate-fade-in px-4">
-          <p className="text-muted-foreground mb-6 text-sm md:text-base">
+        <div className="text-center mt-4 md:mt-6 animate-fade-in px-4">
+          <p className="text-muted-foreground mb-4 text-sm md:text-base">
             {t('values.ctaQuestion')}
           </p>
           <button className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">

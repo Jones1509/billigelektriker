@@ -25,7 +25,7 @@ export const ServiceBoxes = () => {
       
       <div className="container relative z-10">
         {/* Enhanced header */}
-        <div className="text-center mb-8 md:mb-10 animate-fade-in px-4">
+        <div className="text-center mb-6 md:mb-8 animate-fade-in px-4">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 via-primary/15 to-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-6 shadow-lg shadow-primary/5">
             <Sparkles className="h-4 w-4" />
             {t('serviceBoxes.badge')}

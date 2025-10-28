@@ -47,11 +47,11 @@ export const ConsultationSection = () => {
   };
 
   return (
-    <section className="relative w-full py-[45px] overflow-hidden bg-white" style={{ marginTop: 0 }}>
+    <section className="relative w-full py-8 md:py-12 overflow-hidden bg-white" style={{ marginTop: 0 }}>
       <div className="relative max-w-[1050px] mx-auto px-8">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-[50px] lg:items-center">
           {/* LEFT SIDE - Content */}
-          <div className="flex flex-col gap-4 lg:flex-[0.85]">
+          <div className="flex flex-col gap-3 lg:flex-[0.85]">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 w-fit px-3.5 py-1.5 bg-primary/8 border border-primary/15 rounded-full">
               <Zap className="w-3 h-3 text-primary" />
@@ -71,7 +71,7 @@ export const ConsultationSection = () => {
             </p>
             
             {/* Features */}
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <span className="text-[14px] font-medium text-slate-800">
