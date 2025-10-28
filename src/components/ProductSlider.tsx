@@ -6,15 +6,6 @@ import { Loader2, ShoppingBag, Zap, ChevronLeft, ChevronRight } from "lucide-rea
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
-// Touch swipe constants
-const SWIPE_MIN_DISTANCE = 50;
-const SWIPE_MAX_DURATION = 300;
-const SWIPE_RESUME_DELAY = 2000;
-
-// Trackpad scroll constants
-const SCROLL_THRESHOLD = 30;
-const SCROLL_RESUME_DELAY = 3000;
-
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
@@ -205,25 +196,29 @@ export const ProductSlider = () => {
     const touchDiff = touchStartX.current - touchEndX.current;
     const touchDuration = Date.now() - touchStartTime.current;
     
-    // Validate swipe: minimum distance and quick duration
-    const distanceValid = Math.abs(touchDiff) > SWIPE_MIN_DISTANCE;
-    const durationValid = SWIPE_MAX_DURATION > touchDuration;
-    
-    if (distanceValid && durationValid) {
-      touchDiff > 0 ? handleNext() : handlePrevious();
+    // Minimum swipe distance: 50px, maximum duration: 300ms
+    if (Math.abs(touchDiff) > 50 && touchDuration < 300) {
+      if (touchDiff > 0) {
+        // Swipe left - next
+        handleNext();
+      } else {
+        // Swipe right - previous
+        handlePrevious();
+      }
     }
     
+    // Resume auto-scroll after 2 seconds
     setTimeout(() => {
       if (isAutoScrollActive) {
         setIsPaused(false);
       }
-    }, SWIPE_RESUME_DELAY);
+    }, 2000);
   };
 
+  // Wheel event handler for trackpad scrolling
   const handleWheel = (e: React.WheelEvent) => {
-    const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-    
-    if (isHorizontalScroll) {
+    // Check if it's horizontal scroll (trackpad with 2 fingers)
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       e.preventDefault();
       
       if (scrollTimeout.current) {
@@ -232,21 +227,18 @@ export const ProductSlider = () => {
       
       setIsPaused(true);
       
-      // Check scroll direction against threshold
-      const scrollRight = e.deltaX > SCROLL_THRESHOLD;
-      const scrollLeft = -SCROLL_THRESHOLD > e.deltaX;
-      
-      if (scrollRight) {
+      if (e.deltaX > 30) {
         handleNext();
-      } else if (scrollLeft) {
+      } else if (e.deltaX < -30) {
         handlePrevious();
       }
       
+      // Resume auto-scroll after 3 seconds of inactivity
       scrollTimeout.current = setTimeout(() => {
         if (isAutoScrollActive) {
           setIsPaused(false);
         }
-      }, SCROLL_RESUME_DELAY);
+      }, 3000);
     }
   };
 
