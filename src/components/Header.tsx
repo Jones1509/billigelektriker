@@ -559,17 +559,21 @@ export const Header = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
 
-            <NavigationMenuItem
-              value="tilbud"
-              onMouseEnter={() => handleMenuEnter("tilbud")}
-            >
-              <NavigationMenuTrigger 
-                className="text-base text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300 gap-2 px-6 py-2.5 bg-white/20 border-2 border-white rounded-full hover:bg-white hover:text-primary data-[state=open]:bg-white data-[state=open]:text-primary"
-              >
-                Tilbud
-              </NavigationMenuTrigger>
-              <NavigationMenuContent onMouseLeave={handleMenuLeave}>
-                <div className="relative bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-3 w-[220px] mt-2">
+          </NavigationMenuList>
+            </NavigationMenu>
+            
+            <div className="flex items-center gap-4 justify-end">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost"
+                    className="text-base text-white hover:text-white/90 transition-all duration-300 gap-2 px-6 py-2.5 bg-white/20 border-2 border-white rounded-full hover:bg-white hover:text-primary hover:scale-105 hover:shadow-lg hover:shadow-white/20"
+                  >
+                    Tilbud
+                    <ChevronDown className="h-4 w-4 ml-1 transition-transform duration-200" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-[220px] bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-3">
                   <div className="space-y-1">
                     <Link
                       to="/tilbud/mest-populaer"
@@ -620,13 +624,9 @@ export const Header = () => {
                       <span>Gratis gave ved køb</span>
                     </Link>
                   </div>
-                </div>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-            </NavigationMenu>
-            
-            <div className="flex items-center gap-4 justify-end">
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
               <div className="flex">
                 <LanguageSwitcher />
               </div>
