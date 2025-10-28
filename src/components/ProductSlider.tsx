@@ -491,36 +491,98 @@ export const ProductSlider = () => {
             {/* Navigation Arrows - Desktop (outside viewport) */}
             <button
               onClick={handlePrevious}
-              className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[60px] z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
-              aria-label="Forrige produkt"
+              disabled={currentIndex === 0}
+              className={`hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[60px] z-20 w-[50px] h-[50px] items-center justify-center bg-white border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.1)] group ${
+                currentIndex === 0 
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
+              }`}
+              aria-label="Forrige produkter"
+              aria-disabled={currentIndex === 0}
             >
-              <ChevronLeft className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+              <ChevronLeft className={`w-[22px] h-[22px] transition-colors ${
+                currentIndex === 0 ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+              }`} />
             </button>
             
             {/* Navigation Arrows - Tablet (inside viewport) */}
             <button
               onClick={handlePrevious}
-              className="hidden md:flex lg:hidden absolute left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 items-center justify-center bg-white/95 backdrop-blur-sm border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
-              aria-label="Forrige produkt"
+              disabled={currentIndex === 0}
+              className={`hidden md:flex lg:hidden absolute left-4 top-1/2 -translate-y-1/2 z-20 w-[44px] h-[44px] items-center justify-center bg-white/95 backdrop-blur-[4px] border-2 border-slate-200 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] group ${
+                currentIndex === 0 
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
+              }`}
+              aria-label="Forrige produkter"
+              aria-disabled={currentIndex === 0}
             >
-              <ChevronLeft className="w-5 h-5 text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+              <ChevronLeft className={`w-5 h-5 transition-colors ${
+                currentIndex === 0 ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+              }`} />
+            </button>
+            
+            {/* Navigation Arrows - Mobile (inside viewport) */}
+            <button
+              onClick={handlePrevious}
+              disabled={currentIndex === 0}
+              className={`flex md:hidden absolute left-3 top-1/2 -translate-y-1/2 z-20 w-[40px] h-[40px] min-w-[48px] min-h-[48px] items-center justify-center bg-white/90 backdrop-blur-[8px] border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.2)] active:scale-95 ${
+                currentIndex === 0 
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'active:opacity-80 transition-all duration-100'
+              }`}
+              aria-label="Forrige produkter"
+              aria-disabled={currentIndex === 0}
+            >
+              <ChevronLeft className="w-[18px] h-[18px] text-[#2563EB]" />
             </button>
             
             <button
               onClick={handleNext}
-              className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-[60px] z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
-              aria-label="Næste produkt"
+              disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              className={`hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-[60px] z-20 w-[50px] h-[50px] items-center justify-center bg-white border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.1)] group ${
+                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
+              }`}
+              aria-label="Næste produkter"
+              aria-disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
             >
-              <ChevronRight className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+              <ChevronRight className={`w-[22px] h-[22px] transition-colors ${
+                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount()) ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+              }`} />
             </button>
 
             {/* Navigation Arrows - Tablet (inside viewport) */}
             <button
               onClick={handleNext}
-              className="hidden md:flex lg:hidden absolute right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 items-center justify-center bg-white/95 backdrop-blur-sm border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
-              aria-label="Næste produkt"
+              disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              className={`hidden md:flex lg:hidden absolute right-4 top-1/2 -translate-y-1/2 z-20 w-[44px] h-[44px] items-center justify-center bg-white/95 backdrop-blur-[4px] border-2 border-slate-200 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] group ${
+                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
+              }`}
+              aria-label="Næste produkter"
+              aria-disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
             >
-              <ChevronRight className="w-5 h-5 text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+              <ChevronRight className={`w-5 h-5 transition-colors ${
+                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount()) ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+              }`} />
+            </button>
+            
+            {/* Navigation Arrows - Mobile (inside viewport) */}
+            <button
+              onClick={handleNext}
+              disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              className={`flex md:hidden absolute right-3 top-1/2 -translate-y-1/2 z-20 w-[40px] h-[40px] min-w-[48px] min-h-[48px] items-center justify-center bg-white/90 backdrop-blur-[8px] border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.2)] active:scale-95 ${
+                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())
+                  ? 'opacity-30 cursor-not-allowed' 
+                  : 'active:opacity-80 transition-all duration-100'
+              }`}
+              aria-label="Næste produkter"
+              aria-disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+            >
+              <ChevronRight className="w-[18px] h-[18px] text-[#2563EB]" />
             </button>
 
             {/* Carousel viewport */}
