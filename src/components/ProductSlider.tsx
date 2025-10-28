@@ -6,49 +6,21 @@ import { Loader2, ShoppingBag, Zap, ChevronLeft, ChevronRight } from "lucide-rea
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
-// Touch swipe constants
-const SWIPE_MIN_DISTANCE = 50;
-const SWIPE_MAX_DURATION = 300;
-const SWIPE_RESUME_DELAY = 2000;
-
-// Trackpad scroll constants
-const SCROLL_THRESHOLD = 30;
-const SCROLL_RESUME_DELAY = 3000;
-
-// Smooth scroll constants
-const TOUCH_SENSITIVITY = 1.0;
-const TRACKPAD_SENSITIVITY = 0.5;
-const SNAP_DURATION = 300;
-const SNAP_THRESHOLD = 0.5;
-const OVERSCROLL_MAX = 50;
-const SCROLL_STOP_DELAY = 150;
-const MOMENTUM_DECELERATION = 0.95;
-const MOMENTUM_MIN_VELOCITY = 0.1;
+// Auto-scroll constants
+const AUTO_SCROLL_INTERVAL = 2500;
+const AUTO_SCROLL_RESUME_DELAY = 3000;
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [isAutoScrollActive, setIsAutoScrollActive] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [isSnapping, setIsSnapping] = useState(false);
-  const [scrollOffset, setScrollOffset] = useState(0);
   
   const viewportRef = useRef<HTMLDivElement>(null);
-  const desktopTrackRef = useRef<HTMLDivElement>(null);
-  const tabletTrackRef = useRef<HTMLDivElement>(null);
-  const mobileTrackRef = useRef<HTMLDivElement>(null);
   const autoScrollTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const touchStartTime = useRef(0);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
-  const snapTimeout = useRef<NodeJS.Timeout | null>(null);
-  const dragStartOffset = useRef(0);
-  const lastDragX = useRef(0);
-  const velocityRef = useRef(0);
-  const animationFrameRef = useRef<number | null>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isUserScrollingRef = useRef(false);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -77,130 +49,83 @@ export const ProductSlider = () => {
     return 2; // Mobile
   }, []);
 
-  // Get gap size based on screen size
-  const getGapSize = useCallback(() => {
-    if (typeof window === 'undefined') return 20;
-    if (window.innerWidth >= 1024) return 20; // Desktop
-    if (window.innerWidth >= 768) return 18;  // Tablet
-    return 16; // Mobile
-  }, []);
-
-  // Apply scroll transform with bounds checking
-  const applyScrollTransform = useCallback((offset: number) => {
-    const visibleProducts = getVisibleProductsCount();
-    const maxIndex = Math.max(0, totalProducts - visibleProducts);
-    const gap = getGapSize();
-    
+  // Update current page based on scroll position
+  const updateCurrentPage = useCallback(() => {
     if (!viewportRef.current) return;
     
-    const viewportWidth = viewportRef.current.offsetWidth;
-    const totalGapWidth = gap * (visibleProducts - 1);
-    const productWidth = (viewportWidth - totalGapWidth) / visibleProducts;
-    const scrollDistance = productWidth + gap;
-    const maxOffset = maxIndex * scrollDistance;
-    
-    // Apply overscroll bounds with elastic effect
-    let boundedOffset = offset;
-    const minBound = -OVERSCROLL_MAX;
-    const maxBound = maxOffset + OVERSCROLL_MAX;
-    
-    if (minBound > offset) {
-      boundedOffset = minBound;
-    } else if (offset > maxBound) {
-      boundedOffset = maxBound;
-    }
-    
-    // Get the appropriate track ref
-    let trackRef: React.RefObject<HTMLDivElement> | null = null;
-    if (window.innerWidth >= 1024) {
-      trackRef = desktopTrackRef;
-    } else if (window.innerWidth >= 768) {
-      trackRef = tabletTrackRef;
-    } else {
-      trackRef = mobileTrackRef;
-    }
-    
-    if (trackRef?.current) {
-      trackRef.current.style.transform = `translateX(${-boundedOffset}px)`;
-    }
-    
-    setScrollOffset(boundedOffset);
-  }, [totalProducts, getVisibleProductsCount, getGapSize]);
-
-  // Calculate and apply scroll position
-  const scrollToIndex = useCallback((index: number) => {
+    const viewport = viewportRef.current;
+    const scrollPosition = viewport.scrollLeft;
+    const viewportWidth = viewport.offsetWidth;
     const visibleProducts = getVisibleProductsCount();
-    const maxIndex = Math.max(0, totalProducts - visibleProducts);
-    const clampedIndex = Math.max(0, Math.min(index, maxIndex));
+    const totalPages = Math.ceil(totalProducts / visibleProducts);
     
-    setCurrentIndex(clampedIndex);
+    // Calculate current page (0-indexed)
+    const calculatedPage = Math.round(scrollPosition / viewportWidth);
+    const clampedPage = Math.max(0, Math.min(calculatedPage, totalPages - 1));
+    
+    setCurrentPage(clampedPage);
+  }, [totalProducts, getVisibleProductsCount]);
 
+  // Handle native scroll events
+  const handleScroll = useCallback(() => {
     if (!viewportRef.current) return;
-
-    const viewportWidth = viewportRef.current.offsetWidth;
-    const gap = getGapSize();
-    const totalGapWidth = gap * (visibleProducts - 1);
-    const productWidth = (viewportWidth - totalGapWidth) / visibleProducts;
-    const scrollDistance = productWidth + gap;
-    const targetOffset = clampedIndex * scrollDistance;
     
-    applyScrollTransform(targetOffset);
-  }, [totalProducts, getVisibleProductsCount, getGapSize, applyScrollTransform]);
+    // User is scrolling manually
+    isUserScrollingRef.current = true;
+    setIsAutoScrollActive(false);
+    
+    // Update current page
+    updateCurrentPage();
+    
+    // Clear existing timeout
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    
+    // Resume auto-scroll after user stops scrolling
+    scrollTimeoutRef.current = setTimeout(() => {
+      isUserScrollingRef.current = false;
+      // Only resume if not stopped by arrow click
+      if (isPaused === false) {
+        setIsAutoScrollActive(true);
+      }
+    }, AUTO_SCROLL_RESUME_DELAY);
+  }, [updateCurrentPage, isPaused]);
 
-  // Auto-scroll functionality
+  // Auto-scroll functionality using native scroll
   useEffect(() => {
-    if (!isAutoScrollActive || isPaused || totalProducts === 0) return;
+    if (!isAutoScrollActive || isPaused || totalProducts === 0 || !viewportRef.current) return;
 
     autoScrollTimerRef.current = setInterval(() => {
-      setCurrentIndex(prev => {
-        const visibleProducts = getVisibleProductsCount();
-        const next = prev + 1;
-        const maxIndex = Math.max(0, totalProducts - visibleProducts);
-        
-        // Loop back to start if we reach the end
-        if (next > maxIndex) {
-          return 0;
-        }
-        return next;
-      });
-    }, 2500);
+      if (!viewportRef.current || isUserScrollingRef.current) return;
+      
+      const viewport = viewportRef.current;
+      const viewportWidth = viewport.offsetWidth;
+      const maxScroll = viewport.scrollWidth - viewport.offsetWidth;
+      const currentScroll = viewport.scrollLeft;
+      
+      // Check if at the end
+      if (currentScroll >= maxScroll - 10) {
+        // Scroll back to start
+        viewport.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        // Scroll to next page
+        viewport.scrollBy({
+          left: viewportWidth,
+          behavior: 'smooth'
+        });
+      }
+    }, AUTO_SCROLL_INTERVAL);
 
     return () => {
       if (autoScrollTimerRef.current) {
         clearInterval(autoScrollTimerRef.current);
       }
     };
-  }, [isAutoScrollActive, isPaused, totalProducts, getVisibleProductsCount]);
-
-  // Update scroll position when index changes
-  useEffect(() => {
-    scrollToIndex(currentIndex);
-  }, [currentIndex, scrollToIndex]);
-
-  // Handle window resize
-  useEffect(() => {
-    let resizeTimeout: NodeJS.Timeout;
-
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        const visibleProducts = getVisibleProductsCount();
-        const maxIndex = Math.max(0, totalProducts - visibleProducts);
-        
-        if (currentIndex > maxIndex) {
-          setCurrentIndex(maxIndex);
-        } else {
-          scrollToIndex(currentIndex);
-        }
-      }, 200);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      clearTimeout(resizeTimeout);
-    };
-  }, [currentIndex, totalProducts, getVisibleProductsCount, scrollToIndex]);
+  }, [isAutoScrollActive, isPaused, totalProducts]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -208,46 +133,60 @@ export const ProductSlider = () => {
       if (autoScrollTimerRef.current) {
         clearInterval(autoScrollTimerRef.current);
       }
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-      if (snapTimeout.current) {
-        clearTimeout(snapTimeout.current);
-      }
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
       }
     };
   }, []);
 
+  // Handle arrow navigation
   const handlePrevious = () => {
-    setIsAutoScrollActive(false);
-    const visibleProducts = getVisibleProductsCount();
-    setCurrentIndex(prev => {
-      if (prev === 0) {
-        return Math.max(0, totalProducts - visibleProducts);
-      }
-      return prev - 1;
+    if (!viewportRef.current) return;
+    
+    setIsAutoScrollActive(false); // Stop auto-scroll permanently
+    
+    const viewport = viewportRef.current;
+    const viewportWidth = viewport.offsetWidth;
+    
+    viewport.scrollBy({
+      left: -viewportWidth,
+      behavior: 'smooth'
     });
   };
 
   const handleNext = () => {
-    setIsAutoScrollActive(false);
-    const visibleProducts = getVisibleProductsCount();
-    const maxIndex = Math.max(0, totalProducts - visibleProducts);
-    setCurrentIndex(prev => {
-      if (prev >= maxIndex) {
-        return 0;
-      }
-      return prev + 1;
-    });
+    if (!viewportRef.current) return;
+    
+    setIsAutoScrollActive(false); // Stop auto-scroll permanently
+    
+    const viewport = viewportRef.current;
+    const viewportWidth = viewport.offsetWidth;
+    const maxScroll = viewport.scrollWidth - viewport.offsetWidth;
+    
+    // If at end, scroll to start
+    if (viewport.scrollLeft >= maxScroll - 10) {
+      viewport.scrollTo({
+        left: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      viewport.scrollBy({
+        left: viewportWidth,
+        behavior: 'smooth'
+      });
+    }
   };
 
-  // Reset index and auto-scroll when tab changes
+  // Reset when tab changes
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
     setActiveTab(tab);
-    setCurrentIndex(0);
+    setCurrentPage(0);
     setIsAutoScrollActive(true);
+    
+    // Reset scroll position
+    if (viewportRef.current) {
+      viewportRef.current.scrollTo({ left: 0, behavior: 'auto' });
+    }
   };
 
   // Pause on hover
@@ -259,151 +198,31 @@ export const ProductSlider = () => {
     setIsPaused(false);
   };
 
-  // Snap to nearest product
-  const snapToNearest = useCallback(() => {
-    const visibleProducts = getVisibleProductsCount();
-    const gap = getGapSize();
-    
-    if (!viewportRef.current) return;
-    
-    const viewportWidth = viewportRef.current.offsetWidth;
-    const totalGapWidth = gap * (visibleProducts - 1);
-    const productWidth = (viewportWidth - totalGapWidth) / visibleProducts;
-    const scrollDistance = productWidth + gap;
-    
-    // Calculate nearest index
-    const nearestIndex = Math.round(scrollOffset / scrollDistance);
-    const maxIndex = Math.max(0, totalProducts - visibleProducts);
-    const clampedIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
-    
-    setCurrentIndex(clampedIndex);
-    setIsSnapping(true);
-    
-    // Smooth snap animation
-    const targetOffset = clampedIndex * scrollDistance;
-    applyScrollTransform(targetOffset);
-    
-    setTimeout(() => {
-      setIsSnapping(false);
-      setIsScrolling(false);
-    }, SNAP_DURATION);
-  }, [scrollOffset, totalProducts, getVisibleProductsCount, getGapSize, applyScrollTransform]);
-
-  // Touch drag handlers
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (isSnapping) return;
-    
-    touchStartX.current = e.touches[0].clientX;
-    lastDragX.current = e.touches[0].clientX;
-    dragStartOffset.current = scrollOffset;
-    touchStartTime.current = Date.now();
-    
-    setIsScrolling(true);
-    setIsPaused(true);
-    
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (isSnapping) return;
-    
-    const currentX = e.touches[0].clientX;
-    const dragDiff = lastDragX.current - currentX;
-    const newOffset = dragStartOffset.current + (dragDiff * TOUCH_SENSITIVITY);
-    
-    velocityRef.current = dragDiff;
-    lastDragX.current = currentX;
-    touchEndX.current = currentX;
-    
-    applyScrollTransform(newOffset);
-  };
-
-  const handleTouchEnd = () => {
-    if (isSnapping) return;
-    
-    if (snapTimeout.current) {
-      clearTimeout(snapTimeout.current);
-    }
-    
-    // Apply momentum if velocity is high enough
-    const absVelocity = Math.abs(velocityRef.current);
-    const hasHighVelocity = absVelocity > MOMENTUM_MIN_VELOCITY;
-    
-    if (hasHighVelocity) {
-      // Start momentum scroll
-      const momentumScroll = () => {
-        velocityRef.current *= MOMENTUM_DECELERATION;
-        const newOffset = scrollOffset + velocityRef.current;
-        
-        applyScrollTransform(newOffset);
-        
-        const stillScrolling = Math.abs(velocityRef.current) > MOMENTUM_MIN_VELOCITY;
-        if (stillScrolling && !isSnapping) {
-          animationFrameRef.current = requestAnimationFrame(momentumScroll);
-        } else {
-          snapToNearest();
-        }
-      };
-      
-      animationFrameRef.current = requestAnimationFrame(momentumScroll);
-    } else {
-      snapToNearest();
-    }
-    
-    setTimeout(() => {
-      if (isAutoScrollActive) {
-        setIsPaused(false);
-      }
-    }, SWIPE_RESUME_DELAY);
-  };
-
-  // Trackpad scroll handler
-  const handleWheel = (e: React.WheelEvent) => {
-    const isHorizontalScroll = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-    
-    if (isHorizontalScroll) {
-      e.preventDefault();
-      
-      if (isSnapping) return;
-      
-      setIsScrolling(true);
-      setIsPaused(true);
-      
-      const scrollDelta = e.deltaX * TRACKPAD_SENSITIVITY;
-      const newOffset = scrollOffset + scrollDelta;
-      
-      applyScrollTransform(newOffset);
-      
-      // Clear existing snap timeout
-      if (snapTimeout.current) {
-        clearTimeout(snapTimeout.current);
-      }
-      
-      // Set new snap timeout
-      snapTimeout.current = setTimeout(() => {
-        snapToNearest();
-        
-        setTimeout(() => {
-          if (isAutoScrollActive) {
-            setIsPaused(false);
-          }
-        }, SCROLL_RESUME_DELAY);
-      }, SCROLL_STOP_DELAY);
-    }
-  };
-
   // Calculate total pages for dots
   const getTotalPages = () => {
     const visibleProducts = getVisibleProductsCount();
     return Math.ceil(totalProducts / visibleProducts);
   };
 
-  const getCurrentPage = () => {
-    const visibleProducts = getVisibleProductsCount();
-    return Math.floor(currentIndex / visibleProducts);
+  // Handle dot click
+  const handleDotClick = (pageIndex: number) => {
+    if (!viewportRef.current) return;
+    
+    setIsAutoScrollActive(false);
+    
+    const viewport = viewportRef.current;
+    const viewportWidth = viewport.offsetWidth;
+    const targetScroll = pageIndex * viewportWidth;
+    
+    viewport.scrollTo({
+      left: targetScroll,
+      behavior: 'smooth'
+    });
   };
+
+  // Check if at start/end for arrow disabled states
+  const isAtStart = currentPage === 0;
+  const isAtEnd = currentPage >= getTotalPages() - 1;
 
   return (
     <section 
@@ -491,172 +310,123 @@ export const ProductSlider = () => {
             {/* Navigation Arrows - Desktop (outside viewport) */}
             <button
               onClick={handlePrevious}
-              disabled={currentIndex === 0}
+              disabled={isAtStart}
               className={`hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[60px] z-20 w-[50px] h-[50px] items-center justify-center bg-white border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.1)] group ${
-                currentIndex === 0 
+                isAtStart
                   ? 'opacity-30 cursor-not-allowed' 
                   : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
               }`}
               aria-label="Forrige produkter"
-              aria-disabled={currentIndex === 0}
+              aria-disabled={isAtStart}
             >
               <ChevronLeft className={`w-[22px] h-[22px] transition-colors ${
-                currentIndex === 0 ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+                isAtStart ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
               }`} />
             </button>
             
             {/* Navigation Arrows - Tablet (inside viewport) */}
             <button
               onClick={handlePrevious}
-              disabled={currentIndex === 0}
+              disabled={isAtStart}
               className={`hidden md:flex lg:hidden absolute left-4 top-1/2 -translate-y-1/2 z-20 w-[44px] h-[44px] items-center justify-center bg-white/95 backdrop-blur-[4px] border-2 border-slate-200 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] group ${
-                currentIndex === 0 
+                isAtStart
                   ? 'opacity-30 cursor-not-allowed' 
                   : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
               }`}
               aria-label="Forrige produkter"
-              aria-disabled={currentIndex === 0}
+              aria-disabled={isAtStart}
             >
               <ChevronLeft className={`w-5 h-5 transition-colors ${
-                currentIndex === 0 ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+                isAtStart ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
               }`} />
             </button>
             
             {/* Navigation Arrows - Mobile (inside viewport) */}
             <button
               onClick={handlePrevious}
-              disabled={currentIndex === 0}
+              disabled={isAtStart}
               className={`flex md:hidden absolute left-3 top-1/2 -translate-y-1/2 z-20 w-[40px] h-[40px] min-w-[48px] min-h-[48px] items-center justify-center bg-white/90 backdrop-blur-[8px] border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.2)] active:scale-95 ${
-                currentIndex === 0 
+                isAtStart
                   ? 'opacity-30 cursor-not-allowed' 
                   : 'active:opacity-80 transition-all duration-100'
               }`}
               aria-label="Forrige produkter"
-              aria-disabled={currentIndex === 0}
+              aria-disabled={isAtStart}
             >
               <ChevronLeft className="w-[18px] h-[18px] text-[#2563EB]" />
             </button>
             
             <button
               onClick={handleNext}
-              disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              disabled={isAtEnd}
               className={`hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-[60px] z-20 w-[50px] h-[50px] items-center justify-center bg-white border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.1)] group ${
-                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())
+                isAtEnd
                   ? 'opacity-30 cursor-not-allowed' 
                   : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
               }`}
               aria-label="Næste produkter"
-              aria-disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              aria-disabled={isAtEnd}
             >
               <ChevronRight className={`w-[22px] h-[22px] transition-colors ${
-                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount()) ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+                isAtEnd ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
               }`} />
             </button>
 
             {/* Navigation Arrows - Tablet (inside viewport) */}
             <button
               onClick={handleNext}
-              disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              disabled={isAtEnd}
               className={`hidden md:flex lg:hidden absolute right-4 top-1/2 -translate-y-1/2 z-20 w-[44px] h-[44px] items-center justify-center bg-white/95 backdrop-blur-[4px] border-2 border-slate-200 rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] group ${
-                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())
+                isAtEnd
                   ? 'opacity-30 cursor-not-allowed' 
                   : 'transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
               }`}
               aria-label="Næste produkter"
-              aria-disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              aria-disabled={isAtEnd}
             >
               <ChevronRight className={`w-5 h-5 transition-colors ${
-                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount()) ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
+                isAtEnd ? 'text-[#2563EB]' : 'text-[#2563EB] group-hover:text-white'
               }`} />
             </button>
             
             {/* Navigation Arrows - Mobile (inside viewport) */}
             <button
               onClick={handleNext}
-              disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              disabled={isAtEnd}
               className={`flex md:hidden absolute right-3 top-1/2 -translate-y-1/2 z-20 w-[40px] h-[40px] min-w-[48px] min-h-[48px] items-center justify-center bg-white/90 backdrop-blur-[8px] border-2 border-slate-200 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.2)] active:scale-95 ${
-                currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())
+                isAtEnd
                   ? 'opacity-30 cursor-not-allowed' 
                   : 'active:opacity-80 transition-all duration-100'
               }`}
               aria-label="Næste produkter"
-              aria-disabled={currentIndex >= Math.max(0, totalProducts - getVisibleProductsCount())}
+              aria-disabled={isAtEnd}
             >
               <ChevronRight className="w-[18px] h-[18px] text-[#2563EB]" />
             </button>
 
-            {/* Carousel viewport */}
+            {/* Carousel viewport with native scroll */}
             <div 
               ref={viewportRef}
-              className="overflow-hidden w-full"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              onWheel={handleWheel}
+              onScroll={handleScroll}
+              className="overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory"
+              style={{
+                scrollbarWidth: 'none', // Firefox
+                msOverflowStyle: 'none', // IE/Edge
+                WebkitOverflowScrolling: 'touch' // iOS momentum scrolling
+              }}
             >
-              {/* Desktop - 4 produkter synlige */}
-              <div 
-                ref={desktopTrackRef}
-                className={`hidden lg:flex flex-nowrap gap-5 ${
-                  isScrolling && !isSnapping ? '' : 'transition-transform duration-500 ease-out'
-                }`}
-              >
+              <style>{`
+                .carousel-viewport::-webkit-scrollbar {
+                  display: none; /* Chrome, Safari, Opera */
+                }
+              `}</style>
+              
+              {/* Single unified track for all screen sizes */}
+              <div className="flex flex-nowrap gap-4 md:gap-[18px] lg:gap-5">
                 {displayProducts.map((product, index) => (
                   <div 
-                    key={`${product.node.id}-desktop-${index}`}
-                    className="flex-shrink-0 flex-grow-0"
-                    style={{ 
-                      flexBasis: 'calc((100% - 60px) / 4)',
-                      width: 'calc((100% - 60px) / 4)',
-                      minWidth: 'calc((100% - 60px) / 4)',
-                      maxWidth: 'calc((100% - 60px) / 4)'
-                    }}
-                  >
-                    <ProductCard product={product} />
-                  </div>
-                ))}
-              </div>
-
-              {/* Tablet - 3 produkter synlige */}
-              <div 
-                ref={tabletTrackRef}
-                className={`hidden md:flex lg:hidden flex-nowrap gap-[18px] ${
-                  isScrolling && !isSnapping ? '' : 'transition-transform duration-500 ease-out'
-                }`}
-              >
-                {displayProducts.map((product, index) => (
-                  <div 
-                    key={`${product.node.id}-tablet-${index}`}
-                    className="flex-shrink-0 flex-grow-0"
-                    style={{ 
-                      flexBasis: 'calc((100% - 36px) / 3)',
-                      width: 'calc((100% - 36px) / 3)',
-                      minWidth: 'calc((100% - 36px) / 3)',
-                      maxWidth: 'calc((100% - 36px) / 3)'
-                    }}
-                  >
-                    <ProductCard product={product} />
-                  </div>
-                ))}
-              </div>
-
-              {/* Mobile - 2 produkter synlige */}
-              <div 
-                ref={mobileTrackRef}
-                className={`flex md:hidden flex-nowrap gap-4 ${
-                  isScrolling && !isSnapping ? '' : 'transition-transform duration-500 ease-out'
-                }`}
-              >
-                {displayProducts.map((product, index) => (
-                  <div 
-                    key={`${product.node.id}-mobile-${index}`}
-                    className="flex-shrink-0 flex-grow-0"
-                    style={{ 
-                      flexBasis: 'calc((100% - 16px) / 2)',
-                      width: 'calc((100% - 16px) / 2)',
-                      minWidth: 'calc((100% - 16px) / 2)',
-                      maxWidth: 'calc((100% - 16px) / 2)'
-                    }}
+                    key={`${product.node.id}-${index}`}
+                    className="flex-shrink-0 snap-start snap-always w-[calc((100%-16px)/2)] md:w-[calc((100%-36px)/3)] lg:w-[calc((100%-60px)/4)]"
                   >
                     <ProductCard product={product} />
                   </div>
@@ -664,18 +434,14 @@ export const ProductSlider = () => {
               </div>
             </div>
 
-            {/* Progress dots - now showing pages instead of individual products */}
+            {/* Progress dots */}
             <div className="flex items-center justify-center gap-2 mt-5">
               {Array.from({ length: getTotalPages() }).map((_, pageIndex) => (
                 <button
                   key={pageIndex}
-                  onClick={() => {
-                    const visibleProducts = getVisibleProductsCount();
-                    setCurrentIndex(pageIndex * visibleProducts);
-                    setIsAutoScrollActive(false);
-                  }}
+                  onClick={() => handleDotClick(pageIndex)}
                   className={`transition-all duration-300 rounded-full ${
-                    pageIndex === getCurrentPage()
+                    pageIndex === currentPage
                       ? 'w-6 h-2 bg-[#2563EB]'
                       : 'w-2 h-2 bg-[#D1D5DB] hover:bg-[#9CA3AF]'
                   }`}
