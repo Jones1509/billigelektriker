@@ -303,7 +303,7 @@ export const ProductSlider = () => {
           </div>
         ) : displayProducts.length > 0 ? (
           <div 
-            className="relative px-4 md:px-10 lg:px-20"
+            className="relative px-5 md:px-10 lg:px-20"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
