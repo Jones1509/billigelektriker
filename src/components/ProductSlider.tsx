@@ -192,13 +192,9 @@ export const ProductSlider = () => {
 
     // Trackpad/wheel scroll - MacBook optimized
     const handleWheel = (e: WheelEvent) => {
-      // Lad browser håndtere vertical scroll naturligt
-      // Kun grib horizontal scroll eller konverter vertical til horizontal
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 0) {
-        // Vertical trackpad gesture -> konverter til horizontal scroll
-        e.preventDefault();
-        container.scrollLeft += e.deltaY * 1.2;
-      } else if (Math.abs(e.deltaX) > 0) {
+      // KUN håndter horizontal scroll (side til side)
+      // Ignorer vertical scroll (op/ned)
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 0) {
         // Horizontal trackpad gesture -> brug direkte
         e.preventDefault();
         container.scrollLeft += e.deltaX * 1.2;
