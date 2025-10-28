@@ -110,6 +110,80 @@ All colors MUST be HSL.
   }
 }
 
+@layer components {
+  /* Product Carousel Navigation Arrows */
+  .nav-arrow {
+    @apply absolute flex items-center justify-center rounded-full cursor-pointer;
+    @apply bg-white border border-[#E5E7EB] text-[#2563EB];
+    top: 40%;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  /* Desktop */
+  @media (min-width: 1200px) {
+    .nav-arrow {
+      width: 48px;
+      height: 48px;
+      font-size: 20px;
+    }
+    
+    .prev-arrow {
+      left: 20px;
+    }
+    
+    .next-arrow {
+      right: 20px;
+    }
+    
+    .nav-arrow:hover:not(:disabled) {
+      background: #2563EB;
+      color: white;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Tablet */
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .nav-arrow {
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+    }
+    
+    .prev-arrow {
+      left: 30px;
+    }
+    
+    .next-arrow {
+      right: 30px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .nav-arrow {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+    
+    .prev-arrow {
+      left: 20px;
+    }
+    
+    .next-arrow {
+      right: 20px;
+    }
+  }
+
+  .nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

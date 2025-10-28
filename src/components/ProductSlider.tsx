@@ -303,55 +303,33 @@ export const ProductSlider = () => {
           </div>
         ) : displayProducts.length > 0 ? (
           <div 
-            className="relative lg:px-20"
+            className="relative px-[10px] md:px-5 lg:px-[90px]"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {/* Arrow positioning wrapper - positioned over product images */}
-            <div 
-              className="absolute top-0 left-0 w-full z-30 pointer-events-none flex items-center justify-between px-2 md:px-3 lg:px-20"
-              style={{ height: '220px' }} // Height of product images
+            {/* Previous Arrow */}
+            <button
+              onClick={handlePrevious}
+              disabled={isAtStart}
+              className={`nav-arrow prev-arrow ${isAtStart ? 'opacity-30 cursor-not-allowed' : ''}`}
+              style={{ touchAction: 'manipulation' }}
+              aria-label="Forrige produkter"
+              aria-disabled={isAtStart}
             >
-              {/* Left Arrow */}
-              <button
-                onClick={handlePrevious}
-                disabled={isAtStart}
-                className={`pointer-events-auto w-[38px] h-[38px] min-w-[44px] min-h-[44px] md:w-[42px] md:h-[42px] md:min-w-[42px] md:min-h-[42px] lg:w-[50px] lg:h-[50px] lg:min-w-[50px] lg:min-h-[50px] flex items-center justify-center rounded-full border-2 shadow-[0_3px_12px_rgba(0,0,0,0.25)] md:shadow-[0_4px_16px_rgba(0,0,0,0.2)] lg:shadow-[0_4px_12px_rgba(0,0,0,0.1)] ${
-                  isAtStart
-                    ? 'opacity-30 cursor-not-allowed bg-white/92 md:bg-white/95 lg:bg-white border-slate-200/80 md:border-slate-200/50 lg:border-slate-200' 
-                    : 'bg-white/92 md:bg-white/95 lg:bg-white border-slate-200/80 md:border-slate-200/50 lg:border-slate-200 active:scale-95 active:opacity-80 md:active:scale-95 md:active:opacity-80 lg:transition-all lg:duration-300 lg:hover:bg-[#2563EB] lg:hover:border-[#2563EB] lg:hover:scale-110 lg:hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
-                } backdrop-blur-[10px] md:backdrop-blur-[8px] lg:backdrop-blur-0`}
-                style={{
-                  touchAction: 'manipulation'
-                }}
-                aria-label="Forrige produkter"
-                aria-disabled={isAtStart}
-              >
-                <ChevronLeft className={`w-4 h-4 md:w-5 md:h-5 lg:w-[22px] lg:h-[22px] transition-colors ${
-                  isAtStart ? 'text-[#2563EB]' : 'text-[#2563EB] lg:group-hover:text-white'
-                }`} />
-              </button>
-              
-              {/* Right Arrow */}
-              <button
-                onClick={handleNext}
-                disabled={isAtEnd}
-                className={`pointer-events-auto w-[38px] h-[38px] min-w-[44px] min-h-[44px] md:w-[42px] md:h-[42px] md:min-w-[42px] md:min-h-[42px] lg:w-[50px] lg:h-[50px] lg:min-w-[50px] lg:min-h-[50px] flex items-center justify-center rounded-full border-2 shadow-[0_3px_12px_rgba(0,0,0,0.25)] md:shadow-[0_4px_16px_rgba(0,0,0,0.2)] lg:shadow-[0_4px_12px_rgba(0,0,0,0.1)] ${
-                  isAtEnd
-                    ? 'opacity-30 cursor-not-allowed bg-white/92 md:bg-white/95 lg:bg-white border-slate-200/80 md:border-slate-200/50 lg:border-slate-200' 
-                    : 'bg-white/92 md:bg-white/95 lg:bg-white border-slate-200/80 md:border-slate-200/50 lg:border-slate-200 active:scale-95 active:opacity-80 md:active:scale-95 md:active:opacity-80 lg:transition-all lg:duration-300 lg:hover:bg-[#2563EB] lg:hover:border-[#2563EB] lg:hover:scale-110 lg:hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)]'
-                } backdrop-blur-[10px] md:backdrop-blur-[8px] lg:backdrop-blur-0`}
-                style={{
-                  touchAction: 'manipulation'
-                }}
-                aria-label="Næste produkter"
-                aria-disabled={isAtEnd}
-              >
-                <ChevronRight className={`w-4 h-4 md:w-5 md:h-5 lg:w-[22px] lg:h-[22px] transition-colors ${
-                  isAtEnd ? 'text-[#2563EB]' : 'text-[#2563EB] lg:group-hover:text-white'
-                }`} />
-              </button>
-            </div>
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Next Arrow */}
+            <button
+              onClick={handleNext}
+              disabled={isAtEnd}
+              className={`nav-arrow next-arrow ${isAtEnd ? 'opacity-30 cursor-not-allowed' : ''}`}
+              style={{ touchAction: 'manipulation' }}
+              aria-label="Næste produkter"
+              aria-disabled={isAtEnd}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
 
             {/* Carousel viewport with native scroll */}
             <div 
