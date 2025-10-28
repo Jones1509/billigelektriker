@@ -44,15 +44,22 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
 
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
-      <Link to={`/product/${node.handle}`}>
-        <div className="aspect-square overflow-hidden bg-secondary/10">
+    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-border rounded-2xl">
+      <Link to={`/product/${node.handle}`} className="relative block">
+        <div className="relative h-[280px] md:h-[240px] lg:h-[280px] overflow-hidden bg-muted/30 rounded-t-2xl">
           {imageUrl ? (
-            <img
-              src={imageUrl}
-              alt={node.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
+            <>
+              <img
+                src={imageUrl}
+                alt={node.title}
+                className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
+              />
+              {/* Status badge */}
+              <span className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold text-white" 
+                    style={{ background: '#10B981' }}>
+                På lager
+              </span>
+            </>
           ) : (
             <div className="w-full h-full flex items-center justify-center text-muted-foreground">
               {t('productCard.noImage')}
@@ -61,32 +68,35 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
       
-      <CardContent className="p-3 md:p-4">
+      <CardContent className="p-5">
         <Link to={`/product/${node.handle}`}>
-          <h3 className="font-semibold text-base md:text-lg mb-2 line-clamp-1 group-hover:text-accent transition-colors">
+          <h3 className="font-semibold text-lg leading-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-200">
             {node.title}
           </h3>
         </Link>
+        
         {node.description && (
-          <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 mb-3">
+          <p className="text-sm text-muted-foreground line-clamp-2 mb-4 leading-relaxed">
             {node.description}
           </p>
         )}
-        <p className="text-lg md:text-xl font-bold">
+        
+        <p className="text-2xl font-bold text-foreground mb-4">
           DKK {price.toFixed(2)}
         </p>
-      </CardContent>
-      
-      <CardFooter className="p-3 pt-0 md:p-4 md:pt-0">
+        
         <Button 
           onClick={handleAddToCart}
-          className="w-full text-sm md:text-base"
-          size="lg"
+          className="w-full h-12 text-[15px] font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02]"
+          style={{ 
+            background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+          }}
         >
           <ShoppingCart className="w-4 h-4 mr-2" />
           {t('productCard.addToCart')}
         </Button>
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 };
