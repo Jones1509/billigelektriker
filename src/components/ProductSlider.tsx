@@ -29,7 +29,7 @@ export const ProductSlider = () => {
 
   return (
     <section 
-      className="py-12 md:py-20 mb-16 md:mb-24 relative overflow-visible"
+      className="pt-6 pb-4 md:pt-12 md:pb-8 relative overflow-visible"
       style={{ 
         background: 'linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--blue-tint)) 100%)'
       }}
@@ -42,7 +42,7 @@ export const ProductSlider = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       
       <div className="max-w-[1400px] mx-auto relative z-10 px-4 md:px-10">
-        <div className="text-center mb-10 animate-fade-in">
+        <div className="text-center mb-6 md:mb-8 animate-fade-in">
           {/* Webshop Badge with gradient */}
           <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-white text-sm font-semibold mb-4 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
