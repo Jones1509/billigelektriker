@@ -1,5 +1,5 @@
 import { ShopifyProduct } from "@/types/shopify";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { useCartStore } from "@/stores/cartStore";
@@ -44,9 +44,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
 
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-border rounded-2xl">
+    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
       <Link to={`/product/${node.handle}`} className="relative block">
-        <div className="relative h-[280px] md:h-[240px] lg:h-[280px] overflow-hidden bg-muted/30 rounded-t-2xl">
+        <div className="relative h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
           {imageUrl ? (
             <>
               <img
@@ -55,7 +55,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
               />
               {/* Status badge */}
-              <span className="absolute top-3 right-3 px-3 py-1.5 rounded-full text-xs font-semibold text-white" 
+              <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white" 
                     style={{ background: '#10B981' }}>
                 På lager
               </span>
@@ -68,26 +68,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
       
-      <CardContent className="p-5">
+      <CardContent className="p-3.5 flex-1 flex flex-col">
         <Link to={`/product/${node.handle}`}>
-          <h3 className="font-semibold text-lg leading-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-200">
+          <h3 className="font-semibold text-base leading-[1.3] mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
             {node.title}
           </h3>
         </Link>
         
         {node.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-4 leading-relaxed">
+          <p className="text-[13px] text-muted-foreground line-clamp-2 mb-3 leading-[1.4]">
             {node.description}
           </p>
         )}
         
-        <p className="text-2xl font-bold text-foreground mb-4">
+        <p className="text-[22px] font-bold text-foreground mb-3 mt-auto">
           DKK {price.toFixed(2)}
         </p>
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full h-12 text-[15px] font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02]"
+          className="w-full h-11 text-[14px] font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02]"
           style={{ 
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
