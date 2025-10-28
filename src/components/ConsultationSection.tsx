@@ -67,7 +67,7 @@ export const ConsultationSection = () => {
             
             {/* Description */}
             <p className="text-[15px] text-slate-600 leading-[1.5]">
-              Kvalificeret hjælp fra certificerede elektrikere – hurtig respons og fair priser.
+              Hos Billig Elektriker får du kvalificeret hjælp fra autoriserede fagfolk. Vi håndterer alt fra akutte fejl til komplette installationer – altid til fair priser.
             </p>
             
             {/* Features */}
@@ -75,21 +75,21 @@ export const ConsultationSection = () => {
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <span className="text-[14px] font-medium text-slate-800">
-                  Certificerede elektrikere
+                  Certificerede & forsikrede elektrikere
                 </span>
               </div>
               
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <span className="text-[14px] font-medium text-slate-800">
-                  Fast-pris tilbud
+                  Fast-pris tilbud uden skjulte gebyrer
                 </span>
               </div>
               
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 <span className="text-[14px] font-medium text-slate-800">
-                  Svar inden 2 timer
+                  Svar inden 2 timer på hverdage
                 </span>
               </div>
             </div>
@@ -97,7 +97,7 @@ export const ConsultationSection = () => {
             {/* Phone Box */}
             <div className="mt-2 p-4 bg-gradient-to-br from-white to-slate-50 border border-primary/20 rounded-xl">
               <p className="text-[11px] text-slate-500 uppercase tracking-wider font-semibold mb-2">
-                Akut behov?
+                Akut behov for elektriker?
               </p>
               <a 
                 href="tel:71997171" 
@@ -106,6 +106,9 @@ export const ConsultationSection = () => {
                 <Phone className="w-5 h-5" />
                 71 99 71 71
               </a>
+              <p className="text-[12px] text-slate-600 mt-2">
+                Vi tager telefonen man-fre kl. 8-17
+              </p>
             </div>
           </div>
           
