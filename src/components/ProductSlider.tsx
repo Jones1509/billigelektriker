@@ -9,15 +9,24 @@ import { useState, useRef, useEffect } from "react";
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
-  const viewportRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const prevBtnRef = useRef<HTMLButtonElement>(null);
   const nextBtnRef = useRef<HTMLButtonElement>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
-  const velocity = useRef(0);
-  const lastX = useRef(0);
-  const lastTime = useRef(0);
+  
+  // Touch tracking
+  const touchStartXRef = useRef(0);
+  const touchScrollLeftRef = useRef(0);
+  const touchLastXRef = useRef(0);
+  const touchLastTimeRef = useRef(0);
+  const touchVelocityRef = useRef(0);
+  
+  // Mouse drag tracking
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragScrollLeftRef = useRef(0);
+  const dragLastXRef = useRef(0);
+  const dragLastTimeRef = useRef(0);
+  const dragVelocityRef = useRef(0);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -35,43 +44,50 @@ export const ProductSlider = () => {
       : data.slice(8, 20)
   ) : [];
 
-  // Update button states
+  // Update button states based on scroll position
   const updateButtonStates = () => {
-    if (!viewportRef.current || !prevBtnRef.current || !nextBtnRef.current) return;
+    const container = scrollContainerRef.current;
+    const prevBtn = prevBtnRef.current;
+    const nextBtn = nextBtnRef.current;
     
-    const { scrollLeft, scrollWidth, clientWidth } = viewportRef.current;
-    const maxScroll = scrollWidth - clientWidth;
+    if (!container || !prevBtn || !nextBtn) return;
     
+    const scrollLeft = container.scrollLeft;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    
+    // Left button
     if (scrollLeft <= 5) {
-      prevBtnRef.current.style.opacity = '0.3';
-      prevBtnRef.current.style.pointerEvents = 'none';
+      prevBtn.style.opacity = '0.3';
+      prevBtn.style.pointerEvents = 'none';
     } else {
-      prevBtnRef.current.style.opacity = '1';
-      prevBtnRef.current.style.pointerEvents = 'auto';
+      prevBtn.style.opacity = '1';
+      prevBtn.style.pointerEvents = 'auto';
     }
     
+    // Right button
     if (scrollLeft >= maxScroll - 5) {
-      nextBtnRef.current.style.opacity = '0.3';
-      nextBtnRef.current.style.pointerEvents = 'none';
+      nextBtn.style.opacity = '0.3';
+      nextBtn.style.pointerEvents = 'none';
     } else {
-      nextBtnRef.current.style.opacity = '1';
-      nextBtnRef.current.style.pointerEvents = 'auto';
+      nextBtn.style.opacity = '1';
+      nextBtn.style.pointerEvents = 'auto';
     }
   };
 
-  // Apply momentum scroll
-  const applyMomentumScroll = (initialVelocity: number) => {
-    if (!viewportRef.current) return;
+  // Apply momentum scroll animation
+  const applyMomentum = (initialVelocity: number) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
     
-    let vel = initialVelocity;
+    let velocity = initialVelocity;
     const friction = 0.92;
     const minVelocity = 0.3;
     
     const animate = () => {
-      if (Math.abs(vel) < minVelocity || !viewportRef.current) return;
+      if (Math.abs(velocity) < minVelocity || !scrollContainerRef.current) return;
       
-      viewportRef.current.scrollLeft += vel;
-      vel *= friction;
+      scrollContainerRef.current.scrollLeft += velocity;
+      velocity *= friction;
       
       requestAnimationFrame(animate);
     };
@@ -80,161 +96,167 @@ export const ProductSlider = () => {
   };
 
   useEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
     // Button click handlers
     const handlePrevClick = () => {
-      const scrollAmount = viewport.clientWidth * 0.9;
-      viewport.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      const scrollAmount = container.clientWidth * 0.85;
+      container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     };
 
     const handleNextClick = () => {
-      const scrollAmount = viewport.clientWidth * 0.9;
-      viewport.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const scrollAmount = container.clientWidth * 0.85;
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     };
 
-    // Scroll event
+    // Scroll event for button states
     const handleScroll = () => {
       requestAnimationFrame(updateButtonStates);
     };
 
-    // Touch events
-    let touchStartX = 0;
-    let touchScrollLeft = 0;
-    let touchVelocity = 0;
-    let touchLastX = 0;
-    let touchLastTime = 0;
-
+    // Touch events for mobile/tablet
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].pageX;
-      touchScrollLeft = viewport.scrollLeft;
-      touchLastX = e.touches[0].pageX;
-      touchLastTime = Date.now();
-      touchVelocity = 0;
+      touchStartXRef.current = e.touches[0].pageX;
+      touchScrollLeftRef.current = container.scrollLeft;
+      touchLastXRef.current = e.touches[0].pageX;
+      touchLastTimeRef.current = Date.now();
+      touchVelocityRef.current = 0;
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       const touchX = e.touches[0].pageX;
-      const diff = touchStartX - touchX;
-      viewport.scrollLeft = touchScrollLeft + (diff * 2);
+      const diff = touchStartXRef.current - touchX;
       
+      // 2x multiplier for extra responsiveness
+      container.scrollLeft = touchScrollLeftRef.current + (diff * 2);
+      
+      // Calculate velocity
       const now = Date.now();
-      const dt = now - touchLastTime;
-      const dx = touchX - touchLastX;
-      touchVelocity = dx / dt;
+      const dt = now - touchLastTimeRef.current;
+      const dx = touchX - touchLastXRef.current;
+      touchVelocityRef.current = dx / dt;
       
-      touchLastX = touchX;
-      touchLastTime = now;
+      touchLastXRef.current = touchX;
+      touchLastTimeRef.current = now;
     };
 
     const handleTouchEnd = () => {
-      if (Math.abs(touchVelocity) > 0.3) {
-        applyMomentumScroll(-touchVelocity * 50);
+      // Apply momentum if velocity is high
+      if (Math.abs(touchVelocityRef.current) > 0.3) {
+        applyMomentum(-touchVelocityRef.current * 50);
       }
     };
 
     // Mouse drag events
     const handleMouseDown = (e: MouseEvent) => {
-      isDragging.current = true;
-      startX.current = e.pageX - viewport.offsetLeft;
-      scrollLeft.current = viewport.scrollLeft;
-      viewport.style.cursor = 'grabbing';
-      lastX.current = e.pageX;
-      lastTime.current = Date.now();
-      velocity.current = 0;
+      isDraggingRef.current = true;
+      dragStartXRef.current = e.pageX - container.offsetLeft;
+      dragScrollLeftRef.current = container.scrollLeft;
+      container.style.cursor = 'grabbing';
+      dragLastXRef.current = e.pageX;
+      dragLastTimeRef.current = Date.now();
+      dragVelocityRef.current = 0;
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current) return;
+      if (!isDraggingRef.current) return;
       e.preventDefault();
       
-      const x = e.pageX - viewport.offsetLeft;
-      const walk = (x - startX.current) * 2;
-      viewport.scrollLeft = scrollLeft.current - walk;
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - dragStartXRef.current) * 2; // 2x multiplier
+      container.scrollLeft = dragScrollLeftRef.current - walk;
       
+      // Calculate velocity
       const now = Date.now();
-      const dt = now - lastTime.current;
-      const dx = e.pageX - lastX.current;
-      velocity.current = dx / dt;
+      const dt = now - dragLastTimeRef.current;
+      const dx = e.pageX - dragLastXRef.current;
+      dragVelocityRef.current = dx / dt;
       
-      lastX.current = e.pageX;
-      lastTime.current = now;
+      dragLastXRef.current = e.pageX;
+      dragLastTimeRef.current = now;
     };
 
     const handleMouseUp = () => {
-      if (isDragging.current && Math.abs(velocity.current) > 0.3) {
-        applyMomentumScroll(-velocity.current * 50);
+      if (isDraggingRef.current && Math.abs(dragVelocityRef.current) > 0.3) {
+        applyMomentum(-dragVelocityRef.current * 50);
       }
-      isDragging.current = false;
-      viewport.style.cursor = 'grab';
+      isDraggingRef.current = false;
+      container.style.cursor = 'grab';
     };
 
     const handleMouseLeave = () => {
-      isDragging.current = false;
-      viewport.style.cursor = 'grab';
+      isDraggingRef.current = false;
+      container.style.cursor = 'grab';
     };
 
     // Trackpad wheel event
-    let momentumTimer: NodeJS.Timeout;
+    let wheelTimeout: NodeJS.Timeout;
     const handleWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaX) > 0) {
+      // Detect horizontal scroll
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
         e.preventDefault();
-        viewport.scrollLeft += e.deltaX * 2;
         
-        clearTimeout(momentumTimer);
-        momentumTimer = setTimeout(() => {
+        // 2x multiplier for responsiveness
+        container.scrollLeft += e.deltaX * 2;
+        
+        // Apply momentum after scroll stops
+        clearTimeout(wheelTimeout);
+        wheelTimeout = setTimeout(() => {
           if (Math.abs(e.deltaX) > 1) {
-            applyMomentumScroll(e.deltaX * 30);
+            applyMomentum(e.deltaX * 30);
           }
         }, 50);
       }
     };
 
-    // Add event listeners
+    // Attach event listeners
     if (prevBtnRef.current) prevBtnRef.current.addEventListener('click', handlePrevClick);
     if (nextBtnRef.current) nextBtnRef.current.addEventListener('click', handleNextClick);
-    viewport.addEventListener('scroll', handleScroll, { passive: true });
-    viewport.addEventListener('touchstart', handleTouchStart, { passive: true });
-    viewport.addEventListener('touchmove', handleTouchMove, { passive: true });
-    viewport.addEventListener('touchend', handleTouchEnd, { passive: true });
-    viewport.addEventListener('mousedown', handleMouseDown);
-    viewport.addEventListener('mousemove', handleMouseMove);
-    viewport.addEventListener('mouseup', handleMouseUp);
-    viewport.addEventListener('mouseleave', handleMouseLeave);
-    viewport.addEventListener('wheel', handleWheel, { passive: false });
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    container.addEventListener('touchend', handleTouchEnd, { passive: true });
+    container.addEventListener('mousedown', handleMouseDown);
+    container.addEventListener('mousemove', handleMouseMove);
+    container.addEventListener('mouseup', handleMouseUp);
+    container.addEventListener('mouseleave', handleMouseLeave);
+    container.addEventListener('wheel', handleWheel, { passive: false });
 
+    // Initial button state
     updateButtonStates();
 
     return () => {
       if (prevBtnRef.current) prevBtnRef.current.removeEventListener('click', handlePrevClick);
       if (nextBtnRef.current) nextBtnRef.current.removeEventListener('click', handleNextClick);
-      viewport.removeEventListener('scroll', handleScroll);
-      viewport.removeEventListener('touchstart', handleTouchStart);
-      viewport.removeEventListener('touchmove', handleTouchMove);
-      viewport.removeEventListener('touchend', handleTouchEnd);
-      viewport.removeEventListener('mousedown', handleMouseDown);
-      viewport.removeEventListener('mousemove', handleMouseMove);
-      viewport.removeEventListener('mouseup', handleMouseUp);
-      viewport.removeEventListener('mouseleave', handleMouseLeave);
-      viewport.removeEventListener('wheel', handleWheel);
-      clearTimeout(momentumTimer);
+      container.removeEventListener('scroll', handleScroll);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleTouchEnd);
+      container.removeEventListener('mousedown', handleMouseDown);
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseup', handleMouseUp);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+      container.removeEventListener('wheel', handleWheel);
+      clearTimeout(wheelTimeout);
     };
   }, [displayProducts]);
 
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
     setActiveTab(tab);
-    if (viewportRef.current) {
-      viewportRef.current.scrollLeft = 0;
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = 0;
     }
   };
 
   return (
-    <section className="product-carousel-section">
+    <section className="luxury-carousel-section">
+      {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       
-      <div className="carousel-inner-wrapper">
+      <div className="luxury-carousel-inner">
+        {/* Header section */}
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
@@ -249,6 +271,7 @@ export const ProductSlider = () => {
             {t('productSlider.subtitle')}
           </p>
           
+          {/* Tab buttons */}
           <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6' }}>
             <button
               onClick={() => handleTabChange('popular')}
@@ -296,29 +319,32 @@ export const ProductSlider = () => {
             </div>
           </div>
         ) : displayProducts.length > 0 ? (
-          <div className="relative">
+          <div className="luxury-carousel-wrapper">
+            {/* Navigation arrows */}
             <button
               ref={prevBtnRef}
-              className="carousel-nav-btn carousel-prev"
-              aria-label="Previous"
+              className="luxury-nav-arrow luxury-nav-prev"
+              aria-label="Previous products"
             >
-              <ChevronLeft className="carousel-nav-icon" />
+              <ChevronLeft className="luxury-nav-icon" />
             </button>
             
             <button
               ref={nextBtnRef}
-              className="carousel-nav-btn carousel-next"
-              aria-label="Next"
+              className="luxury-nav-arrow luxury-nav-next"
+              aria-label="Next products"
             >
-              <ChevronRight className="carousel-nav-icon" />
+              <ChevronRight className="luxury-nav-icon" />
             </button>
 
-            <div ref={viewportRef} className="carousel-viewport">
-              <div className="carousel-track">
+            {/* Scroll container */}
+            <div ref={scrollContainerRef} className="luxury-scroll-container">
+              {/* Products track */}
+              <div className="luxury-products-track">
                 {displayProducts.map((product, index) => (
                   <article 
                     key={`${product.node.id}-${index}`}
-                    className="product-card"
+                    className="luxury-product-card"
                   >
                     <ProductCard product={product} />
                   </article>

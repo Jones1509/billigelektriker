@@ -643,20 +643,27 @@ All colors MUST be HSL.
     display: none;
   }
 
-  /* ===== DRONNING-KVALITET LUKSUS CAROUSEL ===== */
-  .product-carousel-section {
+  /* ===== KOMPLET NY LUKSUS CAROUSEL - PERFEKT IMPLEMENTATION ===== */
+  
+  /* Outer section */
+  .luxury-carousel-section {
     position: relative;
     width: 100%;
     background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--blue-tint)) 50%, hsl(var(--blue-tint)) 100%);
     overflow: hidden;
   }
 
-  .carousel-inner-wrapper {
+  .luxury-carousel-inner {
     position: relative;
     z-index: 10;
   }
 
-  .carousel-viewport {
+  .luxury-carousel-wrapper {
+    position: relative;
+  }
+
+  /* Scroll container */
+  .luxury-scroll-container {
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
@@ -667,39 +674,33 @@ All colors MUST be HSL.
     cursor: grab;
   }
 
-  .carousel-viewport::-webkit-scrollbar {
+  .luxury-scroll-container::-webkit-scrollbar {
     display: none;
   }
 
-  .carousel-viewport:active {
+  .luxury-scroll-container:active {
     cursor: grabbing;
   }
 
-  .carousel-track {
+  /* Products track with CSS Grid */
+  .luxury-products-track {
     display: grid;
     grid-auto-flow: column;
+    width: fit-content;
   }
 
-  .product-card {
+  /* Product card base */
+  .luxury-product-card {
     scroll-snap-align: start;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
-                box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
-  .product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-  }
-
-  .carousel-nav-btn {
+  /* Navigation arrows base */
+  .luxury-nav-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: white;
-    border: 2px solid rgba(0,0,0,0.06);
+    border: 2px solid rgba(0, 0, 0, 0.06);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -708,130 +709,128 @@ All colors MUST be HSL.
     z-index: 100;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     color: #2563eb;
+    will-change: transform, background-color, box-shadow;
   }
 
-  .carousel-nav-btn:hover {
+  .luxury-nav-arrow:hover {
     background: #2563eb;
     color: white;
     transform: translateY(-50%) scale(1.1);
   }
 
-  .carousel-nav-btn:active {
+  .luxury-nav-arrow:active {
     transform: translateY(-50%) scale(0.98);
   }
 
-  /* DESKTOP - over 1200px - ALTID 4 PRODUKTER */
+  /* DESKTOP - OVER 1200PX - ALTID 4 PRODUKTER */
   @media (min-width: 1200px) {
-    .carousel-inner-wrapper {
+    .luxury-carousel-inner {
       max-width: 1600px;
       margin: 0 auto;
       padding: 60px 120px;
     }
 
-    .carousel-track {
-      grid-auto-columns: calc(25% - 21px);
+    /* 4 products visible: (100% - 3 gaps) / 4 */
+    /* Gap = 28px, so 3 gaps = 84px */
+    .luxury-products-track {
+      grid-auto-columns: calc((100% - 84px) / 4);
       gap: 28px;
       padding: 8px;
     }
 
-    .carousel-nav-btn {
+    .luxury-nav-arrow {
       width: 56px;
       height: 56px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .carousel-nav-btn:hover {
-      box-shadow: 0 8px 30px rgba(37,99,235,0.3);
+    .luxury-nav-arrow:hover {
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
     }
 
-    .carousel-nav-icon {
+    .luxury-nav-icon {
       width: 28px;
       height: 28px;
     }
 
-    .carousel-prev {
+    .luxury-nav-prev {
       left: 40px;
     }
 
-    .carousel-next {
+    .luxury-nav-next {
       right: 40px;
     }
   }
 
-  /* TABLET - 768px til 1199px - ALTID 3 PRODUKTER */
+  /* TABLET - 768PX TIL 1199PX - ALTID 3 PRODUKTER */
   @media (min-width: 768px) and (max-width: 1199px) {
-    .carousel-inner-wrapper {
+    .luxury-carousel-inner {
       padding: 60px 80px;
     }
 
-    .carousel-track {
-      grid-auto-columns: calc(33.333% - 16px);
+    /* 3 products visible: (100% - 2 gaps) / 3 */
+    /* Gap = 24px, so 2 gaps = 48px */
+    .luxury-products-track {
+      grid-auto-columns: calc((100% - 48px) / 3);
       gap: 24px;
       padding: 8px;
     }
 
-    .product-card {
-      border-radius: 18px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    }
-
-    .carousel-nav-btn {
+    .luxury-nav-arrow {
       width: 52px;
       height: 52px;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     }
 
-    .carousel-nav-icon {
+    .luxury-nav-icon {
       width: 26px;
       height: 26px;
     }
 
-    .carousel-prev {
+    .luxury-nav-prev {
       left: 16px;
     }
 
-    .carousel-next {
+    .luxury-nav-next {
       right: 16px;
     }
   }
 
-  /* MOBIL - under 768px - ALTID 2 PRODUKTER */
+  /* MOBIL - UNDER 768PX - ALTID 2 PRODUKTER */
   @media (max-width: 767px) {
-    .carousel-inner-wrapper {
+    .luxury-carousel-inner {
       padding: 60px 24px;
     }
 
-    .carousel-track {
-      grid-auto-columns: calc(50% - 8px);
+    /* 2 products visible: (100% - 1 gap) / 2 */
+    /* Gap = 16px, so 1 gap = 16px */
+    .luxury-products-track {
+      grid-auto-columns: calc((100% - 16px) / 2);
       gap: 16px;
       padding: 8px;
     }
 
-    .product-card {
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    .carousel-nav-btn {
+    .luxury-nav-arrow {
       width: 46px;
       height: 46px;
-      background: rgba(255,255,255,0.92);
+      top: 45%;
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
-    .carousel-nav-icon {
+    .luxury-nav-icon {
       width: 24px;
       height: 24px;
     }
 
-    .carousel-prev {
+    .luxury-nav-prev {
       left: 8px;
     }
 
-    .carousel-next {
+    .luxury-nav-next {
       right: 8px;
     }
   }
