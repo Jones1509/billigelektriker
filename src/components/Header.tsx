@@ -3,7 +3,7 @@ import {
   Phone, User, LogOut, Zap, Search, Smartphone, Car, 
   Server, Briefcase, Power, Lamp, Wifi, Moon, 
   Boxes, Cable, Shield, Menu, Info, Mail, Lightbulb, Bell,
-  Lock, Settings, Wrench, ShoppingCart, Battery, Plug, Box, Grid3x3, Gauge, ArrowRight, X, ChevronDown
+  Lock, Settings, Wrench, ShoppingCart, Battery, Plug, Box, Grid3x3, Gauge, ArrowRight, X
 } from "lucide-react";
 import { CartDrawer } from "./CartDrawer";
 import { Link, useNavigate } from "react-router-dom";
@@ -326,77 +326,25 @@ export const Header = () => {
                       </AccordionContent>
                     </AccordionItem>
 
-                    {/* Tilbud Dropdown */}
-                    <AccordionItem value="tilbud" className="border-b border-border/50">
-                      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-primary hover:no-underline transition-colors">
-                        Tilbud
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <div className="space-y-0.5 pt-1 pb-3">
-                          <Link
-                            to="/tilbud/mest-populaer"
-                            onClick={closeMobileMenu}
-                            className="block text-[15px] text-foreground/90 py-3 px-4 active:bg-primary/5 transition-colors duration-150"
-                          >
-                            Mest populær
-                          </Link>
-                          <Link
-                            to="/tilbud/nyhed"
-                            onClick={closeMobileMenu}
-                            className="block text-[15px] text-foreground/90 py-3 px-4 active:bg-primary/5 transition-colors duration-150"
-                          >
-                            Nyhed
-                          </Link>
-                          <Link
-                            to="/tilbud/anbefalet"
-                            onClick={closeMobileMenu}
-                            className="block text-[15px] text-foreground/90 py-3 px-4 active:bg-primary/5 transition-colors duration-150"
-                          >
-                            Anbefalet
-                          </Link>
-                          
-                          <div className="border-t border-border/50 my-2"></div>
-                          
-                          <Link
-                            to="/tilbud/aktuelle"
-                            onClick={closeMobileMenu}
-                            className="flex items-center gap-2 text-[15px] text-foreground/90 py-3 px-4 active:bg-primary/5 transition-colors duration-150"
-                          >
-                            <span className="text-base">🔥</span>
-                            <span>Aktuelle tilbud</span>
-                          </Link>
-                          <Link
-                            to="/tilbud/koeb-2-betal-1"
-                            onClick={closeMobileMenu}
-                            className="flex items-center gap-2 text-[15px] text-foreground/90 py-3 px-4 active:bg-primary/5 transition-colors duration-150"
-                          >
-                            <span className="text-base">🎁</span>
-                            <span>Køb 2, betal for 1</span>
-                          </Link>
-                          <Link
-                            to="/tilbud/restparti-udsalg"
-                            onClick={closeMobileMenu}
-                            className="block text-[15px] text-foreground/90 py-3 px-4 active:bg-primary/5 transition-colors duration-150"
-                          >
-                            Restparti & Udsalg
-                          </Link>
-                          <Link
-                            to="/tilbud/gratis-gave"
-                            onClick={closeMobileMenu}
-                            className="flex items-center gap-2 text-[15px] text-foreground/90 py-3 px-4 active:bg-primary/5 transition-colors duration-150"
-                          >
-                            <span className="text-base">✨</span>
-                            <span>Gratis gave ved køb</span>
-                          </Link>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-
                         {/* Language Switcher in Mobile Menu */}
                         <MobileLanguageSwitcher />
                       </Accordion>
 
-                  {/* User Actions */}
+                  {/* Tilbud Link */}
+                  <div className="border-t border-border/50 pt-2 mt-2">
+                    <div className="space-y-0.5">
+                      <Link
+                        to="/tilbud"
+                        onClick={closeMobileMenu}
+                        className="flex items-center gap-3 px-4 py-3.5 active:bg-muted/30 transition-colors duration-150"
+                      >
+                        <Bell className="h-4 w-4 text-muted-foreground/70" />
+                        <span className="text-[15px] font-medium text-foreground/90">Tilbud</span>
+                      </Link>
+                    </div>
+                  </div>
+
+                      {/* User Actions */}
                       <div className="border-t border-border/50 pt-4 mt-2 space-y-2 px-4">
                         {user ? (
                           <>
@@ -559,74 +507,20 @@ export const Header = () => {
               </NavigationMenuContent>
             </NavigationMenuItem>
 
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild>
+                <Link 
+                  to="/tilbud" 
+                  className="group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-base font-medium text-white hover:text-white/90 backdrop-blur-sm hover:bg-white/5 transition-all duration-300"
+                >
+                  Tilbud
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
           </NavigationMenuList>
             </NavigationMenu>
             
-            <div className="flex items-center gap-4 justify-end">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost"
-                    className="text-base text-white hover:text-white/90 transition-all duration-300 gap-2 px-6 py-2.5 bg-white/20 border-2 border-white rounded-full hover:bg-white hover:text-primary hover:scale-105 hover:shadow-lg hover:shadow-white/20"
-                  >
-                    Tilbud
-                    <ChevronDown className="h-4 w-4 ml-1 transition-transform duration-200" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-[220px] bg-white rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-3">
-                  <div className="space-y-1">
-                    <Link
-                      to="/tilbud/mest-populaer"
-                      className="block px-4 py-3 rounded-lg text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-primary hover:translate-x-1 transition-all duration-200"
-                    >
-                      Mest populær
-                    </Link>
-                    <Link
-                      to="/tilbud/nyhed"
-                      className="block px-4 py-3 rounded-lg text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-primary hover:translate-x-1 transition-all duration-200"
-                    >
-                      Nyhed
-                    </Link>
-                    <Link
-                      to="/tilbud/anbefalet"
-                      className="block px-4 py-3 rounded-lg text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-primary hover:translate-x-1 transition-all duration-200"
-                    >
-                      Anbefalet
-                    </Link>
-                    
-                    <div className="border-t border-slate-200 my-2"></div>
-                    
-                    <Link
-                      to="/tilbud/aktuelle"
-                      className="flex items-center gap-2 px-4 py-3 rounded-lg text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-primary hover:translate-x-1 transition-all duration-200"
-                    >
-                      <span className="text-base">🔥</span>
-                      <span>Aktuelle tilbud</span>
-                    </Link>
-                    <Link
-                      to="/tilbud/koeb-2-betal-1"
-                      className="flex items-center gap-2 px-4 py-3 rounded-lg text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-primary hover:translate-x-1 transition-all duration-200"
-                    >
-                      <span className="text-base">🎁</span>
-                      <span>Køb 2, betal for 1</span>
-                    </Link>
-                    <Link
-                      to="/tilbud/restparti-udsalg"
-                      className="block px-4 py-3 rounded-lg text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-primary hover:translate-x-1 transition-all duration-200"
-                    >
-                      Restparti & Udsalg
-                    </Link>
-                    <Link
-                      to="/tilbud/gratis-gave"
-                      className="flex items-center gap-2 px-4 py-3 rounded-lg text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-primary hover:translate-x-1 transition-all duration-200"
-                    >
-                      <span className="text-base">✨</span>
-                      <span>Gratis gave ved køb</span>
-                    </Link>
-                  </div>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              
+            <div className="flex items-center gap-3 justify-end">
               <div className="flex">
                 <LanguageSwitcher />
               </div>
