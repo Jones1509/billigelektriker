@@ -58,7 +58,7 @@ const MobileLanguageSwitcher = () => {
 
   return (
     <AccordionItem value="language" className="border-b-0">
-      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-foreground/90 hover:no-underline hover:text-foreground transition-colors">
+      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-foreground/90 hover:no-underline transition-colors">
         Sprog / Language
       </AccordionTrigger>
       <AccordionContent>
@@ -272,7 +272,7 @@ export const Header = () => {
                   <Accordion type="single" collapsible className="w-full">
                     {/* Services */}
                     <AccordionItem value="services" className="border-b border-border/50">
-                      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-primary hover:no-underline hover:text-primary/80 transition-colors">
+                      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-primary hover:no-underline transition-colors">
                         {t('header.services')}
                       </AccordionTrigger>
                       <AccordionContent>
@@ -282,9 +282,9 @@ export const Header = () => {
                               key={service.href}
                               to={service.href}
                               onClick={closeMobileMenu}
-                              className="flex items-center justify-between gap-2 px-4 py-3 hover:bg-accent/50 active:bg-accent transition-colors duration-200 group"
+                              className="flex items-center justify-between gap-2 px-4 py-3 active:bg-primary/5 transition-colors duration-150"
                             >
-                              <span className="text-[15px] text-foreground/90 group-hover:text-foreground group-active:text-primary transition-colors">{service.title}</span>
+                              <span className="text-[15px] text-foreground/90">{service.title}</span>
                               {service.badge && (
                                 <span className="bg-destructive text-destructive-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
                                   {service.badge}
@@ -298,7 +298,7 @@ export const Header = () => {
 
                     {/* Products */}
                     <AccordionItem value="products" className="border-b border-border/50">
-                      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-secondary hover:no-underline hover:text-secondary/80 transition-colors">
+                      <AccordionTrigger className="px-4 py-4 text-base font-semibold text-secondary hover:no-underline transition-colors">
                         {t('header.products')}
                       </AccordionTrigger>
                       <AccordionContent>
@@ -314,7 +314,7 @@ export const Header = () => {
                                     key={link.href}
                                     to={link.href}
                                     onClick={closeMobileMenu}
-                                    className="block text-[15px] text-foreground/80 hover:text-foreground hover:bg-accent/50 active:bg-accent active:text-secondary py-2.5 px-4 pl-8 transition-colors duration-200"
+                                    className="block text-[15px] text-foreground/80 active:bg-secondary/5 py-2.5 px-4 pl-8 transition-colors duration-150"
                                   >
                                     {link.title}
                                   </Link>
@@ -336,18 +336,18 @@ export const Header = () => {
                       <Link
                         to="/om-os"
                         onClick={closeMobileMenu}
-                        className="flex items-center gap-3 px-4 py-3.5 hover:bg-accent/50 active:bg-accent transition-colors duration-200 group"
+                        className="flex items-center gap-3 px-4 py-3.5 active:bg-muted/30 transition-colors duration-150"
                       >
-                        <Info className="h-4 w-4 text-muted-foreground/60 group-hover:text-foreground/80 transition-colors" />
-                        <span className="text-[15px] font-medium text-foreground/90 group-hover:text-foreground transition-colors">{t('header.about')}</span>
+                        <Info className="h-4 w-4 text-muted-foreground/70" />
+                        <span className="text-[15px] font-medium text-foreground/90">{t('header.about')}</span>
                       </Link>
                       <Link
                         to="/kontakt"
                         onClick={closeMobileMenu}
-                        className="flex items-center gap-3 px-4 py-3.5 hover:bg-accent/50 active:bg-accent transition-colors duration-200 group"
+                        className="flex items-center gap-3 px-4 py-3.5 active:bg-muted/30 transition-colors duration-150"
                       >
-                        <Mail className="h-4 w-4 text-muted-foreground/60 group-hover:text-foreground/80 transition-colors" />
-                        <span className="text-[15px] font-medium text-foreground/90 group-hover:text-foreground transition-colors">{t('header.contact')}</span>
+                        <Mail className="h-4 w-4 text-muted-foreground/70" />
+                        <span className="text-[15px] font-medium text-foreground/90">{t('header.contact')}</span>
                       </Link>
                     </div>
                   </div>
