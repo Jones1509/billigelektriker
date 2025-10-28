@@ -233,15 +233,15 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
-        <div className="container py-3 lg:py-6">
+      <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95 shadow-sm">
+        <div className="container py-2.5 sm:py-3 lg:py-6">
           {/* Mobile Layout - Flexbox */}
-          <div className="flex lg:hidden items-center justify-between">
+          <div className="flex lg:hidden items-center justify-between px-2 sm:px-0">
             <Link to="/" className="flex items-center">
               <img 
                 src={logo} 
                 alt="Billig Elektriker" 
-                className="h-11 w-auto"
+                className="h-10 sm:h-11 w-auto"
                 style={{ 
                   imageRendering: "-webkit-optimize-contrast",
                   WebkitFontSmoothing: "antialiased"
@@ -250,7 +250,7 @@ export const Header = () => {
               />
             </Link>
             
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <CartDrawer />
               
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
@@ -258,9 +258,9 @@ export const Header = () => {
                   <Button 
                     variant="ghost" 
                     size="icon" 
-                    className="text-white hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 h-11 w-11"
+                    className="text-white hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-300 h-10 w-10 sm:h-11 sm:w-11"
                   >
-                    <Menu className="h-5 w-5" />
+                    <Menu className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-full sm:w-[400px] bg-background">

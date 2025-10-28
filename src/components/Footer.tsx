@@ -21,16 +21,16 @@ export const Footer = () => {
   return (
     <footer className="bg-gradient-to-b from-[#F7F9FC] to-[#EEF4FC] relative">
       {/* Main Footer Content */}
-      <div className="max-w-[1200px] mx-auto px-10 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-12 mb-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 py-8 md:py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1.3fr] gap-8 md:gap-10 lg:gap-12 mb-8">
           
           {/* Kolonne 1: About + Logo */}
           <div>
-            <div className="flex items-start gap-3 mb-6">
-              <img src={logoFooter} alt="Billig Elektriker Logo" className="h-14 w-14 flex-shrink-0" />
+            <div className="flex items-start gap-3 mb-5 md:mb-6">
+              <img src={logoFooter} alt="Billig Elektriker Logo" className="h-12 w-12 sm:h-14 sm:w-14 flex-shrink-0" />
               <div>
-                <h3 className="text-[#1F2937] font-bold text-xl leading-tight mb-1">Billig Elektriker</h3>
-                <p className="text-[#6B7280] text-sm">ASA ApS</p>
+                <h3 className="text-[#1F2937] font-bold text-lg sm:text-xl leading-tight mb-1">Billig Elektriker</h3>
+                <p className="text-[#6B7280] text-xs sm:text-sm">ASA ApS</p>
               </div>
             </div>
             
