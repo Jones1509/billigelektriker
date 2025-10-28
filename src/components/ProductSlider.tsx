@@ -205,16 +205,12 @@ export const ProductSlider = () => {
     const touchDiff = touchStartX.current - touchEndX.current;
     const touchDuration = Date.now() - touchStartTime.current;
     
-    const hasMinDistance = Math.abs(touchDiff) > SWIPE_MIN_DISTANCE;
-    const isQuickSwipe = touchDuration < SWIPE_MAX_DURATION;
-    const isValidSwipe = hasMinDistance && isQuickSwipe;
+    // Validate swipe: minimum distance and quick duration
+    const distanceValid = Math.abs(touchDiff) > SWIPE_MIN_DISTANCE;
+    const durationValid = SWIPE_MAX_DURATION > touchDuration;
     
-    if (isValidSwipe) {
-      if (touchDiff > 0) {
-        handleNext();
-      } else {
-        handlePrevious();
-      }
+    if (distanceValid && durationValid) {
+      touchDiff > 0 ? handleNext() : handlePrevious();
     }
     
     setTimeout(() => {
@@ -236,9 +232,13 @@ export const ProductSlider = () => {
       
       setIsPaused(true);
       
-      if (e.deltaX > SCROLL_THRESHOLD) {
+      // Check scroll direction against threshold
+      const scrollRight = e.deltaX > SCROLL_THRESHOLD;
+      const scrollLeft = -SCROLL_THRESHOLD > e.deltaX;
+      
+      if (scrollRight) {
         handleNext();
-      } else if (e.deltaX < -SCROLL_THRESHOLD) {
+      } else if (scrollLeft) {
         handlePrevious();
       }
       
