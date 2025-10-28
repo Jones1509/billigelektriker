@@ -74,14 +74,14 @@ export const ProductSlider = () => {
     }
   };
 
-  // Apply momentum scroll animation
+  // Apply momentum scroll animation - luxury smooth deceleration
   const applyMomentum = (initialVelocity: number) => {
     const container = scrollContainerRef.current;
     if (!container) return;
     
     let velocity = initialVelocity;
-    const friction = 0.94; // Less friction for longer, smoother scroll
-    const minVelocity = 0.2; // Lower threshold for longer animation
+    const friction = 0.92; // Higher friction for more controlled, luxury feel
+    const minVelocity = 0.3; // Higher threshold for quicker stop
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity || !scrollContainerRef.current) return;
@@ -128,8 +128,8 @@ export const ProductSlider = () => {
       const touchX = e.touches[0].pageX;
       const diff = touchStartXRef.current - touchX;
       
-      // 2.5x multiplier for ultra responsiveness
-      container.scrollLeft = touchScrollLeftRef.current + (diff * 2.5);
+      // 1.0x multiplier for smooth, controlled luxury feel (like Instagram)
+      container.scrollLeft = touchScrollLeftRef.current + diff;
       
       // Calculate velocity
       const now = Date.now();
@@ -142,9 +142,9 @@ export const ProductSlider = () => {
     };
 
     const handleTouchEnd = () => {
-      // Apply momentum if velocity is high - lower threshold for more sensitivity
+      // Apply momentum with reduced multiplier for smooth luxury scroll
       if (Math.abs(touchVelocityRef.current) > 0.2) {
-        applyMomentum(-touchVelocityRef.current * 80);
+        applyMomentum(-touchVelocityRef.current * 30);
       }
     };
 
