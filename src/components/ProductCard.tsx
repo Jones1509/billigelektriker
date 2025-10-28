@@ -46,7 +46,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
       <Link to={`/product/${node.handle}`} className="relative block">
-        <div className="relative aspect-square sm:h-[220px] sm:aspect-auto overflow-hidden bg-muted/30 rounded-t-2xl">
+        <div className="relative h-[140px] sm:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
           {imageUrl ? (
             <>
               <img
@@ -68,32 +68,32 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
       
-      <CardContent className="p-3.5 flex-1 flex flex-col">
+      <CardContent className="p-2.5 sm:p-3.5 flex-1 flex flex-col">
         <Link to={`/product/${node.handle}`}>
-          <h3 className="font-semibold text-base leading-[1.3] mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
+          <h3 className="font-semibold text-sm sm:text-base leading-[1.3] mb-1 sm:mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
             {node.title}
           </h3>
         </Link>
         
         {node.description && (
-          <p className="text-[13px] text-muted-foreground line-clamp-2 mb-3 leading-[1.4]">
+          <p className="text-xs sm:text-[13px] text-muted-foreground line-clamp-1 sm:line-clamp-2 mb-2 sm:mb-3 leading-[1.4]">
             {node.description}
           </p>
         )}
         
-        <p className="text-[22px] font-bold text-foreground mb-3 mt-auto">
+        <p className="text-lg sm:text-[22px] font-bold text-foreground mb-2 sm:mb-3 mt-auto">
           DKK {price.toFixed(2)}
         </p>
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full h-11 text-[14px] font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02]"
+          className="w-full h-9 sm:h-11 text-xs sm:text-[14px] font-semibold rounded-xl transition-all duration-300 hover:scale-[1.02]"
           style={{ 
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
           }}
         >
-          <ShoppingCart className="w-4 h-4 mr-2" />
+          <ShoppingCart className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
           {t('productCard.addToCart')}
         </Button>
       </CardContent>
