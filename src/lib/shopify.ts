@@ -181,8 +181,6 @@ export async function storefrontApiRequest(query: string, variables: any = {}) {
 
 export async function createStorefrontCheckout(items: CartItem[]): Promise<string> {
   try {
-    console.log('Creating checkout for items:', items);
-    
     // Byg direkte checkout URL i stedet for at bruge Cart API
     // Dette undgår custom domain redirect problemet
     const variantIds = items.map(item => {
@@ -194,7 +192,6 @@ export async function createStorefrontCheckout(items: CartItem[]): Promise<strin
     // Brug direkte checkout URL på myshopify.com domænet
     const checkoutUrl = `https://${SHOPIFY_STORE_PERMANENT_DOMAIN}/cart/${variantIds}`;
     
-    console.log('Direct checkout URL:', checkoutUrl);
     return checkoutUrl;
   } catch (error) {
     console.error('Error creating storefront checkout:', error);

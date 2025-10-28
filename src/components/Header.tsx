@@ -190,18 +190,15 @@ export const Header = () => {
   }, []);
 
   const handleMenuEnter = (menu: string) => {
-    console.log('handleMenuEnter called with:', menu);
     if (hoverTimeout) {
-      console.log('Clearing hover timeout');
       clearTimeout(hoverTimeout);
     }
   };
 
   const handleMenuLeave = () => {
-    console.log('handleMenuLeave called');
     if (hoverTimeout) clearTimeout(hoverTimeout);
     const timeout = setTimeout(() => {
-      console.log('Menu will close via handleMenuLeave');
+      // Menu closes after timeout
     }, 300);
     setHoverTimeout(timeout);
   };
@@ -209,7 +206,6 @@ export const Header = () => {
   const handleCloseMenu = (triggerRef: HTMLButtonElement | null) => (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('handleCloseMenu called - closing menu via X button');
     
     if (hoverTimeout) {
       clearTimeout(hoverTimeout);

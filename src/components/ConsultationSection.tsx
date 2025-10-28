@@ -30,8 +30,6 @@ export const ConsultationSection = () => {
       // Simulate API call - replace with actual edge function when ready
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      console.log("Contact form submitted:", data);
-      
       toast.success("Tak! Vi kontakter dig inden for 24 timer.", {
         description: "Vi har modtaget din forespørgsel og vender tilbage hurtigst muligt."
       });

@@ -88,8 +88,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           }}
         >
           <ShoppingCart className="w-3 h-3 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 mr-1 md:mr-1.5 lg:mr-2" />
-          <span className="hidden sm:inline">{t('productCard.addToCart')}</span>
-          <span className="sm:hidden">Køb</span>
+          <span className="hidden md:inline">{t('productCard.addToCart')}</span>
+          <span className="md:hidden">Køb</span>
         </Button>
       </CardContent>
     </Card>

@@ -30,17 +30,13 @@ export const CartDrawer = () => {
 
   const handleCheckout = async () => {
     try {
-      console.log('Starting checkout with items:', items);
-      
       // Åbn et nyt vindue med det samme for at undgå popup blocker
       const checkoutWindow = window.open('about:blank', '_blank');
       
       await createCheckout();
       const checkoutUrl = useCartStore.getState().checkoutUrl;
-      console.log('Checkout URL created:', checkoutUrl);
       
       if (checkoutUrl && checkoutWindow) {
-        console.log('Redirecting to checkout URL');
         checkoutWindow.location.href = checkoutUrl;
         setIsOpen(false);
         toast.success("Åbner checkout", {
