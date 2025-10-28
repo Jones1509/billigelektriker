@@ -111,10 +111,11 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Products Section Styles - Complete Rewrite */
+  /* Products Section - 100% Pixel Perfect Alignment */
   .products-section {
     position: relative;
     width: 100%;
+    overflow: hidden;
   }
 
   .products-container {
@@ -124,130 +125,164 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding: 0 16px;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100%;
   }
 
   .products-container::-webkit-scrollbar {
     display: none;
+    width: 0;
+    height: 0;
   }
 
   .products-grid {
-    display: flex;
-    gap: 12px;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
     width: max-content;
+    margin: 0;
+    padding: 0;
   }
 
   .product-card {
     flex-shrink: 0;
+    flex-grow: 0;
     scroll-snap-align: start;
+    display: flex;
+    box-sizing: border-box;
   }
 
   /* Scroll buttons */
   .scroll-btn {
     position: absolute;
-    top: 35%;
+    top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid #E5E7EB;
+    border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    z-index: 10;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
+    color: #2563EB;
   }
 
   .scroll-btn:hover {
-    background: #f8f9fa;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background: #2563EB;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transform: translateY(-50%) scale(1.05);
   }
 
-  .scroll-btn.prev {
-    left: 8px;
+  .scroll-btn:active {
+    transform: translateY(-50%) scale(0.95);
   }
 
-  .scroll-btn.next {
-    right: 8px;
-  }
-
-  /* Mobile styles (under 768px) */
+  /* MOBIL - 320px til 767px - 2 produkter */
   @media (max-width: 767px) {
     .products-container {
-      padding: 0 16px;
+      padding: 0 16px !important;
     }
     
     .products-grid {
       gap: 12px;
+      padding-left: 0;
+      padding-right: 0;
     }
     
     .product-card {
-      width: calc((100vw - 44px) / 2);
-      min-width: calc((100vw - 44px) / 2);
-      max-width: calc((100vw - 44px) / 2);
+      width: calc((100vw - 32px - 12px) / 2);
+      min-width: calc((100vw - 32px - 12px) / 2);
+      max-width: calc((100vw - 32px - 12px) / 2);
+    }
+
+    .scroll-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    .scroll-btn.prev {
+      left: 8px;
+    }
+
+    .scroll-btn.next {
+      right: 8px;
     }
   }
 
-  /* Tablet styles (768px - 1199px) */
+  /* TABLET - 768px til 1199px - 3 produkter */
   @media (min-width: 768px) and (max-width: 1199px) {
     .products-container {
-      padding: 0 30px;
+      padding: 0 40px !important;
     }
     
     .products-grid {
-      gap: 16px;
+      gap: 20px;
+      padding-left: 0;
+      padding-right: 0;
     }
     
     .product-card {
-      width: 280px;
-      min-width: 280px;
-      max-width: 280px;
+      width: calc((100vw - 80px - 40px) / 3);
+      min-width: calc((100vw - 80px - 40px) / 3);
+      max-width: calc((100vw - 80px - 40px) / 3);
     }
-    
+
     .scroll-btn {
       width: 46px;
       height: 46px;
+      font-size: 20px;
     }
-    
+
     .scroll-btn.prev {
-      left: 10px;
+      left: 12px;
     }
-    
+
     .scroll-btn.next {
-      right: 10px;
+      right: 12px;
     }
   }
 
-  /* Desktop styles (1200px+) */
+  /* DESKTOP - 1200px+ - 4 produkter */
   @media (min-width: 1200px) {
+    .products-section {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
     .products-container {
-      padding: 0 100px;
+      padding: 0 100px !important;
     }
     
     .products-grid {
       gap: 24px;
+      padding-left: 0;
+      padding-right: 0;
     }
     
     .product-card {
-      width: 300px;
-      min-width: 300px;
-      max-width: 300px;
+      width: calc((1400px - 200px - 72px) / 4);
+      min-width: calc((1400px - 200px - 72px) / 4);
+      max-width: calc((1400px - 200px - 72px) / 4);
     }
-    
+
     .scroll-btn {
       width: 50px;
       height: 50px;
+      font-size: 22px;
     }
-    
+
     .scroll-btn.prev {
-      left: 20px;
+      left: 25px;
     }
-    
+
     .scroll-btn.next {
-      right: 20px;
+      right: 25px;
     }
   }
 }

@@ -44,9 +44,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   const price = parseFloat(node.priceRange.minVariantPrice.amount);
 
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
-      <Link to={`/product/${node.handle}`} className="relative block">
-        <div className="relative h-[160px] md:h-[200px] lg:h-[240px] overflow-hidden bg-muted/30 rounded-t-2xl">
+    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full w-full flex flex-col">
+      <Link to={`/product/${node.handle}`} className="relative block w-full">
+        <div className="relative w-full h-[160px] md:h-[200px] lg:h-[240px] overflow-hidden bg-muted/30 rounded-t-2xl">
           {imageUrl ? (
             <>
               <img
@@ -68,32 +68,32 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
       
-      <CardContent className="p-3 md:p-3.5 flex-1 flex flex-col">
-        <Link to={`/product/${node.handle}`}>
-          <h3 className="font-semibold text-sm md:text-base leading-[1.3] mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
+      <CardContent className="p-2.5 md:p-3.5 lg:p-4 flex-1 flex flex-col w-full">
+        <Link to={`/product/${node.handle}`} className="w-full">
+          <h3 className="font-semibold text-[13px] md:text-base leading-[1.3] mb-1 md:mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
             {node.title}
           </h3>
         </Link>
         
         {node.description && (
-          <p className="text-xs md:text-[13px] text-muted-foreground line-clamp-2 mb-2 md:mb-3 leading-[1.3] md:leading-[1.4]">
+          <p className="text-[11px] md:text-[13px] text-muted-foreground line-clamp-2 mb-2 md:mb-3 leading-[1.3]">
             {node.description}
           </p>
         )}
         
-        <p className="text-[20px] md:text-[22px] font-bold text-foreground mb-2.5 md:mb-3 mt-auto">
+        <p className="text-[18px] md:text-[22px] font-bold text-foreground mb-2 md:mb-3 mt-auto">
           DKK {price.toFixed(2)}
         </p>
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full h-[42px] md:h-11 text-[13px] md:text-[14px] font-semibold rounded-[10px] md:rounded-xl transition-all duration-300 hover:scale-[1.02]"
+          className="w-full h-[38px] md:h-11 text-[12px] md:text-[14px] font-semibold rounded-[8px] md:rounded-xl transition-all duration-300 hover:scale-[1.02]"
           style={{ 
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
           }}
         >
-          <ShoppingCart className="w-4 h-4 mr-2" />
+          <ShoppingCart className="w-3.5 h-3.5 md:w-4 md:h-4 mr-1.5 md:mr-2" />
           {t('productCard.addToCart')}
         </Button>
       </CardContent>
