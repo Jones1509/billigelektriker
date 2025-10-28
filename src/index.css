@@ -666,14 +666,17 @@ All colors MUST be HSL.
 .luxury-scroll-container {
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: auto; /* Changed from smooth for instant response */
-  scroll-snap-type: x proximity; /* Changed from mandatory for smoother feel */
+  scroll-behavior: auto;
+  scroll-snap-type: none; /* Disable snap for ultra smooth trackpad */
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
-  transform: translateZ(0); /* Force hardware acceleration */
+  transform: translateZ(0);
   will-change: scroll-position;
+  /* Ultra smooth scrolling */
+  scroll-padding: 0;
+  overscroll-behavior-x: contain;
 }
 
   .luxury-scroll-container::-webkit-scrollbar {
@@ -689,6 +692,10 @@ All colors MUST be HSL.
     display: grid;
     grid-auto-flow: column;
     width: fit-content;
+    /* Smooth rendering */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 
   /* Product card base */

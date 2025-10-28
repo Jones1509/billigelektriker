@@ -190,44 +190,19 @@ export const ProductSlider = () => {
       container.style.cursor = 'grab';
     };
 
-    // Trackpad wheel event - optimeret til MacBook
-    let wheelTimeout: NodeJS.Timeout;
-    let lastWheelDelta = 0;
-    let lastWheelTime = Date.now();
-    
+    // Trackpad/wheel scroll - MacBook optimized
     const handleWheel = (e: WheelEvent) => {
-      // Always prevent default for horizontal carousel
-      if (Math.abs(e.deltaX) > 0 || Math.abs(e.deltaY) > 0) {
+      // Lad browser håndtere vertical scroll naturligt
+      // Kun grib horizontal scroll eller konverter vertical til horizontal
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 0) {
+        // Vertical trackpad gesture -> konverter til horizontal scroll
         e.preventDefault();
-        e.stopPropagation();
+        container.scrollLeft += e.deltaY * 1.2;
+      } else if (Math.abs(e.deltaX) > 0) {
+        // Horizontal trackpad gesture -> brug direkte
+        e.preventDefault();
+        container.scrollLeft += e.deltaX * 1.2;
       }
-      
-      // Primært brug deltaX, men tillad også deltaY for trackpad
-      let scrollAmount = e.deltaX;
-      
-      // Hvis deltaY er større, konverter det til horizontal scroll
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        scrollAmount = e.deltaY;
-      }
-      
-      // 2.5x multiplier for ultra smooth MacBook feel
-      container.scrollLeft += scrollAmount * 2.5;
-      
-      // Beregn velocity for momentum
-      const now = Date.now();
-      const dt = now - lastWheelTime;
-      const velocity = dt > 0 ? (scrollAmount - lastWheelDelta) / dt : 0;
-      
-      lastWheelDelta = scrollAmount;
-      lastWheelTime = now;
-      
-      // Apply momentum efter scroll stopper
-      clearTimeout(wheelTimeout);
-      wheelTimeout = setTimeout(() => {
-        if (Math.abs(velocity) > 0.05) {
-          applyMomentum(velocity * 100);
-        }
-      }, 100);
     };
 
     // Attach event listeners
@@ -258,7 +233,6 @@ export const ProductSlider = () => {
       container.removeEventListener('mouseup', handleMouseUp);
       container.removeEventListener('mouseleave', handleMouseLeave);
       container.removeEventListener('wheel', handleWheel);
-      clearTimeout(wheelTimeout);
     };
   }, [displayProducts]);
 
