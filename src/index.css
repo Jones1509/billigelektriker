@@ -281,8 +281,20 @@ All colors MUST be HSL.
   .mega-menu-inner {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 40px 56px 40px;
+    padding: 40px 16px 56px 16px;
     height: auto;
+  }
+
+  @media (min-width: 768px) {
+    .mega-menu-inner {
+      padding: 40px 24px 56px 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mega-menu-inner {
+      padding: 40px 80px 56px 80px;
+    }
   }
 
   /* Mega Menu Header */
