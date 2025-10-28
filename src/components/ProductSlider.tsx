@@ -106,7 +106,7 @@ export const ProductSlider = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]"></div>
       
-      <div className="max-w-[1400px] mx-auto relative z-10 px-4 md:px-10">
+      <div className="max-w-[1400px] mx-auto relative z-10 px-4 md:px-6 lg:px-20">
         <div className="text-center mb-5 md:mb-7 animate-fade-in">
           {/* Webshop Badge with gradient */}
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
@@ -175,39 +175,39 @@ export const ProductSlider = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            {/* Navigation Arrows - Desktop */}
+            {/* Navigation Arrows - Desktop (outside viewport) */}
             <button
               onClick={handlePrevious}
-              className="hidden lg:flex absolute left-[-70px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[60px] z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
               aria-label="Forrige produkt"
             >
               <ChevronLeft className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
             </button>
             
-            {/* Navigation Arrows - Tablet */}
+            {/* Navigation Arrows - Tablet (inside viewport) */}
             <button
               onClick={handlePrevious}
-              className="hidden md:flex lg:hidden absolute left-[10px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white/95 border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              className="hidden md:flex lg:hidden absolute left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 items-center justify-center bg-white/95 backdrop-blur-sm border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
               aria-label="Forrige produkt"
             >
-              <ChevronLeft className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+              <ChevronLeft className="w-5 h-5 text-[#2563EB] group-hover:text-white transition-colors font-bold" />
             </button>
             
             <button
               onClick={handleNext}
-              className="hidden lg:flex absolute right-[-70px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-[60px] z-20 w-12 h-12 items-center justify-center bg-white border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
               aria-label="Næste produkt"
             >
               <ChevronRight className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
             </button>
 
-            {/* Navigation Arrows - Tablet */}
+            {/* Navigation Arrows - Tablet (inside viewport) */}
             <button
               onClick={handleNext}
-              className="hidden md:flex lg:hidden absolute right-[10px] top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center bg-white/95 border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
+              className="hidden md:flex lg:hidden absolute right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 items-center justify-center bg-white/95 backdrop-blur-sm border-2 border-slate-200 rounded-full transition-all duration-300 hover:bg-[#2563EB] hover:border-[#2563EB] hover:scale-110 shadow-lg group"
               aria-label="Næste produkt"
             >
-              <ChevronRight className="w-[22px] h-[22px] text-[#2563EB] group-hover:text-white transition-colors font-bold" />
+              <ChevronRight className="w-5 h-5 text-[#2563EB] group-hover:text-white transition-colors font-bold" />
             </button>
 
             {/* Carousel viewport */}
