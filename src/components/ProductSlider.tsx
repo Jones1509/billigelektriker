@@ -761,11 +761,11 @@ export const ProductSlider = () => {
 
   return (
     <section className="product-carousel-wrapper" aria-label="Populære produkter i webshoppen">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]" aria-hidden="true"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]" aria-hidden="true"></div>
+      {/* Background effects - MUST have pointer-events-none */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)] pointer-events-none" aria-hidden="true"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)] pointer-events-none" aria-hidden="true"></div>
       
-      <div className="carousel-inner-wrapper">
+      <div className="carousel-inner-wrapper relative z-10">{/* MUST have relative and z-10 */}
         {/* Header section */}
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
