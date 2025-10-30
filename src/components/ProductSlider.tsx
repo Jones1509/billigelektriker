@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, COLLECTION_PRODUCTS_QUERY, COLLECTIONS_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -9,58 +9,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
-  const [collectionHandles, setCollectionHandles] = useState({
-    popular: 'mest-populaer', // Denne virker ✅
-    new: 'collection-2',       // Find det rigtige handle
-    recommended: 'anbefalet'   // Denne virker ✅
-  });
-  
-  // Fetch all collections to find correct handles
-  useEffect(() => {
-    const fetchCollections = async () => {
-      try {
-        const response = await storefrontApiRequest(COLLECTIONS_QUERY, { first: 20 });
-        const collections = response.data.collections.edges;
-        
-        console.log('📦 ALLE COLLECTIONS I SHOPIFY:', collections.map((c: any) => ({
-          title: c.node.title,
-          handle: c.node.handle
-        })));
-        
-        // Try to match collections by title
-        const handles: any = {};
-        
-        // Find collection 1, 2, 3 by any means
-        collections.forEach((edge: any, index: number) => {
-          const title = edge.node.title.toLowerCase();
-          const handle = edge.node.handle;
-          
-          console.log(`Checking collection ${index + 1}: "${edge.node.title}" with handle "${handle}"`);
-          
-          if (title.includes('popul') || title.includes('mest') || handle.includes('collection-1') || title.includes('collection 1')) {
-            handles.popular = handle;
-            console.log(`✅ Found POPULAR: ${handle}`);
-          } else if (title.includes('ny') || title.includes('new') || handle.includes('collection-2') || title.includes('collection 2')) {
-            handles.new = handle;
-            console.log(`✅ Found NEW: ${handle}`);
-          } else if (title.includes('anbef') || title.includes('recommend') || handle.includes('collection-3') || title.includes('collection 3')) {
-            handles.recommended = handle;
-            console.log(`✅ Found RECOMMENDED: ${handle}`);
-          }
-        });
-        
-        console.log('🎯 FINAL MAPPED HANDLES:', handles);
-        
-        if (Object.keys(handles).length > 0) {
-          setCollectionHandles(prev => ({ ...prev, ...handles }));
-        }
-      } catch (error) {
-        console.error('❌ Error fetching collections:', error);
-      }
-    };
-    
-    fetchCollections();
-  }, []);
   
   // DOM refs
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -85,28 +33,21 @@ export const ProductSlider = () => {
   const lastTimeRef = useRef(0);
   
   const { data, isLoading } = useQuery({
-    queryKey: ['collection-products', activeTab, collectionHandles[activeTab]],
+    queryKey: ['slider-products'],
     queryFn: async () => {
-      const collectionHandle = collectionHandles[activeTab];
-      console.log(`🔍 Fetching collection: ${collectionHandle} for tab: ${activeTab}`);
-      
-      const response = await storefrontApiRequest(COLLECTION_PRODUCTS_QUERY, { 
-        handle: collectionHandle,
-        first: 50 
-      });
-      
-      if (!response.data.collectionByHandle) {
-        console.error(`❌ Collection not found: ${collectionHandle}`);
-        return [];
-      }
-      
-      return response.data.collectionByHandle?.products.edges as ShopifyProduct[] || [];
+      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+      return response.data.products.edges as ShopifyProduct[];
     },
-    enabled: !!collectionHandles[activeTab],
   });
 
-  // Use products from collection directly
-  const baseProducts = data || [];
+  // Get base products based on active tab
+  const baseProducts = data ? (
+    activeTab === 'popular' 
+      ? data.slice(0, 12)
+      : activeTab === 'new'
+      ? data.slice(4, 16)
+      : data.slice(8, 20)
+  ) : [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
@@ -817,46 +758,37 @@ export const ProductSlider = () => {
           
           {/* Tab buttons */}
           <nav aria-label="Produktfiltre">
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full relative z-10" style={{ background: '#F3F4F6' }} role="tablist">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6' }} role="tablist">
               <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'popular'}
                 onClick={() => handleTabChange('popular')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'popular' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ color: activeTab === 'popular' ? '#2563EB' : '#6B7280', transitionDuration: '300ms', pointerEvents: 'auto' }}
+                style={{ color: activeTab === 'popular' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
               >
                 Mest Populær
               </button>
               <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'new'}
                 onClick={() => handleTabChange('new')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'new' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ color: activeTab === 'new' ? '#2563EB' : '#6B7280', transitionDuration: '300ms', pointerEvents: 'auto' }}
+                style={{ color: activeTab === 'new' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
               >
                 Nyhed
               </button>
               <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'recommended'}
                 onClick={() => handleTabChange('recommended')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'recommended' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', transitionDuration: '300ms', pointerEvents: 'auto' }}
+                style={{ color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
               >
                 Anbefalet
               </button>

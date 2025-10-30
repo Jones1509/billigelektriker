@@ -15,7 +15,6 @@ export const STOREFRONT_QUERY = `
           title
           description
           handle
-          tags
           priceRange {
             minVariantPrice {
               amount
@@ -64,7 +63,6 @@ export const PRODUCT_BY_HANDLE_QUERY = `
       title
       description
       handle
-      tags
       priceRange {
         minVariantPrice {
           amount
@@ -99,76 +97,6 @@ export const PRODUCT_BY_HANDLE_QUERY = `
       options {
         name
         values
-      }
-    }
-  }
-`;
-
-export const COLLECTION_PRODUCTS_QUERY = `
-  query GetCollectionProducts($handle: String!, $first: Int!) {
-    collectionByHandle(handle: $handle) {
-      id
-      title
-      handle
-      products(first: $first) {
-        edges {
-          node {
-            id
-            title
-            description
-            handle
-            tags
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            images(first: 5) {
-              edges {
-                node {
-                  url
-                  altText
-                }
-              }
-            }
-            variants(first: 10) {
-              edges {
-                node {
-                  id
-                  title
-                  price {
-                    amount
-                    currencyCode
-                  }
-                  availableForSale
-                  selectedOptions {
-                    name
-                    value
-                  }
-                }
-              }
-            }
-            options {
-              name
-              values
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const COLLECTIONS_QUERY = `
-  query GetCollections($first: Int!) {
-    collections(first: $first) {
-      edges {
-        node {
-          id
-          title
-          handle
-        }
       }
     }
   }
