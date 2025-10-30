@@ -252,8 +252,18 @@ export const ProductSlider = () => {
       width: viewport.width
     });
     
-    const card1Visible = rect1.left >= viewport.left - 2 && rect1.right <= viewport.right + 2;
-    const card2Visible = rect2.left >= viewport.left - 2 && rect2.right <= viewport.right + 2;
+    // Pre-calculate boundaries to avoid auto-translation issues
+    const leftBoundary = viewport.left - 2;
+    const rightBoundary = viewport.right + 2;
+    
+    // Check visibility separately
+    const card1LeftOk = rect1.left >= leftBoundary;
+    const card1RightOk = rect1.right <= rightBoundary;
+    const card1Visible = card1LeftOk && card1RightOk;
+    
+    const card2LeftOk = rect2.left >= leftBoundary;
+    const card2RightOk = rect2.right <= rightBoundary;
+    const card2Visible = card2LeftOk && card2RightOk;
     
     console.log('Card', index, ':', {
       left: rect1.left,
