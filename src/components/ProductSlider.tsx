@@ -45,24 +45,37 @@ export const ProductSlider = () => {
     queryKey: ['collection-products', activeTab],
     queryFn: async () => {
       const collectionHandle = COLLECTION_CONFIG[activeTab];
+      console.log('🔵 FETCHING COLLECTION:', collectionHandle, 'for tab:', activeTab);
+      
       const response = await storefrontApiRequest(COLLECTION_QUERY, { 
         handle: collectionHandle, 
         first: 12 
       });
       
+      console.log('📦 COLLECTION RESPONSE:', response.data.collection);
+      
       // If collection is empty or doesn't exist, fallback to all products
       if (!response.data.collection || response.data.collection.products.edges.length === 0) {
-        console.warn(`Collection "${collectionHandle}" er tom eller findes ikke. Bruger alle produkter som fallback.`);
+        console.warn(`⚠️ Collection "${collectionHandle}" er tom eller findes ikke. Bruger alle produkter som fallback.`);
         const fallbackResponse = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+        console.log('📦 FALLBACK PRODUCTS:', fallbackResponse.data.products.edges.length, 'produkter');
         return fallbackResponse.data.products.edges as ShopifyProduct[];
       }
       
+      console.log('✅ COLLECTION PRODUKTER:', response.data.collection.products.edges.length, 'produkter fra', collectionHandle);
       return response.data.collection.products.edges as ShopifyProduct[];
     },
   });
 
   // Base products from collection
   const baseProducts = collectionData || [];
+  
+  console.log('📊 CURRENT STATE:', {
+    activeTab,
+    collectionHandle: COLLECTION_CONFIG[activeTab],
+    productsCount: baseProducts.length,
+    isLoading
+  });
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
@@ -741,6 +754,7 @@ export const ProductSlider = () => {
       handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, clearAutoSnap]);
 
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
+    console.log('🎯 TAB CLICKED:', tab, '→ Will fetch collection:', COLLECTION_CONFIG[tab]);
     setActiveTab(tab);
     currentIndexRef.current = 0;
     if (trackRef.current) {
