@@ -10,9 +10,9 @@ export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
   const [collectionHandles, setCollectionHandles] = useState({
-    popular: 'mest-populaer',
-    new: 'nyhed',
-    recommended: 'anbefalet'
+    popular: 'mest-populaer', // Denne virker ✅
+    new: 'collection-2',       // Find det rigtige handle
+    recommended: 'anbefalet'   // Denne virker ✅
   });
   
   // Fetch all collections to find correct handles
