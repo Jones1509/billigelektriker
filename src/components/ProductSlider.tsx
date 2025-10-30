@@ -183,7 +183,7 @@ export const ProductSlider = () => {
   const calculateDimensions = useCallback(() => {
     const width = window.innerWidth;
     
-    // Determine number of visible items
+    // Determine number of visible items - ALWAYS consistent based on screen width
     if (width >= 1200) {
       itemsVisibleRef.current = 4;
     } else if (width >= 768) {
@@ -211,6 +211,9 @@ export const ProductSlider = () => {
     
     gapRef.current = Math.round(gapValue);
     
+    // FORCE apply gap to track to ensure consistency
+    trackRef.current.style.gap = `${gapRef.current}px`;
+    
     // MOBILE SPECIAL BEREGNING
     if (width < 768) {
       console.log('=== MOBILE DIMENSION CALC ===');
@@ -237,13 +240,14 @@ export const ProductSlider = () => {
       cardWidthRef.current = Math.floor(availableWidth / itemsVisibleRef.current);
     }
     
-    // Anvend bredde på alle kort
+    // CRITICAL: Force apply width to ALL cards
     const cards = viewportRef.current.querySelectorAll('.product-card');
     cards.forEach(card => {
       const cardEl = card as HTMLElement;
       cardEl.style.width = `${cardWidthRef.current}px`;
       cardEl.style.minWidth = `${cardWidthRef.current}px`;
       cardEl.style.maxWidth = `${cardWidthRef.current}px`;
+      cardEl.style.flexShrink = '0'; // Prevent shrinking
     });
     
     // Verificer faktisk bredde
@@ -252,13 +256,21 @@ export const ProductSlider = () => {
       const actualWidth = Math.round(firstCard.getBoundingClientRect().width);
       
       if (Math.abs(actualWidth - cardWidthRef.current) > 2) {
-        console.log('Adjusting card width from', cardWidthRef.current, 'to', actualWidth);
+        console.log('⚠️ Adjusting card width from', cardWidthRef.current, 'to', actualWidth);
         cardWidthRef.current = actualWidth;
+        
+        // Re-apply corrected width
+        cards.forEach(card => {
+          const cardEl = card as HTMLElement;
+          cardEl.style.width = `${cardWidthRef.current}px`;
+          cardEl.style.minWidth = `${cardWidthRef.current}px`;
+          cardEl.style.maxWidth = `${cardWidthRef.current}px`;
+        });
       }
     }
     
     // Log final dimensions
-    console.log('Final dimensions:', {
+    console.log('✅ Final dimensions:', {
       screenWidth: width,
       itemsVisible: itemsVisibleRef.current,
       cardWidth: cardWidthRef.current,
@@ -803,25 +815,43 @@ export const ProductSlider = () => {
     
     console.log('🔄 Collection data changed, recalculating layout...');
     
-    // Force reflow to ensure fresh layout calculations
-    void viewportRef.current.offsetHeight;
-    void trackRef.current.offsetHeight;
+    // Wait for React to finish rendering new products to DOM
+    const recalculateLayout = () => {
+      if (!viewportRef.current || !trackRef.current) return;
+      
+      // Force reflow to ensure fresh layout calculations
+      void viewportRef.current.offsetHeight;
+      void trackRef.current.offsetHeight;
+      
+      // Get fresh card references
+      const cards = viewportRef.current.querySelectorAll('.product-card');
+      console.log('📦 Cards in DOM:', cards.length);
+      
+      // Recalculate dimensions with fresh DOM state
+      calculateDimensions();
+      
+      // Verify cards got correct dimensions
+      if (cards.length > 0) {
+        const firstCard = cards[0] as HTMLElement;
+        const actualWidth = Math.round(firstCard.getBoundingClientRect().width);
+        console.log('✅ Card width after recalc:', actualWidth, 'px');
+      }
+      
+      // Reset to start position
+      currentIndexRef.current = 0;
+      if (trackRef.current) {
+        trackRef.current.style.transition = 'none';
+        trackRef.current.style.transform = 'translateX(0px)';
+      }
+      
+      console.log('✅ Layout recalculated after collection change');
+    };
     
-    // Use requestAnimationFrame to ensure DOM is updated
+    // Use double RAF to ensure DOM is fully rendered
     requestAnimationFrame(() => {
-      setTimeout(() => {
-        // Recalculate dimensions with fresh DOM state
-        calculateDimensions();
-        
-        // Reset to start position
-        currentIndexRef.current = 0;
-        if (trackRef.current) {
-          trackRef.current.style.transition = 'none';
-          trackRef.current.style.transform = 'translateX(0px)';
-        }
-        
-        console.log('✅ Layout recalculated after collection change');
-      }, 100);
+      requestAnimationFrame(() => {
+        setTimeout(recalculateLayout, 50);
+      });
     });
   }, [collectionData, calculateDimensions]);
 
