@@ -987,25 +987,25 @@ export const ProductSlider = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]" aria-hidden="true"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]" aria-hidden="true"></div>
       
-      <div className="carousel-inner-wrapper relative">
+      <div className="carousel-inner-wrapper">
         {/* Header section */}
-        <div className="text-center mb-10 md:mb-12 animate-fade-in">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-8 shadow-lg"
+        <div className="text-center mb-8 md:mb-10 animate-fade-in">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
             <Zap className="w-3.5 h-3.5" aria-hidden="true" />
             {t('productSlider.badge')}
           </span>
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground leading-tight">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground leading-tight">
             {t('productSlider.title')}
           </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-6">
             {t('productSlider.subtitle')}
           </p>
           
           {/* Tab buttons - Labels come from COLLECTION_CONFIG */}
           <nav aria-label="Produktfiltre">
-            <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 p-1.5 mb-[100px] md:mb-[100px] max-md:mb-[90px] rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
+            <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 p-1.5 mb-5 rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
                 disabled={isLoading}
@@ -1070,29 +1070,6 @@ export const ProductSlider = () => {
           </nav>
         </div>
 
-        {/* Navigation arrows - positioned between tabs and products */}
-        {!isLoading && baseProducts.length > 0 && (
-          <>
-            <button
-              onClick={navigatePrev}
-              className="carousel-arrow prev-arrow"
-              style={{ position: 'absolute', top: 'auto', bottom: 'calc(100% + 50px)', left: '48px', zIndex: 100, transform: 'none' }}
-              aria-label="Forrige produkter"
-            >
-              <ChevronLeft className="w-7 h-7" />
-            </button>
-            
-            <button
-              onClick={navigateNext}
-              className="carousel-arrow next-arrow"
-              style={{ position: 'absolute', top: 'auto', bottom: 'calc(100% + 50px)', right: '56px', zIndex: 100, transform: 'none' }}
-              aria-label="Næste produkter"
-            >
-              <ChevronRight className="w-7 h-7" />
-            </button>
-          </>
-        )}
-
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <div className="relative">
@@ -1104,6 +1081,25 @@ export const ProductSlider = () => {
           </div>
         ) : baseProducts.length > 0 ? (
           <div className="carousel-container">
+            {/* Navigation arrows */}
+            <button
+              onClick={navigatePrev}
+              className="carousel-arrow prev-arrow"
+              style={{ zIndex: 1 }}
+              aria-label="Forrige produkter"
+            >
+              <ChevronLeft className="w-7 h-7" />
+            </button>
+            
+            <button
+              onClick={navigateNext}
+              className="carousel-arrow next-arrow"
+              style={{ zIndex: 1 }}
+              aria-label="Næste produkter"
+            >
+              <ChevronRight className="w-7 h-7" />
+            </button>
+
             {/* Viewport */}
             <div ref={viewportRef} className="carousel-viewport">
               {/* Products track */}

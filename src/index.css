@@ -668,7 +668,7 @@ All colors MUST be HSL.
   .product-carousel-wrapper {
     position: relative;
     width: 100%;
-    padding: 60px 0 60px 0;
+    padding: 80px 0 60px 0;
     overflow: hidden;
   }
 
@@ -721,10 +721,10 @@ All colors MUST be HSL.
   /* Navigation arrows */
   .carousel-arrow {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
+    top: -70px;
+    transform: translateY(0);
+    width: 44px;
+    height: 44px;
     background: white;
     border: 2px solid rgba(0, 0, 0, 0.06);
     border-radius: 50%;
@@ -741,12 +741,12 @@ All colors MUST be HSL.
   .carousel-arrow:hover {
     background: #2563eb;
     color: white;
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(0) scale(1.1);
     box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
   }
 
   .carousel-arrow:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: translateY(0) scale(0.95);
   }
 
   .prev-arrow {
@@ -774,10 +774,9 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      top: 50%;
-      transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
+      top: -60px;
+      width: 42px;
+      height: 42px;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
     }
@@ -794,7 +793,7 @@ All colors MUST be HSL.
   /* Mobile responsive (under 768px) */
   @media (max-width: 767px) {
     .product-carousel-wrapper {
-      padding: 40px 0 40px 0;
+      padding: 60px 0 40px 0;
     }
     
     .carousel-inner-wrapper {
@@ -812,11 +811,9 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
+      top: -55px;
+      width: 36px;
+      height: 36px;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
     }
@@ -831,7 +828,7 @@ All colors MUST be HSL.
     }
     
     .next-arrow {
-      right: 24px;
+      right: 32px;
     }
   }
 }
