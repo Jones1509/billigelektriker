@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(), 
     mode === "development" && componentTagger(),
-    autoTranslatePlugin()
+    // autoTranslatePlugin() - Disabled: regex bug matches comparison operators as JSX text
   ].filter(Boolean),
   resolve: {
     alias: {
