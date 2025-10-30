@@ -721,7 +721,7 @@ All colors MUST be HSL.
   /* Navigation arrows */
   .carousel-arrow {
     position: absolute;
-    top: -70px;
+    top: -100px;
     transform: translateY(0);
     width: 44px;
     height: 44px;
@@ -774,7 +774,7 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      top: -60px;
+      top: -80px;
       width: 42px;
       height: 42px;
       background: rgba(255, 255, 255, 0.95);
@@ -811,7 +811,7 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      top: -55px;
+      top: -75px;
       width: 36px;
       height: 36px;
       background: rgba(255, 255, 255, 0.92);
