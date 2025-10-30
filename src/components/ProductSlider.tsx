@@ -361,38 +361,62 @@ export const ProductSlider = () => {
 
   // Snap to nearest - Mobile version
   const snapToNearestMobile = useCallback(() => {
+    if (!viewportRef.current || !trackRef.current) return;
+    
+    // Force recalculate dimensions
     calculateDimensions();
     
-    if (!trackRef.current) return;
+    // Get all cards
+    const cards = Array.from(viewportRef.current.querySelectorAll('.product-card')) as HTMLElement[];
+    if (cards.length === 0) return;
     
-    const currentScroll = getCurrentScroll();
-    const cardPlusGap = cardWidthRef.current + gapRef.current;
+    // Get viewport position
+    const viewportRect = viewportRef.current.getBoundingClientRect();
+    const viewportLeft = viewportRect.left;
     
-    if (cardPlusGap === 0) return;
+    // Find closest card to viewport left edge
+    let closestIndex = 0;
+    let closestDistance = Infinity;
     
-    // Find nærmeste kort index
-    const rawIndex = currentScroll / cardPlusGap;
-    let nearestIndex = Math.round(rawIndex);
+    cards.forEach((card, index) => {
+      const cardRect = card.getBoundingClientRect();
+      const distance = Math.abs(cardRect.left - viewportLeft);
+      
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
     
-    // KRITISK: På mobil max index = total - 2 (vi skal vise 2 kort)
+    // On mobile, max index = total - 2 (always show 2 cards)
     const maxIndex = Math.max(0, baseProducts.length - 2);
-    nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+    const targetIndex = Math.min(closestIndex, maxIndex);
     
-    // Opdater state
-    currentIndexRef.current = nearestIndex;
+    // Get target card's current position
+    const targetCard = cards[targetIndex];
+    const targetCardRect = targetCard.getBoundingClientRect();
     
-    // Beregn target position
-    const targetPosition = Math.round(nearestIndex * cardPlusGap);
+    // Calculate how much to move: difference between card position and viewport left
+    const offsetNeeded = targetCardRect.left - viewportLeft;
     
-    // Anvend transform
+    // Get current transform value
+    const currentScroll = getCurrentScroll();
+    
+    // New transform = current scroll + offset needed
+    const targetScroll = Math.round(currentScroll + offsetNeeded);
+    
+    // Update state
+    currentIndexRef.current = targetIndex;
+    
+    // Apply transform with smooth animation
     trackRef.current.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    trackRef.current.style.transform = `translate3d(-${targetPosition}px, 0, 0)`;
+    trackRef.current.style.transform = `translate3d(-${targetScroll}px, 0, 0)`;
     
     isTransitioningRef.current = true;
     setTimeout(() => {
       isTransitioningRef.current = false;
     }, 350);
-  }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
+  }, [calculateDimensions, getCurrentScroll, baseProducts.length]);
 
   // Snap to nearest - Desktop version
   const snapToNearestDesktop = useCallback(() => {
@@ -590,17 +614,13 @@ export const ProductSlider = () => {
   }, [baseProducts.length, clearAutoSnap]);
 
   const handleTouchEnd = useCallback(() => {
-    // Altid snap efter touch, uanset velocity
+    // Wait for any momentum to settle, then snap
     setTimeout(() => {
-      snapToNearest();
-    }, 100);
-    
-    // Også tilføj en backup snap efter kort tid
-    clearAutoSnap();
-    autoSnapTimerRef.current = setTimeout(() => {
-      snapToNearest();
-    }, 500);
-  }, [clearAutoSnap, snapToNearest]);
+      if (!isTransitioningRef.current) {
+        snapToNearest();
+      }
+    }, 150);
+  }, [snapToNearest]);
 
   // Mouse drag handlers
   const handleMouseDown = useCallback((e: MouseEvent) => {
