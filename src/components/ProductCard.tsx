@@ -70,7 +70,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <script type="application/ld+json">
         {JSON.stringify(productSchema)}
       </script>
-      <Card className="group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
+      <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
         <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
           <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
             {imageUrl ? (
