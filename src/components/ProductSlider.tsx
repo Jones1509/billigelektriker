@@ -190,21 +190,11 @@ export const ProductSlider = () => {
   // Clear auto-snap timer
   const clearAutoSnap = useCallback(() => {
     if (autoSnapTimerRef.current) {
+      console.log('Clearing existing auto-snap timer');
       clearTimeout(autoSnapTimerRef.current);
       autoSnapTimerRef.current = null;
     }
   }, []);
-
-  // Start auto-snap timer
-  const startAutoSnap = useCallback(() => {
-    clearAutoSnap();
-    const snapDelay = window.innerWidth < 768 ? 3000 : 5000;
-    console.log('Starting auto-snap timer:', snapDelay, 'ms');
-    autoSnapTimerRef.current = setTimeout(() => {
-      console.log('Auto-snap timer triggered');
-      snapToNearest();
-    }, snapDelay);
-  }, [clearAutoSnap]);
 
   // Sync currentIndex with actual scroll position
   const syncCurrentIndexWithScroll = useCallback(() => {
@@ -365,6 +355,7 @@ export const ProductSlider = () => {
     
     // Check om mobil
     const isMobile = window.innerWidth < 768;
+    console.log('Is mobile:', isMobile);
     
     if (isMobile) {
       // MOBIL SNAP LOGIK
@@ -377,9 +368,20 @@ export const ProductSlider = () => {
     console.log('=== SNAP TO NEAREST END ===');
   }, [snapToNearestMobile, snapToNearestDesktop]);
 
+  // Start auto-snap timer (defined after snapToNearest to avoid circular dependency)
+  const startAutoSnap = useCallback(() => {
+    clearAutoSnap();
+    const delay = 5000; // 5 sekunder for både mobil og desktop
+    console.log('Starting auto-snap timer:', delay, 'ms');
+    autoSnapTimerRef.current = setTimeout(() => {
+      console.log('⏰ AUTO-SNAP TIMER FIRED');
+      snapToNearest();
+    }, delay);
+  }, [clearAutoSnap, snapToNearest]);
+
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
-    console.log('Starting momentum with velocity:', initialVelocity);
+    console.log('Starting momentum, velocity:', initialVelocity);
     
     let velocity = initialVelocity;
     const friction = 0.92;
@@ -387,7 +389,7 @@ export const ProductSlider = () => {
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity) {
-        console.log('Momentum ended');
+        console.log('Momentum ended, starting auto-snap');
         
         // Recalculate dimensions before snap
         calculateDimensions();
@@ -488,7 +490,12 @@ export const ProductSlider = () => {
     const diff = (startXRef.current - currentX) * 1.5;
     
     const newScroll = startScrollLeftRef.current + diff;
-    const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
+    const isMobile = window.innerWidth < 768;
+    const maxIndex = isMobile 
+      ? Math.max(0, baseProducts.length - 2)
+      : Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    const maxScroll = maxIndex * (cardWidthRef.current + gapRef.current);
+    
     // Add buffer for smoother edge experience
     const clampedScroll = Math.max(-10, Math.min(newScroll, maxScroll + 10));
     
@@ -503,20 +510,23 @@ export const ProductSlider = () => {
     
     lastXRef.current = currentX;
     lastTimeRef.current = now;
-  }, [baseProducts.length]);
+    
+    // KRITISK: Clear auto-snap during touch
+    clearAutoSnap();
+  }, [baseProducts.length, clearAutoSnap]);
 
   const handleTouchEnd = useCallback(() => {
-    console.log('Touch ended');
+    console.log('=== TOUCH END ===');
+    console.log('Velocity:', velocityRef.current);
     
     // Apply momentum hvis hurtig swipe
     if (Math.abs(velocityRef.current) > 0.5) {
-      console.log('Applying momentum, velocity:', velocityRef.current);
+      console.log('Applying momentum');
       applyMomentum(-velocityRef.current * 50);
     } else {
-      // Ingen momentum - snap direkte
-      console.log('No momentum, direct snap');
+      // Ingen momentum - sync index
+      console.log('No momentum, syncing index');
       
-      // Sync index først med mobile awareness
       const currentScroll = getCurrentScroll();
       const cardPlusGap = cardWidthRef.current + gapRef.current;
       if (cardPlusGap > 0) {
@@ -528,10 +538,12 @@ export const ProductSlider = () => {
         currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
         console.log('Synced index to:', currentIndexRef.current);
       }
-      
-      // Start auto-snap
-      startAutoSnap();
     }
+    
+    // KRITISK: Start auto-snap timer ALTID efter touch
+    console.log('Starting 5 second auto-snap timer...');
+    startAutoSnap();
+    console.log('Timer started, will snap in 5 seconds');
   }, [getCurrentScroll, applyMomentum, startAutoSnap, baseProducts.length]);
 
   // Mouse drag handlers
