@@ -68,8 +68,16 @@ export const ProductSlider = () => {
       const cards = viewportRef.current.querySelectorAll('.product-card');
       if (cards.length > 0) {
         const firstCard = cards[0] as HTMLElement;
-        cardWidthRef.current = firstCard.offsetWidth;
+        const cardRect = firstCard.getBoundingClientRect();
+        
+        // Round to whole numbers to avoid decimal pixel issues
+        cardWidthRef.current = Math.round(cardRect.width);
       }
+      
+      // Double-check gap value and round
+      const trackStyle = window.getComputedStyle(trackRef.current!);
+      const gapValue = parseFloat(trackStyle.gap) || gapRef.current;
+      gapRef.current = Math.round(gapValue);
     }
   }, []);
 
@@ -79,7 +87,9 @@ export const ProductSlider = () => {
     const transform = trackRef.current.style.transform;
     if (!transform || transform === 'none') return 0;
     const match = transform.match(/translateX\((-?\d+\.?\d*)px\)/);
-    return match ? Math.abs(parseFloat(match[1])) : 0;
+    const scrollValue = match ? Math.abs(parseFloat(match[1])) : 0;
+    // Return whole number to avoid decimal pixel issues
+    return Math.round(scrollValue);
   }, []);
 
   // Update position
@@ -87,6 +97,8 @@ export const ProductSlider = () => {
     if (!trackRef.current) return;
     
     const moveDistance = currentIndexRef.current * (cardWidthRef.current + gapRef.current);
+    // Round to whole pixels for crisp positioning
+    const exactDistance = Math.round(moveDistance);
     
     if (animate) {
       isTransitioningRef.current = true;
@@ -98,7 +110,7 @@ export const ProductSlider = () => {
       trackRef.current.style.transition = 'none';
     }
     
-    trackRef.current.style.transform = `translateX(-${moveDistance}px)`;
+    trackRef.current.style.transform = `translateX(-${exactDistance}px)`;
   }, []);
 
   // Clear auto-snap timer
@@ -137,12 +149,29 @@ export const ProductSlider = () => {
   const snapToNearest = useCallback(() => {
     if (!trackRef.current) return;
     
-    // Sync index first
-    syncCurrentIndexWithScroll();
+    const currentScroll = getCurrentScroll();
+    const cardPlusGap = cardWidthRef.current + gapRef.current;
     
-    // Then update position
-    updatePosition(true);
-  }, [syncCurrentIndexWithScroll, updatePosition]);
+    // Avoid division by zero
+    if (cardPlusGap === 0) return;
+    
+    // Calculate nearest index
+    let nearestIndex = Math.round(currentScroll / cardPlusGap);
+    
+    // Constrain to valid range
+    const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+    
+    // Update state
+    currentIndexRef.current = nearestIndex;
+    
+    // Calculate exact pixel position (whole number)
+    const exactPosition = Math.round(nearestIndex * cardPlusGap);
+    
+    // Apply position directly with smooth animation
+    trackRef.current.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    trackRef.current.style.transform = `translateX(-${exactPosition}px)`;
+  }, [getCurrentScroll, baseProducts.length]);
 
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
@@ -152,6 +181,8 @@ export const ProductSlider = () => {
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity) {
+        // Recalculate dimensions before snap to ensure accuracy
+        calculateDimensions();
         // Sync before auto-snap
         syncCurrentIndexWithScroll();
         startAutoSnap();
@@ -164,7 +195,7 @@ export const ProductSlider = () => {
       const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
       
       if (trackRef.current) {
-        trackRef.current.style.transform = `translateX(-${clampedScroll}px)`;
+        trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
       }
       
       velocity *= friction;
@@ -172,7 +203,7 @@ export const ProductSlider = () => {
     };
     
     requestAnimationFrame(animate);
-  }, [getCurrentScroll, syncCurrentIndexWithScroll, startAutoSnap, baseProducts.length]);
+  }, [getCurrentScroll, calculateDimensions, syncCurrentIndexWithScroll, startAutoSnap, baseProducts.length]);
 
   // Navigate to next product
   const navigateNext = useCallback(() => {
@@ -228,10 +259,11 @@ export const ProductSlider = () => {
     
     const newScroll = startScrollLeftRef.current + diff;
     const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
-    const clampedScroll = Math.max(-50, Math.min(newScroll, maxScroll + 50));
+    // Add buffer for smoother edge experience
+    const clampedScroll = Math.max(-10, Math.min(newScroll, maxScroll + 10));
     
     if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(-${clampedScroll}px)`;
+      trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
     }
     
     const now = Date.now();
@@ -282,10 +314,11 @@ export const ProductSlider = () => {
     
     const newScroll = startScrollLeftRef.current + diff;
     const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
-    const clampedScroll = Math.max(-50, Math.min(newScroll, maxScroll + 50));
+    // Add buffer for smoother edge experience
+    const clampedScroll = Math.max(-10, Math.min(newScroll, maxScroll + 10));
     
     if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(-${clampedScroll}px)`;
+      trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
     }
     
     const now = Date.now();
@@ -323,11 +356,12 @@ export const ProductSlider = () => {
       const currentScroll = getCurrentScroll();
       const newScroll = currentScroll + (e.deltaX * 1.5);
       const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
-      const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
+      // Add small buffer for desktop
+      const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll + 10));
       
       if (trackRef.current) {
         trackRef.current.style.transition = 'none';
-        trackRef.current.style.transform = `translateX(-${clampedScroll}px)`;
+        trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
       }
       
       clearAutoSnap();
