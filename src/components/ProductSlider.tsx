@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { storefrontApiRequest, STOREFRONT_QUERY, COLLECTION_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
-import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
+import { Loader2, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
@@ -1009,6 +1009,7 @@ export const ProductSlider = () => {
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
+            <ShoppingBag className="w-4 h-4" aria-hidden="true" />
             {t('productSlider.badge')}
           </span>
           
