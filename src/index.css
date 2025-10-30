@@ -698,16 +698,12 @@ All colors MUST be HSL.
     flex-shrink: 0;
     box-sizing: border-box;
     border-radius: 24px !important;
-    overflow: hidden;
   }
   
-  .product-card * {
-    border-radius: inherit;
-  }
-  
-  /* Force rounded corners and shadows on product cards */
+  /* Force rounded corners and smooth shadows on product cards */
   .product-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+    filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.12)) drop-shadow(0 10px 10px rgba(0, 0, 0, 0.08)) !important;
+    transform: translateY(-4px) !important;
   }
 
   /* Navigation arrows */
