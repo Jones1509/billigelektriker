@@ -136,6 +136,48 @@ export const ProductSlider = () => {
         console.log('Adjusted card width to actual:', cardWidthRef.current);
       }
     }
+    
+    // MOBILE VERIFICATION
+    if (width < 768 && cards.length > 0) {
+      // Verify that exactly 2 cards fit in viewport
+      const firstCard = cards[0] as HTMLElement;
+      const actualCardWidth = firstCard.getBoundingClientRect().width;
+      
+      const expectedTotalWidth = (actualCardWidth * 2) + gapRef.current;
+      
+      console.log('=== MOBILE VERIFICATION ===');
+      console.log('Viewport width:', viewportWidth);
+      console.log('Calculated card width:', cardWidthRef.current);
+      console.log('Actual card width:', actualCardWidth);
+      console.log('Gap:', gapRef.current);
+      console.log('Expected total width (2 cards + gap):', expectedTotalWidth);
+      console.log('Fits in viewport:', expectedTotalWidth <= viewportWidth);
+      
+      // If cards don't fit perfectly, adjust
+      if (expectedTotalWidth > viewportWidth) {
+        const newCardWidth = Math.floor((viewportWidth - gapRef.current) / 2);
+        cardWidthRef.current = newCardWidth;
+        
+        console.log('ADJUSTED card width to:', newCardWidth);
+        
+        // Set new width
+        cards.forEach(card => {
+          const cardEl = card as HTMLElement;
+          cardEl.style.width = `${newCardWidth}px`;
+          cardEl.style.minWidth = `${newCardWidth}px`;
+          cardEl.style.maxWidth = `${newCardWidth}px`;
+        });
+      }
+    }
+    
+    // Log final dimensions
+    console.log('Final dimensions:', {
+      screenWidth: width,
+      itemsVisible: itemsVisibleRef.current,
+      cardWidth: cardWidthRef.current,
+      gap: gapRef.current,
+      totalCards: cards.length
+    });
   }, []);
 
   // Get current scroll position
@@ -206,58 +248,87 @@ export const ProductSlider = () => {
   const snapToNearest = useCallback(() => {
     if (!trackRef.current) return;
     
-    // Recalculate dimensions first to be sure
+    // Recalculate dimensions first
     calculateDimensions();
     
     const currentScroll = getCurrentScroll();
-    const cardPlusGap = cardWidthRef.current + gapRef.current;
     
-    if (cardPlusGap === 0) {
-      console.error('Card width or gap is 0, cannot snap');
-      return;
-    }
+    // CHECK IF MOBILE
+    const isMobile = window.innerWidth < 768;
     
-    let nearestIndex;
-    
-    // SPECIAL MOBILE LOGIC
-    if (itemsVisibleRef.current === 2) {
-      // On mobile: snap to nearest position showing 2 complete products
-      const rawIndex = currentScroll / cardPlusGap;
-      nearestIndex = Math.round(rawIndex);
+    if (isMobile) {
+      // ===== MOBILE SNAP LOGIC =====
       
-      // IMPORTANT: On mobile we always need to see 2 products
-      // So max index is total - 2 (not total - itemsVisible)
-      const maxIndex = Math.max(0, baseProducts.length - 2);
-      nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+      // On mobile we ALWAYS show exactly 2 products
+      // So we snap to positions where index × (cardWidth + gap) gives us 2 whole products
       
-      console.log('Mobile snap - rawIndex:', rawIndex, 'snapping to:', nearestIndex);
+      const cardPlusGap = cardWidthRef.current + gapRef.current;
+      
+      if (cardPlusGap === 0) return;
+      
+      // Calculate how many products we've scrolled past
+      const scrolledProducts = currentScroll / cardPlusGap;
+      
+      // Round to nearest whole number
+      let targetIndex = Math.round(scrolledProducts);
+      
+      // CRITICAL: Max index on mobile is total - 2
+      // because we always need to see 2 products
+      const maxMobileIndex = baseProducts.length - 2;
+      
+      // Constrain
+      targetIndex = Math.max(0, Math.min(targetIndex, maxMobileIndex));
+      
+      // Calculate PRECISE position
+      const targetPosition = targetIndex * cardPlusGap;
+      
+      console.log('=== MOBILE SNAP ===');
+      console.log('Scrolled:', currentScroll);
+      console.log('Card+Gap:', cardPlusGap);
+      console.log('Scrolled products:', scrolledProducts);
+      console.log('Target index:', targetIndex);
+      console.log('Target position:', targetPosition);
+      console.log('Will show products:', targetIndex, 'and', targetIndex + 1);
+      
+      // Update state
+      currentIndexRef.current = targetIndex;
+      
+      // Apply position
+      isTransitioningRef.current = true;
+      trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
+      
+      setTimeout(() => {
+        isTransitioningRef.current = false;
+      }, 400);
+      
     } else {
-      // Desktop/Tablet: normal snap logic
+      // ===== DESKTOP/TABLET SNAP LOGIC =====
+      
+      const cardPlusGap = cardWidthRef.current + gapRef.current;
+      
+      if (cardPlusGap === 0) return;
+      
       const rawIndex = currentScroll / cardPlusGap;
-      nearestIndex = Math.round(rawIndex);
+      let targetIndex = Math.round(rawIndex);
       
-      const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
-      nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+      const maxIndex = baseProducts.length - itemsVisibleRef.current;
+      targetIndex = Math.max(0, Math.min(targetIndex, maxIndex));
       
-      console.log('Desktop/Tablet snap - rawIndex:', rawIndex, 'snapping to:', nearestIndex);
+      currentIndexRef.current = targetIndex;
+      
+      const targetPosition = targetIndex * cardPlusGap;
+      
+      console.log('Desktop/Tablet snap to index:', targetIndex, 'position:', targetPosition);
+      
+      isTransitioningRef.current = true;
+      trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
+      
+      setTimeout(() => {
+        isTransitioningRef.current = false;
+      }, 400);
     }
-    
-    // Update state
-    currentIndexRef.current = nearestIndex;
-    
-    // Calculate PRECISE position in whole pixels
-    const targetPosition = Math.round(nearestIndex * cardPlusGap);
-    
-    console.log('Final snap position:', targetPosition, 'pixels');
-    
-    // Smooth animation to target
-    isTransitioningRef.current = true;
-    trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
-    
-    setTimeout(() => {
-      isTransitioningRef.current = false;
-    }, 400);
   }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
 
   // Apply momentum scroll
