@@ -721,10 +721,12 @@ All colors MUST be HSL.
   /* Navigation arrows */
   .carousel-arrow {
     position: absolute;
-    top: -50px;
+    top: auto;
+    bottom: auto;
+    margin-top: -60px;
     transform: translateY(0);
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     background: white;
     border: 2px solid rgba(0, 0, 0, 0.06);
     border-radius: 50%;
@@ -774,9 +776,9 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      top: -50px;
-      width: 42px;
-      height: 42px;
+      margin-top: -60px;
+      width: 48px;
+      height: 48px;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
     }
@@ -811,9 +813,9 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      top: -40px;
-      width: 36px;
-      height: 36px;
+      margin-top: -50px;
+      width: 40px;
+      height: 40px;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
     }
