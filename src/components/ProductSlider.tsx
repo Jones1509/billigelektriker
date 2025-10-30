@@ -373,7 +373,7 @@ export const ProductSlider = () => {
     console.log('Starting momentum, velocity:', initialVelocity);
     
     let velocity = initialVelocity;
-    const friction = 0.92;
+    const friction = 0.86; // Increased friction for faster stop (like Instagram)
     const minVelocity = 0.5;
     
     const animate = () => {
@@ -481,7 +481,7 @@ export const ProductSlider = () => {
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
     const currentX = e.touches[0].pageX;
-    const diff = (startXRef.current - currentX) * 1.5;
+    const diff = (startXRef.current - currentX) * 1.0; // 1:1 touch tracking
     
     const newScroll = startScrollLeftRef.current + diff;
     const isMobile = window.innerWidth < 768;
@@ -516,7 +516,7 @@ export const ProductSlider = () => {
     // Apply momentum hvis hurtig swipe
     if (Math.abs(velocityRef.current) > 0.5) {
       console.log('Applying momentum');
-      applyMomentum(-velocityRef.current * 50);
+      applyMomentum(-velocityRef.current * 28); // Reduced from 50 to 28 for controlled momentum
     } else {
       // Ingen momentum - sync index
       console.log('No momentum, syncing index');
@@ -598,7 +598,7 @@ export const ProductSlider = () => {
     // Apply momentum hvis hurtig drag
     if (Math.abs(velocityRef.current) > 0.5) {
       console.log('Mouse drag momentum, velocity:', velocityRef.current);
-      applyMomentum(-velocityRef.current * 50);
+      applyMomentum(-velocityRef.current * 28); // Matched with touch for consistency
     } else {
       // Sync index først
       const currentScroll = getCurrentScroll();
