@@ -782,11 +782,11 @@ All colors MUST be HSL.
     }
     
     .prev-arrow {
-      left: 18px;
+      left: 40px;
     }
     
     .next-arrow {
-      right: 18px;
+      right: 40px;
     }
   }
 
@@ -820,11 +820,11 @@ All colors MUST be HSL.
     }
     
     .prev-arrow {
-      left: 10px;
+      left: 20px;
     }
     
     .next-arrow {
-      right: 10px;
+      right: 20px;
     }
   }
 }
