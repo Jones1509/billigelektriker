@@ -1,10 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, STOREFRONT_QUERY, COLLECTION_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
+
+// SHOPIFY COLLECTIONS CONFIGURATION
+// Skift collection handle her for at ændre hvilke produkter der vises under hver tab
+const COLLECTION_CONFIG = {
+  'popular': 'mest-populaer',      // Shopify collection handle for "Mest Populær"
+  'new': 'nyheder',                 // Shopify collection handle for "Nyhed"
+  'recommended': 'anbefalet'        // Shopify collection handle for "Anbefalet"
+} as const;
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
@@ -32,22 +40,29 @@ export const ProductSlider = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   
-  const { data, isLoading } = useQuery({
-    queryKey: ['slider-products'],
+  // Fetch products from Shopify Collection based on active tab
+  const { data: collectionData, isLoading } = useQuery({
+    queryKey: ['collection-products', activeTab],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
-      return response.data.products.edges as ShopifyProduct[];
+      const collectionHandle = COLLECTION_CONFIG[activeTab];
+      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+        handle: collectionHandle, 
+        first: 12 
+      });
+      
+      // If collection is empty or doesn't exist, fallback to all products
+      if (!response.data.collection || response.data.collection.products.edges.length === 0) {
+        console.warn(`Collection "${collectionHandle}" er tom eller findes ikke. Bruger alle produkter som fallback.`);
+        const fallbackResponse = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+        return fallbackResponse.data.products.edges as ShopifyProduct[];
+      }
+      
+      return response.data.collection.products.edges as ShopifyProduct[];
     },
   });
 
-  // Get base products based on active tab
-  const baseProducts = data ? (
-    activeTab === 'popular' 
-      ? data.slice(0, 12)
-      : activeTab === 'new'
-      ? data.slice(4, 16)
-      : data.slice(8, 20)
-  ) : [];
+  // Base products from collection
+  const baseProducts = collectionData || [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
