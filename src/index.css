@@ -666,8 +666,8 @@ All colors MUST be HSL.
 .luxury-scroll-container {
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: auto; /* Let native scrolling handle smoothness */
-  scroll-snap-type: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch; /* Critical for iOS smooth scrolling */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -706,6 +706,7 @@ All colors MUST be HSL.
   /* Product card base */
   .luxury-product-card {
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   /* Navigation arrows base */
