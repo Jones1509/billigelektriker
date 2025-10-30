@@ -814,9 +814,8 @@ All colors MUST be HSL.
     
     .carousel-arrow {
       position: absolute;
-      top: auto;
-      bottom: auto;
-      margin-top: -50px;
+      top: -55px;
+      transform: translateY(0);
       width: 40px;
       height: 40px;
       background: rgba(255, 255, 255, 0.92);
