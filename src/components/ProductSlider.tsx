@@ -35,18 +35,18 @@ export const ProductSlider = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 24 });
       return response.data.products.edges as ShopifyProduct[];
     },
   });
 
-  // Get base products based on active tab
+  // Get base products based on active tab - 8 products per category
   const baseProducts = data ? (
     activeTab === 'popular' 
-      ? data.slice(0, 12)
+      ? data.slice(0, 8)
       : activeTab === 'new'
-      ? data.slice(4, 16)
-      : data.slice(8, 20)
+      ? data.slice(8, 16)
+      : data.slice(16, 24)
   ) : [];
 
   // Calculate dimensions based on screen width
