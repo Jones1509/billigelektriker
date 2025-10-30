@@ -674,8 +674,6 @@ All colors MUST be HSL.
   cursor: grab;
   overscroll-behavior-x: contain;
   touch-action: pan-x; /* Only allow horizontal swipe */
-  width: 100%;
-  box-sizing: border-box;
 }
 
 /* Desktop only - enable GPU acceleration */
@@ -743,18 +741,12 @@ All colors MUST be HSL.
     .luxury-carousel-inner {
       max-width: 1600px;
       margin: 0 auto;
-      padding: 60px 60px;
+      padding: 60px 80px;
     }
 
-    .luxury-scroll-container {
-      width: 100%;
-      padding: 0 20px;
-      box-sizing: border-box;
-    }
-
-    /* 4 produkter med 3 gaps - beregn baseret på scroll container */
+    /* 4 produkter med 3 gaps */
     .luxury-products-track {
-      grid-auto-columns: calc((100% - 84px) / 4);
+      grid-auto-columns: calc((100% - (3 * 28px)) / 4);
       gap: 28px;
       padding: 0;
     }
@@ -786,18 +778,12 @@ All colors MUST be HSL.
   /* TABLET - 768PX TIL 1199PX - 3 HELE PRODUKTER */
   @media (min-width: 768px) and (max-width: 1199px) {
     .luxury-carousel-inner {
-      padding: 60px 30px;
-    }
-
-    .luxury-scroll-container {
-      width: 100%;
-      padding: 0 15px;
-      box-sizing: border-box;
+      padding: 60px 40px;
     }
 
     /* 3 produkter med 2 gaps */
     .luxury-products-track {
-      grid-auto-columns: calc((100% - 48px) / 3);
+      grid-auto-columns: calc((100% - (2 * 24px)) / 3);
       gap: 24px;
       padding: 0;
     }
@@ -827,13 +813,7 @@ All colors MUST be HSL.
   /* MOBIL - UNDER 768PX - 2 HELE PRODUKTER */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 40px 12px;
-    }
-
-    .luxury-scroll-container {
-      width: 100%;
-      padding: 0 8px;
-      box-sizing: border-box;
+      padding: 40px 20px;
     }
 
     /* 2 produkter med 1 gap */
