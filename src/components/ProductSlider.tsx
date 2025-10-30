@@ -757,38 +757,44 @@ export const ProductSlider = () => {
           </p>
           
           {/* Tab buttons */}
-          <nav aria-label="Produktfiltre">
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6' }} role="tablist">
+          <nav aria-label="Produktfiltre" style={{ position: 'relative', zIndex: 10 }}>
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6', position: 'relative', zIndex: 10 }} role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`cursor-pointer px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'popular' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ color: activeTab === 'popular' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
+                style={{ color: activeTab === 'popular' ? '#2563EB' : '#6B7280', transitionDuration: '300ms', pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
+                role="tab"
+                aria-selected={activeTab === 'popular'}
               >
                 Mest Populær
               </button>
               <button
                 onClick={() => handleTabChange('new')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`cursor-pointer px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'new' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ color: activeTab === 'new' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
+                style={{ color: activeTab === 'new' ? '#2563EB' : '#6B7280', transitionDuration: '300ms', pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
+                role="tab"
+                aria-selected={activeTab === 'new'}
               >
                 Nyhed
               </button>
               <button
                 onClick={() => handleTabChange('recommended')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`cursor-pointer px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'recommended' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
+                style={{ color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', transitionDuration: '300ms', pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
+                role="tab"
+                aria-selected={activeTab === 'recommended'}
               >
                 Anbefalet
               </button>
