@@ -70,7 +70,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <script type="application/ld+json">
         {JSON.stringify(productSchema)}
       </script>
-      <Card className="group overflow-hidden border border-border rounded-2xl h-full flex flex-col">
+      <Card className="group overflow-hidden border border-border rounded-2xl h-full flex flex-col transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]">
         <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
           <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
             {imageUrl ? (
@@ -98,7 +98,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       
       <CardContent className="p-2 md:p-2.5 lg:p-3.5 flex-1 flex flex-col">
         <Link to={`/product/${node.handle}`} aria-label={`Læs mere om ${node.title}`}>
-          <h3 className="font-semibold text-[11px] md:text-sm lg:text-base leading-tight mb-1 md:mb-1 lg:mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
+          <h3 className="font-semibold text-[11px] md:text-sm lg:text-base leading-tight mb-1 md:mb-1 lg:mb-1.5 line-clamp-2 transition-colors duration-300 group-hover:text-[#10B981]">
             {node.title}
           </h3>
         </Link>
@@ -109,7 +109,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full h-8 md:h-9 lg:h-11 text-[10px] md:text-xs lg:text-[14px] font-semibold rounded-lg lg:rounded-xl transition-all duration-300 hover:scale-[1.02]"
+          className="w-full h-8 md:h-9 lg:h-11 text-[10px] md:text-xs lg:text-[14px] font-semibold rounded-lg lg:rounded-xl transition-all duration-300 hover:brightness-110"
           style={{ 
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             boxShadow: '0 2px 8px rgba(16, 185, 129, 0.25)'
