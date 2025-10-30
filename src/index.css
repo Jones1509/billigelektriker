@@ -779,13 +779,13 @@ All colors MUST be HSL.
   /* TABLET - 768PX TIL 1199PX - 2 PRODUKTER FOR ALLE TABS */
   @media (min-width: 768px) and (max-width: 1199px) {
     .luxury-carousel-inner {
-      padding: 60px 80px;
+      padding: 60px 40px;
     }
 
-    /* 2 produkter for alle tabs */
+    /* 2 produkter for alle tabs - større produkter */
     .luxury-products-track {
-      grid-auto-columns: calc(50% - 12px);
-      gap: 24px;
+      grid-auto-columns: calc(50% - 20px);
+      gap: 40px;
       padding: 8px;
     }
 
@@ -814,13 +814,13 @@ All colors MUST be HSL.
   /* MOBIL - UNDER 768PX - 2 PRODUKTER FOR ALLE TABS */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 40px 12px;
+      padding: 40px 16px;
     }
 
-    /* 2 produkter for alle tabs */
+    /* 2 produkter for alle tabs - større produkter */
     .luxury-products-track {
-      grid-auto-columns: calc(50% - 6px);
-      gap: 12px;
+      grid-auto-columns: calc(50% - 12px);
+      gap: 24px;
       padding: 4px;
     }
 
