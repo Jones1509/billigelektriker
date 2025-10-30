@@ -117,17 +117,32 @@ export const ProductSlider = () => {
     }, 5000);
   }, [clearAutoSnap]);
 
+  // Sync currentIndex with actual scroll position
+  const syncCurrentIndexWithScroll = useCallback(() => {
+    const currentScroll = getCurrentScroll();
+    const cardPlusGap = cardWidthRef.current + gapRef.current;
+    
+    // Avoid division by zero
+    if (cardPlusGap === 0) return;
+    
+    // Calculate which index this corresponds to
+    const calculatedIndex = Math.round(currentScroll / cardPlusGap);
+    
+    // Constrain to valid range
+    const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+  }, [getCurrentScroll, baseProducts.length]);
+
   // Snap to nearest full product position
   const snapToNearest = useCallback(() => {
     if (!trackRef.current) return;
     
-    const currentScroll = getCurrentScroll();
-    const cardPlusGap = cardWidthRef.current + gapRef.current;
-    const nearestIndex = Math.round(currentScroll / cardPlusGap);
+    // Sync index first
+    syncCurrentIndexWithScroll();
     
-    currentIndexRef.current = Math.max(0, Math.min(nearestIndex, baseProducts.length - itemsVisibleRef.current));
+    // Then update position
     updatePosition(true);
-  }, [getCurrentScroll, updatePosition, baseProducts.length]);
+  }, [syncCurrentIndexWithScroll, updatePosition]);
 
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
@@ -137,6 +152,8 @@ export const ProductSlider = () => {
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity) {
+        // Sync before auto-snap
+        syncCurrentIndexWithScroll();
         startAutoSnap();
         return;
       }
@@ -155,11 +172,14 @@ export const ProductSlider = () => {
     };
     
     requestAnimationFrame(animate);
-  }, [getCurrentScroll, startAutoSnap, baseProducts.length]);
+  }, [getCurrentScroll, syncCurrentIndexWithScroll, startAutoSnap, baseProducts.length]);
 
   // Navigate to next product
   const navigateNext = useCallback(() => {
     if (isTransitioningRef.current) return;
+    
+    // Sync with actual scroll position first
+    syncCurrentIndexWithScroll();
     
     currentIndexRef.current++;
     
@@ -169,11 +189,14 @@ export const ProductSlider = () => {
     }
     
     updatePosition(true);
-  }, [updatePosition, baseProducts.length]);
+  }, [syncCurrentIndexWithScroll, updatePosition, baseProducts.length]);
 
   // Navigate to previous product
   const navigatePrev = useCallback(() => {
     if (isTransitioningRef.current) return;
+    
+    // Sync with actual scroll position first
+    syncCurrentIndexWithScroll();
     
     currentIndexRef.current--;
     
@@ -183,7 +206,7 @@ export const ProductSlider = () => {
     }
     
     updatePosition(true);
-  }, [updatePosition, baseProducts.length]);
+  }, [syncCurrentIndexWithScroll, updatePosition, baseProducts.length]);
 
   // Touch handlers
   const handleTouchStart = useCallback((e: TouchEvent) => {
@@ -221,12 +244,15 @@ export const ProductSlider = () => {
   }, [baseProducts.length]);
 
   const handleTouchEnd = useCallback(() => {
+    // Sync index with actual position
+    syncCurrentIndexWithScroll();
+    
     if (Math.abs(velocityRef.current) > 0.5) {
       applyMomentum(-velocityRef.current * 50);
     } else {
       startAutoSnap();
     }
-  }, [applyMomentum, startAutoSnap]);
+  }, [syncCurrentIndexWithScroll, applyMomentum, startAutoSnap]);
 
   // Mouse drag handlers
   const handleMouseDown = useCallback((e: MouseEvent) => {
@@ -279,12 +305,15 @@ export const ProductSlider = () => {
       viewportRef.current.style.cursor = 'grab';
     }
     
+    // Sync index with actual position
+    syncCurrentIndexWithScroll();
+    
     if (Math.abs(velocityRef.current) > 0.5) {
       applyMomentum(-velocityRef.current * 50);
     } else {
       startAutoSnap();
     }
-  }, [applyMomentum, startAutoSnap]);
+  }, [syncCurrentIndexWithScroll, applyMomentum, startAutoSnap]);
 
   // Wheel/trackpad handler
   const handleWheel = useCallback((e: WheelEvent) => {
