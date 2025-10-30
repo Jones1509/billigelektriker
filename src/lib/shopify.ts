@@ -157,6 +157,20 @@ export const COLLECTION_QUERY = `
   }
 `;
 
+export const ALL_COLLECTIONS_QUERY = `
+  query GetAllCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+        }
+      }
+    }
+  }
+`;
+
 const CART_CREATE_MUTATION = `
   mutation cartCreate($input: CartInput!) {
     cartCreate(input: $input) {

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, COLLECTION_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, COLLECTION_QUERY, ALL_COLLECTIONS_QUERY, STOREFRONT_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -9,6 +9,20 @@ import { useState, useRef, useEffect, useCallback } from "react";
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
+  
+  // Hent alle collections først
+  const { data: collectionsData } = useQuery({
+    queryKey: ['all-collections'],
+    queryFn: async () => {
+      const response = await storefrontApiRequest(ALL_COLLECTIONS_QUERY, { first: 20 });
+      const collections = response.data.collections.edges;
+      console.log('📦 ALLE SHOPIFY COLLECTIONS:', collections.map((c: any) => ({
+        title: c.node.title,
+        handle: c.node.handle
+      })));
+      return collections;
+    },
+  });
   
   // DOM refs
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -32,41 +46,29 @@ export const ProductSlider = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   
-  // Collection handles mapping
-  const collectionHandles: Record<'popular' | 'new' | 'recommended', string> = {
-    popular: 'collection-1',
-    new: 'collection-2',
-    recommended: 'collection-3'
-  };
-
   const { data, isLoading } = useQuery({
-    queryKey: ['collection-products', activeTab],
+    queryKey: ['tab-products', activeTab],
     queryFn: async () => {
-      const handle = collectionHandles[activeTab];
-      console.log(`🔍 Henter produkter fra collection: "${handle}" (${activeTab})`);
+      console.log(`🔍 Henter produkter for tab: "${activeTab}"`);
       
-      try {
-        const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-          handle,
-          first: 12 
-        });
-        
-        if (response.data.collection?.products?.edges) {
-          const products = response.data.collection.products.edges as ShopifyProduct[];
-          console.log(`✅ Fandt ${products.length} produkter i "${handle}"`);
-          return products;
-        } else {
-          console.warn(`⚠️ Collection "${handle}" ikke fundet eller har ingen produkter`);
-          return [];
-        }
-      } catch (error) {
-        console.error(`❌ Fejl ved hentning af collection "${handle}":`, error);
-        return [];
+      // Fallback til alle produkter hvis ingen collections
+      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+      const allProducts = response.data.products.edges as ShopifyProduct[];
+      
+      console.log(`✅ Fandt ${allProducts.length} produkter totalt`);
+      
+      // Vis forskellige produkter per tab
+      if (activeTab === 'popular') {
+        return allProducts.slice(0, 6);
+      } else if (activeTab === 'new') {
+        return allProducts.slice(3, 9);
+      } else {
+        return allProducts.slice(6, 12);
       }
     },
   });
 
-  // Get base products from collection
+  // Get base products
   const baseProducts = data || [];
 
   // Calculate dimensions based on screen width
