@@ -697,6 +697,17 @@ All colors MUST be HSL.
   .product-card {
     flex-shrink: 0;
     box-sizing: border-box;
+    border-radius: 24px !important;
+    overflow: hidden;
+  }
+  
+  .product-card * {
+    border-radius: inherit;
+  }
+  
+  /* Force rounded corners and shadows on product cards */
+  .product-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
   }
 
   /* Navigation arrows */

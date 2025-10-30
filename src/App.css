@@ -33,9 +33,7 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
+/* Removed global .card styling to prevent conflicts with product cards */
 
 .read-the-docs {
   color: #888;
