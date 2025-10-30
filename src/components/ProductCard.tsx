@@ -70,18 +70,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <script type="application/ld+json">
         {JSON.stringify(productSchema)}
       </script>
-      <Card 
-        className="group overflow-hidden border border-border/60 rounded-2xl h-full flex flex-col transition-all duration-300 hover:border-primary/20 hover:-translate-y-1 shadow-none"
-        style={{
-          filter: 'drop-shadow(0 1px 2px rgb(0 0 0 / 0.05))',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.filter = 'drop-shadow(0 10px 15px rgb(0 0 0 / 0.1))';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.filter = 'drop-shadow(0 1px 2px rgb(0 0 0 / 0.05))';
-        }}
-      >
+      <Card className="product-card-rounded group !overflow-hidden border border-border/60 !rounded-[24px] h-full flex flex-col transition-all duration-300 hover:border-primary/20 hover:-translate-y-1 !shadow-none">
         <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
           <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
             {imageUrl ? (
