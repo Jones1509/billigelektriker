@@ -515,7 +515,7 @@ export const ProductSlider = () => {
     console.log('Starting momentum, velocity:', initialVelocity);
     
     let velocity = initialVelocity;
-    const friction = 0.86; // Increased friction for faster stop (like Instagram)
+    const friction = 0.92; // Smooth iPhone-like deceleration
     const minVelocity = 0.5;
     
     const animate = () => {
@@ -655,10 +655,10 @@ export const ProductSlider = () => {
     console.log('=== TOUCH END ===');
     console.log('Velocity:', velocityRef.current);
     
-    // Apply momentum hvis hurtig swipe
-    if (Math.abs(velocityRef.current) > 0.5) {
+    // Apply momentum hvis hurtig swipe (højere threshold for mere kontrol)
+    if (Math.abs(velocityRef.current) > 1.2) {
       console.log('Applying momentum');
-      applyMomentum(-velocityRef.current * 28); // Reduced from 50 to 28 for controlled momentum
+      applyMomentum(-velocityRef.current * 15); // Reduceret for smooth iPhone-style
     } else {
       // Ingen momentum - sync index
       console.log('No momentum, syncing index');
