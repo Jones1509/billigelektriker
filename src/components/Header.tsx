@@ -229,7 +229,7 @@ export const Header = () => {
   return (
     <>
       <AnnouncementBar />
-      <header className="sticky top-0 z-50 w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95 shadow-sm">
+      <header className="sticky top-0 z-[9999] w-full bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95 shadow-sm">
         <div className="container py-2.5 sm:py-3 lg:py-6">
           {/* Mobile Layout - Flexbox */}
           <div className="flex lg:hidden items-center justify-between px-2 sm:px-0">

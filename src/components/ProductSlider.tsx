@@ -866,7 +866,7 @@ export const ProductSlider = () => {
   };
 
   return (
-    <section className="product-carousel-wrapper" aria-label="Populære produkter i webshoppen">
+    <section className="product-carousel-wrapper relative z-[1]" aria-label="Populære produkter i webshoppen">
       {/* Background effects */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]" aria-hidden="true"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]" aria-hidden="true"></div>
@@ -889,7 +889,7 @@ export const ProductSlider = () => {
           
           {/* Tab buttons - Labels come from COLLECTION_CONFIG */}
           <nav aria-label="Produktfiltre">
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6', position: 'relative', zIndex: 100 }} role="tablist">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
                 role="tab"
@@ -897,12 +897,9 @@ export const ProductSlider = () => {
                 style={{ 
                   color: activeTab === 'popular' ? '#2563EB' : '#6B7280', 
                   transitionDuration: '300ms',
-                  cursor: 'pointer',
-                  pointerEvents: 'auto',
-                  position: 'relative',
-                  zIndex: 101
+                  cursor: 'pointer'
                 }}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all relative ${
                   activeTab === 'popular' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
@@ -917,12 +914,9 @@ export const ProductSlider = () => {
                 style={{ 
                   color: activeTab === 'new' ? '#2563EB' : '#6B7280', 
                   transitionDuration: '300ms',
-                  cursor: 'pointer',
-                  pointerEvents: 'auto',
-                  position: 'relative',
-                  zIndex: 101
+                  cursor: 'pointer'
                 }}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all relative ${
                   activeTab === 'new' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
@@ -937,12 +931,9 @@ export const ProductSlider = () => {
                 style={{ 
                   color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', 
                   transitionDuration: '300ms',
-                  cursor: 'pointer',
-                  pointerEvents: 'auto',
-                  position: 'relative',
-                  zIndex: 101
+                  cursor: 'pointer'
                 }}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all relative ${
                   activeTab === 'recommended' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
@@ -969,6 +960,7 @@ export const ProductSlider = () => {
             <button
               onClick={navigatePrev}
               className="carousel-arrow prev-arrow"
+              style={{ zIndex: 1 }}
               aria-label="Forrige produkter"
             >
               <ChevronLeft className="w-7 h-7" />
@@ -977,6 +969,7 @@ export const ProductSlider = () => {
             <button
               onClick={navigateNext}
               className="carousel-arrow next-arrow"
+              style={{ zIndex: 1 }}
               aria-label="Næste produkter"
             >
               <ChevronRight className="w-7 h-7" />
