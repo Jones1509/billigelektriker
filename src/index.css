@@ -754,7 +754,7 @@ All colors MUST be HSL.
   }
 
   .next-arrow {
-    right: 48px;
+    right: 56px;
   }
 
   /* Tablet responsive (768px - 1199px) */
@@ -786,7 +786,7 @@ All colors MUST be HSL.
     }
     
     .next-arrow {
-      right: 40px;
+      right: 48px;
     }
   }
 
@@ -828,7 +828,7 @@ All colors MUST be HSL.
     }
     
     .next-arrow {
-      right: 24px;
+      right: 32px;
     }
   }
 }
