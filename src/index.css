@@ -662,50 +662,50 @@ All colors MUST be HSL.
     position: relative;
   }
 
-  /* Scroll container - Native Instagram-style smooth scrolling */
+  /* Scroll container */
 .luxury-scroll-container {
+  position: relative;
+  width: 100%;
+  display: flex;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* Critical for iOS smooth scrolling */
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  cursor: grab;
-  overscroll-behavior-x: contain;
-  touch-action: pan-x; /* Only allow horizontal swipe */
 }
 
-/* Desktop only - enable GPU acceleration */
-@media (min-width: 1024px) {
-  .luxury-scroll-container {
-    transform: translateZ(0);
-    will-change: scroll-position;
-  }
+.luxury-scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
-  .luxury-scroll-container::-webkit-scrollbar {
-    display: none;
-  }
+/* Products track - dynamic gap based on screen size */
+.luxury-products-track {
+  display: flex;
+  gap: 28px; /* Desktop: 28px */
+  padding: 0 20px;
+  align-items: stretch;
+}
 
-  .luxury-scroll-container:active {
-    cursor: grabbing;
-  }
-
-  /* Products track with CSS Grid */
+@media (max-width: 1199px) {
   .luxury-products-track {
-    display: grid;
-    grid-auto-flow: column;
-    width: fit-content;
-    /* Smooth rendering */
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
+    gap: 24px; /* Tablet: 24px */
+    padding: 0 16px;
   }
+}
 
-  /* Product card base */
-  .luxury-product-card {
-    /* Removed scroll-snap to avoid conflicts with arrow navigation */
+@media (max-width: 767px) {
+  .luxury-products-track {
+    gap: 16px; /* Mobile: 16px */
+    padding: 0 12px;
   }
+}
+
+/* Product card - width set dynamically via JavaScript */
+.luxury-product-card {
+  flex-shrink: 0;
+  /* Width will be calculated and set by JavaScript based on screen size */
+}
 
   /* Navigation arrows base */
   .luxury-nav-arrow {

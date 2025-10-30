@@ -4,7 +4,7 @@ import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
@@ -12,21 +12,8 @@ export const ProductSlider = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const prevBtnRef = useRef<HTMLButtonElement>(null);
   const nextBtnRef = useRef<HTMLButtonElement>(null);
-  
-  // Touch tracking
-  const touchStartXRef = useRef(0);
-  const touchScrollLeftRef = useRef(0);
-  const touchLastXRef = useRef(0);
-  const touchLastTimeRef = useRef(0);
-  const touchVelocityRef = useRef(0);
-  
-  // Mouse drag tracking
-  const isDraggingRef = useRef(false);
-  const dragStartXRef = useRef(0);
-  const dragScrollLeftRef = useRef(0);
-  const dragLastXRef = useRef(0);
-  const dragLastTimeRef = useRef(0);
-  const dragVelocityRef = useRef(0);
+  const snapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
   
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
@@ -36,7 +23,8 @@ export const ProductSlider = () => {
     },
   });
 
-  const displayProducts = data ? (
+  // Get base products based on active tab
+  const baseProducts = data ? (
     activeTab === 'popular' 
       ? data.slice(0, 12)
       : activeTab === 'new'
@@ -44,227 +32,222 @@ export const ProductSlider = () => {
       : data.slice(8, 20)
   ) : [];
 
-  // Update button states based on scroll position
-  const updateButtonStates = () => {
+  // Helper: Get number of visible products based on screen width
+  const getVisibleCount = useCallback(() => {
+    const width = window.innerWidth;
+    if (width >= 1200) return 4; // Desktop
+    if (width >= 768) return 3;  // Tablet
+    return 2; // Mobile
+  }, []);
+
+  // Helper: Get gap size based on screen width
+  const getGap = useCallback(() => {
+    const width = window.innerWidth;
+    if (width >= 1200) return 28;
+    if (width >= 768) return 24;
+    return 16;
+  }, []);
+
+  // Create looped products array (add clones at start and end for infinite scroll)
+  const displayProducts = baseProducts.length > 0 ? [
+    ...baseProducts.slice(-getVisibleCount()), // Clone last N products at start
+    ...baseProducts,
+    ...baseProducts.slice(0, getVisibleCount()), // Clone first N products at end
+  ] : [];
+
+  // Calculate and apply dynamic product sizes
+  const calculateProductSizes = useCallback(() => {
     const container = scrollContainerRef.current;
-    const prevBtn = prevBtnRef.current;
-    const nextBtn = nextBtnRef.current;
+    if (!container) return;
+
+    const visibleCount = getVisibleCount();
+    const gap = getGap();
+    const containerWidth = container.offsetWidth;
+    const totalGaps = (visibleCount - 1) * gap;
+    const productWidth = (containerWidth - totalGaps) / visibleCount;
+
+    // Apply width to all product cards
+    const productCards = container.querySelectorAll('.luxury-product-card');
+    productCards.forEach((card) => {
+      (card as HTMLElement).style.width = `${productWidth}px`;
+      (card as HTMLElement).style.minWidth = `${productWidth}px`;
+      (card as HTMLElement).style.maxWidth = `${productWidth}px`;
+    });
+  }, [getVisibleCount, getGap]);
+
+  // Snap to nearest full product after manual scroll stops
+  const snapToNearest = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+    if (!productCard) return;
+
+    const productWidth = productCard.offsetWidth;
+    const gap = getGap();
+    const scrollUnit = productWidth + gap;
+    const currentScroll = container.scrollLeft;
     
-    if (!container || !prevBtn || !nextBtn) return;
+    // Find nearest snap point
+    const nearestIndex = Math.round(currentScroll / scrollUnit);
+    const targetScroll = nearestIndex * scrollUnit;
+
+    container.scrollTo({
+      left: targetScroll,
+      behavior: 'smooth'
+    });
+  }, [getGap]);
+
+  // Check if we need to loop (seamless infinite scroll)
+  const checkLoop = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container || baseProducts.length === 0) return;
+
+    const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+    if (!productCard) return;
+
+    const productWidth = productCard.offsetWidth;
+    const gap = getGap();
+    const scrollUnit = productWidth + gap;
+    const visibleCount = getVisibleCount();
+    const cloneCount = visibleCount;
     
-    const scrollLeft = container.scrollLeft;
+    const currentScroll = container.scrollLeft;
     const maxScroll = container.scrollWidth - container.clientWidth;
     
-    // Left button
-    if (scrollLeft <= 5) {
-      prevBtn.style.opacity = '0.3';
-      prevBtn.style.pointerEvents = 'none';
-    } else {
-      prevBtn.style.opacity = '1';
-      prevBtn.style.pointerEvents = 'auto';
+    // If scrolled into start clones, jump to original end
+    if (currentScroll < scrollUnit * cloneCount * 0.5) {
+      const jumpTo = scrollUnit * (baseProducts.length + cloneCount);
+      container.scrollLeft = jumpTo - (scrollUnit * cloneCount - currentScroll);
     }
     
-    // Right button
-    if (scrollLeft >= maxScroll - 5) {
-      nextBtn.style.opacity = '0.3';
-      nextBtn.style.pointerEvents = 'none';
-    } else {
-      nextBtn.style.opacity = '1';
-      nextBtn.style.pointerEvents = 'auto';
+    // If scrolled into end clones, jump to original start
+    if (currentScroll > maxScroll - scrollUnit * cloneCount * 0.5) {
+      const jumpTo = scrollUnit * cloneCount;
+      container.scrollLeft = jumpTo + (currentScroll - (maxScroll - scrollUnit * cloneCount));
     }
-  };
+  }, [baseProducts.length, getGap, getVisibleCount]);
 
-  // Apply momentum scroll animation - luxury smooth deceleration
-  const applyMomentum = (initialVelocity: number) => {
+  // Scroll one product to the left
+  const scrollPrev = useCallback(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
-    
-    let velocity = initialVelocity;
-    const friction = 0.92; // Higher friction for more controlled, luxury feel
-    const minVelocity = 0.3; // Higher threshold for quicker stop
-    
-    const animate = () => {
-      if (Math.abs(velocity) < minVelocity || !scrollContainerRef.current) return;
-      
-      scrollContainerRef.current.scrollLeft += velocity;
-      velocity *= friction;
-      
-      requestAnimationFrame(animate);
-    };
-    
-    requestAnimationFrame(animate);
-  };
 
+    const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+    if (!productCard) return;
+
+    const productWidth = productCard.offsetWidth;
+    const gap = getGap();
+    const scrollAmount = productWidth + gap;
+
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  }, [getGap]);
+
+  // Scroll one product to the right
+  const scrollNext = useCallback(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+    if (!productCard) return;
+
+    const productWidth = productCard.offsetWidth;
+    const gap = getGap();
+    const scrollAmount = productWidth + gap;
+
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }, [getGap]);
+
+  // Main effect: Setup all event listeners and calculations
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container) return;
+    if (!container || displayProducts.length === 0) return;
 
-    // Helper function til at beregne gap dynamisk
-    const getGap = () => {
-      const width = window.innerWidth;
-      if (width >= 1200) return 28;
-      if (width >= 768) return 24;
-      return 16;
-    };
+    // Calculate initial product sizes
+    calculateProductSizes();
+
+    // Set initial scroll position to skip start clones
+    const visibleCount = getVisibleCount();
+    const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+    if (productCard) {
+      const productWidth = productCard.offsetWidth;
+      const gap = getGap();
+      const scrollUnit = productWidth + gap;
+      container.scrollLeft = scrollUnit * visibleCount;
+    }
 
     // Keyboard navigation
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        // Scroll præcis én produktbredde + gap
-        const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
-        if (productCard) {
-          const productWidth = productCard.offsetWidth;
-          const gap = getGap();
-          const scrollAmount = productWidth + gap;
-          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        }
+        scrollPrev();
+        setTimeout(checkLoop, 300);
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
-        // Scroll præcis én produktbredde + gap
-        const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
-        if (productCard) {
-          const productWidth = productCard.offsetWidth;
-          const gap = getGap();
-          const scrollAmount = productWidth + gap;
-          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
+        scrollNext();
+        setTimeout(checkLoop, 300);
       }
     };
 
-    // Button click handlers
-    const handlePrevClick = () => {
-      // Scroll præcis én produktbredde + gap
-      const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
-      if (productCard) {
-        const productWidth = productCard.offsetWidth;
-        const gap = getGap();
-        const scrollAmount = productWidth + gap;
-        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      }
-    };
-
-    const handleNextClick = () => {
-      // Scroll præcis én produktbredde + gap
-      const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
-      if (productCard) {
-        const productWidth = productCard.offsetWidth;
-        const gap = getGap();
-        const scrollAmount = productWidth + gap;
-        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      }
-    };
-
-    // Scroll event for button states
+    // Scroll event handler
     const handleScroll = () => {
-      requestAnimationFrame(updateButtonStates);
-    };
+      isScrollingRef.current = true;
 
-    // Touch events for mobile/tablet - native smooth scrolling
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartXRef.current = e.touches[0].pageX;
-      touchScrollLeftRef.current = container.scrollLeft;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const touchX = e.touches[0].pageX;
-      const diff = touchStartXRef.current - touchX;
-      
-      // Native 1:1 smooth scrolling - ingen multiplier
-      container.scrollLeft = touchScrollLeftRef.current + diff;
-    };
-
-    const handleTouchEnd = () => {
-      // Ingen momentum - bare native smooth scrolling
-    };
-
-    // Mouse drag events
-    const handleMouseDown = (e: MouseEvent) => {
-      isDraggingRef.current = true;
-      dragStartXRef.current = e.pageX - container.offsetLeft;
-      dragScrollLeftRef.current = container.scrollLeft;
-      container.style.cursor = 'grabbing';
-      dragLastXRef.current = e.pageX;
-      dragLastTimeRef.current = Date.now();
-      dragVelocityRef.current = 0;
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDraggingRef.current) return;
-      e.preventDefault();
-      
-      const x = e.pageX - container.offsetLeft;
-      const walk = (x - dragStartXRef.current) * 2; // 2x multiplier
-      container.scrollLeft = dragScrollLeftRef.current - walk;
-      
-      // Calculate velocity
-      const now = Date.now();
-      const dt = now - dragLastTimeRef.current;
-      const dx = e.pageX - dragLastXRef.current;
-      dragVelocityRef.current = dx / dt;
-      
-      dragLastXRef.current = e.pageX;
-      dragLastTimeRef.current = now;
-    };
-
-    const handleMouseUp = () => {
-      if (isDraggingRef.current && Math.abs(dragVelocityRef.current) > 0.3) {
-        applyMomentum(-dragVelocityRef.current * 50);
+      // Clear existing snap timeout
+      if (snapTimeoutRef.current) {
+        clearTimeout(snapTimeoutRef.current);
       }
-      isDraggingRef.current = false;
-      container.style.cursor = 'grab';
+
+      // Set new snap timeout (5 seconds after scroll stops)
+      snapTimeoutRef.current = setTimeout(() => {
+        snapToNearest();
+        isScrollingRef.current = false;
+      }, 5000);
+
+      // Check for loop boundary
+      checkLoop();
     };
 
-    const handleMouseLeave = () => {
-      isDraggingRef.current = false;
-      container.style.cursor = 'grab';
-    };
-
-    // Trackpad/wheel scroll - MacBook optimized
+    // Trackpad/wheel scroll
     const handleWheel = (e: WheelEvent) => {
-      // KUN håndter horizontal scroll (side til side)
-      // Ignorer vertical scroll (op/ned)
       if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 0) {
-        // Horizontal trackpad gesture -> brug direkte
         e.preventDefault();
-        container.scrollLeft += e.deltaX * 1.2;
+        container.scrollLeft += e.deltaX;
       }
+    };
+
+    // Window resize handler
+    const handleResize = () => {
+      calculateProductSizes();
+      snapToNearest();
     };
 
     // Attach event listeners
     window.addEventListener('keydown', handleKeyDown);
-    if (prevBtnRef.current) prevBtnRef.current.addEventListener('click', handlePrevClick);
-    if (nextBtnRef.current) nextBtnRef.current.addEventListener('click', handleNextClick);
+    window.addEventListener('resize', handleResize);
+    if (prevBtnRef.current) prevBtnRef.current.addEventListener('click', () => {
+      scrollPrev();
+      setTimeout(checkLoop, 300);
+    });
+    if (nextBtnRef.current) nextBtnRef.current.addEventListener('click', () => {
+      scrollNext();
+      setTimeout(checkLoop, 300);
+    });
     container.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Mouse drag kun på desktop (ikke mobil/tablet)
-    const isDesktop = window.innerWidth >= 1024;
-    if (isDesktop) {
-      container.addEventListener('mousedown', handleMouseDown);
-      container.addEventListener('mousemove', handleMouseMove);
-      container.addEventListener('mouseup', handleMouseUp);
-      container.addEventListener('mouseleave', handleMouseLeave);
-      container.addEventListener('wheel', handleWheel, { passive: false });
-    }
-
-    // Initial button state
-    updateButtonStates();
+    container.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      if (prevBtnRef.current) prevBtnRef.current.removeEventListener('click', handlePrevClick);
-      if (nextBtnRef.current) nextBtnRef.current.removeEventListener('click', handleNextClick);
+      window.removeEventListener('resize', handleResize);
+      if (prevBtnRef.current) prevBtnRef.current.removeEventListener('click', scrollPrev);
+      if (nextBtnRef.current) nextBtnRef.current.removeEventListener('click', scrollNext);
       container.removeEventListener('scroll', handleScroll);
-      
-      if (isDesktop) {
-        container.removeEventListener('mousedown', handleMouseDown);
-        container.removeEventListener('mousemove', handleMouseMove);
-        container.removeEventListener('mouseup', handleMouseUp);
-        container.removeEventListener('mouseleave', handleMouseLeave);
-        container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener('wheel', handleWheel);
+      if (snapTimeoutRef.current) {
+        clearTimeout(snapTimeoutRef.current);
       }
     };
-  }, [displayProducts]);
+  }, [displayProducts, calculateProductSizes, scrollPrev, scrollNext, snapToNearest, checkLoop, getVisibleCount, getGap]);
 
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
     setActiveTab(tab);
