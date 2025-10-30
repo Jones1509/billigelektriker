@@ -668,7 +668,7 @@ All colors MUST be HSL.
   .product-carousel-wrapper {
     position: relative;
     width: 100%;
-    padding: 80px 0 60px 0;
+    padding: 60px 0 60px 0;
     overflow: hidden;
   }
 
@@ -811,7 +811,7 @@ All colors MUST be HSL.
   /* Mobile responsive (under 768px) */
   @media (max-width: 767px) {
     .product-carousel-wrapper {
-      padding: 60px 0 40px 0;
+      padding: 45px 0 40px 0;
     }
     
     .carousel-inner-wrapper {
