@@ -70,12 +70,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <script type="application/ld+json">
         {JSON.stringify(productSchema)}
       </script>
-      <Card 
-        className="group overflow-visible hover:-translate-y-1 border border-border h-full flex flex-col"
+      <div 
+        className="group hover:-translate-y-1 h-full flex flex-col"
         style={{ 
-          borderRadius: '1.5rem',
+          borderRadius: '24px',
+          border: '1px solid hsl(var(--border))',
+          backgroundColor: 'hsl(var(--card))',
+          color: 'hsl(var(--card-foreground))',
           boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          overflow: 'visible'
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';
@@ -85,7 +89,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         }}
       >
         <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
-          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30" style={{ borderRadius: '1.5rem 1.5rem 0 0' }}>
+          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30" style={{ borderRadius: '24px 24px 0 0' }}>
             {imageUrl ? (
               <>
                 <img
@@ -109,7 +113,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </Link>
       
-      <CardContent className="p-2 md:p-2.5 lg:p-3.5 flex-1 flex flex-col">
+      
+      <div className="p-2 md:p-2.5 lg:p-3.5 flex-1 flex flex-col">
         <Link to={`/product/${node.handle}`} aria-label={`Læs mere om ${node.title}`}>
           <h3 className="font-semibold text-[11px] md:text-sm lg:text-base leading-tight mb-1 md:mb-1 lg:mb-1.5 line-clamp-2 group-hover:text-primary transition-colors duration-200">
             {node.title}
@@ -133,8 +138,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <span className="hidden md:inline">{t('productCard.addToCart')}</span>
           <span className="md:hidden">Køb</span>
         </Button>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
     </>
   );
 };
