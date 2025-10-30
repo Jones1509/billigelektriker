@@ -438,9 +438,9 @@ export const ProductSlider = () => {
     // Opdater state
     currentIndexRef.current = targetIndex;
     
-    // Anvend transform
-    trackRef.current.style.transition = 'transform 0.4s ease-out';
-    trackRef.current.style.transform = `translateX(-${Math.round(targetTransform)}px)`;
+    // Anvend transform med smooth transition
+    trackRef.current.style.transition = 'transform 0.3s ease-out';
+    trackRef.current.style.transform = `translate3d(-${Math.round(targetTransform)}px, 0, 0)`;
     
     isTransitioningRef.current = true;
     
@@ -538,7 +538,7 @@ export const ProductSlider = () => {
         clearAutoSnap();
         autoSnapTimerRef.current = setTimeout(() => {
           snapToNearest();
-        }, 5000);
+        }, 100); // Meget kort timeout
         return;
       }
       
@@ -651,7 +651,7 @@ export const ProductSlider = () => {
     if (Math.abs(velocityRef.current) > 2.0) {
       applyMomentum(-velocityRef.current * 5); // Meget lille momentum
     } else {
-      // Ingen momentum - sync index
+      // Ingen momentum - snap med det samme
       const currentScroll = getCurrentScroll();
       const cardPlusGap = cardWidthRef.current + gapRef.current;
       if (cardPlusGap > 0) {
@@ -662,13 +662,17 @@ export const ProductSlider = () => {
           : Math.max(0, baseProducts.length - itemsVisibleRef.current);
         currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
       }
+      // Snap med det samme for hurtig feedback
+      setTimeout(() => {
+        snapToNearest();
+      }, 50);
     }
     
     // KRITISK: Start auto-snap timer ALTID efter touch
     clearAutoSnap();
     autoSnapTimerRef.current = setTimeout(() => {
       snapToNearest();
-    }, 5000);
+    }, 1000); // Reduceret til 1 sekund
   }, [getCurrentScroll, applyMomentum, clearAutoSnap, snapToNearest, baseProducts.length]);
 
   // Mouse drag handlers
