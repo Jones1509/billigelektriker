@@ -79,7 +79,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                   src={imageUrl}
                   alt={altText}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
                 {/* Status badge */}
                 <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white" 
