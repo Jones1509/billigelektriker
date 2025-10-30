@@ -128,13 +128,31 @@ export const ProductSlider = () => {
 
   // Get current scroll position
   const getCurrentScroll = useCallback(() => {
-    if (!trackRef.current) return 0;
+    if (!trackRef.current) {
+      console.log('getCurrentScroll: No track ref, returning 0');
+      return 0;
+    }
+    
     const transform = trackRef.current.style.transform;
-    if (!transform || transform === 'none') return 0;
+    
+    if (!transform || transform === 'none') {
+      console.log('getCurrentScroll: No transform, returning 0');
+      return 0;
+    }
+    
     const match = transform.match(/translateX\((-?\d+\.?\d*)px\)/);
-    const scrollValue = match ? Math.abs(parseFloat(match[1])) : 0;
-    // Return whole number to avoid decimal pixel issues
-    return Math.round(scrollValue);
+    
+    if (!match) {
+      console.log('getCurrentScroll: No match found, returning 0');
+      return 0;
+    }
+    
+    const value = Math.abs(parseFloat(match[1]));
+    const rounded = Math.round(value);
+    
+    console.log('getCurrentScroll:', rounded);
+    
+    return rounded;
   }, []);
 
   // Update position
@@ -192,6 +210,8 @@ export const ProductSlider = () => {
 
   // Snap to nearest full product position
   const snapToNearest = useCallback(() => {
+    console.log('=== SNAP TO NEAREST ===');
+    
     const isMobile = window.innerWidth < 768;
     
     if (!isMobile) {
@@ -200,21 +220,51 @@ export const ProductSlider = () => {
       const currentScroll = getCurrentScroll();
       const cardPlusGap = cardWidthRef.current + gapRef.current;
       
-      if (cardPlusGap === 0 || !trackRef.current) return;
+      console.log('Current scroll:', currentScroll);
+      console.log('Card + gap:', cardPlusGap);
       
+      if (cardPlusGap === 0 || !trackRef.current) {
+        console.error('Card width or gap is 0, cannot snap');
+        return;
+      }
+      
+      // Beregn hvilket index bruger er tættest på
       const rawIndex = currentScroll / cardPlusGap;
-      let targetIndex = Math.round(rawIndex);
-      const maxIndex = baseProducts.length - itemsVisibleRef.current;
-      targetIndex = Math.max(0, Math.min(targetIndex, maxIndex));
+      let nearestIndex = Math.round(rawIndex);
       
-      currentIndexRef.current = targetIndex;
-      const targetPosition = targetIndex * cardPlusGap;
+      console.log('Raw index:', rawIndex);
+      console.log('Nearest index (before clamp):', nearestIndex);
       
+      // Beregn max index baseret på items visible
+      const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+      
+      console.log('Max allowed index:', maxIndex);
+      console.log('Items visible:', itemsVisibleRef.current);
+      console.log('Total cards:', baseProducts.length);
+      
+      // KRITISK: Begræns til valid range
+      nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+      
+      console.log('Final nearest index:', nearestIndex);
+      
+      // Opdater state
+      currentIndexRef.current = nearestIndex;
+      
+      // Beregn præcis position
+      const targetPosition = Math.round(nearestIndex * cardPlusGap);
+      
+      console.log('Target position:', targetPosition);
+      
+      // Anvend snap
       trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
       
       isTransitioningRef.current = true;
-      setTimeout(() => { isTransitioningRef.current = false; }, 400);
+      setTimeout(() => { 
+        isTransitioningRef.current = false; 
+      }, 400);
+      
+      console.log('======================');
       return;
     }
     
@@ -474,16 +524,37 @@ export const ProductSlider = () => {
       e.preventDefault();
       
       const currentScroll = getCurrentScroll();
-      const newScroll = currentScroll + (e.deltaX * 1.5);
-      const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
-      // Add small buffer for desktop
-      const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll + 10));
+      const deltaX = e.deltaX * 1.5;
+      const newScroll = currentScroll + deltaX;
       
+      const cardPlusGap = cardWidthRef.current + gapRef.current;
+      const maxScroll = (baseProducts.length - itemsVisibleRef.current) * cardPlusGap;
+      
+      // Clamp scroll position
+      const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
+      
+      console.log('Wheel scroll:', {
+        deltaX: e.deltaX,
+        currentScroll,
+        newScroll,
+        clampedScroll,
+        maxScroll
+      });
+      
+      // Anvend scroll uden transition
       if (trackRef.current) {
         trackRef.current.style.transition = 'none';
         trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
       }
       
+      // NYT: Sync current index med faktisk position
+      const calculatedIndex = Math.round(clampedScroll / cardPlusGap);
+      const maxIndex = baseProducts.length - itemsVisibleRef.current;
+      currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+      
+      console.log('Wheel: synced currentIndex to', currentIndexRef.current);
+      
+      // Clear og start auto-snap
       clearAutoSnap();
       startAutoSnap();
     }
