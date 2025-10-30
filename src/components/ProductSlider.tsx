@@ -1,10 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, COLLECTION_PRODUCTS_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
+
+// Collection handles mapping - opdater disse med dine faktiske collection handles
+const COLLECTION_HANDLES = {
+  popular: 'collection-1', // Opdater med dit faktiske collection handle
+  new: 'collection-2',      // Opdater med dit faktiske collection handle
+  recommended: 'collection-3' // Opdater med dit faktiske collection handle
+};
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
@@ -33,27 +40,19 @@ export const ProductSlider = () => {
   const lastTimeRef = useRef(0);
   
   const { data, isLoading } = useQuery({
-    queryKey: ['slider-products'],
+    queryKey: ['collection-products', activeTab],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 50 });
-      return response.data.products.edges as ShopifyProduct[];
+      const collectionHandle = COLLECTION_HANDLES[activeTab];
+      const response = await storefrontApiRequest(COLLECTION_PRODUCTS_QUERY, { 
+        handle: collectionHandle,
+        first: 50 
+      });
+      return response.data.collectionByHandle?.products.edges as ShopifyProduct[] || [];
     },
   });
 
-  // Filter products based on active tab and tags
-  const baseProducts = data ? data.filter((product) => {
-    const tags = product.node.tags || [];
-    
-    if (activeTab === 'popular') {
-      return tags.includes('popular');
-    } else if (activeTab === 'new') {
-      return tags.includes('new');
-    } else if (activeTab === 'recommended') {
-      return tags.includes('recommended');
-    }
-    
-    return false;
-  }) : [];
+  // Use products from collection directly
+  const baseProducts = data || [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
