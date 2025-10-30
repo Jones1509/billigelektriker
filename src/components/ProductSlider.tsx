@@ -894,14 +894,19 @@ export const ProductSlider = () => {
     calculateDimensions();
     updatePosition(false);
     
+    // Check if mobile
+    const isMobile = window.innerWidth < 768;
+    
     // Log layout info
     console.log('=== CAROUSEL LAYOUT INFO ===');
     console.log('Window width:', window.innerWidth);
+    console.log('Is mobile:', isMobile);
     console.log('Items visible:', itemsVisibleRef.current);
     console.log('Viewport width:', viewportRef.current?.getBoundingClientRect().width);
     console.log('Card width:', cardWidthRef.current);
     console.log('Gap:', gapRef.current);
     console.log('Total cards:', baseProducts.length);
+    console.log('Touch scroll enabled:', !isMobile);
     console.log('============================');
     
     // Window resize
@@ -923,23 +928,35 @@ export const ProductSlider = () => {
     };
     
     window.addEventListener('resize', handleResize);
-    viewport.addEventListener('touchstart', handleTouchStart, { passive: true });
-    viewport.addEventListener('touchmove', handleTouchMove, { passive: true });
-    viewport.addEventListener('touchend', handleTouchEnd, { passive: true });
-    viewport.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    viewport.addEventListener('wheel', handleWheel, { passive: false });
+    
+    // Only add touch events on desktop (NOT on mobile)
+    if (!isMobile) {
+      console.log('✅ Adding touch/scroll events (Desktop)');
+      viewport.addEventListener('touchstart', handleTouchStart, { passive: true });
+      viewport.addEventListener('touchmove', handleTouchMove, { passive: true });
+      viewport.addEventListener('touchend', handleTouchEnd, { passive: true });
+      viewport.addEventListener('mousedown', handleMouseDown);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      viewport.addEventListener('wheel', handleWheel, { passive: false });
+    } else {
+      console.log('🚫 Skipping touch/scroll events (Mobile - arrows only)');
+    }
     
     return () => {
       window.removeEventListener('resize', handleResize);
-      viewport.removeEventListener('touchstart', handleTouchStart);
-      viewport.removeEventListener('touchmove', handleTouchMove);
-      viewport.removeEventListener('touchend', handleTouchEnd);
-      viewport.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      viewport.removeEventListener('wheel', handleWheel);
+      
+      // Clean up touch events only if they were added
+      if (!isMobile) {
+        viewport.removeEventListener('touchstart', handleTouchStart);
+        viewport.removeEventListener('touchmove', handleTouchMove);
+        viewport.removeEventListener('touchend', handleTouchEnd);
+        viewport.removeEventListener('mousedown', handleMouseDown);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+        viewport.removeEventListener('wheel', handleWheel);
+      }
+      
       clearAutoSnap();
     };
   }, [baseProducts.length, calculateDimensions, updatePosition, handleTouchStart, handleTouchMove, handleTouchEnd, 
