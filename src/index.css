@@ -744,9 +744,9 @@ All colors MUST be HSL.
       padding: 60px 80px;
     }
 
-    /* 4 produkter - beregn fra max-width 1600px minus padding */
+    /* 4 produkter - fast bredde baseret på viewport */
     .luxury-products-track {
-      grid-auto-columns: minmax(0, calc((1440px - (3 * 28px)) / 4));
+      grid-auto-columns: calc((100vw - 160px - (3 * 28px)) / 4);
       gap: 28px;
       padding: 0;
     }
