@@ -299,15 +299,18 @@ export const ProductSlider = () => {
         const rect2 = card2.getBoundingClientRect();
         const vpRect = viewport.getBoundingClientRect();
         
+        const card1Visible = rect1.left >= vpRect.left - 1 && rect1.right <= vpRect.right + 1;
+        const card2Visible = rect2.left >= vpRect.left - 1 && rect2.right <= vpRect.right + 1;
+        
         console.log('Card 1:', {
           left: rect1.left,
           right: rect1.right,
-          fullyVisible: rect1.left >= vpRect.left - 1 && rect1.right <= vpRect.right + 1
+          fullyVisible: card1Visible
         });
         console.log('Card 2:', {
           left: rect2.left,
           right: rect2.right,
-          fullyVisible: rect2.left >= vpRect.left - 1 && rect2.right <= vpRect.right + 1
+          fullyVisible: card2Visible
         });
       }
       console.log('===============================');
