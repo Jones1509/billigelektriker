@@ -1,20 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, COLLECTION_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
-
-// ============================================
-// KONFIGURATION - Skift dine collection handles her
-// ============================================
-const COLLECTION_CONFIG = {
-  popular: 'mest-populaer',
-  new: 'nyheder', 
-  recommended: 'anbefalet'
-};
-// ============================================
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
@@ -42,49 +32,22 @@ export const ProductSlider = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   
-  // Fetch products from popular collection
-  const { data: popularData, isLoading: popularLoading } = useQuery({
-    queryKey: ['collection-popular', COLLECTION_CONFIG.popular],
+  const { data, isLoading } = useQuery({
+    queryKey: ['slider-products'],
     queryFn: async () => {
-      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: COLLECTION_CONFIG.popular,
-        first: 8 
-      });
-      return response.data.collection?.products?.edges as ShopifyProduct[] || [];
-    },
-  });
-
-  // Fetch products from new collection
-  const { data: newData, isLoading: newLoading } = useQuery({
-    queryKey: ['collection-new', COLLECTION_CONFIG.new],
-    queryFn: async () => {
-      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: COLLECTION_CONFIG.new,
-        first: 8 
-      });
-      return response.data.collection?.products?.edges as ShopifyProduct[] || [];
-    },
-  });
-
-  // Fetch products from recommended collection
-  const { data: recommendedData, isLoading: recommendedLoading } = useQuery({
-    queryKey: ['collection-recommended', COLLECTION_CONFIG.recommended],
-    queryFn: async () => {
-      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: COLLECTION_CONFIG.recommended,
-        first: 8 
-      });
-      return response.data.collection?.products?.edges as ShopifyProduct[] || [];
+      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+      return response.data.products.edges as ShopifyProduct[];
     },
   });
 
   // Get base products based on active tab
-  const baseProducts = 
-    activeTab === 'popular' ? (popularData || [])
-    : activeTab === 'new' ? (newData || [])
-    : (recommendedData || []);
-
-  const isLoading = popularLoading || newLoading || recommendedLoading;
+  const baseProducts = data ? (
+    activeTab === 'popular' 
+      ? data.slice(0, 12)
+      : activeTab === 'new'
+      ? data.slice(4, 16)
+      : data.slice(8, 20)
+  ) : [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
@@ -795,43 +758,37 @@ export const ProductSlider = () => {
           
           {/* Tab buttons */}
           <nav aria-label="Produktfiltre">
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full bg-muted relative z-10" role="tablist">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6' }} role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'popular' 
-                    ? 'bg-background shadow-md text-primary font-semibold' 
-                    : 'bg-transparent text-muted-foreground hover:text-primary'
+                    ? 'bg-white shadow-md font-semibold' 
+                    : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ pointerEvents: 'auto' }}
-                role="tab"
-                aria-selected={activeTab === 'popular'}
+                style={{ color: activeTab === 'popular' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
               >
                 Mest Populær
               </button>
               <button
                 onClick={() => handleTabChange('new')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'new' 
-                    ? 'bg-background shadow-md text-primary font-semibold' 
-                    : 'bg-transparent text-muted-foreground hover:text-primary'
+                    ? 'bg-white shadow-md font-semibold' 
+                    : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ pointerEvents: 'auto' }}
-                role="tab"
-                aria-selected={activeTab === 'new'}
+                style={{ color: activeTab === 'new' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
               >
                 Nyhed
               </button>
               <button
                 onClick={() => handleTabChange('recommended')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
                   activeTab === 'recommended' 
-                    ? 'bg-background shadow-md text-primary font-semibold' 
-                    : 'bg-transparent text-muted-foreground hover:text-primary'
+                    ? 'bg-white shadow-md font-semibold' 
+                    : 'bg-transparent hover:text-[#2563EB]'
                 }`}
-                style={{ pointerEvents: 'auto' }}
-                role="tab"
-                aria-selected={activeTab === 'recommended'}
+                style={{ color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
               >
                 Anbefalet
               </button>
