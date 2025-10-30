@@ -37,7 +37,7 @@ export const ProductSlider = () => {
     queryKey: ['collection-popular'],
     queryFn: async () => {
       const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: 'mest-popular',
+        handle: 'mest-populaer',
         first: 8 
       });
       return response.data.collection?.products?.edges as ShopifyProduct[] || [];
@@ -49,7 +49,7 @@ export const ProductSlider = () => {
     queryKey: ['collection-new'],
     queryFn: async () => {
       const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: 'nyhed',
+        handle: 'nyheder',
         first: 8 
       });
       return response.data.collection?.products?.edges as ShopifyProduct[] || [];
