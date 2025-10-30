@@ -53,31 +53,72 @@ export const ProductSlider = () => {
   const calculateDimensions = useCallback(() => {
     const width = window.innerWidth;
     
+    // Determine number of visible items
     if (width >= 1200) {
       itemsVisibleRef.current = 4;
-      gapRef.current = 28;
     } else if (width >= 768) {
       itemsVisibleRef.current = 3;
-      gapRef.current = 24;
     } else {
       itemsVisibleRef.current = 2;
-      gapRef.current = 16;
     }
     
-    if (viewportRef.current) {
-      const cards = viewportRef.current.querySelectorAll('.product-card');
-      if (cards.length > 0) {
-        const firstCard = cards[0] as HTMLElement;
-        const cardRect = firstCard.getBoundingClientRect();
-        
-        // Round to whole numbers to avoid decimal pixel issues
-        cardWidthRef.current = Math.round(cardRect.width);
-      }
+    if (!viewportRef.current || !trackRef.current) return;
+    
+    // Get ACTUAL available space in viewport
+    const viewportRect = viewportRef.current.getBoundingClientRect();
+    const viewportWidth = viewportRect.width;
+    
+    // Calculate gap from CSS
+    const trackStyle = window.getComputedStyle(trackRef.current);
+    let gapValue = parseFloat(trackStyle.gap);
+    
+    // Fallback if gap not set
+    if (isNaN(gapValue) || gapValue === 0) {
+      if (width >= 1200) gapValue = 28;
+      else if (width >= 768) gapValue = 24;
+      else gapValue = 16;
+    }
+    
+    gapRef.current = Math.round(gapValue);
+    
+    // CRITICAL: Calculate precise product width
+    // Total gap space between N products = (N-1) × gap
+    const totalGaps = (itemsVisibleRef.current - 1) * gapRef.current;
+    
+    // Available space for products = viewport - gaps - safety margin
+    const safetyMargin = 4; // 4px extra margin to avoid clipping
+    const availableWidth = viewportWidth - totalGaps - safetyMargin;
+    
+    // Product width = available space / number of products
+    cardWidthRef.current = Math.floor(availableWidth / itemsVisibleRef.current);
+    
+    console.log('Calculated dimensions:', {
+      itemsVisible: itemsVisibleRef.current,
+      gap: gapRef.current,
+      totalGaps,
+      viewportWidth,
+      availableWidth,
+      cardWidth: cardWidthRef.current
+    });
+    
+    // IMPORTANT: Set width directly on ALL product cards
+    const cards = viewportRef.current.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      const cardEl = card as HTMLElement;
+      cardEl.style.width = `${cardWidthRef.current}px`;
+      cardEl.style.minWidth = `${cardWidthRef.current}px`;
+      cardEl.style.maxWidth = `${cardWidthRef.current}px`;
+    });
+    
+    // Verify that a product actually has the right size
+    if (cards.length > 0) {
+      const actualWidth = (cards[0] as HTMLElement).getBoundingClientRect().width;
+      console.log('Actual card width after setting:', actualWidth);
       
-      // Double-check gap value and round
-      const trackStyle = window.getComputedStyle(trackRef.current!);
-      const gapValue = parseFloat(trackStyle.gap) || gapRef.current;
-      gapRef.current = Math.round(gapValue);
+      // If there's a discrepancy, use actual width
+      if (Math.abs(actualWidth - cardWidthRef.current) > 2) {
+        cardWidthRef.current = Math.round(actualWidth);
+      }
     }
   }, []);
 
@@ -149,29 +190,44 @@ export const ProductSlider = () => {
   const snapToNearest = useCallback(() => {
     if (!trackRef.current) return;
     
+    // Recalculate dimensions first to be sure
+    calculateDimensions();
+    
     const currentScroll = getCurrentScroll();
     const cardPlusGap = cardWidthRef.current + gapRef.current;
     
-    // Avoid division by zero
-    if (cardPlusGap === 0) return;
+    if (cardPlusGap === 0) {
+      console.error('Card width or gap is 0, cannot snap');
+      return;
+    }
     
-    // Calculate nearest index
-    let nearestIndex = Math.round(currentScroll / cardPlusGap);
+    // Find nearest index
+    const rawIndex = currentScroll / cardPlusGap;
+    let nearestIndex = Math.round(rawIndex);
     
     // Constrain to valid range
     const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
     nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
     
+    console.log('Snapping from scroll:', currentScroll, 'to index:', nearestIndex);
+    
     // Update state
     currentIndexRef.current = nearestIndex;
     
-    // Calculate exact pixel position (whole number)
-    const exactPosition = Math.round(nearestIndex * cardPlusGap);
+    // Calculate PRECISE position in whole pixels
+    const targetPosition = Math.round(nearestIndex * cardPlusGap);
     
-    // Apply position directly with smooth animation
-    trackRef.current.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    trackRef.current.style.transform = `translateX(-${exactPosition}px)`;
-  }, [getCurrentScroll, baseProducts.length]);
+    // Smooth animation to target
+    isTransitioningRef.current = true;
+    trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
+    
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 400);
+    
+    console.log('Snapped to position:', targetPosition);
+  }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
 
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
@@ -377,13 +433,31 @@ export const ProductSlider = () => {
     calculateDimensions();
     updatePosition(false);
     
+    // Log layout info
+    console.log('=== CAROUSEL LAYOUT INFO ===');
+    console.log('Window width:', window.innerWidth);
+    console.log('Items visible:', itemsVisibleRef.current);
+    console.log('Viewport width:', viewportRef.current?.getBoundingClientRect().width);
+    console.log('Card width:', cardWidthRef.current);
+    console.log('Gap:', gapRef.current);
+    console.log('Total cards:', baseProducts.length);
+    console.log('============================');
+    
     // Window resize
     let resizeTimer: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
+        console.log('Window resized, recalculating...');
+        
+        // Force recalculation
         calculateDimensions();
+        
+        // Reset position
+        currentIndexRef.current = 0;
         updatePosition(false);
+        
+        console.log('Recalculated - Items visible:', itemsVisibleRef.current, 'Card width:', cardWidthRef.current);
       }, 250);
     };
     

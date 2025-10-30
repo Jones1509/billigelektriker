@@ -650,7 +650,7 @@ All colors MUST be HSL.
     position: relative;
     width: 100%;
     padding: 80px 0 60px 0;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .carousel-inner-wrapper {
@@ -666,7 +666,7 @@ All colors MUST be HSL.
 
   /* Viewport - visible area */
   .carousel-viewport {
-    overflow-x: auto;
+    overflow-x: visible;
     overflow-y: hidden;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -693,12 +693,10 @@ All colors MUST be HSL.
     will-change: transform;
   }
 
-  /* Product card base */
+  /* Product card base - width controlled by JavaScript */
   .product-card {
     flex-shrink: 0;
-    width: calc((100vw - 280px - 84px) / 4);
-    min-width: calc((100vw - 280px - 84px) / 4);
-    max-width: calc((100vw - 280px - 84px) / 4);
+    box-sizing: border-box;
   }
 
   /* Navigation arrows */
@@ -750,10 +748,10 @@ All colors MUST be HSL.
       gap: 24px;
     }
     
+    /* Product card width controlled by JavaScript */
     .product-card {
-      width: calc((100vw - 180px - 48px) / 3);
-      min-width: calc((100vw - 180px - 48px) / 3);
-      max-width: calc((100vw - 180px - 48px) / 3);
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
     
     .carousel-arrow {
@@ -786,10 +784,10 @@ All colors MUST be HSL.
       gap: 16px;
     }
     
+    /* Product card width controlled by JavaScript */
     .product-card {
-      width: calc((100vw - 60px - 16px) / 2);
-      min-width: calc((100vw - 60px - 16px) / 2);
-      max-width: calc((100vw - 60px - 16px) / 2);
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
     
     .carousel-arrow {
