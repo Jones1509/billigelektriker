@@ -656,8 +656,6 @@ All colors MUST be HSL.
   .luxury-carousel-inner {
     position: relative;
     z-index: 10;
-    max-width: 1600px;
-    margin: 0 auto;
   }
 
   .luxury-carousel-wrapper {
@@ -742,19 +740,19 @@ All colors MUST be HSL.
   @media (min-width: 1200px) {
     .luxury-carousel-inner {
       padding: 60px 80px;
+      max-width: none;
     }
 
-    /* 4 produkter - FAST minimum bredde - større for at garantere max 4 */
+    /* 4 produkter - FAST bredde der garanterer kun 4 vises */
     .luxury-products-track {
-      grid-auto-columns: 380px;
+      grid-auto-columns: calc((100vw - 160px - (3 * 28px)) / 4);
       gap: 28px;
       padding: 0;
     }
     
     .luxury-product-card {
-      min-width: 380px;
-      max-width: 380px;
-      width: 380px;
+      min-width: 0;
+      width: 100%;
     }
 
     .luxury-nav-arrow {
@@ -787,17 +785,16 @@ All colors MUST be HSL.
       padding: 60px 40px;
     }
 
-    /* 3 produkter - FAST bredde */
+    /* 3 produkter - beregn fra viewport */
     .luxury-products-track {
-      grid-auto-columns: 280px;
+      grid-auto-columns: calc((100vw - 80px - (2 * 24px)) / 3);
       gap: 24px;
       padding: 0;
     }
     
     .luxury-product-card {
-      min-width: 280px;
-      max-width: 280px;
-      width: 280px;
+      min-width: 0;
+      width: 100%;
     }
 
     .luxury-nav-arrow {
