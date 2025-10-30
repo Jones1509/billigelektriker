@@ -797,6 +797,34 @@ export const ProductSlider = () => {
   }, [getCurrentScroll, clearAutoSnap, snapToNearest, baseProducts.length]);
 
   // Setup event listeners
+  // Force recalculation when collection data changes
+  useEffect(() => {
+    if (!viewportRef.current || !trackRef.current || baseProducts.length === 0) return;
+    
+    console.log('🔄 Collection data changed, recalculating layout...');
+    
+    // Force reflow to ensure fresh layout calculations
+    void viewportRef.current.offsetHeight;
+    void trackRef.current.offsetHeight;
+    
+    // Use requestAnimationFrame to ensure DOM is updated
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        // Recalculate dimensions with fresh DOM state
+        calculateDimensions();
+        
+        // Reset to start position
+        currentIndexRef.current = 0;
+        if (trackRef.current) {
+          trackRef.current.style.transition = 'none';
+          trackRef.current.style.transform = 'translateX(0px)';
+        }
+        
+        console.log('✅ Layout recalculated after collection change');
+      }, 100);
+    });
+  }, [collectionData, calculateDimensions]);
+
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport || baseProducts.length === 0) return;
@@ -856,13 +884,32 @@ export const ProductSlider = () => {
       handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, clearAutoSnap]);
 
   const handleTabChange = (tab: keyof typeof COLLECTION_CONFIG) => {
+    // Prevent tab change if already loading
+    if (isLoading) {
+      console.log('⚠️ Already loading, ignoring tab click');
+      return;
+    }
+    
     console.log('🎯 TAB CLICKED:', tab, '→ Will fetch collection:', COLLECTION_CONFIG[tab].shopifyHandle);
-    setActiveTab(tab);
-    currentIndexRef.current = 0;
+    
+    // Stop all ongoing transitions and animations
     if (trackRef.current) {
       trackRef.current.style.transition = 'none';
       trackRef.current.style.transform = 'translateX(0px)';
     }
+    
+    // Clear any pending timers
+    clearAutoSnap();
+    
+    // Reset state flags
+    isTransitioningRef.current = false;
+    isDraggingRef.current = false;
+    
+    // Reset position
+    currentIndexRef.current = 0;
+    
+    // Change tab (will trigger new data fetch)
+    setActiveTab(tab);
   };
 
   return (
@@ -892,12 +939,15 @@ export const ProductSlider = () => {
             <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 p-1.5 mb-5 rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
+                disabled={isLoading}
                 role="tab"
                 aria-selected={activeTab === 'popular'}
                 style={{ 
                   color: activeTab === 'popular' ? '#2563EB' : '#6B7280', 
                   transitionDuration: '300ms',
-                  cursor: 'pointer'
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.6 : 1,
+                  pointerEvents: isLoading ? 'none' : 'auto'
                 }}
                 className={`px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-[15px] font-medium transition-all relative ${
                   activeTab === 'popular' 
@@ -909,12 +959,15 @@ export const ProductSlider = () => {
               </button>
               <button
                 onClick={() => handleTabChange('new')}
+                disabled={isLoading}
                 role="tab"
                 aria-selected={activeTab === 'new'}
                 style={{ 
                   color: activeTab === 'new' ? '#2563EB' : '#6B7280', 
                   transitionDuration: '300ms',
-                  cursor: 'pointer'
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.6 : 1,
+                  pointerEvents: isLoading ? 'none' : 'auto'
                 }}
                 className={`px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-[15px] font-medium transition-all relative ${
                   activeTab === 'new' 
@@ -926,12 +979,15 @@ export const ProductSlider = () => {
               </button>
               <button
                 onClick={() => handleTabChange('recommended')}
+                disabled={isLoading}
                 role="tab"
                 aria-selected={activeTab === 'recommended'}
                 style={{ 
                   color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', 
                   transitionDuration: '300ms',
-                  cursor: 'pointer'
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.6 : 1,
+                  pointerEvents: isLoading ? 'none' : 'auto'
                 }}
                 className={`px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-[15px] font-medium transition-all relative ${
                   activeTab === 'recommended' 
