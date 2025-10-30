@@ -368,17 +368,6 @@ export const ProductSlider = () => {
     console.log('=== SNAP TO NEAREST END ===');
   }, [snapToNearestMobile, snapToNearestDesktop]);
 
-  // Start auto-snap timer (defined after snapToNearest to avoid circular dependency)
-  const startAutoSnap = useCallback(() => {
-    clearAutoSnap();
-    const delay = 5000; // 5 sekunder for både mobil og desktop
-    console.log('Starting auto-snap timer:', delay, 'ms');
-    autoSnapTimerRef.current = setTimeout(() => {
-      console.log('⏰ AUTO-SNAP TIMER FIRED');
-      snapToNearest();
-    }, delay);
-  }, [clearAutoSnap, snapToNearest]);
-
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
     console.log('Starting momentum, velocity:', initialVelocity);
@@ -408,8 +397,13 @@ export const ProductSlider = () => {
           console.log('After momentum - synced index to:', currentIndexRef.current);
         }
         
-        // Start auto-snap
-        startAutoSnap();
+        // Start auto-snap timer inline to avoid circular dependency
+        clearAutoSnap();
+        console.log('Starting auto-snap timer: 5000 ms');
+        autoSnapTimerRef.current = setTimeout(() => {
+          console.log('⏰ AUTO-SNAP TIMER FIRED');
+          snapToNearest();
+        }, 5000);
         return;
       }
       
@@ -435,7 +429,7 @@ export const ProductSlider = () => {
     };
     
     requestAnimationFrame(animate);
-  }, [getCurrentScroll, calculateDimensions, startAutoSnap, baseProducts.length]);
+  }, [getCurrentScroll, calculateDimensions, clearAutoSnap, snapToNearest, baseProducts.length]);
 
   // Navigate to next product
   const navigateNext = useCallback(() => {
@@ -540,11 +534,15 @@ export const ProductSlider = () => {
       }
     }
     
-    // KRITISK: Start auto-snap timer ALTID efter touch
+    // KRITISK: Start auto-snap timer ALTID efter touch (inline to avoid circular dependency)
+    clearAutoSnap();
     console.log('Starting 5 second auto-snap timer...');
-    startAutoSnap();
+    autoSnapTimerRef.current = setTimeout(() => {
+      console.log('⏰ AUTO-SNAP TIMER FIRED');
+      snapToNearest();
+    }, 5000);
     console.log('Timer started, will snap in 5 seconds');
-  }, [getCurrentScroll, applyMomentum, startAutoSnap, baseProducts.length]);
+  }, [getCurrentScroll, applyMomentum, clearAutoSnap, snapToNearest, baseProducts.length]);
 
   // Mouse drag handlers
   const handleMouseDown = useCallback((e: MouseEvent) => {
@@ -614,9 +612,14 @@ export const ProductSlider = () => {
         currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
       }
       
-      startAutoSnap();
+      // Start auto-snap inline
+      clearAutoSnap();
+      autoSnapTimerRef.current = setTimeout(() => {
+        console.log('⏰ AUTO-SNAP TIMER FIRED');
+        snapToNearest();
+      }, 5000);
     }
-  }, [getCurrentScroll, applyMomentum, startAutoSnap, baseProducts.length]);
+  }, [getCurrentScroll, applyMomentum, clearAutoSnap, snapToNearest, baseProducts.length]);
 
   // Wheel/trackpad handler
   const handleWheel = useCallback((e: WheelEvent) => {
@@ -654,11 +657,14 @@ export const ProductSlider = () => {
       
       console.log('Wheel: synced currentIndex to', currentIndexRef.current);
       
-      // Clear og start auto-snap
+      // Clear og start auto-snap inline
       clearAutoSnap();
-      startAutoSnap();
+      autoSnapTimerRef.current = setTimeout(() => {
+        console.log('⏰ AUTO-SNAP TIMER FIRED');
+        snapToNearest();
+      }, 5000);
     }
-  }, [getCurrentScroll, clearAutoSnap, startAutoSnap, baseProducts.length]);
+  }, [getCurrentScroll, clearAutoSnap, snapToNearest, baseProducts.length]);
 
   // Setup event listeners
   useEffect(() => {
