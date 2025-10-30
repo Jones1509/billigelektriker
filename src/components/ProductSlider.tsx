@@ -759,12 +759,6 @@ export const ProductSlider = () => {
       trackRef.current.style.transition = 'none';
       trackRef.current.style.transform = 'translateX(0px)';
     }
-    
-    // Recalculate dimensions after tab change
-    setTimeout(() => {
-      calculateDimensions();
-      updatePosition(false);
-    }, 50);
   };
 
   return (
