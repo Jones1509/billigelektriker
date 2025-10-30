@@ -6,17 +6,119 @@ import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
-// SHOPIFY COLLECTIONS CONFIGURATION
-// Skift collection handle her for at ændre hvilke produkter der vises under hver tab
+/*
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  COLLECTION CONFIGURATION GUIDE                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  Dette objekt styrer hvilke Shopify Collections der vises under hver tab.  │
+│                                                                             │
+│  HVORDAN MAN ÆNDRER COLLECTIONS:                                            │
+│  ───────────────────────────────                                            │
+│                                                                             │
+│  1. Gå til Shopify Admin → Products → Collections                          │
+│  2. Find din collection og noter "handle" fra URL                          │
+│     (f.eks. URL: /collections/summer-sale → handle: "summer-sale")         │
+│  3. Ændr 'shopifyHandle' nedenfor til din collection handle                │
+│  4. Ændr 'label' til det ønskede tab navn (valgfrit)                       │
+│  5. Gem filen - færdig!                                                     │
+│                                                                             │
+│  EKSEMPEL 1: Ændre "Mest Populær" til "Tilbud" collection                  │
+│  ──────────────────────────────────────────────────────────                 │
+│  Fra:                                                                       │
+│    popular: {                                                               │
+│      label: 'Mest Populær',                                                 │
+│      shopifyHandle: 'mest-populaer'                                         │
+│    }                                                                        │
+│                                                                             │
+│  Til:                                                                       │
+│    popular: {                                                               │
+│      label: 'Tilbud',                                                       │
+│      shopifyHandle: 'summer-tilbud'                                         │
+│    }                                                                        │
+│                                                                             │
+│  EKSEMPEL 2: Ændre "Nyhed" til "Bestsellers" collection                    │
+│  ────────────────────────────────────────────────────────                   │
+│  Fra:                                                                       │
+│    new: {                                                                   │
+│      label: 'Nyhed',                                                        │
+│      shopifyHandle: 'nyheder'                                               │
+│    }                                                                        │
+│                                                                             │
+│  Til:                                                                       │
+│    new: {                                                                   │
+│      label: 'Bestsellers',                                                  │
+│      shopifyHandle: 'bestsellers'                                           │
+│    }                                                                        │
+│                                                                             │
+│  VIGTIGT:                                                                   │
+│  ────────                                                                   │
+│  • Brug ALTID collection handle fra Shopify (ikke collection titel)        │
+│  • Collection handle er altid lowercase og bruger bindestreger             │
+│  • Design og funktionalitet påvirkes IKKE af denne ændring                 │
+│  • Hvis collection er tom, vises fallback produkter automatisk             │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+*/
+
+// ============================================================================
+// COLLECTION CONFIGURATION
+// Rediger kun dette objekt for at ændre collections
+// ============================================================================
+
 const COLLECTION_CONFIG = {
-  'popular': 'mest-populaer',      // Shopify collection handle for "Mest Populær"
-  'new': 'nyheder',                 // Shopify collection handle for "Nyhed"
-  'recommended': 'anbefalet'        // Shopify collection handle for "Anbefalet"
+  popular: {
+    label: 'Mest Populær',
+    shopifyHandle: 'mest-populaer',
+    key: 'popular' as const
+  },
+  new: {
+    label: 'Nyhed',
+    shopifyHandle: 'nyheder',
+    key: 'new' as const
+  },
+  recommended: {
+    label: 'Anbefalet',
+    shopifyHandle: 'anbefalet',
+    key: 'recommended' as const
+  }
 } as const;
+
+// Validation function - tjekker at configuration er korrekt
+const validateCollectionConfig = () => {
+  const tabs = Object.keys(COLLECTION_CONFIG) as Array<keyof typeof COLLECTION_CONFIG>;
+  
+  tabs.forEach(tabKey => {
+    const config = COLLECTION_CONFIG[tabKey];
+    
+    if (!config.shopifyHandle) {
+      console.error(`❌ Tab "${tabKey}" mangler shopifyHandle i COLLECTION_CONFIG!`);
+    }
+    
+    if (!config.label) {
+      console.error(`❌ Tab "${tabKey}" mangler label i COLLECTION_CONFIG!`);
+    }
+    
+    if (config.shopifyHandle && config.shopifyHandle.includes(' ')) {
+      console.warn(`⚠️ Collection handle "${config.shopifyHandle}" indeholder mellemrum - det er sandsynligvis forkert. Shopify handles bruger bindestreger (-) i stedet.`);
+    }
+  });
+  
+  console.log('✅ Collection configuration valideret:', {
+    popular: COLLECTION_CONFIG.popular.shopifyHandle,
+    new: COLLECTION_CONFIG.new.shopifyHandle,
+    recommended: COLLECTION_CONFIG.recommended.shopifyHandle
+  });
+};
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
+  const [activeTab, setActiveTab] = useState<keyof typeof COLLECTION_CONFIG>('popular');
+  
+  // Validate configuration on component mount
+  useEffect(() => {
+    validateCollectionConfig();
+  }, []);
   
   // DOM refs
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -44,7 +146,7 @@ export const ProductSlider = () => {
   const { data: collectionData, isLoading } = useQuery({
     queryKey: ['collection-products', activeTab],
     queryFn: async () => {
-      const collectionHandle = COLLECTION_CONFIG[activeTab];
+      const collectionHandle = COLLECTION_CONFIG[activeTab].shopifyHandle;
       console.log('🔵 FETCHING COLLECTION:', collectionHandle, 'for tab:', activeTab);
       
       const response = await storefrontApiRequest(COLLECTION_QUERY, { 
@@ -72,7 +174,7 @@ export const ProductSlider = () => {
   
   console.log('📊 CURRENT STATE:', {
     activeTab,
-    collectionHandle: COLLECTION_CONFIG[activeTab],
+    collectionHandle: COLLECTION_CONFIG[activeTab].shopifyHandle,
     productsCount: baseProducts.length,
     isLoading
   });
@@ -753,8 +855,8 @@ export const ProductSlider = () => {
   }, [baseProducts.length, calculateDimensions, updatePosition, handleTouchStart, handleTouchMove, handleTouchEnd, 
       handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, clearAutoSnap]);
 
-  const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
-    console.log('🎯 TAB CLICKED:', tab, '→ Will fetch collection:', COLLECTION_CONFIG[tab]);
+  const handleTabChange = (tab: keyof typeof COLLECTION_CONFIG) => {
+    console.log('🎯 TAB CLICKED:', tab, '→ Will fetch collection:', COLLECTION_CONFIG[tab].shopifyHandle);
     setActiveTab(tab);
     currentIndexRef.current = 0;
     if (trackRef.current) {
@@ -785,7 +887,7 @@ export const ProductSlider = () => {
             {t('productSlider.subtitle')}
           </p>
           
-          {/* Tab buttons */}
+          {/* Tab buttons - Labels come from COLLECTION_CONFIG */}
           <nav aria-label="Produktfiltre">
             <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full" style={{ background: '#F3F4F6', position: 'relative', zIndex: 100 }} role="tablist">
               <button
@@ -806,7 +908,7 @@ export const ProductSlider = () => {
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
                 }`}
               >
-                Mest Populær
+                {COLLECTION_CONFIG.popular.label}
               </button>
               <button
                 onClick={() => handleTabChange('new')}
@@ -826,7 +928,7 @@ export const ProductSlider = () => {
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
                 }`}
               >
-                Nyhed
+                {COLLECTION_CONFIG.new.label}
               </button>
               <button
                 onClick={() => handleTabChange('recommended')}
@@ -846,7 +948,7 @@ export const ProductSlider = () => {
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
                 }`}
               >
-                Anbefalet
+                {COLLECTION_CONFIG.recommended.label}
               </button>
             </div>
           </nav>
