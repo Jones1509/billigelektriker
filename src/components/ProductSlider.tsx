@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, COLLECTION_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -32,22 +32,25 @@ export const ProductSlider = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   
+  // Collection handles based on active tab
+  const collectionHandle = activeTab === 'popular' 
+    ? 'mest-populaer' 
+    : activeTab === 'new'
+    ? 'nyheder'
+    : 'anbefalet';
+
   const { data, isLoading } = useQuery({
-    queryKey: ['slider-products'],
+    queryKey: ['slider-products', collectionHandle],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
-      return response.data.products.edges as ShopifyProduct[];
+      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+        handle: collectionHandle,
+        first: 12 
+      });
+      return response.data.collection?.products.edges as ShopifyProduct[] || [];
     },
   });
 
-  // Get base products based on active tab
-  const baseProducts = data ? (
-    activeTab === 'popular' 
-      ? data.slice(0, 12)
-      : activeTab === 'new'
-      ? data.slice(4, 16)
-      : data.slice(8, 20)
-  ) : [];
+  const baseProducts = data || [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
