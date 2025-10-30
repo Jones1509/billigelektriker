@@ -22,31 +22,40 @@ export const ProductSlider = () => {
         const response = await storefrontApiRequest(COLLECTIONS_QUERY, { first: 20 });
         const collections = response.data.collections.edges;
         
-        console.log('📦 Available Collections:', collections.map((c: any) => ({
+        console.log('📦 ALLE COLLECTIONS I SHOPIFY:', collections.map((c: any) => ({
           title: c.node.title,
           handle: c.node.handle
         })));
         
         // Try to match collections by title
-        const handles: any = { ...collectionHandles };
+        const handles: any = {};
         
-        collections.forEach((edge: any) => {
+        // Find collection 1, 2, 3 by any means
+        collections.forEach((edge: any, index: number) => {
           const title = edge.node.title.toLowerCase();
           const handle = edge.node.handle;
           
-          if (title.includes('popul') || title.includes('mest')) {
+          console.log(`Checking collection ${index + 1}: "${edge.node.title}" with handle "${handle}"`);
+          
+          if (title.includes('popul') || title.includes('mest') || handle.includes('collection-1') || title.includes('collection 1')) {
             handles.popular = handle;
-          } else if (title.includes('ny') || title.includes('new')) {
+            console.log(`✅ Found POPULAR: ${handle}`);
+          } else if (title.includes('ny') || title.includes('new') || handle.includes('collection-2') || title.includes('collection 2')) {
             handles.new = handle;
-          } else if (title.includes('anbef') || title.includes('recommend')) {
+            console.log(`✅ Found NEW: ${handle}`);
+          } else if (title.includes('anbef') || title.includes('recommend') || handle.includes('collection-3') || title.includes('collection 3')) {
             handles.recommended = handle;
+            console.log(`✅ Found RECOMMENDED: ${handle}`);
           }
         });
         
-        console.log('🎯 Mapped handles:', handles);
-        setCollectionHandles(handles);
+        console.log('🎯 FINAL MAPPED HANDLES:', handles);
+        
+        if (Object.keys(handles).length > 0) {
+          setCollectionHandles(prev => ({ ...prev, ...handles }));
+        }
       } catch (error) {
-        console.error('Error fetching collections:', error);
+        console.error('❌ Error fetching collections:', error);
       }
     };
     
