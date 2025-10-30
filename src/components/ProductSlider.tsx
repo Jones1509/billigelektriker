@@ -81,25 +81,40 @@ export const ProductSlider = () => {
     
     gapRef.current = Math.round(gapValue);
     
-    // CRITICAL: Calculate precise product width
-    // Total gap space between N products = (N-1) × gap
-    const totalGaps = (itemsVisibleRef.current - 1) * gapRef.current;
-    
-    // Available space for products = viewport - gaps - safety margin
-    const safetyMargin = 4; // 4px extra margin to avoid clipping
-    const availableWidth = viewportWidth - totalGaps - safetyMargin;
-    
-    // Product width = available space / number of products
-    cardWidthRef.current = Math.floor(availableWidth / itemsVisibleRef.current);
-    
-    console.log('Calculated dimensions:', {
-      itemsVisible: itemsVisibleRef.current,
-      gap: gapRef.current,
-      totalGaps,
-      viewportWidth,
-      availableWidth,
-      cardWidth: cardWidthRef.current
-    });
+    // MOBILE SPECIAL: Extra precision for 2 products
+    if (itemsVisibleRef.current === 2) {
+      // On mobile, exactly 2 products must be visible
+      // Card width = (viewport - gap - safety margin) / 2
+      const safetyMargin = 2;
+      cardWidthRef.current = Math.floor((viewportWidth - gapRef.current - safetyMargin) / 2);
+      
+      console.log('Mobile card width calculation:', {
+        viewportWidth,
+        gap: gapRef.current,
+        cardWidth: cardWidthRef.current,
+        verification: (cardWidthRef.current * 2 + gapRef.current)
+      });
+    } else {
+      // Desktop/Tablet: Calculate precise product width
+      // Total gap space between N products = (N-1) × gap
+      const totalGaps = (itemsVisibleRef.current - 1) * gapRef.current;
+      
+      // Available space for products = viewport - gaps - safety margin
+      const safetyMargin = 4; // 4px extra margin to avoid clipping
+      const availableWidth = viewportWidth - totalGaps - safetyMargin;
+      
+      // Product width = available space / number of products
+      cardWidthRef.current = Math.floor(availableWidth / itemsVisibleRef.current);
+      
+      console.log('Desktop/Tablet dimensions:', {
+        itemsVisible: itemsVisibleRef.current,
+        gap: gapRef.current,
+        totalGaps,
+        viewportWidth,
+        availableWidth,
+        cardWidth: cardWidthRef.current
+      });
+    }
     
     // IMPORTANT: Set width directly on ALL product cards
     const cards = viewportRef.current.querySelectorAll('.product-card');
@@ -118,6 +133,7 @@ export const ProductSlider = () => {
       // If there's a discrepancy, use actual width
       if (Math.abs(actualWidth - cardWidthRef.current) > 2) {
         cardWidthRef.current = Math.round(actualWidth);
+        console.log('Adjusted card width to actual:', cardWidthRef.current);
       }
     }
   }, []);
@@ -201,21 +217,38 @@ export const ProductSlider = () => {
       return;
     }
     
-    // Find nearest index
-    const rawIndex = currentScroll / cardPlusGap;
-    let nearestIndex = Math.round(rawIndex);
+    let nearestIndex;
     
-    // Constrain to valid range
-    const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
-    nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
-    
-    console.log('Snapping from scroll:', currentScroll, 'to index:', nearestIndex);
+    // SPECIAL MOBILE LOGIC
+    if (itemsVisibleRef.current === 2) {
+      // On mobile: snap to nearest position showing 2 complete products
+      const rawIndex = currentScroll / cardPlusGap;
+      nearestIndex = Math.round(rawIndex);
+      
+      // IMPORTANT: On mobile we always need to see 2 products
+      // So max index is total - 2 (not total - itemsVisible)
+      const maxIndex = Math.max(0, baseProducts.length - 2);
+      nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+      
+      console.log('Mobile snap - rawIndex:', rawIndex, 'snapping to:', nearestIndex);
+    } else {
+      // Desktop/Tablet: normal snap logic
+      const rawIndex = currentScroll / cardPlusGap;
+      nearestIndex = Math.round(rawIndex);
+      
+      const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+      nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+      
+      console.log('Desktop/Tablet snap - rawIndex:', rawIndex, 'snapping to:', nearestIndex);
+    }
     
     // Update state
     currentIndexRef.current = nearestIndex;
     
     // Calculate PRECISE position in whole pixels
     const targetPosition = Math.round(nearestIndex * cardPlusGap);
+    
+    console.log('Final snap position:', targetPosition, 'pixels');
     
     // Smooth animation to target
     isTransitioningRef.current = true;
@@ -225,8 +258,6 @@ export const ProductSlider = () => {
     setTimeout(() => {
       isTransitioningRef.current = false;
     }, 400);
-    
-    console.log('Snapped to position:', targetPosition);
   }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
 
   // Apply momentum scroll
