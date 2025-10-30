@@ -1005,7 +1005,7 @@ export const ProductSlider = () => {
           
           {/* Tab buttons - Labels come from COLLECTION_CONFIG */}
           <nav aria-label="Produktfiltre">
-            <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 p-1.5 mb-5 rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
+            <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 p-1.5 mb-20 md:mb-5 rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
                 disabled={isLoading}
