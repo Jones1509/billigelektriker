@@ -889,7 +889,7 @@ export const ProductSlider = () => {
           
           {/* Tab buttons - Labels come from COLLECTION_CONFIG */}
           <nav aria-label="Produktfiltre">
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
+            <div className="inline-flex items-center justify-center gap-1.5 sm:gap-2 p-1.5 mb-5 rounded-full relative z-[1]" style={{ background: '#F3F4F6' }} role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
                 role="tab"
@@ -899,7 +899,7 @@ export const ProductSlider = () => {
                   transitionDuration: '300ms',
                   cursor: 'pointer'
                 }}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all relative ${
+                className={`px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-[15px] font-medium transition-all relative ${
                   activeTab === 'popular' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
@@ -916,7 +916,7 @@ export const ProductSlider = () => {
                   transitionDuration: '300ms',
                   cursor: 'pointer'
                 }}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all relative ${
+                className={`px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-[15px] font-medium transition-all relative ${
                   activeTab === 'new' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
@@ -933,7 +933,7 @@ export const ProductSlider = () => {
                   transitionDuration: '300ms',
                   cursor: 'pointer'
                 }}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all relative ${
+                className={`px-3 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm md:text-[15px] font-medium transition-all relative ${
                   activeTab === 'recommended' 
                     ? 'bg-white shadow-md font-semibold' 
                     : 'bg-transparent hover:text-[#2563EB] hover:bg-white/50'
