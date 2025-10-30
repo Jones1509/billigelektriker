@@ -9,7 +9,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 // KONFIGURATION: Skift collection handles her for at ændre hvilke produkter der vises
 const COLLECTION_CONFIG = {
   popular: "mest-populaer", // Collection: "mest populær"
-  new: null,
+  new: "nyheder", // Collection: "nyheder"
   recommended: null,
 };
 
