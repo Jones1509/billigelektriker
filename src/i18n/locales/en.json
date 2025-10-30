@@ -250,7 +250,24 @@
     "badge": "⚡ Webshop",
     "title": "Popular products in the webshop",
     "subtitle": "Hand-picked smart lighting for indoors and outdoors – fast delivery right to your door",
-    "comingSoon": "Products coming soon!"
+    "comingSoon": "Products coming soon!",
+    "tabs": {
+      "popular": {
+        "badge": "⚡ Webshop",
+        "title": "Most Popular Products",
+        "subtitle": "Our bestsellers – the products customers love most"
+      },
+      "new": {
+        "badge": "✨ New Arrivals",
+        "title": "New Products",
+        "subtitle": "Latest additions to our range – fresh on the shelf"
+      },
+      "recommended": {
+        "badge": "💡 Recommended",
+        "title": "Recommended Products",
+        "subtitle": "Hand-picked by our experts – perfect for your project"
+      }
+    }
   },
   "team": {
     "badge": "Meet the team",

@@ -250,7 +250,24 @@
     "badge": "⚡ Boutique en ligne",
     "title": "Produits populaires dans la boutique en ligne",
     "subtitle": "Éclairage intelligent sélectionné pour l'intérieur et l'extérieur – livraison rapide directement à votre porte",
-    "comingSoon": "Produits à venir bientôt!"
+    "comingSoon": "Produits à venir bientôt!",
+    "tabs": {
+      "popular": {
+        "badge": "⚡ Boutique en ligne",
+        "title": "Produits Les Plus Populaires",
+        "subtitle": "Nos meilleures ventes – les produits que les clients adorent le plus"
+      },
+      "new": {
+        "badge": "✨ Nouveautés",
+        "title": "Nouveaux Produits",
+        "subtitle": "Derniers ajouts à notre gamme – fraîchement arrivés"
+      },
+      "recommended": {
+        "badge": "💡 Recommandé",
+        "title": "Produits Recommandés",
+        "subtitle": "Sélectionnés par nos experts – parfaits pour votre projet"
+      }
+    }
   },
   "team": {
     "badge": "Rencontrez l'équipe",

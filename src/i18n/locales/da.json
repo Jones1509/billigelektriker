@@ -250,7 +250,24 @@
     "badge": "⚡ Webshop",
     "title": "Populære produkter i webshoppen",
     "subtitle": "Håndplukket smart lys til inde og ude – hurtig levering direkte til døren",
-    "comingSoon": "Produkter kommer snart!"
+    "comingSoon": "Produkter kommer snart!",
+    "tabs": {
+      "popular": {
+        "badge": "⚡ Webshop",
+        "title": "Mest Populære Produkter",
+        "subtitle": "Vores bestsellere – de produkter kunderne elsker mest"
+      },
+      "new": {
+        "badge": "✨ Nyheder",
+        "title": "Nye Produkter",
+        "subtitle": "Seneste nyheder i vores sortiment – frisk på hylden"
+      },
+      "recommended": {
+        "badge": "💡 Anbefalet",
+        "title": "Anbefalede Produkter",
+        "subtitle": "Håndplukket af vores eksperter – perfekt til dit projekt"
+      }
+    }
   },
   "team": {
     "badge": "Mød teamet",

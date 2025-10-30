@@ -250,7 +250,24 @@
     "badge": "⚡ Webshop",
     "title": "Beliebte Produkte im Webshop",
     "subtitle": "Handverlesene intelligente Beleuchtung für Innen- und Außenbereich – schnelle Lieferung direkt vor Ihre Tür",
-    "comingSoon": "Produkte kommen bald!"
+    "comingSoon": "Produkte kommen bald!",
+    "tabs": {
+      "popular": {
+        "badge": "⚡ Webshop",
+        "title": "Beliebteste Produkte",
+        "subtitle": "Unsere Bestseller – die Produkte, die Kunden am meisten lieben"
+      },
+      "new": {
+        "badge": "✨ Neuheiten",
+        "title": "Neue Produkte",
+        "subtitle": "Neueste Ergänzungen unseres Sortiments – frisch im Regal"
+      },
+      "recommended": {
+        "badge": "💡 Empfohlen",
+        "title": "Empfohlene Produkte",
+        "subtitle": "Von unseren Experten handverlesen – perfekt für Ihr Projekt"
+      }
+    }
   },
   "team": {
     "badge": "Das Team kennenlernen",
