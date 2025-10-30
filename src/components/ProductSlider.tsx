@@ -314,51 +314,6 @@ export const ProductSlider = () => {
     
     setTimeout(() => {
       isTransitioningRef.current = false;
-      
-      // Verificer
-      if (!viewportRef.current) return;
-      
-      console.log('--- Verification ---');
-      const vp = viewportRef.current.getBoundingClientRect();
-      const allCards = Array.from(viewportRef.current.querySelectorAll('.product-card'));
-      const c1 = allCards[targetIndex] as HTMLElement;
-      const c2 = allCards[targetIndex + 1] as HTMLElement;
-      
-      if (!c1) return;
-      
-      const c1Rect = c1.getBoundingClientRect();
-      const c2Rect = c2?.getBoundingClientRect();
-      
-      console.log('After snap:');
-      console.log('Viewport:', Math.round(vp.left), '-', Math.round(vp.right));
-      console.log('Card', targetIndex, ':', Math.round(c1Rect.left), '-', Math.round(c1Rect.right));
-      
-      if (c2Rect) {
-        console.log('Card', targetIndex + 1, ':', Math.round(c2Rect.left), '-', Math.round(c2Rect.right));
-      }
-      
-      // Pre-calculate to avoid auto-translation
-      const leftBound = vp.left - 2;
-      const rightBound = vp.right + 2;
-      
-      const c1LeftOk = c1Rect.left >= leftBound;
-      const c1RightOk = c1Rect.right <= rightBound;
-      const card1Visible = c1LeftOk && c1RightOk;
-      
-      let card2Visible = false;
-      if (c2Rect) {
-        const c2LeftOk = c2Rect.left >= leftBound;
-        const c2RightOk = c2Rect.right <= rightBound;
-        card2Visible = c2LeftOk && c2RightOk;
-      }
-      
-      if (card1Visible && card2Visible) {
-        console.log('✅ Both cards fully visible');
-      } else {
-        console.log('❌ Cards not fully visible');
-        console.log('Card 1 visible:', card1Visible);
-        console.log('Card 2 visible:', card2Visible);
-      }
     }, 450);
     
     console.log('=== MOBILE SNAP END ===');
