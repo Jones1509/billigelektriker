@@ -515,8 +515,8 @@ export const ProductSlider = () => {
     console.log('Starting momentum, velocity:', initialVelocity);
     
     let velocity = initialVelocity;
-    const friction = 0.92; // Smooth iPhone-like deceleration
-    const minVelocity = 0.5;
+    const friction = 0.95; // Høj friction for hurtig stop
+    const minVelocity = 0.3; // Stop tidligere
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity) {
@@ -623,7 +623,7 @@ export const ProductSlider = () => {
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
     const currentX = e.touches[0].pageX;
-    const diff = (startXRef.current - currentX) * 1.0; // 1:1 touch tracking
+    const diff = (startXRef.current - currentX) * 0.8; // Reduceret for mere kontrol
     
     const newScroll = startScrollLeftRef.current + diff;
     const isMobile = window.innerWidth < 768;
@@ -656,9 +656,9 @@ export const ProductSlider = () => {
     console.log('Velocity:', velocityRef.current);
     
     // Apply momentum hvis hurtig swipe (højere threshold for mere kontrol)
-    if (Math.abs(velocityRef.current) > 1.2) {
+    if (Math.abs(velocityRef.current) > 1.5) {
       console.log('Applying momentum');
-      applyMomentum(-velocityRef.current * 15); // Reduceret for smooth iPhone-style
+      applyMomentum(-velocityRef.current * 8); // Meget reduceret for kontrolleret scroll
     } else {
       // Ingen momentum - sync index
       console.log('No momentum, syncing index');
