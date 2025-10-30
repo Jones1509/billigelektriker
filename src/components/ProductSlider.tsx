@@ -361,94 +361,37 @@ export const ProductSlider = () => {
 
   // Snap to nearest - Mobile version
   const snapToNearestMobile = useCallback(() => {
-    console.log('=== MOBILE SNAP START ===');
-    
     calculateDimensions();
     
-    if (!viewportRef.current || !trackRef.current) return;
+    if (!trackRef.current) return;
     
-    // Få viewport info
-    const viewportRect = viewportRef.current.getBoundingClientRect();
-    const viewportLeft = viewportRect.left;
-    const viewportWidth = viewportRect.width;
+    const currentScroll = getCurrentScroll();
+    const cardPlusGap = cardWidthRef.current + gapRef.current;
     
-    console.log('Viewport:', { left: viewportLeft, width: viewportWidth });
+    if (cardPlusGap === 0) return;
     
-    // Find hvilket kort er tættest på viewport's venstre kant
-    const cards = Array.from(viewportRef.current.querySelectorAll('.product-card'));
-    let closestIndex = 0;
-    let closestDistance = Infinity;
+    // Find nærmeste kort index
+    const rawIndex = currentScroll / cardPlusGap;
+    let nearestIndex = Math.round(rawIndex);
     
-    cards.forEach((card, index) => {
-      const cardRect = card.getBoundingClientRect();
-      const cardLeft = cardRect.left;
-      
-      // Distance fra kortets venstre kant til viewport's venstre kant
-      const distance = Math.abs(cardLeft - viewportLeft);
-      
-      console.log(`Card ${index}: left=${Math.round(cardLeft)}, distance=${Math.round(distance)}`);
-      
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
-    
-    console.log('Closest card to viewport left:', closestIndex);
-    
-    // KRITISK: På mobil skal vi kunne se 2 kort
-    // Så max index = total - 2
-    const maxIndex = baseProducts.length - 2;
-    const targetIndex = Math.min(closestIndex, maxIndex);
-    
-    console.log('Target index (clamped):', targetIndex);
-    console.log('Will show cards:', targetIndex, 'and', targetIndex + 1);
-    
-    // Nu beregn PRÆCIS hvor meget vi skal flytte track
-    // Vi vil have card[targetIndex] skal være ved viewport's venstre kant
-    
-    const targetCard = cards[targetIndex] as HTMLElement;
-    if (!targetCard) {
-      console.error('Target card not found');
-      return;
-    }
-    
-    const targetCardRect = targetCard.getBoundingClientRect();
-    const trackRect = trackRef.current.getBoundingClientRect();
-    
-    console.log('Target card current position:', Math.round(targetCardRect.left));
-    console.log('Track current position:', Math.round(trackRect.left));
-    
-    // Beregn offset: hvor langt skal track flyttes for at aligne?
-    // Target card's current distance from viewport left
-    const currentOffset = targetCardRect.left - viewportLeft;
-    
-    console.log('Current offset of target card:', Math.round(currentOffset));
-    
-    // Current transform value
-    const currentTransform = getCurrentScroll();
-    
-    console.log('Current transform:', currentTransform);
-    
-    // New transform = current + offset
-    const targetTransform = currentTransform + currentOffset;
-    
-    console.log('Target transform:', Math.round(targetTransform));
+    // KRITISK: På mobil max index = total - 2 (vi skal vise 2 kort)
+    const maxIndex = Math.max(0, baseProducts.length - 2);
+    nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
     
     // Opdater state
-    currentIndexRef.current = targetIndex;
+    currentIndexRef.current = nearestIndex;
     
-    // Anvend transform med smooth transition
-    trackRef.current.style.transition = 'transform 0.3s ease-out';
-    trackRef.current.style.transform = `translate3d(-${Math.round(targetTransform)}px, 0, 0)`;
+    // Beregn target position
+    const targetPosition = Math.round(nearestIndex * cardPlusGap);
+    
+    // Anvend transform
+    trackRef.current.style.transition = 'transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    trackRef.current.style.transform = `translate3d(-${targetPosition}px, 0, 0)`;
     
     isTransitioningRef.current = true;
-    
     setTimeout(() => {
       isTransitioningRef.current = false;
-    }, 450);
-    
-    console.log('=== MOBILE SNAP END ===');
+    }, 350);
   }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
 
   // Snap to nearest - Desktop version
@@ -647,33 +590,17 @@ export const ProductSlider = () => {
   }, [baseProducts.length, clearAutoSnap]);
 
   const handleTouchEnd = useCallback(() => {
-    // Kun meget minimal momentum ved meget hurtige swipes
-    if (Math.abs(velocityRef.current) > 2.0) {
-      applyMomentum(-velocityRef.current * 5); // Meget lille momentum
-    } else {
-      // Ingen momentum - snap med det samme
-      const currentScroll = getCurrentScroll();
-      const cardPlusGap = cardWidthRef.current + gapRef.current;
-      if (cardPlusGap > 0) {
-        const calculatedIndex = Math.round(currentScroll / cardPlusGap);
-        const isMobile = window.innerWidth < 768;
-        const maxIndex = isMobile 
-          ? Math.max(0, baseProducts.length - 2)
-          : Math.max(0, baseProducts.length - itemsVisibleRef.current);
-        currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
-      }
-      // Snap med det samme for hurtig feedback
-      setTimeout(() => {
-        snapToNearest();
-      }, 50);
-    }
+    // Altid snap efter touch, uanset velocity
+    setTimeout(() => {
+      snapToNearest();
+    }, 100);
     
-    // KRITISK: Start auto-snap timer ALTID efter touch
+    // Også tilføj en backup snap efter kort tid
     clearAutoSnap();
     autoSnapTimerRef.current = setTimeout(() => {
       snapToNearest();
-    }, 1000); // Reduceret til 1 sekund
-  }, [getCurrentScroll, applyMomentum, clearAutoSnap, snapToNearest, baseProducts.length]);
+    }, 500);
+  }, [clearAutoSnap, snapToNearest]);
 
   // Mouse drag handlers
   const handleMouseDown = useCallback((e: MouseEvent) => {
