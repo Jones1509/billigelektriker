@@ -776,16 +776,16 @@ All colors MUST be HSL.
     }
   }
 
-  /* TABLET - 768PX TIL 1199PX - 2 PRODUKTER FOR ALLE TABS */
+  /* TABLET - 768PX TIL 1199PX - 3 PRODUKTER FOR ALLE TABS */
   @media (min-width: 768px) and (max-width: 1199px) {
     .luxury-carousel-inner {
-      padding: 60px 40px;
+      padding: 60px 20px;
     }
 
-    /* 2 produkter for alle tabs - større produkter */
+    /* 3 produkter for alle tabs */
     .luxury-products-track {
-      grid-auto-columns: calc(50% - 20px);
-      gap: 40px;
+      grid-auto-columns: calc(33.333% - 16px);
+      gap: 24px;
       padding: 8px;
     }
 
@@ -814,13 +814,13 @@ All colors MUST be HSL.
   /* MOBIL - UNDER 768PX - 2 PRODUKTER FOR ALLE TABS */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
-      padding: 40px 16px;
+      padding: 40px 12px;
     }
 
-    /* 2 produkter for alle tabs - større produkter */
+    /* 2 produkter for alle tabs */
     .luxury-products-track {
-      grid-auto-columns: calc(50% - 12px);
-      gap: 24px;
+      grid-auto-columns: calc(50% - 8px);
+      gap: 16px;
       padding: 4px;
     }
 
