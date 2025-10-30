@@ -8,7 +8,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 // KONFIGURATION: Skift collection handles her for at ændre hvilke produkter der vises
 const COLLECTION_CONFIG = {
-  popular: null, // Sæt til null for at bruge alle produkter, eller "collection-handle" for specifik collection
+  popular: "mest-populaer", // Collection: "mest populær"
   new: null,
   recommended: null,
 };
