@@ -1,10 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, STOREFRONT_QUERY, COLLECTION_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
+
+// KONFIGURATION: Skift collection handles her for at ændre hvilke produkter der vises
+const COLLECTION_CONFIG = {
+  popular: null, // Sæt til null for at bruge alle produkter, eller "collection-handle" for specifik collection
+  new: null,
+  recommended: null,
+};
 
 export const ProductSlider = () => {
   const { t } = useTranslation();
@@ -32,22 +39,65 @@ export const ProductSlider = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   
-  const { data, isLoading } = useQuery({
-    queryKey: ['slider-products'],
+  // Queries for each tab
+  const { data: popularData, isLoading: popularLoading } = useQuery({
+    queryKey: ['slider-products-popular', COLLECTION_CONFIG.popular],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
-      return response.data.products.edges as ShopifyProduct[];
+      if (COLLECTION_CONFIG.popular) {
+        const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+          handle: COLLECTION_CONFIG.popular,
+          first: 12 
+        });
+        return response.data.collection?.products?.edges as ShopifyProduct[] || [];
+      } else {
+        const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+        return response.data.products.edges as ShopifyProduct[];
+      }
     },
   });
 
+  const { data: newData, isLoading: newLoading } = useQuery({
+    queryKey: ['slider-products-new', COLLECTION_CONFIG.new],
+    queryFn: async () => {
+      if (COLLECTION_CONFIG.new) {
+        const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+          handle: COLLECTION_CONFIG.new,
+          first: 12 
+        });
+        return response.data.collection?.products?.edges as ShopifyProduct[] || [];
+      } else {
+        const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+        return response.data.products.edges as ShopifyProduct[];
+      }
+    },
+  });
+
+  const { data: recommendedData, isLoading: recommendedLoading } = useQuery({
+    queryKey: ['slider-products-recommended', COLLECTION_CONFIG.recommended],
+    queryFn: async () => {
+      if (COLLECTION_CONFIG.recommended) {
+        const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+          handle: COLLECTION_CONFIG.recommended,
+          first: 12 
+        });
+        return response.data.collection?.products?.edges as ShopifyProduct[] || [];
+      } else {
+        const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+        return response.data.products.edges as ShopifyProduct[];
+      }
+    },
+  });
+
+  const isLoading = popularLoading || newLoading || recommendedLoading;
+
   // Get base products based on active tab
-  const baseProducts = data ? (
+  const baseProducts = (
     activeTab === 'popular' 
-      ? data.slice(0, 12)
+      ? (popularData || [])
       : activeTab === 'new'
-      ? data.slice(4, 16)
-      : data.slice(8, 20)
-  ) : [];
+      ? (newData || [])
+      : (recommendedData || [])
+  );
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
