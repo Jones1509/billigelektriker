@@ -71,10 +71,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         {JSON.stringify(productSchema)}
       </script>
       <Card 
-        className="group overflow-visible transition-all duration-300 hover:-translate-y-1 border border-border h-full flex flex-col"
+        className="group overflow-visible hover:-translate-y-1 border border-border h-full flex flex-col"
         style={{ 
           borderRadius: '1rem',
-          boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)'
+          boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.boxShadow = '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)';
@@ -84,7 +85,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         }}
       >
         <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
-          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
+          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30" style={{ borderRadius: '1rem 1rem 0 0' }}>
             {imageUrl ? (
               <>
                 <img
