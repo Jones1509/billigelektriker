@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, COLLECTION_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -32,22 +32,49 @@ export const ProductSlider = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   
-  const { data, isLoading } = useQuery({
-    queryKey: ['slider-products'],
+  // Fetch products from popular collection
+  const { data: popularData, isLoading: popularLoading } = useQuery({
+    queryKey: ['collection-popular'],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
-      return response.data.products.edges as ShopifyProduct[];
+      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+        handle: 'mest-popular',
+        first: 8 
+      });
+      return response.data.collection?.products?.edges as ShopifyProduct[] || [];
+    },
+  });
+
+  // Fetch products from new collection
+  const { data: newData, isLoading: newLoading } = useQuery({
+    queryKey: ['collection-new'],
+    queryFn: async () => {
+      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+        handle: 'nyhed',
+        first: 8 
+      });
+      return response.data.collection?.products?.edges as ShopifyProduct[] || [];
+    },
+  });
+
+  // Fetch products from recommended collection
+  const { data: recommendedData, isLoading: recommendedLoading } = useQuery({
+    queryKey: ['collection-recommended'],
+    queryFn: async () => {
+      const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+        handle: 'anbefalet',
+        first: 8 
+      });
+      return response.data.collection?.products?.edges as ShopifyProduct[] || [];
     },
   });
 
   // Get base products based on active tab
-  const baseProducts = data ? (
-    activeTab === 'popular' 
-      ? data.slice(0, 12)
-      : activeTab === 'new'
-      ? data.slice(4, 16)
-      : data.slice(8, 20)
-  ) : [];
+  const baseProducts = 
+    activeTab === 'popular' ? (popularData || [])
+    : activeTab === 'new' ? (newData || [])
+    : (recommendedData || []);
+
+  const isLoading = popularLoading || newLoading || recommendedLoading;
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
@@ -767,6 +794,8 @@ export const ProductSlider = () => {
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
                 style={{ color: activeTab === 'popular' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
+                role="tab"
+                aria-selected={activeTab === 'popular'}
               >
                 Mest Populær
               </button>
@@ -778,6 +807,8 @@ export const ProductSlider = () => {
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
                 style={{ color: activeTab === 'new' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
+                role="tab"
+                aria-selected={activeTab === 'new'}
               >
                 Nyhed
               </button>
@@ -789,6 +820,8 @@ export const ProductSlider = () => {
                     : 'bg-transparent hover:text-[#2563EB]'
                 }`}
                 style={{ color: activeTab === 'recommended' ? '#2563EB' : '#6B7280', transitionDuration: '300ms' }}
+                role="tab"
+                aria-selected={activeTab === 'recommended'}
               >
                 Anbefalet
               </button>
