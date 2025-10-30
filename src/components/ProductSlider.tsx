@@ -537,18 +537,30 @@ export const ProductSlider = () => {
         // Recalculate dimensions before snap
         calculateDimensions();
         
-        // Sync index with mobile-aware logic
+        // Sync index with mobile-aware logic KORREKT
         const currentScroll = getCurrentScroll();
         const cardPlusGap = cardWidthRef.current + gapRef.current;
         
         if (cardPlusGap > 0) {
-          const calculatedIndex = Math.round(currentScroll / cardPlusGap);
           const isMobile = window.innerWidth < 768;
           const maxIndex = isMobile 
             ? Math.max(0, baseProducts.length - 2)
             : Math.max(0, baseProducts.length - itemsVisibleRef.current);
-          currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
-          console.log('After momentum - synced index to:', currentIndexRef.current);
+          
+          // KRITISK: Check hvis vi er tæt på max scroll
+          const maxScroll = maxIndex * cardPlusGap;
+          const distanceFromMax = Math.abs(currentScroll - maxScroll);
+          
+          if (distanceFromMax < 50) {
+            // Vi er ved sidste produkt
+            currentIndexRef.current = maxIndex;
+            console.log('After momentum near MAX - synced to:', currentIndexRef.current);
+          } else {
+            // Normal beregning
+            const calculatedIndex = Math.round(currentScroll / cardPlusGap);
+            currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+            console.log('After momentum - synced to:', currentIndexRef.current);
+          }
         }
         
         // Start auto-snap timer inline to avoid circular dependency
@@ -688,19 +700,31 @@ export const ProductSlider = () => {
       console.log('Applying momentum');
       applyMomentum(-velocityRef.current * 28); // Reduced from 50 to 28 for controlled momentum
     } else {
-      // Ingen momentum - sync index
+      // Ingen momentum - sync index KORREKT
       console.log('No momentum, syncing index');
       
       const currentScroll = getCurrentScroll();
       const cardPlusGap = cardWidthRef.current + gapRef.current;
       if (cardPlusGap > 0) {
-        const calculatedIndex = Math.round(currentScroll / cardPlusGap);
         const isMobile = window.innerWidth < 768;
         const maxIndex = isMobile 
           ? Math.max(0, baseProducts.length - 2)
           : Math.max(0, baseProducts.length - itemsVisibleRef.current);
-        currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
-        console.log('Synced index to:', currentIndexRef.current);
+        
+        // KRITISK: Check hvis vi er tæt på max scroll
+        const maxScroll = maxIndex * cardPlusGap;
+        const distanceFromMax = Math.abs(currentScroll - maxScroll);
+        
+        if (distanceFromMax < 50) {
+          // Vi er ved sidste produkt
+          currentIndexRef.current = maxIndex;
+          console.log('Touch ended near MAX - synced to:', currentIndexRef.current);
+        } else {
+          // Normal beregning
+          const calculatedIndex = Math.round(currentScroll / cardPlusGap);
+          currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+          console.log('Touch ended - synced to:', currentIndexRef.current);
+        }
       }
     }
     
@@ -770,16 +794,29 @@ export const ProductSlider = () => {
       console.log('Mouse drag momentum, velocity:', velocityRef.current);
       applyMomentum(-velocityRef.current * 28); // Matched with touch for consistency
     } else {
-      // Sync index først
+      // Sync index KORREKT
       const currentScroll = getCurrentScroll();
       const cardPlusGap = cardWidthRef.current + gapRef.current;
       if (cardPlusGap > 0) {
-        const calculatedIndex = Math.round(currentScroll / cardPlusGap);
         const isMobile = window.innerWidth < 768;
         const maxIndex = isMobile 
           ? Math.max(0, baseProducts.length - 2)
           : Math.max(0, baseProducts.length - itemsVisibleRef.current);
-        currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+        
+        // KRITISK: Check hvis vi er tæt på max scroll
+        const maxScroll = maxIndex * cardPlusGap;
+        const distanceFromMax = Math.abs(currentScroll - maxScroll);
+        
+        if (distanceFromMax < 50) {
+          // Vi er ved sidste produkt
+          currentIndexRef.current = maxIndex;
+          console.log('Mouse ended near MAX - synced to:', currentIndexRef.current);
+        } else {
+          // Normal beregning
+          const calculatedIndex = Math.round(currentScroll / cardPlusGap);
+          currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+          console.log('Mouse ended - synced to:', currentIndexRef.current);
+        }
       }
       
       // Start auto-snap inline
