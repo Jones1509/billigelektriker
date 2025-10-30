@@ -99,6 +99,14 @@ export const ProductSlider = () => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    // Helper function til at beregne gap dynamisk
+    const getGap = () => {
+      const width = window.innerWidth;
+      if (width >= 1200) return 28;
+      if (width >= 768) return 24;
+      return 16;
+    };
+
     // Keyboard navigation
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
@@ -107,7 +115,7 @@ export const ProductSlider = () => {
         const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
         if (productCard) {
           const productWidth = productCard.offsetWidth;
-          const gap = 28; // Match med CSS gap
+          const gap = getGap();
           const scrollAmount = productWidth + gap;
           container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         }
@@ -117,7 +125,7 @@ export const ProductSlider = () => {
         const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
         if (productCard) {
           const productWidth = productCard.offsetWidth;
-          const gap = 28; // Match med CSS gap
+          const gap = getGap();
           const scrollAmount = productWidth + gap;
           container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
@@ -130,7 +138,7 @@ export const ProductSlider = () => {
       const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
       if (productCard) {
         const productWidth = productCard.offsetWidth;
-        const gap = 28; // Match med CSS gap
+        const gap = getGap();
         const scrollAmount = productWidth + gap;
         container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       }
@@ -141,7 +149,7 @@ export const ProductSlider = () => {
       const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
       if (productCard) {
         const productWidth = productCard.offsetWidth;
-        const gap = 28; // Match med CSS gap
+        const gap = getGap();
         const scrollAmount = productWidth + gap;
         container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       }
