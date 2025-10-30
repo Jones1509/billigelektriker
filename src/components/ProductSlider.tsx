@@ -748,12 +748,15 @@ export const ProductSlider = () => {
       handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, clearAutoSnap]);
 
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
+    console.log('🔴 TAB CHANGE CLICKED:', tab);
+    console.log('🔴 Current activeTab:', activeTab);
     setActiveTab(tab);
     currentIndexRef.current = 0;
     if (trackRef.current) {
       trackRef.current.style.transition = 'none';
       trackRef.current.style.transform = 'translateX(0px)';
     }
+    console.log('🔴 Tab changed to:', tab);
   };
 
   return (
