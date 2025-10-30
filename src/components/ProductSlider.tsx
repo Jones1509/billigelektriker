@@ -227,107 +227,6 @@ export const ProductSlider = () => {
     console.log('Synced index to:', currentIndexRef.current);
   }, [getCurrentScroll, baseProducts.length]);
 
-  // Verify mobile snap - check if 2 cards are fully visible
-  const verifyMobileSnap = useCallback((index: number) => {
-    console.log('--- Verify Mobile Snap ---');
-    
-    if (!viewportRef.current) return;
-    
-    const cards = Array.from(viewportRef.current.querySelectorAll('.product-card'));
-    const card1 = cards[index];
-    const card2 = cards[index + 1];
-    
-    if (!card1 || !card2) {
-      console.log('Cards not found for verification');
-      return;
-    }
-    
-    const viewport = viewportRef.current.getBoundingClientRect();
-    const rect1 = (card1 as HTMLElement).getBoundingClientRect();
-    const rect2 = (card2 as HTMLElement).getBoundingClientRect();
-    
-    console.log('Viewport:', {
-      left: viewport.left,
-      right: viewport.right,
-      width: viewport.width
-    });
-    
-    // Pre-calculate boundaries to avoid auto-translation issues
-    const leftBoundary = viewport.left - 2;
-    const rightBoundary = viewport.right + 2;
-    
-    // Check visibility separately
-    const card1LeftOk = rect1.left >= leftBoundary;
-    const card1RightOk = rect1.right <= rightBoundary;
-    const card1Visible = card1LeftOk && card1RightOk;
-    
-    const card2LeftOk = rect2.left >= leftBoundary;
-    const card2RightOk = rect2.right <= rightBoundary;
-    const card2Visible = card2LeftOk && card2RightOk;
-    
-    console.log('Card', index, ':', {
-      left: rect1.left,
-      right: rect1.right,
-      width: rect1.width,
-      fullyVisible: card1Visible
-    });
-    
-    console.log('Card', index + 1, ':', {
-      left: rect2.left,
-      right: rect2.right,
-      width: rect2.width,
-      fullyVisible: card2Visible
-    });
-    
-    const bothVisible = card1Visible && card2Visible;
-    
-    if (bothVisible) {
-      console.log('✅ SUCCESS: Both cards fully visible');
-    } else {
-      console.log('❌ PROBLEM: Cards not properly aligned');
-    }
-  }, []);
-
-  // Snap to nearest - Desktop version
-  const snapToNearestDesktop = useCallback(() => {
-    console.log('--- Desktop/Tablet Snap ---');
-    
-    calculateDimensions();
-    
-    const currentScroll = getCurrentScroll();
-    const cardPlusGap = cardWidthRef.current + gapRef.current;
-    
-    console.log('Current scroll:', currentScroll);
-    console.log('Card + gap:', cardPlusGap);
-    
-    if (cardPlusGap === 0 || !trackRef.current) {
-      console.error('Card width or gap is 0');
-      return;
-    }
-    
-    const rawIndex = currentScroll / cardPlusGap;
-    let nearestIndex = Math.round(rawIndex);
-    
-    const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
-    nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
-    
-    console.log('Nearest index:', nearestIndex, '(max:', maxIndex, ')');
-    
-    currentIndexRef.current = nearestIndex;
-    
-    const targetPosition = Math.round(nearestIndex * cardPlusGap);
-    
-    console.log('Target position:', targetPosition);
-    
-    trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-    trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
-    
-    isTransitioningRef.current = true;
-    setTimeout(() => {
-      isTransitioningRef.current = false;
-    }, 400);
-  }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
-
   // Snap to nearest - Mobile version
   const snapToNearestMobile = useCallback(() => {
     console.log('--- Mobile Snap ---');
@@ -384,11 +283,48 @@ export const ProductSlider = () => {
     isTransitioningRef.current = true;
     setTimeout(() => {
       isTransitioningRef.current = false;
-      
-      // Verificer efter snap
-      verifyMobileSnap(nearestIndex);
     }, 450);
-  }, [getCurrentScroll, calculateDimensions, verifyMobileSnap, baseProducts.length]);
+  }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
+
+  // Snap to nearest - Desktop version
+  const snapToNearestDesktop = useCallback(() => {
+    console.log('--- Desktop/Tablet Snap ---');
+    
+    calculateDimensions();
+    
+    const currentScroll = getCurrentScroll();
+    const cardPlusGap = cardWidthRef.current + gapRef.current;
+    
+    console.log('Current scroll:', currentScroll);
+    console.log('Card + gap:', cardPlusGap);
+    
+    if (cardPlusGap === 0 || !trackRef.current) {
+      console.error('Card width or gap is 0');
+      return;
+    }
+    
+    const rawIndex = currentScroll / cardPlusGap;
+    let nearestIndex = Math.round(rawIndex);
+    
+    const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+    
+    console.log('Nearest index:', nearestIndex, '(max:', maxIndex, ')');
+    
+    currentIndexRef.current = nearestIndex;
+    
+    const targetPosition = Math.round(nearestIndex * cardPlusGap);
+    
+    console.log('Target position:', targetPosition);
+    
+    trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
+    
+    isTransitioningRef.current = true;
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+    }, 400);
+  }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
 
   // Snap to nearest full product position
   const snapToNearest = useCallback(() => {
