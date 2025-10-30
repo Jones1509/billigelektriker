@@ -1007,7 +1007,7 @@ export const ProductSlider = () => {
       <div className="carousel-inner-wrapper">
         {/* Header section */}
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
+          <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full text-white text-sm font-semibold mb-2 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
             <ShoppingBag className="w-4 h-4" aria-hidden="true" />
             {t('productSlider.badge')}
