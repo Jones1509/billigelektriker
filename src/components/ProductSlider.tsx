@@ -1009,7 +1009,6 @@ export const ProductSlider = () => {
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-3 shadow-lg" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
-            <Zap className="w-3.5 h-3.5" aria-hidden="true" />
             {t('productSlider.badge')}
           </span>
           
