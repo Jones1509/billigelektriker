@@ -288,32 +288,6 @@ export const ProductSlider = () => {
     isTransitioningRef.current = true;
     setTimeout(() => {
       isTransitioningRef.current = false;
-      
-      // Verificer efter snap
-      console.log('=== VERIFICATION AFTER SNAP ===');
-      const card1 = cards[targetIndex];
-      const card2 = cards[targetIndex + 1];
-      
-      if (card1 && card2) {
-        const rect1 = card1.getBoundingClientRect();
-        const rect2 = card2.getBoundingClientRect();
-        const vpRect = viewport.getBoundingClientRect();
-        
-        const card1Visible = rect1.left >= vpRect.left - 1 && rect1.right <= vpRect.right + 1;
-        const card2Visible = rect2.left >= vpRect.left - 1 && rect2.right <= vpRect.right + 1;
-        
-        console.log('Card 1:', {
-          left: rect1.left,
-          right: rect1.right,
-          fullyVisible: card1Visible
-        });
-        console.log('Card 2:', {
-          left: rect2.left,
-          right: rect2.right,
-          fullyVisible: card2Visible
-        });
-      }
-      console.log('===============================');
     }, 450);
     
     console.log('=== MOBILE SNAP END ===');
