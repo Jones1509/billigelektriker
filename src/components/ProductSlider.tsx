@@ -35,18 +35,18 @@ export const ProductSlider = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 24 });
+      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
       return response.data.products.edges as ShopifyProduct[];
     },
   });
 
-  // Get base products based on active tab - 8 products per category
+  // Get base products based on active tab
   const baseProducts = data ? (
     activeTab === 'popular' 
-      ? data.slice(0, 8)
+      ? data.slice(0, 12)
       : activeTab === 'new'
-      ? data.slice(8, 16)
-      : data.slice(16, 24)
+      ? data.slice(4, 16)
+      : data.slice(8, 20)
   ) : [];
 
   // Calculate dimensions based on screen width
@@ -737,8 +737,8 @@ export const ProductSlider = () => {
   return (
     <section className="product-carousel-wrapper" aria-label="Populære produkter i webshoppen">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)] pointer-events-none" aria-hidden="true"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)] pointer-events-none" aria-hidden="true"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]" aria-hidden="true"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]" aria-hidden="true"></div>
       
       <div className="carousel-inner-wrapper">
         {/* Header section */}
