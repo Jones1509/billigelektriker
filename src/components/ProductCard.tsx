@@ -70,16 +70,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       <script type="application/ld+json">
         {JSON.stringify(productSchema)}
       </script>
-      <Card className="group overflow-hidden border border-border rounded-2xl h-full flex flex-col">
+      <Card className="group overflow-hidden border border-border rounded-2xl h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:border-primary/30 hover:scale-[1.02]">
         <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
-          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
+          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl group-hover:bg-primary/5 transition-colors duration-500">
             {imageUrl ? (
               <>
                 <img
                   src={imageUrl}
                   alt={altText}
                   loading="lazy"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-105"
                 />
                 {/* Status badge */}
                 <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white" 
@@ -98,7 +98,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       
       <CardContent className="p-2 md:p-2.5 lg:p-3.5 flex-1 flex flex-col">
         <Link to={`/product/${node.handle}`} aria-label={`Læs mere om ${node.title}`}>
-          <h3 className="font-semibold text-[11px] md:text-sm lg:text-base leading-tight mb-1 md:mb-1 lg:mb-1.5 line-clamp-2">
+          <h3 className="font-semibold text-[11px] md:text-sm lg:text-base leading-tight mb-1 md:mb-1 lg:mb-1.5 line-clamp-2 transition-colors duration-300 group-hover:text-primary">
             {node.title}
           </h3>
         </Link>
@@ -109,7 +109,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         
         <Button 
           onClick={handleAddToCart}
-          className="w-full h-8 md:h-9 lg:h-11 text-[10px] md:text-xs lg:text-[14px] font-semibold rounded-lg lg:rounded-xl"
+          className="w-full h-8 md:h-9 lg:h-11 text-[10px] md:text-xs lg:text-[14px] font-semibold rounded-lg lg:rounded-xl transition-all duration-300 hover:shadow-lg hover:brightness-110"
           style={{ 
             background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
             boxShadow: '0 2px 8px rgba(16, 185, 129, 0.25)'
