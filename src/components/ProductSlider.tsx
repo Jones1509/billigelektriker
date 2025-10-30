@@ -229,61 +229,139 @@ export const ProductSlider = () => {
 
   // Snap to nearest - Mobile version
   const snapToNearestMobile = useCallback(() => {
-    console.log('--- Mobile Snap ---');
+    console.log('=== MOBILE SNAP START ===');
     
     calculateDimensions();
     
-    const currentScroll = getCurrentScroll();
-    const cardPlusGap = cardWidthRef.current + gapRef.current;
+    if (!viewportRef.current || !trackRef.current) return;
     
-    console.log('Current scroll:', currentScroll);
-    console.log('Card width:', cardWidthRef.current);
-    console.log('Gap:', gapRef.current);
-    console.log('Card + gap:', cardPlusGap);
+    // Få viewport info
+    const viewportRect = viewportRef.current.getBoundingClientRect();
+    const viewportLeft = viewportRect.left;
+    const viewportWidth = viewportRect.width;
     
-    if (cardPlusGap === 0 || !trackRef.current) {
-      console.error('Card width or gap is 0');
+    console.log('Viewport:', { left: viewportLeft, width: viewportWidth });
+    
+    // Find hvilket kort er tættest på viewport's venstre kant
+    const cards = Array.from(viewportRef.current.querySelectorAll('.product-card'));
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+    
+    cards.forEach((card, index) => {
+      const cardRect = card.getBoundingClientRect();
+      const cardLeft = cardRect.left;
+      
+      // Distance fra kortets venstre kant til viewport's venstre kant
+      const distance = Math.abs(cardLeft - viewportLeft);
+      
+      console.log(`Card ${index}: left=${Math.round(cardLeft)}, distance=${Math.round(distance)}`);
+      
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+    
+    console.log('Closest card to viewport left:', closestIndex);
+    
+    // KRITISK: På mobil skal vi kunne se 2 kort
+    // Så max index = total - 2
+    const maxIndex = baseProducts.length - 2;
+    const targetIndex = Math.min(closestIndex, maxIndex);
+    
+    console.log('Target index (clamped):', targetIndex);
+    console.log('Will show cards:', targetIndex, 'and', targetIndex + 1);
+    
+    // Nu beregn PRÆCIS hvor meget vi skal flytte track
+    // Vi vil have card[targetIndex] skal være ved viewport's venstre kant
+    
+    const targetCard = cards[targetIndex] as HTMLElement;
+    if (!targetCard) {
+      console.error('Target card not found');
       return;
     }
     
-    // Beregn hvor mange produkter vi har scrollet
-    const scrolledProducts = currentScroll / cardPlusGap;
+    const targetCardRect = targetCard.getBoundingClientRect();
+    const trackRect = trackRef.current.getBoundingClientRect();
     
-    console.log('Scrolled products:', scrolledProducts);
+    console.log('Target card current position:', Math.round(targetCardRect.left));
+    console.log('Track current position:', Math.round(trackRect.left));
     
-    // Rund til nærmeste helt tal
-    let nearestIndex = Math.round(scrolledProducts);
+    // Beregn offset: hvor langt skal track flyttes for at aligne?
+    // Target card's current distance from viewport left
+    const currentOffset = targetCardRect.left - viewportLeft;
     
-    console.log('Nearest index (raw):', nearestIndex);
+    console.log('Current offset of target card:', Math.round(currentOffset));
     
-    // KRITISK: På mobil skal vi altid kunne se 2 produkter
-    // Max index = total produkter - 2
-    const maxMobileIndex = Math.max(0, baseProducts.length - 2);
+    // Current transform value
+    const currentTransform = getCurrentScroll();
     
-    console.log('Max mobile index:', maxMobileIndex, '(total cards:', baseProducts.length, ')');
+    console.log('Current transform:', currentTransform);
     
-    // Begræns
-    nearestIndex = Math.max(0, Math.min(nearestIndex, maxMobileIndex));
+    // New transform = current + offset
+    const targetTransform = currentTransform + currentOffset;
     
-    console.log('Final index:', nearestIndex);
-    console.log('Will show products:', nearestIndex, 'and', nearestIndex + 1);
+    console.log('Target transform:', Math.round(targetTransform));
     
     // Opdater state
-    currentIndexRef.current = nearestIndex;
+    currentIndexRef.current = targetIndex;
     
-    // Beregn præcis position
-    const targetPosition = Math.round(nearestIndex * cardPlusGap);
-    
-    console.log('Target position:', targetPosition, 'px');
-    
-    // Anvend snap
+    // Anvend transform
     trackRef.current.style.transition = 'transform 0.4s ease-out';
-    trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
+    trackRef.current.style.transform = `translateX(-${Math.round(targetTransform)}px)`;
     
     isTransitioningRef.current = true;
+    
     setTimeout(() => {
       isTransitioningRef.current = false;
+      
+      // Verificer
+      if (!viewportRef.current) return;
+      
+      console.log('--- Verification ---');
+      const vp = viewportRef.current.getBoundingClientRect();
+      const allCards = Array.from(viewportRef.current.querySelectorAll('.product-card'));
+      const c1 = allCards[targetIndex] as HTMLElement;
+      const c2 = allCards[targetIndex + 1] as HTMLElement;
+      
+      if (!c1) return;
+      
+      const c1Rect = c1.getBoundingClientRect();
+      const c2Rect = c2?.getBoundingClientRect();
+      
+      console.log('After snap:');
+      console.log('Viewport:', Math.round(vp.left), '-', Math.round(vp.right));
+      console.log('Card', targetIndex, ':', Math.round(c1Rect.left), '-', Math.round(c1Rect.right));
+      
+      if (c2Rect) {
+        console.log('Card', targetIndex + 1, ':', Math.round(c2Rect.left), '-', Math.round(c2Rect.right));
+      }
+      
+      // Pre-calculate to avoid auto-translation
+      const leftBound = vp.left - 2;
+      const rightBound = vp.right + 2;
+      
+      const c1LeftOk = c1Rect.left >= leftBound;
+      const c1RightOk = c1Rect.right <= rightBound;
+      const card1Visible = c1LeftOk && c1RightOk;
+      
+      let card2Visible = false;
+      if (c2Rect) {
+        const c2LeftOk = c2Rect.left >= leftBound;
+        const c2RightOk = c2Rect.right <= rightBound;
+        card2Visible = c2LeftOk && c2RightOk;
+      }
+      
+      if (card1Visible && card2Visible) {
+        console.log('✅ Both cards fully visible');
+      } else {
+        console.log('❌ Cards not fully visible');
+        console.log('Card 1 visible:', card1Visible);
+        console.log('Card 2 visible:', card2Visible);
+      }
     }, 450);
+    
+    console.log('=== MOBILE SNAP END ===');
   }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
 
   // Snap to nearest - Desktop version
