@@ -6,11 +6,11 @@ import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
-// Collection handles mapping - opdater disse med dine faktiske collection handles
+// Collection handles mapping
 const COLLECTION_HANDLES = {
-  popular: 'collection-1', // Opdater med dit faktiske collection handle
-  new: 'collection-2',      // Opdater med dit faktiske collection handle
-  recommended: 'collection-3' // Opdater med dit faktiske collection handle
+  popular: 'mest-populaer',
+  new: 'nyhed',
+  recommended: 'anbefalet'
 };
 
 export const ProductSlider = () => {
