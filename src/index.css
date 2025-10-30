@@ -818,9 +818,9 @@ All colors MUST be HSL.
       padding: 40px 16px;
     }
 
-    /* Default: 2 produkter for "Mest Populær" */
+    /* 3 produkter for "Mest Populær" */
     .luxury-products-track[data-active-tab="popular"] {
-      grid-auto-columns: calc(50% - 10px);
+      grid-auto-columns: calc(33.333% - 14px);
       gap: 20px;
       padding: 6px;
     }
@@ -832,9 +832,9 @@ All colors MUST be HSL.
       padding: 6px;
     }
 
-    /* 2 produkter for "Anbefalet" */
+    /* 3 produkter for "Anbefalet" */
     .luxury-products-track[data-active-tab="recommended"] {
-      grid-auto-columns: calc(50% - 10px);
+      grid-auto-columns: calc(33.333% - 14px);
       gap: 20px;
       padding: 6px;
     }
@@ -865,23 +865,23 @@ All colors MUST be HSL.
       padding: 40px 12px;
     }
 
-    /* Default: 2 produkter for "Mest Populær" */
+    /* 3 produkter for "Mest Populær" */
     .luxury-products-track[data-active-tab="popular"] {
-      grid-auto-columns: calc(50% - 6px);
+      grid-auto-columns: calc(33.333% - 8px);
       gap: 12px;
       padding: 4px;
     }
 
-    /* 3 produkter for "Nyhed" - små kort */
+    /* 3 produkter for "Nyhed" */
     .luxury-products-track[data-active-tab="new"] {
       grid-auto-columns: calc(33.333% - 8px);
       gap: 12px;
       padding: 4px;
     }
 
-    /* 2 produkter for "Anbefalet" */
+    /* 3 produkter for "Anbefalet" */
     .luxury-products-track[data-active-tab="recommended"] {
-      grid-auto-columns: calc(50% - 6px);
+      grid-auto-columns: calc(33.333% - 8px);
       gap: 12px;
       padding: 4px;
     }
