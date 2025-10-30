@@ -35,19 +35,25 @@ export const ProductSlider = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['slider-products'],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
+      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 50 });
       return response.data.products.edges as ShopifyProduct[];
     },
   });
 
-  // Get base products based on active tab
-  const baseProducts = data ? (
-    activeTab === 'popular' 
-      ? data.slice(0, 12)
-      : activeTab === 'new'
-      ? data.slice(4, 16)
-      : data.slice(8, 20)
-  ) : [];
+  // Filter products based on active tab and tags
+  const baseProducts = data ? data.filter((product) => {
+    const tags = product.node.tags || [];
+    
+    if (activeTab === 'popular') {
+      return tags.includes('popular');
+    } else if (activeTab === 'new') {
+      return tags.includes('new');
+    } else if (activeTab === 'recommended') {
+      return tags.includes('recommended');
+    }
+    
+    return false;
+  }) : [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
