@@ -668,7 +668,7 @@ All colors MUST be HSL.
   .product-carousel-wrapper {
     position: relative;
     width: 100%;
-    padding: 80px 0 60px 0;
+    padding: 60px 0 60px 0;
     overflow: hidden;
   }
 
@@ -721,7 +721,7 @@ All colors MUST be HSL.
   /* Navigation arrows */
   .carousel-arrow {
     position: absolute;
-    top: -50px;
+    top: -80px;
     transform: translateY(0);
     width: 44px;
     height: 44px;
@@ -774,7 +774,7 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      top: -40px;
+      top: -70px;
       width: 42px;
       height: 42px;
       background: rgba(255, 255, 255, 0.95);
@@ -793,7 +793,7 @@ All colors MUST be HSL.
   /* Mobile responsive (under 768px) */
   @media (max-width: 767px) {
     .product-carousel-wrapper {
-      padding: 60px 0 40px 0;
+      padding: 40px 0 40px 0;
     }
     
     .carousel-inner-wrapper {
@@ -811,7 +811,7 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
-      top: -35px;
+      top: -65px;
       width: 36px;
       height: 36px;
       background: rgba(255, 255, 255, 0.92);
