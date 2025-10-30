@@ -340,11 +340,21 @@ export const ProductSlider = () => {
 
   // Sync currentIndex with actual scroll position
   const syncCurrentIndexWithScroll = useCallback(() => {
+    // KRITISK: Genberegn dimensions først for at sikre korrekte værdier
+    calculateDimensions();
+    
     const currentScroll = getCurrentScroll();
     const cardPlusGap = cardWidthRef.current + gapRef.current;
     
+    console.log('=== SYNC INDEX START ===');
+    console.log('Current scroll:', currentScroll);
+    console.log('Card + gap:', cardPlusGap);
+    
     // Avoid division by zero
-    if (cardPlusGap === 0) return;
+    if (cardPlusGap === 0) {
+      console.log('Card+gap is 0, aborting sync');
+      return;
+    }
     
     // Determine mobile or desktop
     const isMobile = window.innerWidth < 768;
@@ -352,24 +362,35 @@ export const ProductSlider = () => {
       ? Math.max(0, baseProducts.length - 2)
       : Math.max(0, baseProducts.length - itemsVisibleRef.current);
     
-    // Calculate which index this corresponds to
-    const rawIndex = currentScroll / cardPlusGap;
-    const calculatedIndex = Math.round(rawIndex);
+    console.log('Mobile:', isMobile, 'Max index:', maxIndex);
     
-    // KRITISK: Check if we're very close to max scroll position
+    // Calculate max scroll position
     const maxScroll = maxIndex * cardPlusGap;
-    const distanceFromMax = Math.abs(currentScroll - maxScroll);
+    console.log('Max scroll:', maxScroll);
     
-    // If we're within 50px of max scroll, snap to max index
-    if (distanceFromMax < 50) {
+    // Calculate raw index from scroll
+    const rawIndex = currentScroll / cardPlusGap;
+    console.log('Raw index:', rawIndex);
+    
+    // KRITISK: Øget tolerance - hvis vi er inden for 20% af sidste position
+    const distanceFromMax = Math.abs(currentScroll - maxScroll);
+    const tolerance = cardPlusGap * 0.5; // 50% af én card bredde
+    
+    console.log('Distance from max:', distanceFromMax, 'Tolerance:', tolerance);
+    
+    if (distanceFromMax < tolerance) {
+      // Vi er tæt på sidste produkt - snap til max
       currentIndexRef.current = maxIndex;
-      console.log('Synced to MAX index (close to end):', currentIndexRef.current);
+      console.log('✅ SYNCED TO MAX INDEX:', currentIndexRef.current);
     } else {
-      // Otherwise use calculated index
+      // Normal beregning
+      const calculatedIndex = Math.round(rawIndex);
       currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
-      console.log('Synced index to:', currentIndexRef.current);
+      console.log('✅ SYNCED TO INDEX:', currentIndexRef.current);
     }
-  }, [getCurrentScroll, baseProducts.length]);
+    
+    console.log('=== SYNC INDEX END ===');
+  }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
 
   // Snap to nearest - Mobile version
   const snapToNearestMobile = useCallback(() => {
