@@ -510,35 +510,33 @@ export const ProductSlider = () => {
   const navigateNext = useCallback(() => {
     if (isTransitioningRef.current) return;
     
-    // Sync with actual scroll position first
-    syncCurrentIndexWithScroll();
+    // Calculate correct max index based on screen size
+    const isMobile = window.innerWidth < 768;
+    const maxIndex = isMobile 
+      ? Math.max(0, baseProducts.length - 2)
+      : Math.max(0, baseProducts.length - itemsVisibleRef.current);
     
-    currentIndexRef.current++;
-    
-    // Loop back to start
-    if (currentIndexRef.current > baseProducts.length - itemsVisibleRef.current) {
-      currentIndexRef.current = 0;
+    // Don't navigate if already at end
+    if (currentIndexRef.current >= maxIndex) {
+      return;
     }
     
+    currentIndexRef.current++;
     updatePosition(true);
-  }, [syncCurrentIndexWithScroll, updatePosition, baseProducts.length]);
+  }, [updatePosition, baseProducts.length]);
 
   // Navigate to previous product
   const navigatePrev = useCallback(() => {
     if (isTransitioningRef.current) return;
     
-    // Sync with actual scroll position first
-    syncCurrentIndexWithScroll();
-    
-    currentIndexRef.current--;
-    
-    // Loop to end
-    if (currentIndexRef.current < 0) {
-      currentIndexRef.current = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    // Don't navigate if already at start
+    if (currentIndexRef.current <= 0) {
+      return;
     }
     
+    currentIndexRef.current--;
     updatePosition(true);
-  }, [syncCurrentIndexWithScroll, updatePosition, baseProducts.length]);
+  }, [updatePosition]);
 
   // Touch handlers
   const handleTouchStart = useCallback((e: TouchEvent) => {
@@ -554,6 +552,8 @@ export const ProductSlider = () => {
   const handleTouchMove = useCallback((e: TouchEvent) => {
     if (!isDraggingRef.current || !trackRef.current) return;
     
+    e.preventDefault(); // Prevent page scroll
+    
     const currentX = e.touches[0].pageX;
     const diff = startXRef.current - currentX; // Direct 1:1 tracking
     
@@ -564,9 +564,10 @@ export const ProductSlider = () => {
       : Math.max(0, baseProducts.length - itemsVisibleRef.current);
     const maxScroll = maxIndex * (cardWidthRef.current + gapRef.current);
     
-    // Hard clamp at boundaries
+    // Hard clamp - no overshoot
     const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
     
+    // Direct transform without rounding for smooth pixel-perfect tracking
     trackRef.current.style.transform = `translate3d(-${clampedScroll}px, 0, 0)`;
   }, [baseProducts.length]);
 
