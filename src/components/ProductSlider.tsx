@@ -632,8 +632,8 @@ export const ProductSlider = () => {
       : Math.max(0, baseProducts.length - itemsVisibleRef.current);
     const maxScroll = maxIndex * (cardWidthRef.current + gapRef.current);
     
-    // Add buffer for smoother edge experience
-    const clampedScroll = Math.max(-10, Math.min(newScroll, maxScroll + 10));
+    // Hård stop ved grænserne - ingen buffer
+    const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
     
     if (trackRef.current) {
       trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
@@ -713,8 +713,12 @@ export const ProductSlider = () => {
     const diff = (startXRef.current - currentX) * 1.5;
     
     const newScroll = startScrollLeftRef.current + diff;
-    const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
-    const clampedScroll = Math.max(-10, Math.min(newScroll, maxScroll + 10));
+    const isMobile = window.innerWidth < 768;
+    const maxIndex = isMobile 
+      ? Math.max(0, baseProducts.length - 2)
+      : Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    const maxScroll = maxIndex * (cardWidthRef.current + gapRef.current);
+    const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
     
     if (trackRef.current) {
       trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
