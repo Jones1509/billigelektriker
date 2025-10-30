@@ -815,9 +815,21 @@ export const ProductSlider = () => {
     
     console.log('🔄 Collection data changed, recalculating layout...');
     
+    // Fallback timer: Force visibility after 2 seconds if something goes wrong
+    const fallbackTimer = setTimeout(() => {
+      console.warn('⚠️ FALLBACK: Forcing products visible after timeout');
+      if (trackRef.current) {
+        trackRef.current.style.transition = 'opacity 0.25s ease-in';
+        trackRef.current.style.opacity = '1';
+      }
+    }, 2000);
+    
     // Wait for React to finish rendering new products to DOM
     const recalculateLayout = () => {
-      if (!viewportRef.current || !trackRef.current) return;
+      if (!viewportRef.current || !trackRef.current) {
+        clearTimeout(fallbackTimer);
+        return;
+      }
       
       // Force reflow to ensure fresh layout calculations
       void viewportRef.current.offsetHeight;
@@ -852,7 +864,11 @@ export const ProductSlider = () => {
         if (trackRef.current) {
           trackRef.current.style.transition = 'opacity 0.25s ease-in';
           trackRef.current.style.opacity = '1';
+          console.log('✅ Products faded in successfully');
         }
+        
+        // Clear fallback timer since we succeeded
+        clearTimeout(fallbackTimer);
       });
       
       console.log('✅ Layout recalculated after collection change');
@@ -864,6 +880,11 @@ export const ProductSlider = () => {
         setTimeout(recalculateLayout, 50);
       });
     });
+    
+    // Cleanup function
+    return () => {
+      clearTimeout(fallbackTimer);
+    };
   }, [collectionData, calculateDimensions]);
 
   useEffect(() => {
@@ -925,6 +946,12 @@ export const ProductSlider = () => {
       handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, clearAutoSnap]);
 
   const handleTabChange = (tab: keyof typeof COLLECTION_CONFIG) => {
+    // Ignore if same tab is already active
+    if (activeTab === tab) {
+      console.log('⚠️ Same tab already active, ignoring click');
+      return;
+    }
+    
     // Prevent tab change if already loading
     if (isLoading) {
       console.log('⚠️ Already loading, ignoring tab click');
