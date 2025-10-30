@@ -346,17 +346,29 @@ export const ProductSlider = () => {
     // Avoid division by zero
     if (cardPlusGap === 0) return;
     
-    // Calculate which index this corresponds to
-    const calculatedIndex = Math.round(currentScroll / cardPlusGap);
-    
-    // Constrain to valid range based on mobile or desktop
+    // Determine mobile or desktop
     const isMobile = window.innerWidth < 768;
     const maxIndex = isMobile 
       ? Math.max(0, baseProducts.length - 2)
       : Math.max(0, baseProducts.length - itemsVisibleRef.current);
     
-    currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
-    console.log('Synced index to:', currentIndexRef.current);
+    // Calculate which index this corresponds to
+    const rawIndex = currentScroll / cardPlusGap;
+    const calculatedIndex = Math.round(rawIndex);
+    
+    // KRITISK: Check if we're very close to max scroll position
+    const maxScroll = maxIndex * cardPlusGap;
+    const distanceFromMax = Math.abs(currentScroll - maxScroll);
+    
+    // If we're within 50px of max scroll, snap to max index
+    if (distanceFromMax < 50) {
+      currentIndexRef.current = maxIndex;
+      console.log('Synced to MAX index (close to end):', currentIndexRef.current);
+    } else {
+      // Otherwise use calculated index
+      currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+      console.log('Synced index to:', currentIndexRef.current);
+    }
   }, [getCurrentScroll, baseProducts.length]);
 
   // Snap to nearest - Mobile version
