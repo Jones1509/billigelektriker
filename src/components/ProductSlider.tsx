@@ -1007,16 +1007,16 @@ export const ProductSlider = () => {
       <div className="carousel-inner-wrapper">
         {/* Header section */}
         <div className="text-center mb-8 md:mb-10 animate-fade-in">
-          <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full text-white text-sm font-semibold mb-2 shadow-lg -mt-[10px]" 
+          <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full text-white text-sm font-semibold mb-4 shadow-lg -mt-[10px]" 
                 style={{ background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)', boxShadow: '0 4px 12px rgba(37, 99, 235, 0.2)' }}>
             <ShoppingBag className="w-4 h-4" aria-hidden="true" />
             {t('productSlider.badge')}
           </span>
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground leading-tight">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground leading-tight">
             {t(`productSlider.tabs.${activeTab}.title`)}
           </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-6">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto mb-8">
             {t(`productSlider.tabs.${activeTab}.subtitle`)}
           </p>
           
