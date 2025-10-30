@@ -987,7 +987,7 @@ export const ProductSlider = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,197,94,0.08),transparent_50%)]" aria-hidden="true"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.08),transparent_50%)]" aria-hidden="true"></div>
       
-      <div className="carousel-inner-wrapper">
+      <div className="carousel-inner-wrapper relative">
         {/* Header section */}
         <div className="text-center mb-10 md:mb-12 animate-fade-in">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold mb-8 shadow-lg"
@@ -1070,6 +1070,29 @@ export const ProductSlider = () => {
           </nav>
         </div>
 
+        {/* Navigation arrows - positioned between tabs and products */}
+        {!isLoading && baseProducts.length > 0 && (
+          <>
+            <button
+              onClick={navigatePrev}
+              className="carousel-arrow prev-arrow"
+              style={{ position: 'absolute', top: 'auto', bottom: 'calc(100% + 50px)', left: '48px', zIndex: 100, transform: 'none' }}
+              aria-label="Forrige produkter"
+            >
+              <ChevronLeft className="w-7 h-7" />
+            </button>
+            
+            <button
+              onClick={navigateNext}
+              className="carousel-arrow next-arrow"
+              style={{ position: 'absolute', top: 'auto', bottom: 'calc(100% + 50px)', right: '56px', zIndex: 100, transform: 'none' }}
+              aria-label="Næste produkter"
+            >
+              <ChevronRight className="w-7 h-7" />
+            </button>
+          </>
+        )}
+
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <div className="relative">
@@ -1081,25 +1104,6 @@ export const ProductSlider = () => {
           </div>
         ) : baseProducts.length > 0 ? (
           <div className="carousel-container">
-            {/* Navigation arrows */}
-            <button
-              onClick={navigatePrev}
-              className="carousel-arrow prev-arrow"
-              style={{ zIndex: 1 }}
-              aria-label="Forrige produkter"
-            >
-              <ChevronLeft className="w-7 h-7" />
-            </button>
-            
-            <button
-              onClick={navigateNext}
-              className="carousel-arrow next-arrow"
-              style={{ zIndex: 1 }}
-              aria-label="Næste produkter"
-            >
-              <ChevronRight className="w-7 h-7" />
-            </button>
-
             {/* Viewport */}
             <div ref={viewportRef} className="carousel-viewport">
               {/* Products track */}
