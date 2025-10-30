@@ -580,11 +580,19 @@ export const ProductSlider = () => {
     // Sync with actual scroll position first
     syncCurrentIndexWithScroll();
     
-    currentIndexRef.current++;
+    // Calculate max index based on mobile or desktop
+    const isMobile = window.innerWidth < 768;
+    const maxIndex = isMobile 
+      ? Math.max(0, baseProducts.length - 2)
+      : Math.max(0, baseProducts.length - itemsVisibleRef.current);
     
-    // Loop back to start
-    if (currentIndexRef.current > baseProducts.length - itemsVisibleRef.current) {
+    // Check if we're already at the end
+    if (currentIndexRef.current >= maxIndex) {
+      // Loop back to start
       currentIndexRef.current = 0;
+    } else {
+      // Move to next
+      currentIndexRef.current++;
     }
     
     updatePosition(true);
@@ -597,11 +605,19 @@ export const ProductSlider = () => {
     // Sync with actual scroll position first
     syncCurrentIndexWithScroll();
     
-    currentIndexRef.current--;
+    // Calculate max index based on mobile or desktop
+    const isMobile = window.innerWidth < 768;
+    const maxIndex = isMobile 
+      ? Math.max(0, baseProducts.length - 2)
+      : Math.max(0, baseProducts.length - itemsVisibleRef.current);
     
-    // Loop to end
-    if (currentIndexRef.current < 0) {
-      currentIndexRef.current = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    // Check if we're at the start
+    if (currentIndexRef.current <= 0) {
+      // Loop to end
+      currentIndexRef.current = maxIndex;
+    } else {
+      // Move to previous
+      currentIndexRef.current--;
     }
     
     updatePosition(true);
