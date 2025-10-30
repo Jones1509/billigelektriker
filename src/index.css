@@ -667,7 +667,7 @@ All colors MUST be HSL.
   /* Viewport - visible area */
   .carousel-viewport {
     overflow-x: visible;
-    overflow-y: hidden;
+    overflow-y: visible;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     cursor: grab;
