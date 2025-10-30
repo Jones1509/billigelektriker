@@ -693,6 +693,9 @@ All colors MUST be HSL.
     scrollbar-width: none;
     -ms-overflow-style: none;
     position: relative;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 
   .carousel-viewport::-webkit-scrollbar {
@@ -710,6 +713,10 @@ All colors MUST be HSL.
     width: fit-content;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   /* Product card base - width controlled by JavaScript */

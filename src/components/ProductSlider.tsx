@@ -513,8 +513,8 @@ export const ProductSlider = () => {
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
     let velocity = initialVelocity;
-    const friction = 0.94; // Smooth deceleration
-    const minVelocity = 0.2; // Stop tidligere
+    const friction = 0.88; // Hurtig stop
+    const minVelocity = 0.1; // Stop meget tidligt
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity) {
@@ -647,9 +647,9 @@ export const ProductSlider = () => {
   }, [baseProducts.length, clearAutoSnap]);
 
   const handleTouchEnd = useCallback(() => {
-    // Apply momentum hvis hurtig swipe (højere threshold for mere kontrol)
-    if (Math.abs(velocityRef.current) > 1.0) {
-      applyMomentum(-velocityRef.current * 10); // Meget reduceret for kontrolleret scroll
+    // Kun meget minimal momentum ved meget hurtige swipes
+    if (Math.abs(velocityRef.current) > 2.0) {
+      applyMomentum(-velocityRef.current * 5); // Meget lille momentum
     } else {
       // Ingen momentum - sync index
       const currentScroll = getCurrentScroll();
