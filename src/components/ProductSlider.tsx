@@ -1,21 +1,57 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, COLLECTION_PRODUCTS_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, COLLECTION_PRODUCTS_QUERY, COLLECTIONS_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
-// Collection handles mapping
-const COLLECTION_HANDLES = {
-  popular: 'mest-populaer',
-  new: 'nyhed',
-  recommended: 'anbefalet'
-};
-
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
+  const [collectionHandles, setCollectionHandles] = useState({
+    popular: 'mest-populaer',
+    new: 'nyhed',
+    recommended: 'anbefalet'
+  });
+  
+  // Fetch all collections to find correct handles
+  useEffect(() => {
+    const fetchCollections = async () => {
+      try {
+        const response = await storefrontApiRequest(COLLECTIONS_QUERY, { first: 20 });
+        const collections = response.data.collections.edges;
+        
+        console.log('📦 Available Collections:', collections.map((c: any) => ({
+          title: c.node.title,
+          handle: c.node.handle
+        })));
+        
+        // Try to match collections by title
+        const handles: any = { ...collectionHandles };
+        
+        collections.forEach((edge: any) => {
+          const title = edge.node.title.toLowerCase();
+          const handle = edge.node.handle;
+          
+          if (title.includes('popul') || title.includes('mest')) {
+            handles.popular = handle;
+          } else if (title.includes('ny') || title.includes('new')) {
+            handles.new = handle;
+          } else if (title.includes('anbef') || title.includes('recommend')) {
+            handles.recommended = handle;
+          }
+        });
+        
+        console.log('🎯 Mapped handles:', handles);
+        setCollectionHandles(handles);
+      } catch (error) {
+        console.error('Error fetching collections:', error);
+      }
+    };
+    
+    fetchCollections();
+  }, []);
   
   // DOM refs
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -40,15 +76,24 @@ export const ProductSlider = () => {
   const lastTimeRef = useRef(0);
   
   const { data, isLoading } = useQuery({
-    queryKey: ['collection-products', activeTab],
+    queryKey: ['collection-products', activeTab, collectionHandles[activeTab]],
     queryFn: async () => {
-      const collectionHandle = COLLECTION_HANDLES[activeTab];
+      const collectionHandle = collectionHandles[activeTab];
+      console.log(`🔍 Fetching collection: ${collectionHandle} for tab: ${activeTab}`);
+      
       const response = await storefrontApiRequest(COLLECTION_PRODUCTS_QUERY, { 
         handle: collectionHandle,
         first: 50 
       });
+      
+      if (!response.data.collectionByHandle) {
+        console.error(`❌ Collection not found: ${collectionHandle}`);
+        return [];
+      }
+      
       return response.data.collectionByHandle?.products.edges as ShopifyProduct[] || [];
     },
+    enabled: !!collectionHandles[activeTab],
   });
 
   // Use products from collection directly

@@ -160,6 +160,20 @@ export const COLLECTION_PRODUCTS_QUERY = `
   }
 `;
 
+export const COLLECTIONS_QUERY = `
+  query GetCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+        }
+      }
+    }
+  }
+`;
+
 const CART_CREATE_MUTATION = `
   mutation cartCreate($input: CartInput!) {
     cartCreate(input: $input) {
