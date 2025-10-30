@@ -6,6 +6,16 @@ import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect, useCallback } from "react";
 
+// ============================================
+// KONFIGURATION - Skift dine collection handles her
+// ============================================
+const COLLECTION_CONFIG = {
+  popular: 'mest-populaer',
+  new: 'nyheder', 
+  recommended: 'anbefalet'
+};
+// ============================================
+
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
@@ -34,10 +44,10 @@ export const ProductSlider = () => {
   
   // Fetch products from popular collection
   const { data: popularData, isLoading: popularLoading } = useQuery({
-    queryKey: ['collection-popular'],
+    queryKey: ['collection-popular', COLLECTION_CONFIG.popular],
     queryFn: async () => {
       const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: 'mest-populaer',
+        handle: COLLECTION_CONFIG.popular,
         first: 8 
       });
       return response.data.collection?.products?.edges as ShopifyProduct[] || [];
@@ -46,10 +56,10 @@ export const ProductSlider = () => {
 
   // Fetch products from new collection
   const { data: newData, isLoading: newLoading } = useQuery({
-    queryKey: ['collection-new'],
+    queryKey: ['collection-new', COLLECTION_CONFIG.new],
     queryFn: async () => {
       const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: 'nyheder',
+        handle: COLLECTION_CONFIG.new,
         first: 8 
       });
       return response.data.collection?.products?.edges as ShopifyProduct[] || [];
@@ -58,10 +68,10 @@ export const ProductSlider = () => {
 
   // Fetch products from recommended collection
   const { data: recommendedData, isLoading: recommendedLoading } = useQuery({
-    queryKey: ['collection-recommended'],
+    queryKey: ['collection-recommended', COLLECTION_CONFIG.recommended],
     queryFn: async () => {
       const response = await storefrontApiRequest(COLLECTION_QUERY, { 
-        handle: 'anbefalet',
+        handle: COLLECTION_CONFIG.recommended,
         first: 8 
       });
       return response.data.collection?.products?.edges as ShopifyProduct[] || [];
@@ -785,14 +795,15 @@ export const ProductSlider = () => {
           
           {/* Tab buttons */}
           <nav aria-label="Produktfiltre">
-            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full bg-muted" role="tablist">
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 p-1.5 mb-5 rounded-full bg-muted relative z-10" role="tablist">
               <button
                 onClick={() => handleTabChange('popular')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
                   activeTab === 'popular' 
                     ? 'bg-background shadow-md text-primary font-semibold' 
                     : 'bg-transparent text-muted-foreground hover:text-primary'
                 }`}
+                style={{ pointerEvents: 'auto' }}
                 role="tab"
                 aria-selected={activeTab === 'popular'}
               >
@@ -800,11 +811,12 @@ export const ProductSlider = () => {
               </button>
               <button
                 onClick={() => handleTabChange('new')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
                   activeTab === 'new' 
                     ? 'bg-background shadow-md text-primary font-semibold' 
                     : 'bg-transparent text-muted-foreground hover:text-primary'
                 }`}
+                style={{ pointerEvents: 'auto' }}
                 role="tab"
                 aria-selected={activeTab === 'new'}
               >
@@ -812,11 +824,12 @@ export const ProductSlider = () => {
               </button>
               <button
                 onClick={() => handleTabChange('recommended')}
-                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all ${
+                className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-sm sm:text-[15px] font-medium transition-all cursor-pointer ${
                   activeTab === 'recommended' 
                     ? 'bg-background shadow-md text-primary font-semibold' 
                     : 'bg-transparent text-muted-foreground hover:text-primary'
                 }`}
+                style={{ pointerEvents: 'auto' }}
                 role="tab"
                 aria-selected={activeTab === 'recommended'}
               >
