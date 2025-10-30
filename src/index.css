@@ -813,6 +813,9 @@ All colors MUST be HSL.
     }
     
     .carousel-arrow {
+      position: absolute;
+      top: auto;
+      bottom: auto;
       margin-top: -50px;
       width: 40px;
       height: 40px;
@@ -830,7 +833,7 @@ All colors MUST be HSL.
     }
     
     .next-arrow {
-      right: 32px;
+      right: 24px;
     }
   }
 }
