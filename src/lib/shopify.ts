@@ -102,61 +102,6 @@ export const PRODUCT_BY_HANDLE_QUERY = `
   }
 `;
 
-export const COLLECTION_QUERY = `
-  query GetCollection($handle: String!, $first: Int!) {
-    collection(handle: $handle) {
-      id
-      title
-      handle
-      products(first: $first) {
-        edges {
-          node {
-            id
-            title
-            description
-            handle
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            images(first: 5) {
-              edges {
-                node {
-                  url
-                  altText
-                }
-              }
-            }
-            variants(first: 10) {
-              edges {
-                node {
-                  id
-                  title
-                  price {
-                    amount
-                    currencyCode
-                  }
-                  availableForSale
-                  selectedOptions {
-                    name
-                    value
-                  }
-                }
-              }
-            }
-            options {
-              name
-              values
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 const CART_CREATE_MUTATION = `
   mutation cartCreate($input: CartInput!) {
     cartCreate(input: $input) {
