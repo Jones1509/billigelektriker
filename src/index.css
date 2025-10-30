@@ -683,21 +683,39 @@ All colors MUST be HSL.
     width: 100%;
   }
 
-  /* Embla Carousel Styles */
-  .embla {
-    overflow: hidden;
-  }
-
-  .embla__container {
-    display: flex;
-    touch-action: pan-y;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .embla__slide {
+  /* Viewport - visible area */
+  .carousel-viewport {
+    overflow-x: visible;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     position: relative;
-    min-width: 0;
+  }
+
+  .carousel-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-viewport:active {
+    cursor: grabbing;
+  }
+
+  /* Products track */
+  .products-track {
+    display: flex;
+    gap: 28px;
+    width: fit-content;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  /* Product card base - width controlled by JavaScript */
+  .product-card {
+    flex-shrink: 0;
+    box-sizing: border-box;
   }
 
   /* Navigation arrows */
@@ -720,14 +738,14 @@ All colors MUST be HSL.
     color: #2563eb;
   }
 
-  .carousel-arrow:hover:not(:disabled) {
+  .carousel-arrow:hover {
     background: #2563eb;
     color: white;
     transform: translateY(0) scale(1.1);
     box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3);
   }
 
-  .carousel-arrow:active:not(:disabled) {
+  .carousel-arrow:active {
     transform: translateY(0) scale(0.95);
   }
 
@@ -743,6 +761,16 @@ All colors MUST be HSL.
   @media (min-width: 768px) and (max-width: 1199px) {
     .carousel-inner-wrapper {
       padding: 0 90px;
+    }
+    
+    .products-track {
+      gap: 24px;
+    }
+    
+    /* Product card width controlled by JavaScript */
+    .product-card {
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
     
     .carousel-arrow {
@@ -770,6 +798,16 @@ All colors MUST be HSL.
     
     .carousel-inner-wrapper {
       padding: 0 30px;
+    }
+    
+    .products-track {
+      gap: 16px;
+    }
+    
+    /* Product card width controlled by JavaScript */
+    .product-card {
+      flex-shrink: 0;
+      box-sizing: border-box;
     }
     
     .carousel-arrow {
