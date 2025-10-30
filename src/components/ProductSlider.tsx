@@ -332,9 +332,9 @@ export const ProductSlider = () => {
             </button>
 
             {/* Scroll container */}
-            <div ref={scrollContainerRef} className="luxury-scroll-container">
+            <div ref={scrollContainerRef} className="luxury-scroll-container" data-active-tab={activeTab}>
               {/* Products track */}
-              <div className="luxury-products-track">
+              <div className="luxury-products-track" data-active-tab={activeTab}>
                 {displayProducts.map((product, index) => (
                   <article 
                     key={`${product.node.id}-${index}`}

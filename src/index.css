@@ -812,13 +812,28 @@ All colors MUST be HSL.
     }
   }
 
-  /* TABLET - 768PX TIL 1023PX - 2 KOMPAKTE KOLONNER */
+  /* TABLET - 768PX TIL 1023PX - RESPONSIVE BASERET PÅ TAB */
   @media (min-width: 768px) and (max-width: 1023px) {
     .luxury-carousel-inner {
       padding: 40px 16px;
     }
 
-    .luxury-products-track {
+    /* Default: 2 produkter for "Mest Populær" */
+    .luxury-products-track[data-active-tab="popular"] {
+      grid-auto-columns: calc(50% - 10px);
+      gap: 20px;
+      padding: 6px;
+    }
+
+    /* 3 produkter for "Nyhed" */
+    .luxury-products-track[data-active-tab="new"] {
+      grid-auto-columns: calc(33.333% - 14px);
+      gap: 20px;
+      padding: 6px;
+    }
+
+    /* 2 produkter for "Anbefalet" */
+    .luxury-products-track[data-active-tab="recommended"] {
       grid-auto-columns: calc(50% - 10px);
       gap: 20px;
       padding: 6px;
@@ -844,14 +859,28 @@ All colors MUST be HSL.
     }
   }
 
-  /* MOBIL - UNDER 768PX - 2 KOLONNER GRID */
+  /* MOBIL - UNDER 768PX - RESPONSIVE BASERET PÅ TAB */
   @media (max-width: 767px) {
     .luxury-carousel-inner {
       padding: 40px 12px;
     }
 
-    /* 2 column grid layout - exactly like Shopify reference */
-    .luxury-products-track {
+    /* Default: 2 produkter for "Mest Populær" */
+    .luxury-products-track[data-active-tab="popular"] {
+      grid-auto-columns: calc(50% - 6px);
+      gap: 12px;
+      padding: 4px;
+    }
+
+    /* 3 produkter for "Nyhed" - små kort */
+    .luxury-products-track[data-active-tab="new"] {
+      grid-auto-columns: calc(33.333% - 8px);
+      gap: 12px;
+      padding: 4px;
+    }
+
+    /* 2 produkter for "Anbefalet" */
+    .luxury-products-track[data-active-tab="recommended"] {
       grid-auto-columns: calc(50% - 6px);
       gap: 12px;
       padding: 4px;
