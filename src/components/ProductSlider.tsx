@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, COLLECTION_QUERY, ALL_COLLECTIONS_QUERY, STOREFRONT_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -9,20 +9,6 @@ import { useState, useRef, useEffect, useCallback } from "react";
 export const ProductSlider = () => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'popular' | 'new' | 'recommended'>('popular');
-  
-  // Hent alle collections først
-  const { data: collectionsData } = useQuery({
-    queryKey: ['all-collections'],
-    queryFn: async () => {
-      const response = await storefrontApiRequest(ALL_COLLECTIONS_QUERY, { first: 20 });
-      const collections = response.data.collections.edges;
-      console.log('📦 ALLE SHOPIFY COLLECTIONS:', collections.map((c: any) => ({
-        title: c.node.title,
-        handle: c.node.handle
-      })));
-      return collections;
-    },
-  });
   
   // DOM refs
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -47,29 +33,21 @@ export const ProductSlider = () => {
   const lastTimeRef = useRef(0);
   
   const { data, isLoading } = useQuery({
-    queryKey: ['tab-products', activeTab],
+    queryKey: ['slider-products'],
     queryFn: async () => {
-      console.log(`🔍 Henter produkter for tab: "${activeTab}"`);
-      
-      // Fallback til alle produkter hvis ingen collections
       const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
-      const allProducts = response.data.products.edges as ShopifyProduct[];
-      
-      console.log(`✅ Fandt ${allProducts.length} produkter totalt`);
-      
-      // Vis forskellige produkter per tab
-      if (activeTab === 'popular') {
-        return allProducts.slice(0, 6);
-      } else if (activeTab === 'new') {
-        return allProducts.slice(3, 9);
-      } else {
-        return allProducts.slice(6, 12);
-      }
+      return response.data.products.edges as ShopifyProduct[];
     },
   });
 
-  // Get base products
-  const baseProducts = data || [];
+  // Get base products based on active tab
+  const baseProducts = data ? (
+    activeTab === 'popular' 
+      ? data.slice(0, 12)
+      : activeTab === 'new'
+      ? data.slice(4, 16)
+      : data.slice(8, 20)
+  ) : [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
@@ -748,15 +726,12 @@ export const ProductSlider = () => {
       handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, clearAutoSnap]);
 
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
-    console.log('🔴 TAB CHANGE CLICKED:', tab);
-    console.log('🔴 Current activeTab:', activeTab);
     setActiveTab(tab);
     currentIndexRef.current = 0;
     if (trackRef.current) {
       trackRef.current.style.transition = 'none';
       trackRef.current.style.transform = 'translateX(0px)';
     }
-    console.log('🔴 Tab changed to:', tab);
   };
 
   return (
