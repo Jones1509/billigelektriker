@@ -83,27 +83,27 @@ export const ProductSlider = () => {
     
     // MOBILE SPECIAL BEREGNING
     if (width < 768) {
-      // På mobil: 2 kort skal passe præcist i viewport
-      // Card width = (viewport - gap) / 2 - lille margin
-      const margin = 1; // 1px margin på hver side
-      cardWidthRef.current = Math.floor((viewportWidth - gapRef.current - (margin * 2)) / 2);
-      
-      console.log('=== MOBILE CARD WIDTH ===');
+      console.log('=== MOBILE DIMENSION CALC ===');
       console.log('Viewport width:', viewportWidth);
       console.log('Gap:', gapRef.current);
-      console.log('Calculated card width:', cardWidthRef.current);
-      console.log('Verification: 2 cards + gap =', (cardWidthRef.current * 2) + gapRef.current, '(should be <=', viewportWidth, ')');
-      console.log('========================');
+      
+      // 2 kort skal passe i viewport med gap imellem
+      // cardWidth × 2 + gap = viewport
+      // cardWidth = (viewport - gap) / 2
+      const calculatedWidth = (viewportWidth - gapRef.current) / 2;
+      
+      // Afrund ned og træk lidt fra for sikkerhed
+      cardWidthRef.current = Math.floor(calculatedWidth) - 1;
+      
+      console.log('Calculated card width:', calculatedWidth);
+      console.log('Final card width:', cardWidthRef.current);
+      console.log('Verification: 2 cards + gap =', (cardWidthRef.current * 2 + gapRef.current));
+      console.log('============================');
     } else {
       // Desktop/Tablet: Calculate precise product width
-      // Total gap space between N products = (N-1) × gap
       const totalGaps = (itemsVisibleRef.current - 1) * gapRef.current;
-      
-      // Available space for products = viewport - gaps - safety margin
-      const safetyMargin = 4; // 4px extra margin to avoid clipping
+      const safetyMargin = 4;
       const availableWidth = viewportWidth - totalGaps - safetyMargin;
-      
-      // Product width = available space / number of products
       cardWidthRef.current = Math.floor(availableWidth / itemsVisibleRef.current);
     }
     
@@ -115,6 +115,17 @@ export const ProductSlider = () => {
       cardEl.style.minWidth = `${cardWidthRef.current}px`;
       cardEl.style.maxWidth = `${cardWidthRef.current}px`;
     });
+    
+    // Verificer faktisk bredde
+    if (cards.length > 0) {
+      const firstCard = cards[0] as HTMLElement;
+      const actualWidth = Math.round(firstCard.getBoundingClientRect().width);
+      
+      if (Math.abs(actualWidth - cardWidthRef.current) > 2) {
+        console.log('Adjusting card width from', cardWidthRef.current, 'to', actualWidth);
+        cardWidthRef.current = actualWidth;
+      }
+    }
     
     // Log final dimensions
     console.log('Final dimensions:', {
@@ -187,9 +198,12 @@ export const ProductSlider = () => {
   // Start auto-snap timer
   const startAutoSnap = useCallback(() => {
     clearAutoSnap();
+    const snapDelay = window.innerWidth < 768 ? 3000 : 5000;
+    console.log('Starting auto-snap timer:', snapDelay, 'ms');
     autoSnapTimerRef.current = setTimeout(() => {
+      console.log('Auto-snap timer triggered');
       snapToNearest();
-    }, 5000);
+    }, snapDelay);
   }, [clearAutoSnap]);
 
   // Sync currentIndex with actual scroll position
@@ -203,165 +217,232 @@ export const ProductSlider = () => {
     // Calculate which index this corresponds to
     const calculatedIndex = Math.round(currentScroll / cardPlusGap);
     
-    // Constrain to valid range
-    const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    // Constrain to valid range based on mobile or desktop
+    const isMobile = window.innerWidth < 768;
+    const maxIndex = isMobile 
+      ? Math.max(0, baseProducts.length - 2)
+      : Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    
     currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+    console.log('Synced index to:', currentIndexRef.current);
   }, [getCurrentScroll, baseProducts.length]);
 
-  // Snap to nearest full product position
-  const snapToNearest = useCallback(() => {
-    console.log('=== SNAP TO NEAREST ===');
+  // Verify mobile snap - check if 2 cards are fully visible
+  const verifyMobileSnap = useCallback((index: number) => {
+    console.log('--- Verify Mobile Snap ---');
     
-    const isMobile = window.innerWidth < 768;
+    if (!viewportRef.current) return;
     
-    if (!isMobile) {
-      // Desktop/Tablet - normal snap
-      calculateDimensions();
-      const currentScroll = getCurrentScroll();
-      const cardPlusGap = cardWidthRef.current + gapRef.current;
-      
-      console.log('Current scroll:', currentScroll);
-      console.log('Card + gap:', cardPlusGap);
-      
-      if (cardPlusGap === 0 || !trackRef.current) {
-        console.error('Card width or gap is 0, cannot snap');
-        return;
-      }
-      
-      // Beregn hvilket index bruger er tættest på
-      const rawIndex = currentScroll / cardPlusGap;
-      let nearestIndex = Math.round(rawIndex);
-      
-      console.log('Raw index:', rawIndex);
-      console.log('Nearest index (before clamp):', nearestIndex);
-      
-      // Beregn max index baseret på items visible
-      const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
-      
-      console.log('Max allowed index:', maxIndex);
-      console.log('Items visible:', itemsVisibleRef.current);
-      console.log('Total cards:', baseProducts.length);
-      
-      // KRITISK: Begræns til valid range
-      nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
-      
-      console.log('Final nearest index:', nearestIndex);
-      
-      // Opdater state
-      currentIndexRef.current = nearestIndex;
-      
-      // Beregn præcis position
-      const targetPosition = Math.round(nearestIndex * cardPlusGap);
-      
-      console.log('Target position:', targetPosition);
-      
-      // Anvend snap
-      trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
-      
-      isTransitioningRef.current = true;
-      setTimeout(() => { 
-        isTransitioningRef.current = false; 
-      }, 400);
-      
-      console.log('======================');
+    const cards = Array.from(viewportRef.current.querySelectorAll('.product-card'));
+    const card1 = cards[index];
+    const card2 = cards[index + 1];
+    
+    if (!card1 || !card2) {
+      console.log('Cards not found for verification');
       return;
     }
     
-    // ===== MOBIL SNAP - VIEWPORT BASED APPROACH =====
+    const viewport = viewportRef.current.getBoundingClientRect();
+    const rect1 = (card1 as HTMLElement).getBoundingClientRect();
+    const rect2 = (card2 as HTMLElement).getBoundingClientRect();
     
-    console.log('=== MOBILE SNAP START ===');
-    
-    // Genberegn dimensioner
-    calculateDimensions();
-    
-    // Få viewport og track info
-    const viewport = viewportRef.current;
-    const track = trackRef.current;
-    if (!viewport || !track) return;
-    
-    const viewportRect = viewport.getBoundingClientRect();
-    const viewportLeft = viewportRect.left;
-    const viewportRight = viewportRect.right;
-    const viewportWidth = viewportRect.width;
-    
-    console.log('Viewport:', { left: viewportLeft, right: viewportRight, width: viewportWidth });
-    
-    // Find hvilket kort er tættest på at være ved venstre kant
-    const cards = Array.from(viewport.querySelectorAll('.product-card'));
-    let closestIndex = 0;
-    let closestDistance = Infinity;
-    
-    cards.forEach((card, index) => {
-      const cardRect = card.getBoundingClientRect();
-      const cardLeft = cardRect.left;
-      
-      // Distance fra card's venstre kant til viewport's venstre kant
-      const distance = Math.abs(cardLeft - viewportLeft);
-      
-      console.log(`Card ${index}:`, {
-        left: cardLeft,
-        distanceToViewportLeft: distance
-      });
-      
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
+    console.log('Viewport:', {
+      left: viewport.left,
+      right: viewport.right,
+      width: viewport.width
     });
     
-    console.log('Closest card to left edge:', closestIndex);
+    const card1Visible = rect1.left >= viewport.left - 2 && rect1.right <= viewport.right + 2;
+    const card2Visible = rect2.left >= viewport.left - 2 && rect2.right <= viewport.right + 2;
     
-    // KRITISK: På mobil skal vi kunne se 2 kort
-    // Så hvis closestIndex er > (total - 2), juster ned
-    const maxValidIndex = baseProducts.length - 2;
-    const targetIndex = Math.min(closestIndex, maxValidIndex);
+    console.log('Card', index, ':', {
+      left: rect1.left,
+      right: rect1.right,
+      width: rect1.width,
+      fullyVisible: card1Visible
+    });
     
-    console.log('Target index (adjusted):', targetIndex);
-    console.log('Will show products:', targetIndex, 'and', targetIndex + 1);
+    console.log('Card', index + 1, ':', {
+      left: rect2.left,
+      right: rect2.right,
+      width: rect2.width,
+      fullyVisible: card2Visible
+    });
     
-    // Beregn præcis position
+    const bothVisible = card1Visible && card2Visible;
+    
+    if (bothVisible) {
+      console.log('✅ SUCCESS: Both cards fully visible');
+    } else {
+      console.log('❌ PROBLEM: Cards not properly aligned');
+    }
+  }, []);
+
+  // Snap to nearest - Desktop version
+  const snapToNearestDesktop = useCallback(() => {
+    console.log('--- Desktop/Tablet Snap ---');
+    
+    calculateDimensions();
+    
+    const currentScroll = getCurrentScroll();
     const cardPlusGap = cardWidthRef.current + gapRef.current;
-    const targetPosition = targetIndex * cardPlusGap;
     
-    console.log('Card width:', cardWidthRef.current);
-    console.log('Gap:', gapRef.current);
+    console.log('Current scroll:', currentScroll);
+    console.log('Card + gap:', cardPlusGap);
+    
+    if (cardPlusGap === 0 || !trackRef.current) {
+      console.error('Card width or gap is 0');
+      return;
+    }
+    
+    const rawIndex = currentScroll / cardPlusGap;
+    let nearestIndex = Math.round(rawIndex);
+    
+    const maxIndex = Math.max(0, baseProducts.length - itemsVisibleRef.current);
+    nearestIndex = Math.max(0, Math.min(nearestIndex, maxIndex));
+    
+    console.log('Nearest index:', nearestIndex, '(max:', maxIndex, ')');
+    
+    currentIndexRef.current = nearestIndex;
+    
+    const targetPosition = Math.round(nearestIndex * cardPlusGap);
+    
     console.log('Target position:', targetPosition);
     
-    // Opdater state
-    currentIndexRef.current = targetIndex;
-    
-    // Anvend snap
-    track.style.transition = 'transform 0.4s ease-out';
-    track.style.transform = `translateX(-${targetPosition}px)`;
+    trackRef.current.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
     
     isTransitioningRef.current = true;
     setTimeout(() => {
       isTransitioningRef.current = false;
-    }, 450);
-    
-    console.log('=== MOBILE SNAP END ===');
+    }, 400);
   }, [getCurrentScroll, calculateDimensions, baseProducts.length]);
+
+  // Snap to nearest - Mobile version
+  const snapToNearestMobile = useCallback(() => {
+    console.log('--- Mobile Snap ---');
+    
+    calculateDimensions();
+    
+    const currentScroll = getCurrentScroll();
+    const cardPlusGap = cardWidthRef.current + gapRef.current;
+    
+    console.log('Current scroll:', currentScroll);
+    console.log('Card width:', cardWidthRef.current);
+    console.log('Gap:', gapRef.current);
+    console.log('Card + gap:', cardPlusGap);
+    
+    if (cardPlusGap === 0 || !trackRef.current) {
+      console.error('Card width or gap is 0');
+      return;
+    }
+    
+    // Beregn hvor mange produkter vi har scrollet
+    const scrolledProducts = currentScroll / cardPlusGap;
+    
+    console.log('Scrolled products:', scrolledProducts);
+    
+    // Rund til nærmeste helt tal
+    let nearestIndex = Math.round(scrolledProducts);
+    
+    console.log('Nearest index (raw):', nearestIndex);
+    
+    // KRITISK: På mobil skal vi altid kunne se 2 produkter
+    // Max index = total produkter - 2
+    const maxMobileIndex = Math.max(0, baseProducts.length - 2);
+    
+    console.log('Max mobile index:', maxMobileIndex, '(total cards:', baseProducts.length, ')');
+    
+    // Begræns
+    nearestIndex = Math.max(0, Math.min(nearestIndex, maxMobileIndex));
+    
+    console.log('Final index:', nearestIndex);
+    console.log('Will show products:', nearestIndex, 'and', nearestIndex + 1);
+    
+    // Opdater state
+    currentIndexRef.current = nearestIndex;
+    
+    // Beregn præcis position
+    const targetPosition = Math.round(nearestIndex * cardPlusGap);
+    
+    console.log('Target position:', targetPosition, 'px');
+    
+    // Anvend snap
+    trackRef.current.style.transition = 'transform 0.4s ease-out';
+    trackRef.current.style.transform = `translateX(-${targetPosition}px)`;
+    
+    isTransitioningRef.current = true;
+    setTimeout(() => {
+      isTransitioningRef.current = false;
+      
+      // Verificer efter snap
+      verifyMobileSnap(nearestIndex);
+    }, 450);
+  }, [getCurrentScroll, calculateDimensions, verifyMobileSnap, baseProducts.length]);
+
+  // Snap to nearest full product position
+  const snapToNearest = useCallback(() => {
+    console.log('=== SNAP TO NEAREST START ===');
+    
+    // Check om mobil
+    const isMobile = window.innerWidth < 768;
+    
+    if (isMobile) {
+      // MOBIL SNAP LOGIK
+      snapToNearestMobile();
+    } else {
+      // DESKTOP/TABLET SNAP LOGIK
+      snapToNearestDesktop();
+    }
+    
+    console.log('=== SNAP TO NEAREST END ===');
+  }, [snapToNearestMobile, snapToNearestDesktop]);
 
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
+    console.log('Starting momentum with velocity:', initialVelocity);
+    
     let velocity = initialVelocity;
     const friction = 0.92;
     const minVelocity = 0.5;
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity) {
-        // Recalculate dimensions before snap to ensure accuracy
+        console.log('Momentum ended');
+        
+        // Recalculate dimensions before snap
         calculateDimensions();
-        // Sync before auto-snap
-        syncCurrentIndexWithScroll();
+        
+        // Sync index with mobile-aware logic
+        const currentScroll = getCurrentScroll();
+        const cardPlusGap = cardWidthRef.current + gapRef.current;
+        
+        if (cardPlusGap > 0) {
+          const calculatedIndex = Math.round(currentScroll / cardPlusGap);
+          const isMobile = window.innerWidth < 768;
+          const maxIndex = isMobile 
+            ? Math.max(0, baseProducts.length - 2)
+            : Math.max(0, baseProducts.length - itemsVisibleRef.current);
+          currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+          console.log('After momentum - synced index to:', currentIndexRef.current);
+        }
+        
+        // Start auto-snap
         startAutoSnap();
         return;
       }
       
       const currentScroll = getCurrentScroll();
       const newScroll = currentScroll + velocity;
-      const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
+      
+      // Calculate max scroll with mobile awareness
+      const cardPlusGap = cardWidthRef.current + gapRef.current;
+      const isMobile = window.innerWidth < 768;
+      const maxIndex = isMobile 
+        ? Math.max(0, baseProducts.length - 2)
+        : Math.max(0, baseProducts.length - itemsVisibleRef.current);
+      const maxScroll = maxIndex * cardPlusGap;
+      
       const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
       
       if (trackRef.current) {
@@ -373,7 +454,7 @@ export const ProductSlider = () => {
     };
     
     requestAnimationFrame(animate);
-  }, [getCurrentScroll, calculateDimensions, syncCurrentIndexWithScroll, startAutoSnap, baseProducts.length]);
+  }, [getCurrentScroll, calculateDimensions, startAutoSnap, baseProducts.length]);
 
   // Navigate to next product
   const navigateNext = useCallback(() => {
@@ -446,15 +527,33 @@ export const ProductSlider = () => {
   }, [baseProducts.length]);
 
   const handleTouchEnd = useCallback(() => {
-    // Sync index with actual position
-    syncCurrentIndexWithScroll();
+    console.log('Touch ended');
     
+    // Apply momentum hvis hurtig swipe
     if (Math.abs(velocityRef.current) > 0.5) {
+      console.log('Applying momentum, velocity:', velocityRef.current);
       applyMomentum(-velocityRef.current * 50);
     } else {
+      // Ingen momentum - snap direkte
+      console.log('No momentum, direct snap');
+      
+      // Sync index først med mobile awareness
+      const currentScroll = getCurrentScroll();
+      const cardPlusGap = cardWidthRef.current + gapRef.current;
+      if (cardPlusGap > 0) {
+        const calculatedIndex = Math.round(currentScroll / cardPlusGap);
+        const isMobile = window.innerWidth < 768;
+        const maxIndex = isMobile 
+          ? Math.max(0, baseProducts.length - 2)
+          : Math.max(0, baseProducts.length - itemsVisibleRef.current);
+        currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+        console.log('Synced index to:', currentIndexRef.current);
+      }
+      
+      // Start auto-snap
       startAutoSnap();
     }
-  }, [syncCurrentIndexWithScroll, applyMomentum, startAutoSnap]);
+  }, [getCurrentScroll, applyMomentum, startAutoSnap, baseProducts.length]);
 
   // Mouse drag handlers
   const handleMouseDown = useCallback((e: MouseEvent) => {
@@ -484,7 +583,6 @@ export const ProductSlider = () => {
     
     const newScroll = startScrollLeftRef.current + diff;
     const maxScroll = (baseProducts.length - itemsVisibleRef.current) * (cardWidthRef.current + gapRef.current);
-    // Add buffer for smoother edge experience
     const clampedScroll = Math.max(-10, Math.min(newScroll, maxScroll + 10));
     
     if (trackRef.current) {
@@ -508,15 +606,26 @@ export const ProductSlider = () => {
       viewportRef.current.style.cursor = 'grab';
     }
     
-    // Sync index with actual position
-    syncCurrentIndexWithScroll();
-    
+    // Apply momentum hvis hurtig drag
     if (Math.abs(velocityRef.current) > 0.5) {
+      console.log('Mouse drag momentum, velocity:', velocityRef.current);
       applyMomentum(-velocityRef.current * 50);
     } else {
+      // Sync index først
+      const currentScroll = getCurrentScroll();
+      const cardPlusGap = cardWidthRef.current + gapRef.current;
+      if (cardPlusGap > 0) {
+        const calculatedIndex = Math.round(currentScroll / cardPlusGap);
+        const isMobile = window.innerWidth < 768;
+        const maxIndex = isMobile 
+          ? Math.max(0, baseProducts.length - 2)
+          : Math.max(0, baseProducts.length - itemsVisibleRef.current);
+        currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
+      }
+      
       startAutoSnap();
     }
-  }, [syncCurrentIndexWithScroll, applyMomentum, startAutoSnap]);
+  }, [getCurrentScroll, applyMomentum, startAutoSnap, baseProducts.length]);
 
   // Wheel/trackpad handler
   const handleWheel = useCallback((e: WheelEvent) => {
