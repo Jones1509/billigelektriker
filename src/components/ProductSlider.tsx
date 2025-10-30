@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { storefrontApiRequest, STOREFRONT_QUERY } from "@/lib/shopify";
+import { storefrontApiRequest, COLLECTION_QUERY } from "@/lib/shopify";
 import { ShopifyProduct } from "@/types/shopify";
 import { ProductCard } from "./ProductCard";
 import { Loader2, Zap, ChevronLeft, ChevronRight } from "lucide-react";
@@ -32,22 +32,42 @@ export const ProductSlider = () => {
   const lastXRef = useRef(0);
   const lastTimeRef = useRef(0);
   
+  // Collection handles mapping
+  const collectionHandles: Record<'popular' | 'new' | 'recommended', string> = {
+    popular: 'collection-1',
+    new: 'collection-2',
+    recommended: 'collection-3'
+  };
+
   const { data, isLoading } = useQuery({
-    queryKey: ['slider-products'],
+    queryKey: ['collection-products', activeTab],
     queryFn: async () => {
-      const response = await storefrontApiRequest(STOREFRONT_QUERY, { first: 12 });
-      return response.data.products.edges as ShopifyProduct[];
+      const handle = collectionHandles[activeTab];
+      console.log(`🔍 Henter produkter fra collection: "${handle}" (${activeTab})`);
+      
+      try {
+        const response = await storefrontApiRequest(COLLECTION_QUERY, { 
+          handle,
+          first: 12 
+        });
+        
+        if (response.data.collection?.products?.edges) {
+          const products = response.data.collection.products.edges as ShopifyProduct[];
+          console.log(`✅ Fandt ${products.length} produkter i "${handle}"`);
+          return products;
+        } else {
+          console.warn(`⚠️ Collection "${handle}" ikke fundet eller har ingen produkter`);
+          return [];
+        }
+      } catch (error) {
+        console.error(`❌ Fejl ved hentning af collection "${handle}":`, error);
+        return [];
+      }
     },
   });
 
-  // Get base products based on active tab
-  const baseProducts = data ? (
-    activeTab === 'popular' 
-      ? data.slice(0, 12)
-      : activeTab === 'new'
-      ? data.slice(4, 16)
-      : data.slice(8, 20)
-  ) : [];
+  // Get base products from collection
+  const baseProducts = data || [];
 
   // Calculate dimensions based on screen width
   const calculateDimensions = useCallback(() => {
