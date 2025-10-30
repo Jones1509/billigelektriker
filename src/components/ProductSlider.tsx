@@ -512,16 +512,12 @@ export const ProductSlider = () => {
 
   // Apply momentum scroll
   const applyMomentum = useCallback((initialVelocity: number) => {
-    console.log('Starting momentum, velocity:', initialVelocity);
-    
     let velocity = initialVelocity;
-    const friction = 0.95; // Høj friction for hurtig stop
-    const minVelocity = 0.3; // Stop tidligere
+    const friction = 0.94; // Smooth deceleration
+    const minVelocity = 0.2; // Stop tidligere
     
     const animate = () => {
       if (Math.abs(velocity) < minVelocity) {
-        console.log('Momentum ended, starting auto-snap');
-        
         // Recalculate dimensions before snap
         calculateDimensions();
         
@@ -536,14 +532,11 @@ export const ProductSlider = () => {
             ? Math.max(0, baseProducts.length - 2)
             : Math.max(0, baseProducts.length - itemsVisibleRef.current);
           currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
-          console.log('After momentum - synced index to:', currentIndexRef.current);
         }
         
-        // Start auto-snap timer inline to avoid circular dependency
+        // Start auto-snap timer
         clearAutoSnap();
-        console.log('Starting auto-snap timer: 5000 ms');
         autoSnapTimerRef.current = setTimeout(() => {
-          console.log('⏰ AUTO-SNAP TIMER FIRED');
           snapToNearest();
         }, 5000);
         return;
@@ -563,7 +556,7 @@ export const ProductSlider = () => {
       const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
       
       if (trackRef.current) {
-        trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
+        trackRef.current.style.transform = `translate3d(-${Math.round(clampedScroll)}px, 0, 0)`;
       }
       
       velocity *= friction;
@@ -623,7 +616,7 @@ export const ProductSlider = () => {
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
     const currentX = e.touches[0].pageX;
-    const diff = (startXRef.current - currentX) * 0.8; // Reduceret for mere kontrol
+    const diff = (startXRef.current - currentX);
     
     const newScroll = startScrollLeftRef.current + diff;
     const isMobile = window.innerWidth < 768;
@@ -636,13 +629,15 @@ export const ProductSlider = () => {
     const clampedScroll = Math.max(0, Math.min(newScroll, maxScroll));
     
     if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(-${Math.round(clampedScroll)}px)`;
+      trackRef.current.style.transform = `translate3d(-${Math.round(clampedScroll)}px, 0, 0)`;
     }
     
     const now = Date.now();
     const dt = now - lastTimeRef.current;
-    const dx = currentX - lastXRef.current;
-    velocityRef.current = dx / dt;
+    if (dt > 0) {
+      const dx = currentX - lastXRef.current;
+      velocityRef.current = dx / dt;
+    }
     
     lastXRef.current = currentX;
     lastTimeRef.current = now;
@@ -652,17 +647,11 @@ export const ProductSlider = () => {
   }, [baseProducts.length, clearAutoSnap]);
 
   const handleTouchEnd = useCallback(() => {
-    console.log('=== TOUCH END ===');
-    console.log('Velocity:', velocityRef.current);
-    
     // Apply momentum hvis hurtig swipe (højere threshold for mere kontrol)
-    if (Math.abs(velocityRef.current) > 1.5) {
-      console.log('Applying momentum');
-      applyMomentum(-velocityRef.current * 8); // Meget reduceret for kontrolleret scroll
+    if (Math.abs(velocityRef.current) > 1.0) {
+      applyMomentum(-velocityRef.current * 10); // Meget reduceret for kontrolleret scroll
     } else {
       // Ingen momentum - sync index
-      console.log('No momentum, syncing index');
-      
       const currentScroll = getCurrentScroll();
       const cardPlusGap = cardWidthRef.current + gapRef.current;
       if (cardPlusGap > 0) {
@@ -672,18 +661,14 @@ export const ProductSlider = () => {
           ? Math.max(0, baseProducts.length - 2)
           : Math.max(0, baseProducts.length - itemsVisibleRef.current);
         currentIndexRef.current = Math.max(0, Math.min(calculatedIndex, maxIndex));
-        console.log('Synced index to:', currentIndexRef.current);
       }
     }
     
-    // KRITISK: Start auto-snap timer ALTID efter touch (inline to avoid circular dependency)
+    // KRITISK: Start auto-snap timer ALTID efter touch
     clearAutoSnap();
-    console.log('Starting 5 second auto-snap timer...');
     autoSnapTimerRef.current = setTimeout(() => {
-      console.log('⏰ AUTO-SNAP TIMER FIRED');
       snapToNearest();
     }, 5000);
-    console.log('Timer started, will snap in 5 seconds');
   }, [getCurrentScroll, applyMomentum, clearAutoSnap, snapToNearest, baseProducts.length]);
 
   // Mouse drag handlers
