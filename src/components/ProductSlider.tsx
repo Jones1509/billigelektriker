@@ -103,24 +103,48 @@ export const ProductSlider = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        const scrollAmount = container.clientWidth * 0.85;
-        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        // Scroll præcis én produktbredde + gap
+        const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+        if (productCard) {
+          const productWidth = productCard.offsetWidth;
+          const gap = 28; // Match med CSS gap
+          const scrollAmount = productWidth + gap;
+          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
-        const scrollAmount = container.clientWidth * 0.85;
-        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        // Scroll præcis én produktbredde + gap
+        const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+        if (productCard) {
+          const productWidth = productCard.offsetWidth;
+          const gap = 28; // Match med CSS gap
+          const scrollAmount = productWidth + gap;
+          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
       }
     };
 
     // Button click handlers
     const handlePrevClick = () => {
-      const scrollAmount = container.clientWidth * 0.85;
-      container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      // Scroll præcis én produktbredde + gap
+      const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+      if (productCard) {
+        const productWidth = productCard.offsetWidth;
+        const gap = 28; // Match med CSS gap
+        const scrollAmount = productWidth + gap;
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }
     };
 
     const handleNextClick = () => {
-      const scrollAmount = container.clientWidth * 0.85;
-      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      // Scroll præcis én produktbredde + gap
+      const productCard = container.querySelector('.luxury-product-card') as HTMLElement;
+      if (productCard) {
+        const productWidth = productCard.offsetWidth;
+        const gap = 28; // Match med CSS gap
+        const scrollAmount = productWidth + gap;
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
     };
 
     // Scroll event for button states
