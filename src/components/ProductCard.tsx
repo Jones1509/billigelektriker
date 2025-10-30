@@ -72,14 +72,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       </script>
       <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-border rounded-2xl h-full flex flex-col">
         <Link to={`/product/${node.handle}`} className="relative block" aria-label={`Se ${node.title}`}>
-          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] overflow-hidden bg-muted/30 rounded-t-2xl">
+          <div className="relative h-[130px] md:h-[180px] lg:h-[220px] bg-muted/30 rounded-t-2xl overflow-hidden">
             {imageUrl ? (
               <>
                 <img
                   src={imageUrl}
                   alt={altText}
                   loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
+                  className="w-full h-full object-contain transition-transform duration-400 group-hover:scale-102"
                 />
                 {/* Status badge */}
                 <span className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-white" 
