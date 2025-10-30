@@ -844,6 +844,17 @@ export const ProductSlider = () => {
         trackRef.current.style.transform = 'translateX(0px)';
       }
       
+      // Force one more reflow
+      void trackRef.current.offsetHeight;
+      
+      // Now FADE IN products smoothly
+      requestAnimationFrame(() => {
+        if (trackRef.current) {
+          trackRef.current.style.transition = 'opacity 0.25s ease-in';
+          trackRef.current.style.opacity = '1';
+        }
+      });
+      
       console.log('✅ Layout recalculated after collection change');
     };
     
@@ -922,9 +933,10 @@ export const ProductSlider = () => {
     
     console.log('🎯 TAB CLICKED:', tab, '→ Will fetch collection:', COLLECTION_CONFIG[tab].shopifyHandle);
     
-    // Stop all ongoing transitions and animations
+    // INSTANT hide products to prevent ugly layout flash
     if (trackRef.current) {
       trackRef.current.style.transition = 'none';
+      trackRef.current.style.opacity = '0';
       trackRef.current.style.transform = 'translateX(0px)';
     }
     
