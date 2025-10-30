@@ -754,14 +754,6 @@ export const ProductSlider = () => {
       handleMouseDown, handleMouseMove, handleMouseUp, handleWheel, clearAutoSnap]);
 
   const handleTabChange = (tab: 'popular' | 'new' | 'recommended') => {
-    // ALERT TEST - så du kan se det virker
-    const tabNames = {
-      'popular': 'Mest Populær',
-      'new': 'Nyhed', 
-      'recommended': 'Anbefalet'
-    };
-    alert(`✅ Tab clicked: ${tabNames[tab]}\nCollection: ${COLLECTION_CONFIG[tab]}`);
-    
     console.log('🎯 TAB CLICKED:', tab, '→ Will fetch collection:', COLLECTION_CONFIG[tab]);
     setActiveTab(tab);
     currentIndexRef.current = 0;
